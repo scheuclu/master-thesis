@@ -1,0 +1,43 @@
+\documentclass[../main.tex]{subfiles}
+%\usepackage{import}
+\begin{document}
+\section{About this template}
+\label{cha:about}
+
+The purpose of this document is two-fold:\\
+Firstly, this is a plain and simple template with the most basic \LaTeX-commands and
+structures introduced that are
+needed for writing a thesis in \LaTeX. It should be sufficient for 95\% of
+the theses submitted at LNM - this means that completeness is not claimed. It is recommended to
+stick to these basic suggestions, knowing that other - possibly better -
+philosophies or styles exist. In case a more complex structure is needed, refer to literature or the web, although you should think
+twice about introducing a much more complex structure. \\
+Secondly, this report gives some basic suggestions on what the structure of the report should look like and also some brief description about typically expected content.\\
+
+\begin{figure}[h!]
+	\begin{center}
+	    \includegraphics{\mainpath/fig/tikz/build/setup_quad4_basic_example.pdf}
+        %\includestandalone{../fig/tikz/setup_quad4_basic_example}
+        %\subimport{../}{/fig/tikz/setup_quad4_basic_example.tex}
+        \caption[aaa]{aaa bbb}
+		\label{aaa}
+    \end{center}
+\end{figure}
+
+%\include{/home/lukas/Desktop/project/independence/project/thesis/thesis_template/fig/tikz/setup_quad4_basic_example}
+%\subfile{structure_report}
+
+\textbf{Please note}: 
+\begin{itemize}
+ \item Significant changes to the document style, layout and structure should only be done according to prior agreement with your supervisor.
+ \item compile the template with the following command \\
+ \verb|latex LaTeX_template_v04.tex && dvipdfm LaTeX_template_v04.dvi|
+ \item if you encounter problems with dvipdfm, you can also use \\
+ \verb|latex LaTeX_template_v04.tex && dvi2ps LaTeX_template_v04.dvi &&|\\
+ \verb|ps2pdf LaTeX_template_v04.ps| \\
+ \item if you use texmaker, or a similar LaTeX editor, declare \verb|LaTeX_template_v04.tex| as master document   \\
+ \item the latex compiler might requires 2 or 3 runs, until newly created references are resolved correctly \\
+ \item the bibtex file has to be compiled seperately
+\end{itemize}
+
+\end{document}

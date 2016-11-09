@@ -1,0 +1,12 @@
+FEMAC
+AMLatex
+*.blg
+*.aux
+*.log
+*.lof
+*.res*
+*.dis*
+*.vtk*
+*.pdf
+*.gz
+*.bak

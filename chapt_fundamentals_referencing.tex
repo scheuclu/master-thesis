@@ -1,0 +1,54 @@
+\section{Fundamentals of \LaTeX II: referencing}\label{sec:referencing}
+
+\subsection{Sections, equations, figures, and tables}
+\label{sec:refseceq}
+
+Everything that can be referenced should have a label. Otherwise use the
+non-referenceable version, e.g. the \verb!align*! environment instead of
+\verb!align!. This also means every proper section of your thesis should have a
+label. Furthermore, every equation that has a number should be important
+enough to be referenced and thus gets a label. Sometimes this can also be a
+sentence like ``Equation (4) states the key result of this section.'' to
+emphasise its importance. If the equation is not referenced, it is not
+important and should not even have a number - use \verb!align*!. Figures and
+tables always have a label und should always be referenced at least
+once. Some readers don't look at them before they are referenced in the
+text. Of course, things that cannot be referenced should
+never have a label. 
+
+The label should have a certain structure and start with a specifier
+according to the object it references, followed by a colon and the actual name
+of the label. An example would be \verb!\label{sec:intro}! for the label of
+the first section ``Introduction''. The specifiers are given in table
+\ref{tab:labelspec}. Referencing a labelled objects is done by the command
+\verb!\ref!, e.g. \verb!\ref{sec:intro}!. Equations should always be
+referenced by \verb!\eqref!, which automatically puts the brackets around the
+equation number (comes with an ams-package already included in this
+template).
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|l|l|}\hline
+    \bf object & \bf specifier \\\hline
+    (sub-)section & sec\\
+    equation & eq\\
+    figure & fig\\
+    table & tab\\ 
+    (appendix) & (app)\\ \hline
+  \end{tabular}
+  \caption{Object specifiers for labels.}
+  \label{tab:labelspec}
+\end{table}
+
+\subsection{Citations}
+\label{sec:cite}
+
+For citations you have to use \BibTeX. For citing a reference, you use
+\verb!\cite{LabelOfRef}! As label, it is suggested to use the surname of the
+first author, directly followed by the year, and, if there is more than one
+publication of that author in the that year, a lowercase letter in
+alphabetical order. For instance: \verb!\cite{hughes1987}! for article
+\cite{hughes1987}. Others might prefer other systems, which is fine as long
+as it is consistent. If you use only a few references, adding them by hand to
+your \BibTeX-file seems the easiest. If there are more references you
+might want to create your \BibTeX-file by a reference software like Jabref.

@@ -1,0 +1,130 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% template for student thesis, 14.05.2012
+% 1.version: Keijo Nissen
+% 2.version: Hamman de Vaal
+% 3.version: Caroline Danowski
+%
+% build document e.g. in console with
+%    latex LaTeX_template_v03 && dvipdfm LaTeX_template_v03.dvi
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% template for DIN A4
+\documentclass[12pt,a4paper]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% LEAD UP %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% packages that should be included - extend at will
+\usepackage{fancyhdr}
+\usepackage{mdwlist}
+\usepackage{dsfont}
+
+\usepackage{graphicx}  		%geändert damit er die eps zu pdfs machen kann
+%\usepackage[pdftex]{graphicx}
+%\usepackage{epstopdf}
+%\epstopdfsetup{outdir=./}
+%\usepackage[outdir=./]{epstopdf}
+
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+%\usepackage{breqn}
+\usepackage{amsthm}
+\usepackage{ifthen}
+
+
+\usepackage{color}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=red,
+    linktoc=all
+}
+
+\usepackage[font={small,it}]{caption}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepgfplotslibrary{groupplots}
+
+
+
+
+% have a look on this file, it can be reallzy helpfull
+\input{"/home/lukas/Desktop/project/independence/project/thesis/thesis_template/usercommands.tex"}
+
+
+
+% source of all figures
+\graphicspath{{./}}
+    % This is the folder where your figures should be. 
+    % You can define more folders by inserting  {./additionalPath/}.
+
+% Leere Fu''llseiten
+\makeatletter
+\renewcommand{\cleardoublepage}{\clearpage\if@twoside \ifodd\c@page\else
+  \hbox{}
+  \vspace*{\fill}
+  \thispagestyle{empty}
+  \newpage
+  \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\makeatother
+
+% falls Arbeit auf DEUTSCH verfasst werden soll
+% \usepackage{ngerman}			% wie german, aber neue Trennregeln
+% 					% unmittelbare Eingabe deutscher
+% 					% Sonderzeichen
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% page layout %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\topmargin}{0mm}                % Oberer Rand
+\setlength{\headheight}{12pt}              % Kopfh''ohe
+\setlength{\headsep}{8mm}                  % Abstand zw. Kopf und Text
+\setlength{\textheight}{230mm}             % Texth''ohe
+\setlength{\footskip}{10mm}                % Texth''ohe
+
+\setlength{\evensidemargin}{0mm}           % Innenrandabstand linkes Blatt, geradzahlig
+\setlength{\oddsidemargin}{8mm}            % Innenrandabstand rechtes Blatt, ungeradzahlig
+\setlength{\textwidth}{150mm}              % Textbreite
+\setlength{\marginparsep}{0mm}             % Randnotizabstand
+
+\setlength{\voffset}{0mm}                  % vertikaler Abstand 
+\setlength{\hoffset}{0mm}                  % horizontaler Abstand
+
+\newlength{\pagewidth}
+\setlength{\pagewidth}{165mm}
+
+% suggested headers and footers
+\pagestyle{fancyplain}
+\fancyhf{}
+\fancyfoot[C]{\fancyplain{}{\bfseries\thepage}}
+
+
+%%%% TODO Has to be filled
+\newcommand{\thesistype}{Type of Thesis}% e.g. Bachelor's Thesis
+\newcommand{\thesistitle}{A Simple Yet Revealing Title}
+\newcommand{\shorttitle}{Short Title}
+\newcommand{\Author}{John Doe}
+\newcommand{\Supervisor}{D. B. Cooper, M.Sc.}
+\newcommand{\Mail}{someone@lnm.mw.tum.de}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% THE ACTUAL THESIS %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%  	BEGIN DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

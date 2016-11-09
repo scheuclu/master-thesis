@@ -1,0 +1,96 @@
+\input{"/home/lukas/Desktop/project/independence/project/thesis/thesis_template/Header.tex"}
+
+
+\graphicspath{{fig/}{../fig/}}
+\usepackage{subfiles}
+
+%fo some reason, this must not be in the header file itself
+\usepackage[subpreambles=false]{standalone}
+
+\usepackage{import}
+
+%\includeonly{Test}
+
+\newcommand{\mainpath}{/home/lukas/Desktop/project/independence/project/thesis/thesis_template/}
+
+
+\begin{document}
+
+\fancyhead[RO]{\fancyplain{}{\Author}}
+\fancyhead[LO]{\fancyplain{}{\thesistype:\ \shorttitle}}
+\pagenumbering{roman}
+
+\include{titlepage}
+\include{Preface}
+
+\include{Nomenclature}
+\include{Introduction}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%% beginning of actual thessis content         %%
+%% provide all chapters in seperate files, and %%
+%% use the \include command                    %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\cleardoublepage
+\insertblankpage
+
+\pagenumbering{arabic}
+\setboolean{@twoside}{true} 
+\fancyhead[RO,LE,LO]{\fancyplain{}{}}
+\fancyhead[CE]{\fancyplain{}{\leftmark}}
+\fancyhead[CO]{\fancyplain{}{\rightmark}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                             %%
+%%                Chapters                     %%
+%%                                             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\subfile{chapters/about}
+%\subfile{chapters/fundamentals_structure}
+%\subfile{chapters/fundamentals_referencing}
+%\subfile{chapters/structure_report}
+
+aaaaaaaaaaaaaaaaaaa
+
+%\begin{figure}[h!]
+%	\begin{center}
+%	    %\fbox{\subimport{./}{./fig/tikz/study_inclusion.tex}}
+%        %\includestandalone{./fig/tikz/error_estimationPCG}
+%        \subimport{.}{/fig/tikz/setup_quad4_basic_example}
+%        \caption[aaa]{aaa}
+%		\label{aaa}
+%    \end{center}
+%\end{figure}
+%
+%\subimport{.}{/fig/tikz/setup_quad4_basic_example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                             %%
+%%                Appendix                     %%
+%%                                             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\cleardoublepage
+\appendix{}
+%\section{First Appendix}
+%% \newpage
+%\section{Second Appendix}
+
+
+\cleardoublepage
+
+%% Bibliography is provided via Bibtex.
+\bibliographystyle{plain}
+\bibliography{templatebibtex}
+% the referenced bibtex file is provided with this template
+
+%\include{Bibliografy}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% End document                               %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

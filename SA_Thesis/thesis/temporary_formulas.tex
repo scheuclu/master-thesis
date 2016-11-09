@@ -1,0 +1,181 @@
+\documentclass[preview]{standalone} %preview is crucially important here
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+
+\usepackage{tikz}
+\usepackage{import}
+
+
+
+
+
+
+\def\mainpath{.}
+\def\tikzpath{./fig/tikz}
+
+\newcommand{\order}[1]{\mathcal{O}(#1)}
+
+\input{\mainpath/colordefinitions}
+\input{\mainpath/customcommands}
+
+\begin{document}
+
+\section{General}
+Let the new conjuaget gradient search direction be defined by $\sdirnspace$.
+
+We know that, if we have found the correct solution
+\begin{align}
+\totalgap=\sum_s \ids{\asmop}\ids{\dispvec}=\ifacedispvec-\locdualschur \lagvec - \rmodespace \rmodevec = \dvec{0}
+\end{align}
+
+At iteration $i$ of the conjugate gradient algorithm, one can thus define
+\begin{align}
+\totalgap_i=\underbrace{\ifacedispvec-\locdualschur \lagvec_i}_{\resvec_i} - \rmodespace \rmodevec_i = \dvec{0}
+\label{eq:definition_wi}
+\end{align}
+
+On can interpret $\resvec_i$ as the actual force imbalance at the interface, and $\totalgap_i$ as the force imbalance in natural subspace.\\
+
+The conjuagate gradient algorithm will choose its search direction with regards to $\totalgap_i$ (Search directions are orthorgonalized additionally). As explained in REF, the iterations searches for a solution in the natural subspace. In other words, $\lagvec_i$ is always orthorgonal to the rigid body modes.(That was not correct).
+
+As was explained in \eqref{eq:reason_natural_subspace}, classical FETI encounters a problem for static calculations if the local stiffnes matrix is not singular. In that case, we required
+\begin{align}
+&\tp{\ids{\nullspacemat}}(\ids{\dvec{f}}+{\ids{\traceop}}^T {\ids{\asmop}}^T \lagvec)=\dvec{0}%\label{eq:reason_natural_subspace}
+\end{align}
+
+
+Something is missing here?S
+
+We had solved this problem by prescribing the
+\begin{align}
+\tp{\rmodespace} \totalgap_i =0
+\label{eq:orthogonality_natural_subspace}
+\end{align}
+
+Inserting Equation~\eqref{eq:definition_wi} one can thus write
+\begin{align}
+\tp{\rmodespace} (\ifacedispvec-\locdualschur \lagvec_i - \rmodespace \rmodevec_i ) =0
+\end{align}
+
+Wich can easily be reformulated to
+\begin{align}
+\tp{\rmodespace} \underbrace{(\ifacedispvec- \locdualschur \lagvec_i)}_{\resvec_i} - \tp{\rmodespace} \rmodespace \rmodevec_i =0
+\end{align}
+
+Solved for $\rmodevec_i$ this gives
+\begin{align}
+\rmodevec_i=\inv{(\tp{\rmodespace}\rmodespace)}\tp{\rmodespace}\resvec_i
+\label{eq:r_to_alpha}
+\end{align}
+
+Inserting Equation~\eqref{eq:r_to_alpha} into Equation~\eqref{eq:definition_wi} give
+\begin{align}
+\totalgap_i&=\resvec_i-\rmodespace \inv{(\tp{\rmodespace}\rmodespace)}\tp{\rmodespace}\resvec_i\\
+       &=\underbrace{(\eyemat-\rmodespace \inv{(\tp{\rmodespace}\rmodespace)}\tp{\rmodespace})}_{\projn}\resvec_i
+\end{align}
+where by looking at the equation, $\projn$ can be interpreted as a projection operator, that romoves all rigid body components from the actual force imbalance $\resvec_i$.
+
+As first described in \cite{FarhatRoux1994}, and further investigated in \cite{RixenPHD} it is often advantegous to choose $\totalgap_i$ to be not simlply orthorgonal, but A-orthorgonal to a matrix A:
+\begin{align}
+\tp{\rmodespace} \scalemat \totalgap_i =0
+\end{align}
+
+which leads to the following expression for the natural subspace projector
+\begin{align}
+\tp{\projn}=\eyemat-\scalemat\rmodespace \inv{(\tp{\rmodespace}\scalemat\rmodespace)}\tp{\rmodespace}
+\end{align}
+
+
+
+\section{Scalability}\label{sec:scalability}
+The main goal of a DD algorithm is scalability. Generally, one can distinguish numerical scalability and paralelle scalabiity. In iterative DD methods as FETI, numerical scalability statisfied if the cobdition number after the preconditioning step grows weakly with the ration of the subdomainsize $h$ to the overall size $H$.\\
+For unpreconditioned interface problems \cite{Farhat1995ref1,Farhat1995ref1} have shown, that the condition number grows asymptotically
+\begin{align}
+\condnum=\order{\frac{H}{h}}
+\label{eq:condnum_without_natural_cspace}
+\end{align}
+which makes algorihms like that useless for real enginieering problems. Mandel and Tezaur \cite{Farhat1995ref17} have proven mathemativcally, that using subdomain-based Dirichlet operators as preconditioners results in a condition number of the natural coarse problem of
+\begin{align}
+\condnum=\order{1-log^\beta(\frac{H}{h})}
+\end{align}
+\linebreak
+It is important to note, that the numerical scalability of the FETI-1 method can be traced back to the inherent problem of the natural coarse space.
+This gives rise to a problem, when it comes to structural dynamics calculations. As \cite{Farhat1998} writes, and as it was shown in Section~\ref{sec:TODO} the natural coarse problem was introduced due to a potential singularity of the substructure stiffness matrices.\\
+This singularity, however, ist no longer present in dynamic calcuation, since an implcit time integrator typically leads to a system of equations that is goverend by substructure matrices of the form
+\begin{align}
+\ids{\dmat{A}}=\ids{\dmat{M}}+\zeta \Delta t^2\ids{\dmat{K}}
+\end{align}
+Since $\ids{\dmat{M}}$ is positive definite and $\dmat{K}$ is positive semi definite, any linear combination of the two is also positive definite and thus invertible. However, as REF wrote, loosing the projector $\projn$ means loosing its mechanism of propagating the error globally, which was the basis of the scalability considerations performed in \cite{TODO}, see also \ref{sec:scalability}. 
+
+
+Without the natural coarse problem,however, the conditions properties ares thrown back to Equation~\eqref{eq:condum_without_natural_cspace}
+A solution to this problem is the introduction of an auxiliary coarse problem, which will leads to the FETI-2 methods describedin Section~\ref{sec:FETI2}.
+
+
+\section{FETI-2}
+As mentioned in Section~\ref{sec:scalability}, the introduction of an auxiliary coarse space in the FETI-1 algorithm leads to the FETI-2 algorithm.\\
+Albeit derived as necesity for structural dynamics problems, a suitable auxiliary coarse space has also proven very useful for static FETI calculations. Therefor, every FETI-1 method, enhanced by an auxiliary coarse space of any kind shall now be called a FETI-2 method.\\
+
+One particular expample of the general advantage of an auxiliary coarse space was firstfirst described in REF an further analysed in REF.\\
+The basic FETI-1 algorithm shows bad ??? due to ???, espacially for heterogenities. This is also reflected in the very broad eigenvalue distribution of FETI-1 (see Figure~\ref{fig:TODO}.
+REF proposed the introduction of an auxiliary coarse space, to cope with this problem. The idea is to identify the bad eigenmodes, or an approximation thereof, and then solve the problem in a subspace (the so-called coarse space) orthorgonal to these eigenmodes:
+\begin{align}
+\tp{\cspace}\totalgap_i=\dvec{0}
+\label{eq:orthogonality_coarse_subspace}
+\end{align}
+which is completly analogous to Equation~\eqref{eq:orthogonality_natural_subspace}.\\
+The coarse space projector can thus be derived as
+\begin{align}
+\projc=\eyemat-\cspace\inv{(\tp{\cspace}\locdualschur\cspace)}\tp{\cspace}\locdualschur
+\end{align}
+
+%\begin{figure}[h!]
+%\centering
+%\subimport{}{\tikzpath/algorithm_feti2.tex}
+%\caption[FETI-2 algorithm]{FETI-2 algorithm}
+%\label{strukt:feti2}
+%\end{figure}
+
+\subsection{Geneo}
+A mathematically appealing approach for the definition of the auxiliary coarse space $\cspace$ are the so-called Geneo methods (Geneo). They try to identify the bad eigenmodes, corresponding to the bad eigenvalues (see Figure~\ref{fig:TODO} and build the coarse space upon them. Extensive Analysis of this methods\cite{Spillane2016,Spillane2013,Spillane2014} has shown their remarkable robustnes, espacially for the generally quite challenging FETI problems described in Section\ref{sec:challenges}. However, althoug mathemetically found and robust the eigenvalue problems on the interface introduce a substantial computational overhead, thus other methods like FETI-S\ref{sec:fetis} or FETI-B\ref{sec:fetib} are more efficient for engineering problems.
+
+\subsection{FETI-S}
+
+The simultaneous FETI, or FETI-S, algorithm was first described in \cite{RixenPhD} for two subdomains, and consequently generalized to an arbitrary number of subdomains in REF. Its basic idea shows some resemblence to the popular Lanczos algorithm for the calculation of eigenmodes.\\
+The basic idea is to exploit the additive structure of the preconditioner( see Equation~\eqref{eq:feti1_preconditioner}).
+On can thus precondition each subtructure independently, which results in $s$ search directions that can be searched for independently.
+\begin{align}
+\Zmat_i=\begin{bmatrix} \cdots,\ids{\scaled{\asmop}} \ids{\scaled{\locschur}} {\ids{\scaled{\asmop}}}{}^T \resvec_i,\cdots \end{bmatrix}     
+\end{align}
+The crucial advantage of this method is, that although at each iteration, on minimizes with respect to $s$ search directions, the cost of each iteration is equivalent to the cost of a standard conjugate gradient iteration(like FETI-1 or FETI-2). Partcularily, the number of Neumann solves on the substructures is not increased.
+
+\begin{align}
+\scaled{\locschur}=\sum_s \ids{{\scaled{\asmop}}} \ids{{\scaled{\locschur}}}
+{\ids{{\scaled{\asmop}}}}{}^T  \\
+\end{align}
+
+The efficency FETI-S algorithm was substantally improved in~\cite{Gosselet2015} by introducing an important trick, that localized the application of the FETI opeartor.
+Moreover, the paper also provides an efficient implementations of the conjugate gradient algorithm, that all FETI algorithms provided in this paper are based on.
+Generally, the FETI-S algorithm can be classified as a Multip Projonditioned Conjugate Gradient Algorithm (MPCG)\cite{Bridson2006}.\\
+It is noteworthy, that since MPCG algorithms do not minimize in a Krylov subspace, a heuristic bound for the number of iterations can not be justified. However, extensive numerical analysizes have certified a very robust behaviour, similar to that of FETI-B\ref{sec:FETI-B}.\\
+A detailed explanition of the FETI-S algorithm is provided in Figure~\ref{fig:algorithm_feti-2}
+
+
+%\begin{figure}[h!]
+%\centering
+%\subimport{./}{fig/tikz/algorithm_fetis.tex}
+%\caption[FETI-2 algorithm]{FETI-S algorithm}
+%\label{strukt:fetis}
+%\end{figure}
+
+\section{FETI-B}
+The block FETI method (FETI-B) is based on the idea of the block Conjugate Gradient algorithm~\cite{OLeary1980}.
+Compared to FETI-1, a block of right hand sides is used to activate the local effects. In other words, it exploits the additive structure of the interface displacements $\ifacedispvec$ just like FETI-S exploits the additive structure of the preconditioner. The FETI-B method was first proposed in~\cite{Gosselet2015}, and has shown to require slightly less iterations than the FETI-S method. However it introduces the drawback of additional local Dirichlet and Neumann solves, while the main advantage, the elimination of full reorthogonalization, can not be exploited in real codes, due to roundoff error.\\
+First numerical studies, however, have attested the method noticable reductions in the iteration numbers when it comes to crosspoints and very irregular meshes. The method, however, still requires further investigation.\\
+A detailed explanation of the FETI-B algorithm is provided in Figure~\ref{fig:algorithm_feti-b}
+
+\end{document}

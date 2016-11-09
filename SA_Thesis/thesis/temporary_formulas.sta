@@ -1,0 +1,5 @@
+\standalonepreambles
+\subpreamble{./fig/tikz/algorithm_feti2.tex}
+\usepackage {tikz}\usepackage {amsmath}\usepackage {struktex}\usetikzlibrary {positioning}\usetikzlibrary {calc}\def \mainpath {../../}\def \tikzpath {./}\input {\mainpath /colordefinitions}\input {\mainpath /customcommands}
+\endsubpreamble
+\endstandalonepreambles
