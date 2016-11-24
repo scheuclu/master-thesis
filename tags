@@ -1,0 +1,337 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+0pt	SA_Thesis/latexindent/documentation/manual.tex	/^\\titlespacing\\section{0pt}{12pt plus 4pt minus 2pt}{-5pt plus 2pt minus 2pt}$/;"	s
+0pt	SA_Thesis/latexindent/documentation/manual.tex	/^\\titlespacing\\subsection{0pt}{12pt plus 4pt minus 2pt}{-6pt plus 2pt minus 2pt}$/;"	u
+0pt	SA_Thesis/latexindent/documentation/manual.tex	/^\\titlespacing\\subsubsection{0pt}{12pt plus 4pt minus 2pt}{-6pt plus 2pt minus 2pt}$/;"	b
+0pt	latexindent/documentation/manual.tex	/^\\titlespacing\\section{0pt}{12pt plus 4pt minus 2pt}{-5pt plus 2pt minus 2pt}$/;"	s
+0pt	latexindent/documentation/manual.tex	/^\\titlespacing\\subsection{0pt}{12pt plus 4pt minus 2pt}{-6pt plus 2pt minus 2pt}$/;"	u
+0pt	latexindent/documentation/manual.tex	/^\\titlespacing\\subsubsection{0pt}{12pt plus 4pt minus 2pt}{-6pt plus 2pt minus 2pt}$/;"	b
+Abbrevations	testfile.tex	/^\\end{tabular}$/;"	u
+Abbrevations	testfile.tex	/^\\subsection*{Abbrevations}$/;"	u
+Abbreviations	SA_Thesis/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	u
+About this template	chapt_about.tex	/^\\section{About this template}$/;"	s
+About this template	chapters/about.tex	/^\\begin{document}$/;"	s
+About this template	chapters/problem_description.tex	/^\\begin{document}$/;"	s
+Abstract	Preface.tex	/^\\cleardoublepage$/;"	s
+Abstract	chapt_structure_report.tex	/^The typical sections are discussed below, but some specifics might vary according to the type of research project. Please discuss the actual structure of your thesis with your supervisor.$/;"	u
+Abstract	chapters/structure_report.tex	/^The typical sections are discussed below, but some specifics might vary according to the type of research project. Please discuss the actual structure of your thesis with your supervisor.$/;"	u
+Adaptive Multi Preconditioned Conjugate Gradient	SA_Thesis/thesis/cha_adaptive_mpcg.tex	/^\\chapter{Adaptive Multi Preconditioned Conjugate Gradient}$/;"	c
+Adaptive Simultaneous FETI  FETI-AS 	SA_Thesis/thesis/cha_feti-solvers.tex	/^\\end{figure}$/;"	s
+After changing the boolean values with	SA_Thesis/thesis/struktex/struktex-test-3.tex	/^}$/;"	P
+An important example	SA_Thesis/latexindent/documentation/manual.tex	/^\\end{figure}$/;"	u
+An important example	latexindent/documentation/manual.tex	/^\\end{figure}$/;"	u
+Augmented Lagrange	SA_Thesis/thesis/cha_fe-formulation.tex	/^They main advantage of the penalty method lies in the fact, that it does not introduce any new unknows, und thus maintains the positive definitness of the system matrix. On the other hand, the constraints are not fulfilled exactly. Regarding the choice of $\\sigma_\\mathrm k$ one has to weight carefully between a more accurate constraint fulfillment and the overall systems constitution since a greater $\\sigma_k$ value might enforce the constraints stronger, but can also lead to numerical instabilities.$/;"	b
+Basics	chapters/problem_description.tex	/^\\section{About this template}\\label{sec:about}$/;"	u
+Before we begin	SA_Thesis/latexindent/documentation/manual.tex	/^\\lstlistoflistings$/;"	s
+Before we begin	latexindent/documentation/manual.tex	/^\\lstlistoflistings$/;"	s
+CLSDIR	SA_Thesis/thesis/struktex/struktex.mk	/^CLSDIR=$(INSTALLTEXMF)\/tex\/latex\/$(PACKAGE)$/;"	m
+COMMON_OPTIONS	SA_Thesis/thesis/struktex/struktex.mk	/^COMMON_OPTIONS = # \\OnlyDescription\\CodelineNumbered\\PageIndex$/;"	m
+Choices for $ dmat  A	SA_Thesis/thesis/cha_feti-formulation.tex	/^\\end{align}$/;"	P
+Combined heterogeneities	SA_Thesis/thesis/cha_numerical-assesment.tex	/^\\FloatBarrier$/;"	u
+Computational cost of FETI-S	SA_Thesis/thesis/cha_feti-solvers.tex	/^A detailed description of the FETI-S algorithm is provided in Figure~\\ref{strukt:fetis}$/;"	u
+Conditioning	SA_Thesis/thesis/cha_numerical-assesment.tex	/^\\end{center}$/;"	s
+Conditioning of the FETI problem	SA_Thesis/thesis/cha_numerical-assesment.tex	/^It his well known that the error will decrease at minimum by a factor of $2 \\left( \\frac{\\sqrt{\\condnum}-1}{\\sqrt{\\condnum}+1} \\right)^{i}$ in $k$ steps.$/;"	u
+DEVELOPER_OPTIONS	SA_Thesis/thesis/struktex/struktex.mk	/^DEVELOPER_OPTIONS = \\EnableCrossrefs\\RecordChanges\\AlsoImplementation\\CodelineIndex$/;"	m
+DOCDIR	SA_Thesis/thesis/struktex/struktex.mk	/^DOCDIR=$(INSTALLTEXMF)\/doc\/latex\/$(PACKAGE)$/;"	m
+DVIPS	SA_Thesis/thesis/struktex/struktex.mk	/^DVIPS = dvips$/;"	m
+Declare anything you have used	Nomenclature.tex	/^\\end{tabular}$/;"	u
+Default parameters	SA_Thesis/thesis/cha_numerical-assesment.tex	/^\\\\$/;"	s
+Default values  C  	SA_Thesis/thesis/struktex/struktex-test-3.tex	/^\\pBoolValue{\\texttt{WAHR}}{\\texttt{FALSCH}}$/;"	s
+Default values  Java  	SA_Thesis/thesis/struktex/struktex-test-3.tex	/^\\pBoolValue{\\texttt{WAHR}}{\\texttt{FALSCH}}$/;"	s
+Default values  Pascal  	SA_Thesis/thesis/struktex/struktex-test-3.tex	/^\\pLanguage{Pascal}$/;"	s
+Default values  Python  	SA_Thesis/thesis/struktex/struktex-test-3.tex	/^\\pBoolValue{\\texttt{WAHR}}{\\texttt{FALSCH}}$/;"	s
+Demonstration  before and after	SA_Thesis/latexindent/documentation/manual.tex	/^\\end{warning}$/;"	s
+Demonstration  before and after	latexindent/documentation/manual.tex	/^\\end{warning}$/;"	s
+Domain decomposition	SA_Thesis/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	u
+ERROR	SA_Thesis/latexindent/latexindent.pl	/^ERROR: When using the -o flag you need to call latexindent.pl with 2 arguments$/;"	l
+ERROR	SA_Thesis/latexindent/latexindent.pl	/^ERROR:$/;"	l
+ERROR	latexindent/latexindent.pl	/^ERROR: When using the -o flag you need to call latexindent.pl with 2 arguments$/;"	l
+ERROR	latexindent/latexindent.pl	/^ERROR:$/;"	l
+FE space discretization	SA_Thesis/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	u
+FETI Solvers	SA_Thesis/thesis/cha_feti-solvers.tex	/^\\chapter{FETI Solvers}\\label{cha:feti_solvers}$/;"	c
+FETI-2	SA_Thesis/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	b
+FETI-2	SA_Thesis/thesis/temporary_formulas.tex	/^A solution to this problem is the introduction of an auxiliary coarse problem, which will leads to the FETI-2 methods describedin Section~\\ref{sec:FETI2}.$/;"	s
+FETI-AS	SA_Thesis/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	b
+FETI-B	SA_Thesis/thesis/temporary_formulas.tex	/^A detailed explanition of the FETI-S algorithm is provided in Figure~\\ref{fig:algorithm_feti-2}$/;"	s
+FETI-Method	SA_Thesis/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	u
+FETI-S	SA_Thesis/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	b
+FETI-S	SA_Thesis/thesis/temporary_formulas.tex	/^A mathematically appealing approach for the definition of the auxiliary coarse space $\\cspace$ are the so-called Geneo methods (Geneo). They try to identify the bad eigenmodes, corresponding to the bad eigenvalues (see Figure~\\ref{fig:TODO} and build the coarse space upon them. Extensive Analysis of this methods\\cite{Spillane2016,Spillane2013,Spillane2014} has shown their remarkable robustnes, espacially for the generally quite challenging FETI problems described in Section\\ref{sec:challenges}. However, althoug mathemetically found and robust the eigenvalue problems on the interface introduce a substantial computational overhead, thus other methods like FETI-S\\ref{sec:fetis} or FETI-B\\ref{sec:fetib} are more efficient for engineering problems.$/;"	u
+Fast Adaptive Simultaneous FETI  FETI-FAS 	SA_Thesis/thesis/cha_feti-solvers.tex	/^\\end{figure}$/;"	u
+Fluid Structure Interaction	testfile.tex	/^\\subsection*{Symbols}$/;"	b
+From the command line	SA_Thesis/latexindent/documentation/manual.tex	/^simply \\lstinline!latexindent!.$/;"	u
+From the command line	latexindent/documentation/manual.tex	/^simply \\lstinline!latexindent!.$/;"	u
+Fundamentals of LaTeX I  structure	chapt_fundamentals_structure.tex	/^\\section{Fundamentals of \\LaTeX I: structure}$/;"	s
+Fundamentals of LaTeX I  structure	chapters/fundamentals_structure.tex	/^\\begin{document}$/;"	s
+Fundamentals of LaTeX II  referencing	chapt_fundamentals_referencing.tex	/^\\section{Fundamentals of \\LaTeX II: referencing}\\label{sec:referencing}$/;"	s
+Fundamentals of LaTeX II  referencing	chapters/fundamentals_referencing.tex	/^\\begin{document}$/;"	s
+GV	SA_Thesis/thesis/struktex/struktex.mk	/^GV = gv$/;"	m
+Geneo	SA_Thesis/thesis/temporary_formulas.tex	/^\\end{align}$/;"	u
+General	SA_Thesis/thesis/Nomenclature.tex	/^\\subsection*{FETI-Method}$/;"	b
+General	SA_Thesis/thesis/cha_feti-formulation.tex	/^\\end{figure}$/;"	s
+General	SA_Thesis/thesis/temporary_formulas.tex	/^\\begin{document}$/;"	s
+Generalized eigenvalues in the overlap  Geneo 	SA_Thesis/thesis/cha_feti-solvers.tex	/^\\end{figure}$/;"	u
+Governing equations and finite element formulations	SA_Thesis/thesis/cha_fe-formulation.tex	/^$/;"	c
+Graphing rational functions  horizontal asymptotes 	SA_Thesis/latexindent/success/sampleAFTER.tex	/^ 	\\end{exercises}$/;"	s
+Graphing rational functions  horizontal asymptotes 	SA_Thesis/latexindent/success/sampleBEFORE.tex	/^ 	\\end{exercises}$/;"	s
+Graphing rational functions  horizontal asymptotes 	latexindent/success/sampleAFTER.tex	/^ 	\\end{exercises}$/;"	s
+Graphing rational functions  horizontal asymptotes 	latexindent/success/sampleBEFORE.tex	/^ 	\\end{exercises}$/;"	s
+HISTORY_OPTIONS	SA_Thesis/thesis/struktex/struktex.mk	/^HISTORY_OPTIONS = \\RecordChanges$/;"	m
+Heterogeneities	SA_Thesis/thesis/cha_numerical-assesment.tex	/^\\end{figure}$/;"	s
+Heterogeneities across the interface	SA_Thesis/thesis/cha_numerical-assesment.tex	/^\\end{figure}$/;"	u
+Heterogeneities along the interface	SA_Thesis/thesis/cha_numerical-assesment.tex	/^\\FloatBarrier$/;"	u
+Hierarchy of fields	SA_Thesis/latexindent/documentation/manual.tex	/^\\end{itemize}$/;"	b
+Hierarchy of fields	latexindent/documentation/manual.tex	/^\\end{itemize}$/;"	b
+How to use the script	SA_Thesis/latexindent/documentation/manual.tex	/^\\end{adjustwidth}$/;"	s
+How to use the script	latexindent/documentation/manual.tex	/^\\end{adjustwidth}$/;"	s
+INSTALLTEXMF	SA_Thesis/thesis/struktex/struktex.mk	/^INSTALLTEXMF=`kpsewhich --expand-var '$$TEXMFHOME'`$/;"	m
+Inclusion	SA_Thesis/thesis/cha_numerical-assesment.tex	/^\\FloatBarrier$/;"	s
+Incompressibility	SA_Thesis/thesis/cha_numerical-assesment.tex	/^\\end{figure}$/;"	s
+Interface reduction	SA_Thesis/thesis/cha_feti-formulation.tex	/^\\\\$/;"	s
+Introduction	Introduction.tex	/^$/;"	s
+Introduction	SA_Thesis/latexindent/success/theorem.tex	/^\\begin{document}$/;"	s
+Introduction	SA_Thesis/thesis/cha_introduction.tex	/^\\chapter{Introduction}\\label{cha:introduction}$/;"	c
+Introduction	SA_Thesis/thesis/chapters/chapt_introduction.tex	/^\\chapter{Introduction} a$/;"	c
+Introduction	latexindent/success/theorem.tex	/^\\begin{document}$/;"	s
+Introduction	main.tex	/^\\include{testfile}$/;"	i
+Iterative Solution techniques	SA_Thesis/thesis/cha_iterative-solvers.tex	/^\\chapter{Iterative Solution techniques}$/;"	c
+Iterative Solution techniques	SA_Thesis/thesis/cha_iterative_solvers.tex	/^\\chapter{Iterative Solution techniques}\\label{cha:iterative_solvers}$/;"	c
+JacobiSolver	SA_Thesis/studies/2016-08-23_ConditionNumberTheory/JacobiSolver.m	/^function [ k ] = JacobiSolver( A,b,tol )$/;"	f
+Known limitations	SA_Thesis/latexindent/documentation/manual.tex	/^as a verbatim environment.$/;"	s
+Known limitations	latexindent/documentation/manual.tex	/^as a verbatim environment.$/;"	s
+LATEX	SA_Thesis/thesis/struktex/struktex.mk	/^LATEX = latex$/;"	m
+LaTeX-env-declaration	SA_Thesis/thesis/struktex/struktex.el	/^(defun LaTeX-env-declaration (environment)$/;"	f
+LaTeX-env-struktogramm	SA_Thesis/thesis/struktex/struktex.el	/^(defun LaTeX-env-struktogramm (environment)$/;"	f
+LaTeX-struktex-package-options	SA_Thesis/thesis/struktex/struktex.el	/^(defvar LaTeX-struktex-package-options '("curves" "draft" "emlines" "final"$/;"	f
+Lagrange multiplier approach	SA_Thesis/thesis/cha_fe-formulation.tex	/^Numerous methods have been proposed to solve this kind of problems. Among the most common ones are the Lagrange multiplier approach and the penalty method. This thesis focuses solemnly on the first on, nevertheless a quick introduction into the alternatives shall be provided, so that the pros and cons of each method can be discussed.$/;"	b
+License	SA_Thesis/latexindent/documentation/manual.tex	/^encouragement.$/;"	u
+License	latexindent/documentation/manual.tex	/^encouragement.$/;"	u
+List of Symbols	Nomenclature.tex	/^\\section*{List of Symbols}$/;"	s
+Matrix notation	SA_Thesis/thesis/cha_feti-formulation.tex	/^as the local schur operator, assembled local schur operator and global schur operator respectively.$/;"	s
+Methods of constraint enforcement	SA_Thesis/thesis/cha_fe-formulation.tex	/^\\end{align}$/;"	s
+Monitoring the realtive error in PCG	SA_Thesis/thesis/cha_adaptive_mpcg.tex	/^\\end{figure}$/;"	u
+Monitoring the realtive error in PCG	SA_Thesis/thesis/cha_iterative-solvers.tex	/^\\end{figure}$/;"	u
+Motivation	Introduction.tex	/^\\section{Introduction}\\label{chapt:introduction}$/;"	u
+Motivation	SA_Thesis/thesis/cha_introduction.tex	/^\\chapter{Introduction}\\label{cha:introduction}$/;"	s
+Motivation	SA_Thesis/thesis/chapters/chapt_introduction.tex	/^\\chapter{Introduction} a$/;"	s
+Nitsche method	SA_Thesis/thesis/cha_fe-formulation.tex	/^Contrary to the Penalty approach, $\\mu \\rightarrow \\infty$ is not required in order to solve the original, unconstrained problem, thanks to the presence of the Lagrange multiplier term. The method is therefor especially favorable due to both, an exact fulfillment of the boundary conditions and no introduction of new Unknowns. It also avoids the ill conditioning of the standard quadratic penalty method.$/;"	b
+Nomenclature	Nomenclature.tex	/^\\section*{List of Symbols}$/;"	s
+Nomenclature	SA_Thesis/thesis/Nomenclature.tex	/^\\section*{Nomenclature}\\label{sec:nomenclature}$/;"	s
+Nomenclature	SA_Thesis/thesis/thesis.tex	/^\\PrintTablesAndListsOfContents$/;"	i
+Nomenclature	testfile.tex	/^\\section*{Nomenclature}\\label{sec:nomenclature}$/;"	s
+Numerical Assessment	SA_Thesis/thesis/cha_numerical-assesment.tex	/^\\chapter{Numerical Assessment}\\label{cha:numerical_assesment}$/;"	c
+Objective	Introduction.tex	/^The main purpose of SA lies in Optimization. Given the a set of design parameters on can imagine that the methodology above is able to give reliable values for out target function, e.g. airfoil lift, with respect to these parameters, e.g. airfoil thickness at different points. Based on this information it is now possible to slighlty modify the airfoil, according to these new results. After that the whiole process starts again after we finally converge to the optimal configuration of the design parameters with respect to those parameters.$/;"	u
+Objective	SA_Thesis/thesis/cha_introduction.tex	/^A recent publication \\cite{Spillane2016} has proposed a new, Adaptive Multi Preconditioned Conjugate Gradient Algorithm (AMPCG) for cases where the preconditioner is built as a sum of contributions (like in FETI). A first application to the Balancing Domain Decomposition method has shown promising results.$/;"	s
+One-level FETI  FETI-1 	SA_Thesis/thesis/cha_feti-solvers.tex	/^The projection into the natural subspace however, is also used in all other FETI algorithms.$/;"	s
+Operators	testfile.tex	/^\\end{tabular}$/;"	u
+Operators and Symbols	testfile.tex	/^\\subsection*{Operators}$/;"	u
+Operators and symbols	Nomenclature.tex	/^\\end{tabular}$/;"	u
+Operators and symbols	SA_Thesis/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	u
+Optimization	testfile.tex	/^\\end{tabular}$/;"	b
+Outlook	SA_Thesis/thesis/cha_outlook.tex	/^\\chapter{Outlook}$/;"	c
+Own work declaration	Preface.tex	/^\\cleardoublepage$/;"	s
+PACKAGE	SA_Thesis/thesis/struktex/struktex.mk	/^PACKAGE = struktex$/;"	m
+PDFLATEX	SA_Thesis/thesis/struktex/struktex.mk	/^PDFLATEX = pdflatex$/;"	m
+Partitioning	SA_Thesis/thesis/cha_numerical-assesment.tex	/^\\end{figure}$/;"	s
+Penalty approach	SA_Thesis/thesis/cha_fe-formulation.tex	/^The Lagrange multiplier approach does, however, come with the disadvantage of introducing additional unknowns, as well as worsening the overall system of equations constitution.$/;"	b
+Polynomial functions	SA_Thesis/latexindent/success/sampleAFTER.tex	/^% arara: indent: {overwrite: yes}$/;"	s
+Polynomial functions	SA_Thesis/latexindent/success/sampleBEFORE.tex	/^% arara: indent: {overwrite: true, trace: on}$/;"	s
+Polynomial functions	latexindent/success/sampleAFTER.tex	/^% arara: indent: {overwrite: yes}$/;"	s
+Polynomial functions	latexindent/success/sampleBEFORE.tex	/^% arara: indent: {overwrite: true, trace: on}$/;"	s
+Power functions with positive exponents	SA_Thesis/latexindent/success/sampleAFTER.tex	/^ \\end{essentialskills}$/;"	u
+Power functions with positive exponents	SA_Thesis/latexindent/success/sampleBEFORE.tex	/^ \\end{essentialskills}$/;"	u
+Power functions with positive exponents	latexindent/success/sampleAFTER.tex	/^ \\end{essentialskills}$/;"	u
+Power functions with positive exponents	latexindent/success/sampleBEFORE.tex	/^ \\end{essentialskills}$/;"	u
+Preconditioners	SA_Thesis/thesis/cha_feti-formulation.tex	/^The displacements can finally be recovered by Equation~\\eqref{eq:displacement_recovery}.$/;"	s
+Preface	main.tex	/^\\include{titlepage}$/;"	i
+Principle of Virtual Work	SA_Thesis/thesis/cha_fe-formulation.tex	/^Gauss divergence divergence is subsequently applied for further derivations.$/;"	P
+Problem Setup	SA_Thesis/thesis/cha_feti-formulation.tex	/^\\chapter{The FETI formulation}\\label{cha:feti_formulation}$/;"	s
+Representation of salars. tensors and other quatities	Nomenclature.tex	/^\\section*{Nomenclature}\\label{sec:nomenclature}$/;"	u
+Representation of scalars  tensors and other quantities	testfile.tex	/^\\end{tabular}$/;"	u
+Representation of scalars. tensors and other quantities	SA_Thesis/thesis/Nomenclature.tex	/^\\section*{Nomenclature}\\label{sec:nomenclature}$/;"	u
+Required lstinline  Perl  modules	SA_Thesis/latexindent/documentation/manual.tex	/^\\appendix$/;"	s
+Required lstinline  Perl  modules	latexindent/documentation/manual.tex	/^\\appendix$/;"	s
+Residuum formulation	SA_Thesis/thesis/cha_feti-formulation.tex	/^The bottom line is that in most cases simply choosing $\\scalemat=\\eyemat$ is the more efficient option. During this thesis, this choice has been retained.$/;"	s
+SRCDIR	SA_Thesis/thesis/struktex/struktex.mk	/^SRCDIR=$(INSTALLTEXMF)\/source\/latex\/$(PACKAGE)$/;"	m
+Scalability	SA_Thesis/thesis/cha_feti-formulation.tex	/^Both scaling approaches introduced here are appealing since they do not introduce a significant extra cost, while drastically improving the solver performance, especially for the case with high heterogeneities across the interface. The policy in this thesis, that can also be recommended with clear considence as a standard approach, therefore is to always use both of these scaling types combined. Exceptions(see Chapter~\\ref{cha:numerical_assesment}) will be explicitly mentioned.$/;"	s
+Scalability	SA_Thesis/thesis/temporary_formulas.tex	/^\\end{align}$/;"	s
+Sections	chapt_fundamentals_structure.tex	/^\\label{sec:struct}$/;"	u
+Sections	chapters/fundamentals_structure.tex	/^\\label{sec:struct}$/;"	u
+Sections  equations  figures  and tables	chapt_fundamentals_referencing.tex	/^\\section{Fundamentals of \\LaTeX II: referencing}\\label{sec:referencing}$/;"	u
+Sections  equations  figures  and tables	chapters/fundamentals_referencing.tex	/^\\section{Fundamentals of \\LaTeX II: referencing}\\label{sec:referencing}$/;"	u
+Sensitivity Derivation	main.tex	/^\\section{The Finite Volume Method}$/;"	s
+Settings load order	SA_Thesis/latexindent/documentation/manual.tex	/^\\lstinline!latexindent.pl! has read \\lstinline!localSettings.yaml!.$/;"	u
+Settings load order	latexindent/documentation/manual.tex	/^\\lstinline!latexindent.pl! has read \\lstinline!localSettings.yaml!.$/;"	u
+Simultaneous FETI  FETI-S 	SA_Thesis/thesis/cha_feti-solvers.tex	/^A mathematically appealing approach for the definition of the auxiliary coarse space $\\cspace$ in a FETI-2 method are the so-called Geneo methods (Generalized eigenvalues on the interface).\\\\ The idea is to identify the "bad" eigenmodes, corresponding to the "bad" eigenvalues in the spectrum of the system matrix (see Figure~\\ref{fig:eigvalues_pointdistribution}) and to build up the auxiliary coarse space with them. The coarse problem is solved for directly, before the CG iterations themselves are then performed in a subspace orthogonal to these modes, the spectrum of the projected system matrix can thus be significantly improved. Extensive analysis of this methods\\cite{Spillane2016}\\cite{Spillane2013}\\cite{Spillane2014} has shown their remarkable robustness, especially for the generally quite challenging FETI problems described in Chapter~\\ref{cha:numerical_assesment}. However, although mathematically found and robust, the eigenvalue problems on the interface introduce a substantial computational overhead and cannot be parallelized well. What is more increasing the size of the auxiliary coarse grid degenerates the parallelizability of the algorithm further. Thus other methods like the family of Multi Preconditioned Conjugate Gradient solvers are generally more efficient for engineering problems.$/;"	s
+Solid mechanics	SA_Thesis/thesis/cha_fe-formulation.tex	/^The following section provides a short summary of the most important equations of solid mechanics in the finite element context. It thus serves as a short preparation for Chapter \\ref{cha:feti_formulation}, which will will enhanced the basic formulation by a domain decomposition approach. A comprehensive declaration of all terms and expressions used in this thesis can also be found in the nomenclature. Moreover, since domain decomposition typically involves some kind of constraint enforcement, the most important methods in a finite element context are highlighted.$/;"	s
+Space discretization	SA_Thesis/thesis/cha_fe-formulation.tex	/^The finite element formulation is finally derived expressing all terms of the PVW exclusively in the primary variables. To do so, the strong connections of the Tonti diagram are taken advantage of.$/;"	s
+Sturctural Analysis	testfile.tex	/^\\end{tabular}$/;"	b
+Summary	SA_Thesis/thesis/cha_summary.tex	/^\\chapter{Summary}\\label{cha:summary}$/;"	c
+Symbols	testfile.tex	/^\\section*{Nomenclature}\\label{sec:nomenclature}$/;"	u
+TEXHASH	SA_Thesis/thesis/struktex/struktex.mk	/^TEXHASH=texhash$/;"	m
+TEXINPUTS	SA_Thesis/thesis/struktex/struktex.mk	/^TEXINPUTS := $(PWD):$(TEXINPUTS)$/;"	m
+TeX-mac-case	SA_Thesis/thesis/struktex/struktex.el	/^(defun TeX-mac-case (macro)$/;"	f
+TeX-mac-forever	SA_Thesis/thesis/struktex/struktex.el	/^(defun TeX-mac-forever (macro)$/;"	f
+TeX-mac-ifthenelse	SA_Thesis/thesis/struktex/struktex.el	/^(defun TeX-mac-ifthenelse (macro)$/;"	f
+TeX-mac-inparallel	SA_Thesis/thesis/struktex/struktex.el	/^(defun TeX-mac-inparallel (macro)$/;"	f
+TeX-mac-until	SA_Thesis/thesis/struktex/struktex.el	/^(defun TeX-mac-until (macro)$/;"	f
+TeX-mac-while	SA_Thesis/thesis/struktex/struktex.el	/^(defun TeX-mac-while (macro)$/;"	f
+Thanks	SA_Thesis/latexindent/documentation/manual.tex	/^\\section{Before we begin}$/;"	u
+Thanks	latexindent/documentation/manual.tex	/^\\section{Before we begin}$/;"	u
+The Conjugate Gradient algorithm	SA_Thesis/thesis/cha_iterative-solvers.tex	/^aaa$/;"	s
+The FETI formulation	SA_Thesis/thesis/cha_feti-formulation.tex	/^\\chapter{The FETI formulation}\\label{cha:feti_formulation}$/;"	c
+The Finite Volume Method	main.tex	/^\\subfile{chapters\/problem_description}$/;"	s
+The Multi Preconditioned Conjugate Gradient algorithm	SA_Thesis/thesis/cha_iterative-solvers.tex	/^aaa$/;"	u
+The Preconditend Conjugate Gradient algorithm	SA_Thesis/thesis/cha_iterative-solvers.tex	/^aaa$/;"	u
+The Projeced Preconditioned Conjugate Gradient algorithm	SA_Thesis/thesis/cha_iterative-solvers.tex	/^aaa$/;"	u
+The actual structure of your report	chapt_structure_report.tex	/^\\section{The actual structure of your report} %Your new development\/method\/finding$/;"	s
+The actual structure of your report	chapters/structure_report.tex	/^\\begin{document}$/;"	s
+The lstinline  arara  rule	SA_Thesis/latexindent/documentation/manual.tex	/^wish to see where they are cached, use the  \\lstinline!trace! option, e.g  \\lstinline!latexindent.exe -t myfile.tex!.$/;"	s
+The lstinline  arara  rule	latexindent/documentation/manual.tex	/^wish to see where they are cached, use the  \\lstinline!trace! option, e.g  \\lstinline!latexindent.exe -t myfile.tex!.$/;"	s
+The natural subspace	SA_Thesis/thesis/cha_feti-formulation.tex	/^\\\\$/;"	s
+The problem with FETI-1  FETI-2	SA_Thesis/thesis/cha_feti-solvers.tex	/^Numerical analysis will finally test their robustness and performance compared to FETI-AS and conclusions will be drawn in Chapter~\\ref{cha:summary}.$/;"	P
+Theory	SA_Thesis/thesis/cha_iterative-solvers.tex	/^aa$/;"	s
+Theory	SA_Thesis/thesis/cha_numerical-assesment.tex	/^As any iterative method, a CG algorithm is quite susceptible to bad condition numbers. It should be noted at this point, that the conditioning is a property of the problem formulation, not the algorithm itself. Of course, the absolute value of $\\condnum$ depends on the norm used, it should therefore be used only for relative statements.\\\\$/;"	u
+This is the first chapter	SA_Thesis/thesis/main.tex	/^$/;"	c
+Title	chapt_fundamentals_structure.tex	/^  \\paragraph{Title}$/;"	G
+Title	chapt_fundamentals_structure.tex	/^\\begin{verbatim}$/;"	P
+Title	chapters/fundamentals_structure.tex	/^  \\paragraph{Title}$/;"	G
+Title	chapters/fundamentals_structure.tex	/^\\begin{verbatim}$/;"	P
+TitleInTOC	chapt_fundamentals_structure.tex	/^  \\section[TitleInTOC]{FullTitle}\\label{sec:SectionLabel}$/;"	u
+TitleInTOC	chapt_fundamentals_structure.tex	/^  \\subsection[TitleInTOC]{FullTitle}\\label{sec:SectionLabel}$/;"	b
+TitleInTOC	chapt_fundamentals_structure.tex	/^\\begin{verbatim}$/;"	s
+TitleInTOC	chapters/fundamentals_structure.tex	/^  \\section[TitleInTOC]{FullTitle}\\label{sec:SectionLabel}$/;"	u
+TitleInTOC	chapters/fundamentals_structure.tex	/^  \\subsection[TitleInTOC]{FullTitle}\\label{sec:SectionLabel}$/;"	b
+TitleInTOC	chapters/fundamentals_structure.tex	/^\\begin{verbatim}$/;"	s
+Two-level FETI  FETI-2 	SA_Thesis/thesis/cha_feti-solvers.tex	/^\\end{figure}$/;"	s
+VERSION_L	SA_Thesis/thesis/struktex/struktex.mk	/^VERSION_L := latex getversion | grep '^VERSION'$/;"	m
+VERSION_S	SA_Thesis/thesis/struktex/struktex.mk	/^VERSION_S := `latex getversion | grep '^VERSION' | \\$/;"	m
+WARNING	SA_Thesis/latexindent/latexindent.pl	/^WARNING:  $indentconfig$/;"	l
+WARNING	SA_Thesis/latexindent/latexindent.pl	/^WARNING: \\t line count of original file and indented file does$/;"	l
+WARNING	SA_Thesis/latexindent/latexindent.pl	/^WARNING:$/;"	l
+WARNING	latexindent/latexindent.pl	/^WARNING:  $indentconfig$/;"	l
+WARNING	latexindent/latexindent.pl	/^WARNING: \\t line count of original file and indented file does$/;"	l
+WARNING	latexindent/latexindent.pl	/^WARNING:$/;"	l
+abb	create_nomencature.py	/^            abb=abbrevations[secname][expl].split("{")[1].split("}")[0]$/;"	v
+abbrevations	create_nomencature.py	/^abbrevations={}$/;"	v
+after changing the fonts with	SA_Thesis/thesis/struktex/struktex-test-3.tex	/^}$/;"	P
+at_beg_noindent	SA_Thesis/latexindent/latexindent.pl	/^sub at_beg_noindent{$/;"	s
+at_beg_noindent	latexindent/latexindent.pl	/^sub at_beg_noindent{$/;"	s
+at_beg_of_env_or_eq	SA_Thesis/latexindent/latexindent.pl	/^sub at_beg_of_env_or_eq{$/;"	s
+at_beg_of_env_or_eq	latexindent/latexindent.pl	/^sub at_beg_of_env_or_eq{$/;"	s
+at_end_noindent	SA_Thesis/latexindent/latexindent.pl	/^sub at_end_noindent{$/;"	s
+at_end_noindent	latexindent/latexindent.pl	/^sub at_end_noindent{$/;"	s
+at_end_of_env_or_eq	SA_Thesis/latexindent/latexindent.pl	/^sub at_end_of_env_or_eq{$/;"	s
+at_end_of_env_or_eq	latexindent/latexindent.pl	/^sub at_end_of_env_or_eq{$/;"	s
+begin_command_with_alignment	SA_Thesis/latexindent/latexindent.pl	/^sub begin_command_with_alignment{$/;"	s
+begin_command_with_alignment	latexindent/latexindent.pl	/^sub begin_command_with_alignment{$/;"	s
+cha_fe-formulation	SA_Thesis/thesis/thesis.tex	/^\\include{cha_introduction}$/;"	i
+cha_feti-formulation	SA_Thesis/thesis/thesis.tex	/^\\include{cha_fe-formulation}$/;"	i
+cha_feti-solvers	SA_Thesis/thesis/thesis.tex	/^\\include{cha_iterative_solvers}$/;"	i
+cha_introduction	SA_Thesis/thesis/thesis.tex	/^\\newgeometry{left=0.8in,right=0.8in,top=1in,bottom=2cm}$/;"	i
+cha_iterative_solvers	SA_Thesis/thesis/thesis.tex	/^\\include{cha_feti-formulation}$/;"	i
+cha_numerical-assesment	SA_Thesis/thesis/thesis.tex	/^\\include{cha_feti-solvers}$/;"	i
+cha_outlook	SA_Thesis/thesis/thesis.tex	/^\\include{cha_summary}$/;"	i
+cha_summary	SA_Thesis/thesis/thesis.tex	/^\\include{cha_numerical-assesment}$/;"	i
+chapter	SA_Thesis/latexindent/success/testHeadings.tex	/^           section text$/;"	c
+chapter	latexindent/success/testHeadings.tex	/^           section text$/;"	c
+chapter long title	SA_Thesis/latexindent/success/testHeadings.tex	/^         part text$/;"	c
+chapter long title	latexindent/success/testHeadings.tex	/^         part text$/;"	c
+check_for_else	SA_Thesis/latexindent/latexindent.pl	/^sub check_for_else{$/;"	s
+check_for_else	latexindent/latexindent.pl	/^sub check_for_else{$/;"	s
+command	create_nomencature.py	/^            command=operators[secname][expl].split("{")[1].split("}")[0]$/;"	v
+command	create_nomencature.py	/^            command=symbols[descr][expl].split("{")[1].split("}")[0]$/;"	v
+commandline	create_nomencature.py	/^                commandline=content.pop(0)$/;"	v
+commandline	create_nomencature.py	/^            commandline=content.pop(0)$/;"	v
+content	create_nomencature.py	/^content=file.read().splitlines()$/;"	v
+curline	create_nomencature.py	/^    curline=content.pop(0) #get a line$/;"	v
+decrease_indent	SA_Thesis/latexindent/latexindent.pl	/^sub decrease_indent{$/;"	s
+decrease_indent	latexindent/latexindent.pl	/^sub decrease_indent{$/;"	s
+description	create_nomencature.py	/^            description=content.pop(0)[2:].strip()$/;"	v
+end_command_or_key_unmatched_braces	SA_Thesis/latexindent/latexindent.pl	/^sub end_command_or_key_unmatched_braces{$/;"	s
+end_command_or_key_unmatched_braces	latexindent/latexindent.pl	/^sub end_command_or_key_unmatched_braces{$/;"	s
+end_command_or_key_unmatched_brackets	SA_Thesis/latexindent/latexindent.pl	/^sub end_command_or_key_unmatched_brackets{$/;"	s
+end_command_or_key_unmatched_brackets	latexindent/latexindent.pl	/^sub end_command_or_key_unmatched_brackets{$/;"	s
+end_command_with_alignment	SA_Thesis/latexindent/latexindent.pl	/^sub end_command_with_alignment{$/;"	s
+end_command_with_alignment	latexindent/latexindent.pl	/^sub end_command_with_alignment{$/;"	s
+explanation	create_nomencature.py	/^                explanation=commandline.split("%")[1].strip()$/;"	v
+explanation	create_nomencature.py	/^                explanation=commandline.split("%")[2].strip()$/;"	v
+explclean	create_nomencature.py	/^            explclean=expl.replace(withexpr,"").strip()$/;"	v
+file	create_nomencature.py	/^file = open('.\/customcommands.tex','r')$/;"	v
+for the toc	SA_Thesis/latexindent/success/testHeadings.tex	/^          	subsection text$/;"	s
+for the toc	SA_Thesis/latexindent/success/testHeadings.tex	/^          	subsection text$/;"	u
+for the toc	SA_Thesis/latexindent/success/testHeadings.tex	/^           			subparagraph text$/;"	s
+for the toc	SA_Thesis/latexindent/success/testHeadings.tex	/^           section text$/;"	b
+for the toc	SA_Thesis/latexindent/success/testHeadings.tex	/^           section text$/;"	s
+for the toc	SA_Thesis/latexindent/success/testHeadings.tex	/^           section text$/;"	u
+for the toc	SA_Thesis/latexindent/success/testHeadings.tex	/^          \\]$/;"	s
+for the toc	SA_Thesis/latexindent/success/testHeadings.tex	/^          chapter text$/;"	s
+for the toc	latexindent/success/testHeadings.tex	/^          	subsection text$/;"	s
+for the toc	latexindent/success/testHeadings.tex	/^          	subsection text$/;"	u
+for the toc	latexindent/success/testHeadings.tex	/^           			subparagraph text$/;"	s
+for the toc	latexindent/success/testHeadings.tex	/^           section text$/;"	b
+for the toc	latexindent/success/testHeadings.tex	/^           section text$/;"	s
+for the toc	latexindent/success/testHeadings.tex	/^           section text$/;"	u
+for the toc	latexindent/success/testHeadings.tex	/^          \\]$/;"	s
+for the toc	latexindent/success/testHeadings.tex	/^          chapter text$/;"	s
+format_block	SA_Thesis/latexindent/latexindent.pl	/^sub format_block{$/;"	s
+format_block	latexindent/latexindent.pl	/^sub format_block{$/;"	s
+functions	SA_Thesis/latexindent/success/bigTest.tex	/^\\pagestyle{fancy}$/;"	i
+functions	latexindent/success/bigTest.tex	/^\\pagestyle{fancy}$/;"	i
+ifnum value  chapter	SA_Thesis/latexindent/success/ifelsefi.tex	/^\\preto\\chapter{%$/;"	c
+ifnum value  chapter	latexindent/success/ifelsefi.tex	/^\\preto\\chapter{%$/;"	c
+increase_indent	SA_Thesis/latexindent/latexindent.pl	/^sub increase_indent{$/;"	s
+increase_indent	latexindent/latexindent.pl	/^sub increase_indent{$/;"	s
+indent_after_heading	SA_Thesis/latexindent/latexindent.pl	/^sub indent_after_heading{$/;"	s
+indent_after_heading	latexindent/latexindent.pl	/^sub indent_after_heading{$/;"	s
+indent_after_if_else_fi	SA_Thesis/latexindent/latexindent.pl	/^sub indent_after_if_else_fi{$/;"	s
+indent_after_if_else_fi	latexindent/latexindent.pl	/^sub indent_after_if_else_fi{$/;"	s
+indent_after_item	SA_Thesis/latexindent/latexindent.pl	/^sub indent_after_item{$/;"	s
+indent_after_item	latexindent/latexindent.pl	/^sub indent_after_item{$/;"	s
+indent_heading	SA_Thesis/latexindent/latexindent.pl	/^sub indent_heading{$/;"	s
+indent_heading	latexindent/latexindent.pl	/^sub indent_heading{$/;"	s
+indent_if_else_fi	SA_Thesis/latexindent/latexindent.pl	/^sub indent_if_else_fi{$/;"	s
+indent_if_else_fi	latexindent/latexindent.pl	/^sub indent_if_else_fi{$/;"	s
+indent_item	SA_Thesis/latexindent/latexindent.pl	/^sub indent_item{$/;"	s
+indent_item	latexindent/latexindent.pl	/^sub indent_item{$/;"	s
+lstinline  indentconfig.yaml  and lstinline  .indentconfig.yaml   for user settings 	SA_Thesis/latexindent/documentation/manual.tex	/^\\end{enumerate}$/;"	u
+lstinline  indentconfig.yaml  and lstinline  .indentconfig.yaml   for user settings 	latexindent/documentation/manual.tex	/^\\end{enumerate}$/;"	u
+lstinline  localSettings.yaml 	SA_Thesis/latexindent/documentation/manual.tex	/^\\end{warning}$/;"	u
+lstinline  localSettings.yaml 	latexindent/documentation/manual.tex	/^\\end{warning}$/;"	u
+macro	create_nomencature.py	/^                macro=commandline.split("%")[0].strip()$/;"	v
+macro	create_nomencature.py	/^                macro=commandline.split("%")[1].strip()$/;"	v
+numarg	create_nomencature.py	/^            numarg=int(operators[secname][expl].split("{")[1].split("}")[1][1])$/;"	v
+operators	create_nomencature.py	/^operators={}$/;"	v
+paragraph	SA_Thesis/latexindent/success/testHeadings.tex	/^           	subsubsection text$/;"	P
+paragraph	latexindent/success/testHeadings.tex	/^           	subsubsection text$/;"	P
+part	SA_Thesis/latexindent/success/testHeadings.tex	/^          chapter text$/;"	p
+part	SA_Thesis/latexindent/success/testHeadings.tex	/^% arara: indent: {onlyDefault: no, overwrite: true, trace: on, silent: yes, localSettings: true}$/;"	p
+part	latexindent/success/testHeadings.tex	/^          chapter text$/;"	p
+part	latexindent/success/testHeadings.tex	/^% arara: indent: {onlyDefault: no, overwrite: true, trace: on, silent: yes, localSettings: true}$/;"	p
+print_aligned_block	SA_Thesis/latexindent/latexindent.pl	/^sub print_aligned_block{$/;"	s
+print_aligned_block	latexindent/latexindent.pl	/^sub print_aligned_block{$/;"	s
+projected preconditioned conjugate gradient	SA_Thesis/thesis/cha_adaptive_mpcg.tex	/^The idea is simple. One assumes that the bad condition number of the matrix is caused by just a little fraction of the full eigenvalue spectrum. One therefor tries to identify these "bad" eigenmodes and create a so called "auxiliary coarse space(deflation space)" with those modes. The problem is then solved directly within this small subspace, before the iterative scheme continues in the remaining space, orthorgonal to the deflation space. If the deflation space is chosen right, the convergence properties are greatly improved.\\\\$/;"	u
+projected preconditioned conjugate gradient	SA_Thesis/thesis/cha_iterative-solvers.tex	/^The idea is simple. One assumes that the bad condition number of the matrix is caused by just a little fraction of the full eigenvalue spectrum. One therefor tries to identify these "bad" eigenmodes and create a so called "auxiliary coarse space(deflation space)" with those modes. The problem is then solved directly within this small subspace, before the iterative scheme continues in the remaining space, orthorgonal to the deflation space. If the deflation space is chosen right, the convergence properties are greatly improved.\\\\$/;"	u
+somethingelse	SA_Thesis/latexindent/success/testHeadings.tex	/^           			subparagraph text$/;"	c
+somethingelse	latexindent/success/testHeadings.tex	/^           			subparagraph text$/;"	c
+start_command_or_key_unmatched_braces	SA_Thesis/latexindent/latexindent.pl	/^sub start_command_or_key_unmatched_braces{$/;"	s
+start_command_or_key_unmatched_braces	latexindent/latexindent.pl	/^sub start_command_or_key_unmatched_braces{$/;"	s
+start_command_or_key_unmatched_brackets	SA_Thesis/latexindent/latexindent.pl	/^sub start_command_or_key_unmatched_brackets{$/;"	s
+start_command_or_key_unmatched_brackets	latexindent/latexindent.pl	/^sub start_command_or_key_unmatched_brackets{$/;"	s
+subparagraph	SA_Thesis/latexindent/success/testHeadings.tex	/^           		paragraph text$/;"	G
+subparagraph	latexindent/success/testHeadings.tex	/^           		paragraph text$/;"	G
+symbols	create_nomencature.py	/^symbols={}$/;"	v
+testfile	main.tex	/^\\include{Preface}$/;"	i
+this is the first section	SA_Thesis/thesis/main.tex	/^asdasad$/;"	s
+this is the second section	SA_Thesis/thesis/main.tex	/^asdasdadasd$/;"	s
+titlepage	main.tex	/^\\pagenumbering{roman}$/;"	i
+toc	SA_Thesis/latexindent/success/testHeadings.tex	/^         part text$/;"	c
+toc	latexindent/success/testHeadings.tex	/^         part text$/;"	c
+usage	SA_Thesis/latexindent/latexindent.pl	/^usage: latexindent.pl [options] [file][.tex]$/;"	l
+usage	latexindent/latexindent.pl	/^usage: latexindent.pl [options] [file][.tex]$/;"	l
+what a great subsection	SA_Thesis/thesis/main.tex	/^all god stuff of the first section can be found at \\secref{sec:firstsection}$/;"	u
+withexpr	create_nomencature.py	/^            withexpr=re.search("with{.*}",expl).group(0)$/;"	v
+withexpr	create_nomencature.py	/^            withexpr=withexpr.replace('with{','').replace('}','')$/;"	v

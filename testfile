@@ -1,0 +1,14 @@
+$\newcommand{\disp}{u}$ & Displacement vector
+$\newcommand{\dispvec}{\dvec{\disp}}$ & Disrete displacement vector
+$\newcommand{\eqctr}{\vec{h}}$ & Equality constraints
+$\newcommand{\stiffmat}{\dmat{K}}$ & Finite Element stiffness matrix
+$\newcommand{\ifacedisp}{d}$ & Interface Displacement
+$\newcommand{\ifacedispvec}{\dvec{\ifacedisp}}$ & Interface Displacent
+$\newcommand{\motion}{\vec{x}}$ & Mesh motion
+$\newcommand{\neqctr}{\vec{g}}$ & Non-equality constraints
+$\newcommand{\optcrits}{\vec{g}}$ & Optimization criteria
+$\newcommand{\mmsstateeq}{\mathcal{D}}$ & TODO
+$\newcommand{\costfunc}{z}$ & Target cost function
+$\newcommand{\phydsgpar}{\vec{d}}$ & physical design parameters
+$\newcommand{\absvars}{\vec{s}}$ & {Vector of abstract optimization variables}
+$\newcommand{\absvar}{s}$ & {abstract optimazation variable

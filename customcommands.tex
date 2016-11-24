@@ -1,146 +1,188 @@
-\renewcommand{\vec}[1]{\boldsymbol{#1}}
-%\renewcommand{\mat}[1]{\boldsymbol{#1}}
+%%==============================%
+% OPERATORS
+% Representation of scalars, tensors and other quantities
+%==============================%
+\newcommand{\scalar}[1]{#1}                        %Scalar quantity with{A}
+\newcommand{\tensor}[1]{\mathcal{\boldsymbol{#1}}} %Tensor with{A}
+\newcommand{\derivtime}[1]{\dot{#1}}               %First time derivative at a fixed reference position with{A}
+\newcommand{\dderivtime}[1]{\ddot{#1}}             %Second time derivative at a fixed refrence position                       with{A} %partial derivative of a quantity
+\newcommand{\dvec}[1]{\boldsymbol{ \mathsf{#1} } } %discrete vector represenation of a scalar field with{A}
+\newcommand{\dmat}[1]{\boldsymbol{\mathsf{#1}}}    %discrete vector represenation of a tensor field with{A}
+\renewcommand{\it}[1]{{#1}^{(k)}}    %Iteration index in the optimization loop{A}
+\newcommand{\ito}[1]{{#1}^{(k)}}    %Iteration index in the optimization loop{A}
+\newcommand{\its}[1]{{#1}^{(n)}}    %Iteration index in thestaggered algorithm{A}
+\newcommand{\fic}[1]{\bar{#1}}      %Fictious entity
+\newcommand{\av}[1]{\bar{#1}}       %Time-averaged quantity
+\newcommand{\fluc}[1]{{#1}'}       %Time-averaged quantity
+\newcommand{\fstaterans}{\fstate_{RANS}} %Augumentes fluid state vector in the RANS formulation
+\newcommand{\turbulenceparam}{\chi} %Additional fluid state variable introduced by the turbulence model
+\newcommand{\turbulencesource}{\mathsf{S}} %Source term in the RANS equations
 
-\newcommand{\derivtime}[1]{\dot{#1}}           % time derivative
-\newcommand{\dderivtime}[1]{\ddot{#1}}         % double time derivative
+\newcommand{\itn}[1]{{#1}^{(0)}}    %Iteration index 0{A}
+\newcommand{\itss}[1]{{#1}^{(n+1)}}    %Iteration index in thestaggered algorithm{A}
+\newcommand{\pd}{\mathrm{\partial}} %TODO check whether I need the partial or not
+\newcommand{\pdfrac}[2]{\frac{\pd #1}{\pd #2}} %partial derivative of one argument with respect to the other
+\newcommand{\ppdfrac}[2]{\frac{\pd^{2} #1}{\pd {#2}^{2}}} %Second partial derivative of one argument with respect to the other
+\renewcommand{\tfrac}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}} %First total derivative of one argument with respect to the other
+\renewcommand{\vec}[1]{\boldsymbol{#1}}            %Vector
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 
-%\renewcommand{\dd}{\mathrm{d}}                    % differential d
-\newcommand{\pd}{\partial}                      % partial differentiation d
-
-\newcommand{\dvec}[1]{\boldsymbol{ \mathsf{#1} } }         % for vectors
-\newcommand{\dmat}[1]{\boldsymbol{\mathsf{#1}}}           % for matrices
-\newcommand{\tensor}[1]{\boldsymbol{\mathcal{#1}}}
-\newcommand{\Bd}[2]{ (#1,#2)_{D^k} }           % bilienarfor over domian
-\newcommand{\Bb}[2]{ (#1,#2)_{\partial D^k} }           % bilienarfor over boundary
 \newcommand{\0}{\textcolor{lightgrey}{0}}
-%
-\newcommand{\domainone}{\Omega_1}
-\newcommand{\domaintwo}{\Omega_2}
-\newcommand{\ifaceone}{\Gamma_1}
-\newcommand{\ifacetwo}{\Gamma_2}
 
-\newcommand{\stiffmat}{\dmat{K}}
-
-\newcommand{\condnum}{\mathcal{K}}
-\newcommand{\myorder}[1]{\mathcal{O}\left(#1\right)}
-
-\newcommand{\sfn}{N}
-
-\newcommand{\disp}{u}
-\newcommand{\dispvec}{\dvec{\disp}}
-
-\newcommand{\lag}{\lambda}
-\newcommand{\lagvec}{\dvec{\lag}}
-
-%natural coarse space lambda
-\newcommand{\lagn}{\lambda_N}
-\newcommand{\lagnvec}{\dvec{\lagn}}
-
-%Coarse space lambda
-\newcommand{\lagc}{\lambda_C}
-\newcommand{\lagcvec}{\dvec{\lagc}}
-
-%FETI subspace space lambda
-\newcommand{\lagf}{\lambda_F}
-\newcommand{\lagfvec}{\dvec{\lagf}}
+%==============================%
+% OPERATORS
+% Operators and Symbols
+%==============================%
+\newcommand{\T}[1]{{#1}^{T}}       %Transpose of a tensor with{A}
+\newcommand{\inv}[1]{ {#1}^{-1}}   %Inverse of a tensor   with{A}
 
 
-\newcommand{\rmode}{\alpha}
-\newcommand{\rmodevec}{\dvec{\rmode}}
-
-\newcommand{\force}{f}
-\newcommand{\forcevec}{\dvec{\force}}
-
-\newcommand{\ifacedisp}{d}
-\newcommand{\ifacedispvec}{\dvec{\ifacedisp}}
-
-\newcommand{\res}{r}
-\newcommand{\resvec}{\dvec{\res}}
-
-\newcommand{\traceop}{\dmat{t}}
-\newcommand{\asmop}{\dmat{B}}
-\newcommand{\nullspacemat}{\dmat{R}}
-\newcommand{\locschur}{\dmat{S}}
-\newcommand{\asmlocschur}{\asmids{\dmat{S}}}
-\newcommand{\locdualschur}{\dmat{F}}
-
-\newcommand{\precond}{\dmat{F}}
-
-
-\newcommand{\rmodespace}{\dmat{G}}
-\newcommand{\scalemat}{\dmat{A}}
-
-\newcommand{\cspace}{\dmat{C}}
-\newcommand{\projn}{\dmat{P}}
-\newcommand{\projc}{\dmat{P}_c}
-
-\newcommand{\totalgap}{\dvec{\Delta}}
-
-%feti-general
-\newcommand{\evec}{\dvec{e}}
-
-%feti-2
-\newcommand{\sdirnspacecspace}{\dvec{q}}
-\newcommand{\sdirnspace}{\dvec{w}} %search direction
-\newcommand{\sdirfspace}{\dvec{z}}
-
-%feti-s
-\newcommand{\sdirnspacemat}{\dmat{W}}
-\newcommand{\Zmat}{\dmat{Z}}
-\newcommand{\sdirfspacemat}{\dmat{Z}}
-\newcommand{\Deltamat}{\dmat{\Delta}}
-\newcommand{\sdirnspacecspaceblock}{\dmat{Q}}
-
-\newcommand{\eyemat}{\dmat{I}}
-
-\newcommand{\idone}[1]{{#1}^{(1)} }
-\newcommand{\idtwo}[1]{{#1}^{(2)} }
-\newcommand{\ids}[1]  {{#1}^{(s)} }
-\newcommand{\asmids}[1]  {{#1}^{[s]} }
-\newcommand{\inv}[1]  {{#1}^{-1} }
-\newcommand{\pinv}[1] {{#1}^{+} }
-\newcommand{\tp}[1]   {{#1}^{T} }
-%\newcommand{\scaled}[1]{\tilde{#1}}
-\newcommand{\scaled}[1]{#1}
+%==============================
+% SYMBOLS
+% 3-field formulations
+%==============================
+\newcommand{\EOSstruct}{\mathcal{S}}      %State equation of the structure
+\newcommand{\EOSmesh}  {\mathcal{D}}      %State equation of the mesh
+\newcommand{\EOSfluid} {\mathcal{F}}      %State equation of the fluid
+\newcommand{\mms}       {\vec{x}}        %Fluid mesh motion
+\newcommand{\fstate}    {\vec{w}}        %Fluid state vector
+\newcommand{\structdisp}{\vec{u}}        %Structure displacement
+\newcommand{\fload}{\vec{P}_F}           %Fluid load TODO
+\newcommand{\sload}{\vec{P}_T}           %Structure load TODO
+\newcommand{\jactwo}{\tensor{H}_2}       %Second order Jacobian  TODO
+\newcommand{\ifaceprojFtoS}{\dmat{T}_p}  %Interface projection matrix from fluid to structure mesh
+\newcommand{\ifaceprojStoF}{\dmat{T}_u}  %Interface projection matrix from structure to fluid mesh
 
 
 
+%==============================%
+% SYMBOLS
+% Optimization
+%==============================%
+\newcommand{\costfunc}{z}        %Target cost function
+\newcommand{\eqctr}{\vec{h}}     %Equality constraints
+\newcommand{\numeqctr}{n_{\vec{h}}}     %Number of equality constraints
+\newcommand{\neqctr}{\vec{g}}    %Non-equality constraints
+\newcommand{\numneqctr}{n_{\vec{g}}} %Number of non-equality constraints
+\newcommand{\absvar}{s}          %abstract optimazation variable
+\newcommand{\absvars}{\vec{s}}   %Vector of abstract optimization variables
+\newcommand{\optcrit}{q}  %Optimization criterium
+\newcommand{\optcrits}{\vec{\optcrit}}  %Vector of optimization criteria
+\newcommand{\phydsgpar}{\vec{d}} %physical design parameters
+\newcommand{\Lagfunc}{L} %Lagrangian function of the optimization problem
+\newcommand{\lagmultseq}{\vec{\eta}} %Lagrange multipliers of the equality constraints
+\newcommand{\lagmultsneq}{\vec{\gamma}} %Lagrange multipliers of the inequality constraints
+\newcommand{\adjoints}{\vec{a}} %Adjoint solutions
+\newcommand{\tolsa}{\epsilon^{SA}} %Specified tolerance in the Sensitivity analysis
 
-%commands for chapter finite element method
-\newcommand{\bodyforce}[1]{\dvec{\hat{b}}}
-\newcommand{\stress}{\dvec{\sigma}}
-\newcommand{\strain}{\dvec{\epsilon}}
-\newcommand{\traction}{\dvec{t}}
-%\newcommand{\pd}[1]{\partial}
+
+%==============================%
+% SYMBOLS
+% Fluid Mechanics
+%==============================%
+\newcommand{\fluxesconv}{\mathcal{F}} %Convective fluxed
+\newcommand{\fluxesdiff}{\mathcal{G}} %Diffusive fluxes
+\newcommand{\dens}{\rho}              %Density
+\newcommand{\pres}{p}              %Pressure
+\newcommand{\fluidvel}{\vec{v}}     %Fluid velocity vector
+\newcommand{\fluidvelx}{v_x}     %Fluid velocity in x-direction
+\newcommand{\fluidvely}{v_y}     %Fluid velocity in y-direction
+\newcommand{\fluidvelz}{v_z}     %Fluid velocity in z-direction
+\newcommand{\energytot}{E}         %Total energys
+\newcommand{\energyint}{e}        %Internal energy
+\newcommand{\eye}{\dmat{I}}        %Identity matrix
+\newcommand{\fluidstress}{\tensor{\tau}}      %Deviatoric fluid stress tensor
+\newcommand{\fluidstresscomp}{\tau}      %Deviatoric fluid stress tensor
+\newcommand{\thermcond}{k}         %Thermal conductivity of the fluid
+\newcommand{\temp}{T}         %Fluid temperature
+\newcommand{\heatfluxcomp}{q} %Heat flux comopnenent
+\newcommand{\heatflux}{\vec{\heatfluxcomp}} %Heat flux vector
+\newcommand{\viscosdyn}{\mu} %Dynamic viscosity
+\newcommand{\viscoskin}{\nu} %Kinematic viscosity
+\newcommand{\reynolds}{RE} %Reynolds number
+\newcommand{\specheatratio}{\gamma} %Specific heat ratio
+
+\newcommand{\dyadic}{\otimes}        %Symbol for dyadic product
+%%%==============================%
+%%% SYMBOLS
+%%% Fluid Analysis
+%%%==============================%
+%%\newcommand{\sate}{w}
+%%\newcommand{•}{•}
+%%\newcommand{•}{•}
+%%\newcommand{•}{•}
+%%\newcommand{\statevec}{\vec{\state}}
 
 
+%==============================%
+% SYMBOLS
+% Sturctural Analysis
+%==============================%
+\newcommand{\stiffmat}{\dmat{K}}               %Finite Element stiffness matrix
+\newcommand{\disp}{u}                          %Displacement vector
+\newcommand{\dispvec}{\dvec{\disp}}            %Disrete displacement vector
+\newcommand{\motion}{\vec{x}}                  %Mesh motion
+\newcommand{\ifacedisp}{d}                     %Interface Displacement
+\newcommand{\ifacedispvec}{\dvec{\ifacedisp}}  %Interface Displacent 
 
-%\newcommand{\nassitext}[1]{\textit{\textcolor{nassitextcolor}{#1}}}
+
+%==========================================
+% SYMBOLS
+% Fluid Structure Interaction
+%==========================================
+\newcommand{\strucstateq}{\mathcal{P}}         %TODO
+\newcommand{\fluidstateq}{\mathcal{F}}         %TODO
+\newcommand{\mmsstateeq}{\mathcal{D}}          %TODO
+
+%\def\abbrevation}[1]{~}
+
+%==========================================
+% ABBREVATIONS
+% Abbrevations
+%==========================================
+%\abbrevation{SQP}      %Sequential Quatdratic Programming
+%\abbrevation{GSE}      %Gloabal Sensitivity Equations
+%\abbrevation{SA}       %Sensitivity Analysis
+%\abbrevation{VOF}      %Volume of Fluid Methods
+%\abbrevation{GFM}      %GFMP
+%\abbrevation{GFMP}     %Ghost Fluid Method of the Poor
+%\abbrevation{EOS}      %Equation of state
+%\abbrevation{JWL}      %Jones-Wilkins-Lee
+%\abbrevation{SG}       %Stiffend Gas
+%\abbrevation{MUSCL}    %Monotonic Upwind scheme for Conservation Laws
+%\abbrevation{FIVER}    %Finite Volume Method with exact two-phase Riemann integrals
+
+
+%=============================================================================%
+% Nassi-Schneidermann auxiliary commands                                      %
+%=============================================================================%
+
+%commands for the text part of the dioagrams
+%the bold command is typcally used for TODO
+%there is now automatic line wrapping in strtuktex, so the  second command is
+% used if the text becomes too long
 \newcommand{\nassitext}[2]{\makebox[#1\textwidth]{\textit{\textcolor{nassitextcolor}{\small #2}}\hfill}}
-
 \newcommand{\nassitextbold}[2]{\makebox[#1\textwidth]{\textbf{\textit{\textcolor{nassitextcolor}{\small #2}}}\hfill}}
-
 \newcommand{\nassitexttwolines}[3]{\nassitext{#1}{#2}\hspace*{\hsize}\linebreak \nassitext{\df2}{#3}}
 
-\usepackage{soul}
-\definecolor{hlcolor}{RGB}{230,230,230}
-\setulcolor{red}
-%\newcommand{\hlchange}[1]{\colorbox{hlcolor}{$#1$}}
-%\newcommand{\hlchange}[1]{\ul{$\displaystyle#1$}}
-%\usepackage{xcolor}
-\newsavebox\MBox
-\newcommand\hlchange[2][red]{{\sbox\MBox{$#2$}%
-  \rlap{\usebox\MBox}\color{#1}\rule[-1.7\dp\MBox]{\wd\MBox}{1.0pt}}}
+%%%%%These commands are used to highlight specific parts of the diagramm, e.g.
+%%%%%algorithm parts that have changed compared to a previous implementation
+%%%%\usepackage{soul}
+%%%%\definecolor{hlcolor}{RGB}{230,230,230}
+%%%%\setulcolor{red}
+%%%%\newsavebox\MBox
+%%%%\newcommand\hlchange[2][red]{{\sbox\MBox{$#2$}%
+%%%%  \rlap{\usebox\MBox}\color{#1}\rule[-1.7\dp\MBox]{\wd\MBox}{1.0pt}}}
 
 
-
-\newcommand*\MyScale{1}
-\newcommand*\Scale[1][1]{\renewcommand*\MyScale{#1}}
-\tikzset{%
-  every picture/.style={%
-    scale=\MyScale,
-  }
-}
+%%%%% custom scale command; TODO usage unclear
+%%%%\newcommand*\MyScale{1}
+%%%%\newcommand*\Scale[1][1]{\renewcommand*\MyScale{#1}}
+%%%%\tikzset{%
+%%%%  every picture/.style={%
+%%%%    scale=\MyScale,
+%%%%  }
+%%%%}
 
 
 %\renewcommand\thesection{\roman{section}}

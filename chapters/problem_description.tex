@@ -1,0 +1,332 @@
+\documentclass[../main.tex]{subfiles}
+%\usepackage{import}
+\begin{document}
+\setlength{\delimitershortfall}{0pt}
+\section{About this template}\label{sec:about}
+
+
+
+\subsection{Basics}
+
+A generic, aeroelastic optimization problem can be written as
+\begin{align}\label{eq:generic_optimization_problem}
+&min_s \costfunc(\absvars) \\%TODO subscribt s
+&\eqctr(\absvar)=\vec{0},~~~\eqctr \in \mathbb{R}^{\numeqctr}\\
+&\neqctr(\absvar)>\vec{0},~~~\neqctr \in \mathbb{R}^{\numneqctr}
+\end{align}
+
+
+
+The Lagrangian function looks like
+\begin{align}\label{eq:lagrangian_of_optimization}
+\Lagfunc(\absvars,\lagmultseq,\lagmultsneq)=\costfunc(\absvars))=\T{\lagmultseq} \eqctr(\absvars) + \T{\lagmultsneq}\neqctr(\absvars) \\
+\end{align}
+
+The Saddle point formulation of the Lagrangian
+\begin{align}\label{eq:saddlepoint_optimization}
+\pdfrac{\Lagfunc}{\absvars}&=\pdfrac{\costfunc}{\absvars}=\T{\lagmultseq}\pdfrac{\eqctr}{\absvars}+\T{\lagmultsneq}\pdfrac{\neqctr}{\absvars} \\
+\pdfrac{\Lagfunc}{\lagmultseq}&=\eqctr=\vec{0} \\
+\pdfrac{\Lagfunc}{\lagmultsneq}&=\T{\lagmultsneq}\neqctr=\vec{0}
+\end{align}
+
+
+\def\PPLagfuncBYabsvars{\ppdfrac{\Lagfunc}{\absvars}}
+\def\PLagfuncBYabsvars{\pdfrac{\Lagfunc}{\absvars}}
+\def\PneqctrBYabsvars{\pdfrac{\neqctr}{\absvar}}
+\def\PeqctrBYabsvars{\pdfrac{\eqctr}{\absvar}}
+
+\def\incrabsvars{\Delta \absvars}
+\def\incrlagmultsneq{\Delta \lagmultsneq}
+\def\incrlagmultseq{\Delta \lagmultseq}
+\begin{align}\label{eq:saddlepoint_newtonform}
+\begin{bmatrix}
+\it{\PPLagfuncBYabsvars}                & \it{\PneqctrBYabsvars} & \it{\PeqctrBYabsvars} \\
+\it{\lagmultsneq}\it{\PneqctrBYabsvars} & \it{\eqctr}            & \vec{0}               \\
+\it{\PeqctrBYabsvars}                   & \vec{0}                & \vec{0}
+\end{bmatrix}
+	\begin{bmatrix}
+	\incrabsvars \\
+	\incrlagmultsneq \\
+	\incrlagmultseq
+	\end{bmatrix}\
+	=
+    -\begin{bmatrix}
+		\it{\PLagfuncBYabsvars} \\
+		\T{\it{\lagmultsneq}} \it{\neqctr} \\
+		\it{\eqctr}
+		\end{bmatrix}
+\end{align}
+
+\begin{align}\label{eq:quadratic_minimization_problem}
+min_{\absvars}( \frac{1}{2} \T{\incrabsvars} \it{\PPLagfuncBYabsvars} \incrabsvars + \frac{\partial \it{\costfunc}}{\partial \absvars} ) \\
+\it{\PneqctrBYabsvars} \incrabsvars+\it{\neqctr} \geq \vec{0} \\
+\it{\PeqctrBYabsvars} \incrabsvars+\it{\eqctr} = \vec{0}
+\end{align}
+
+\begin{align}\label{eq:}
+\begin{bmatrix}
+\absvars^{(k+1)} \\
+\lagmultseq^{(k+1)} \\
+\lagmultsneq^{(k+1)}
+\end{bmatrix} =
+  \begin{bmatrix}
+  \it{\absvars} \\
+  \it{\lagmultseq} \\
+  \it{\lagmultsneq} \\
+  \end{bmatrix} +
+    \it{\alpha}
+    \begin{bmatrix}
+    \it{\incrabsvars} \\
+    \it{\incrlagmultseq} \\
+    \it{\incrlagmultsneq} \\
+    \end{bmatrix}
+\end{align}
+
+
+
+The discrete form ot the steady state can be written as:
+\begin{align}\label{eq:3field_basic}
+\EOSstruct (\absvars,\structdisp,\mms,\fstate) = \vec{0} \\
+\EOSmesh   (\absvars,\structdisp,\mms)         = \vec{0} \\
+\EOSfluid  (\absvars,\mms,\fstate)             = \vec{0}
+\end{align}
+
+\def\DoptcritJBYabsvarI{\frac{d \optcrit_j}{d \absvar_i}}
+\def\PoptcritJBYabsvarI{\pdfrac{\optcrit_j}{\absvar_i}}
+
+\def\PoptcritJBYstructdisp{\pdfrac{\optcrit_j}{\structdisp}}
+\def\PoptcritJBYmms       {\pdfrac{\optcrit_j}{\mms}}
+\def\PoptcritJBYfstate    {\pdfrac{\optcrit_j}{\fstate}}
+
+\def\DstructdispBYabsvarI{\frac{d \structdisp}{d \absvar_i} }
+\def\DmmsBYabsvarI       {\frac{d \mms       }{d \absvar_i} }
+\def\DfstateBYabsvarI    {\frac{d \fstate    }{d \absvar_i} }
+
+The derivative of the optimization criterion$\optcrit_j$ with respect to the optimization variable $\absvar_i$ gives:
+\begin{align}
+\DoptcritJBYabsvarI =  \PoptcritJBYabsvarI    +
+\PoptcritJBYstructdisp \DstructdispBYabsvarI  +
+\PoptcritJBYmms        \DmmsBYabsvarI  +
+\PoptcritJBYfstate     \DfstateBYabsvarI
+\end{align}
+
+
+Differentiation of the governing eqations \eqref{eq:3field_basic} gives:
+\def\PEOSstructBYabsvarI{\pdfrac{\EOSstruct} {\absvar_i}}
+\def\PEOSmeshBYabsvarI  {\pdfrac{\EOSmesh}  {\absvar_i}}
+\def\PEOSfluidBYabsvarI{\pdfrac{\EOSfluid}{\absvar_i}}
+
+\def\PEOSstructBYstructdisp{\pdfrac{\EOSstruct} {\structdisp}}
+\def\PEOSstructBYmms{\pdfrac{\EOSstruct}{\mms}}
+\def\PEOSstructBYfstate    {\vec{0}}
+
+\def\PEOSmeshBYstructdisp{\pdfrac{\EOSmesh}{\structdisp}}
+\def\PEOSmeshBYmms       {\pdfrac{\EOSmesh} {\mms}}
+\def\PEOSmeshBYfstate    {\pdfrac{\EOSmesh} {\fstate}}
+
+\def\PEOSfluidBYstructdisp{\vec{0}}
+\def\PEOSfluidBYmms       {\pdfrac{\EOSfluid} {\mms}}
+\def\PEOSfluidBYfstate    {\pdfrac{\EOSfluid} {\fstate}}
+
+\def\PstructdispBYabsvarI{\pdfrac{\structdisp} {\absvar_i}}
+\def\PmmsBYabsvarI       {\pdfrac{\mms}        {\absvar_i}}
+\def\PfstateBYabsvarI    {\pdfrac{\fstate}     {\absvar_i}}
+
+
+
+\def\jacobian3field{
+  \begin{bmatrix}  
+  \PEOSstructBYstructdisp & \PEOSstructBYmms & \PEOSstructBYfstate \\[0.5em]
+  \PEOSmeshBYstructdisp   & \PEOSmeshBYmms   & \PEOSmeshBYfstate   \\[0.5em]
+  \PEOSfluidBYstructdisp  & \PEOSfluidBYmms  & \PEOSfluidBYfstate
+  \end{bmatrix}}
+
+
+\begin{align}\label{eq:govering_eqautions_derivative}
+\begin{bmatrix}
+\PEOSstructBYabsvarI \\[0.5em]
+\PEOSmeshBYabsvarI   \\[0.5em]
+\PEOSfluidBYabsvarI
+\end{bmatrix} +
+  \begin{bmatrix}
+  \PEOSstructBYstructdisp & \PEOSstructBYmms & \PEOSstructBYfstate \\[0.5em]
+  \PEOSmeshBYstructdisp   & \PEOSmeshBYmms   & \PEOSmeshBYfstate   \\[0.5em]
+  \PEOSfluidBYstructdisp  & \PEOSfluidBYmms  & \PEOSfluidBYfstate
+  \end{bmatrix}
+    \begin{bmatrix}
+    \PstructdispBYabsvarI \\[0.5em]
+    \PmmsBYabsvarI \\[0.5em]
+    \PfstateBYabsvarI
+    \end{bmatrix} = \vec{0}
+\end{align}
+
+
+The total derivative of the optimization criterion with respect to the abstract variables vcan be expressed as:
+\begin{align}\label{eq:totderiv_optcritBYabsvar}
+\DoptcritJBYabsvarI = \PoptcritJBYabsvarI -
+\T{\begin{bmatrix}
+\PoptcritJBYstructdisp \\[0.5em]
+\PoptcritJBYmms        \\[0.5em]
+\PoptcritJBYfstate     \\[0.5em]
+\end{bmatrix}}
+  \inv{\tensor{A}}
+  \begin{bmatrix}
+  \PEOSstructBYabsvarI \\[0.5em]
+  \PEOSmeshBYabsvarI   \\[0.5em]
+  \PEOSfluidBYabsvarI
+  \end{bmatrix}
+\end{align}
+
+
+\begin{align}\label{eq:firststep_direct}
+\begin{bmatrix}
+\PstructdispBYabsvarI \\[0.5em]
+\PmmsBYabsvarI   \\[0.5em]
+\PfstateBYabsvarI
+\end{bmatrix}
+=
+  -\inv{\tensor{A}}
+  \begin{bmatrix}
+  \PEOSstructBYabsvarI \\[0.5em]
+  \PEOSmeshBYabsvarI   \\[0.5em]
+  \PEOSfluidBYabsvarI
+  \end{bmatrix}
+\end{align}
+
+
+Computation of the adjjoint solutions
+\begin{align}\label{eq:firststep_adjoint}
+\begin{bmatrix}
+\adjoints_{\structdisp} \\
+\adjoints_{\mms}        \\
+\adjoints_{\fstate}
+\end{bmatrix}=
+  \tensor{A}^{-T}
+  \begin{bmatrix}
+  \PoptcritJBYstructdisp \\[0.5em]
+  \PoptcritJBYmms        \\[0.5em]
+  \PoptcritJBYfstate     \\[0.5em]
+  \end{bmatrix}
+\end{align}
+
+Then these can be injected into REF
+\begin{align}\label{eq:secondstep_adjoint}
+\DoptcritJBYabsvarI = \PoptcritJBYabsvarI -
+\T{\begin{bmatrix}
+\adjoints_{\structdisp} \\
+\adjoints_{\mms}        \\
+\adjoints_{\fstate}
+\end{bmatrix}}_j
+  \begin{bmatrix}
+  \PEOSstructBYabsvarI \\[0.5em]
+  \PEOSmeshBYabsvarI   \\[0.5em]
+  \PEOSfluidBYabsvarI
+  \end{bmatrix}
+\end{align}
+
+
+The A matrix for the direct approach in ALE formulation looks like
+\def\AoneoneALE{\stiffmat}
+\def\AonetwoALE{\pdfrac{\sload}{\mms}}
+\def\AonethreeALE{\pdfrac{\sload}{\fstate}}
+
+\def\AtwooneALE{\begin{bmatrix}
+                \stiffmat_{\Omega \Gamma} \ifaceprojStoF \\
+                \ifaceprojStoF
+                \end{bmatrix}
+               }
+\def\AtwotwoALE{
+               \begin{bmatrix}
+               \stiffmat_{\Omega \Omega} & \vec{0}  \\
+               \vec{0}                   & \dmat{I}
+               \end{bmatrix}
+               }
+\def\AtwothreeALE{\vec{0}}
+
+\def\AthreeoneALE{\vec{0}}
+\def\AthreetwoALE{\pdfrac{\dmat{F}_2}{\mms}}
+\def\AthreethreeALE{\jactwo}                       %TODO find better shortcurt name
+\begin{align}\label{eq:Amatrix_ALE}
+\tensor{A}=
+\begin{bmatrix}
+\AoneoneALE    &  \AonetwoALE    &  \AonethreeALE  \\[0.5em]
+\AtwooneALE    &  \AtwotwoALE    &  \AtwothreeALE  \\[0.5em]
+\AthreeoneALE  &  \AthreetwoALE  &  \AthreethreeALE
+\end{bmatrix}
+\end{align}
+
+
+
+TODO some formulkas are missing here
+\\
+The underrelaxation of the structural displacement update
+\begin{align}\label{eq:underrelax_structdisp}
+\tfrac{\its{\structdisp}}{\absvar_i} =
+(1-\theta)
+\tfrac{\its{\structdisp}}{\absvar_i} +
+\theta \tfrac{\fic{\structdisp}}{\absvar_i}
+\end{align}
+
+where $\fic{\structdisp}$ is obtained from:
+\begin{align}\label{eq:fictious_structdisp}
+\stiffmat \tfrac{\fic{\structdisp}}{\absvar_i} =
+\pdfrac{TODO}{\absvar_i} + \pdfrac{\its{\ifaceprojStoF}}{\absvar_i} -
+\pdfrac{\stiffmat}{\absvar_i} \structdisp
+\end{align}
+
+
+Compute
+\begin{equation}\label{eq:TODO}
+\tfrac{\its{\structdisp}_T}{\absvar_i} =
+\ifaceprojStoF \tfrac{\its{\structdisp}}{\absvar_i}
+\end{equation}
+
+The fluid mesh motion is computed by solving
+\begin{align}\label{eq:mms_domain}
+\fic{\stiffmat}_{\Omega \Omega}  \tfrac{\its{\mms}_{\Omega}}{\absvar_i} =
+-\fic{\stiffmat}_{\Omega \Gamma} \tfrac{\its{\mms}_{\Gamma}}{\absvar_i}
+\end{align}
+with
+\begin{align}
+\tfrac{\its{\mms}_{\Gamma}}{\absvar_i} =
+\tfrac{\its{\mms}_{\Gamma}}{\absvar_i}
+\end{align}
+
+The derivatives of the fluid state variables are computed by
+\begin{align}
+\jactwo \tfrac{\itss{\fstate}}{\absvar_i} =
+\pdfrac{\tensor{F}_2}{\absvar_i} - \pdfrac{\tensor{F}_2}{\mms} \its{\tfrac{\mms}{\absvar_i}}
+\end{align}
+
+
+The derivative of the fluid load with respect to the abstarct variuables is computed as
+\begin{align}\label{eq:deriv_floadBYabsvar}
+\pdfrac{\itss{\fload}}{\absvar_i} =
+\pdfrac{\itss{\fload}}{\mms}    \tfrac{\its{\mms}}   {\absvar_i} +
+\pdfrac{\itss{\fload}}{\fstate} \tfrac{\its{\fstate}}{\absvar_i}
+\end{align}
+
+and compute project it onto the structure via
+\begin{align}
+\pdfrac{\itss{\sload}}{\absvar_i} = \ifaceprojFtoS \pdfrac{\itss{\fload}}{\absvar_i}
+\end{align}
+
+The convergence is monitores via
+\begin{align}
+\begin{split}
+  \norm{ \stiffmat \tfrac{ \itss{\fic{\structdisp}} }{\absvar_i}  -  \pdfrac{TODO}{\absvar_i} - \pdfrac{\itss{\sload}}{\absvar_i}  +  \pdfrac{\stiffmat}{\absvar_i}}_{2} &
+  \leq \\
+  \tolsa \norm{ \stiffmat \tfrac{ \itn{\fic{\structdisp}}  }{\absvar_i}  -  \pdfrac{TODO}{\absvar_i} - \pdfrac{\itn{\sload}}{\absvar_i}  +  \pdfrac{\stiffmat}{\absvar_i}}_{2} &
+\end{split} &
+\\
+\begin{split}
+  \norm{\jactwo \tfrac{\itss{\fstate}}{\absvar_i} + \pdfrac{\tensor{F}_2}{\absvar_i} + \pdfrac{\tensor{F}_2}{\mms} \itss{\tfrac{\mms}{\absvar_i} }   }_{2} &
+  \leq \\
+  \tolsa \norm{\jactwo \tfrac{\itn{\fstate}}{\absvar_i} + \pdfrac{\tensor{F}_2}{\absvar_i} + \pdfrac{\tensor{F}_2}{\mms} \itn{\tfrac{\mms}{\absvar_i} }   }_{2} &
+\end{split} &
+\end{align}
+
+
+
+
+\end{document}

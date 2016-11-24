@@ -1,4 +1,5 @@
-\input{"/home/lukas/Desktop/project/independence/project/thesis/thesis_template/Header.tex"}
+\newcommand{\mainpath}{/home/lukas/Desktop/project/independence/project/thesis/}
+\input{\mainpath/Header}
 
 
 \graphicspath{{fig/}{../fig/}}
@@ -11,10 +12,12 @@
 
 %\includeonly{Test}
 
-\newcommand{\mainpath}{/home/lukas/Desktop/project/independence/project/thesis/thesis_template/}
 
 
+\makenomenclature
 \begin{document}
+
+\setlength{\delimitershortfall}{0pt}
 
 \fancyhead[RO]{\fancyplain{}{\Author}}
 \fancyhead[LO]{\fancyplain{}{\thesistype:\ \shorttitle}}
@@ -23,7 +26,7 @@
 \include{titlepage}
 \include{Preface}
 
-\include{Nomenclature}
+\include{testfile}
 \include{Introduction}
 
 
@@ -34,7 +37,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 \cleardoublepage
-\insertblankpage
+%%%\insertblankpage
 
 \pagenumbering{arabic}
 \setboolean{@twoside}{true} 
@@ -53,19 +56,9 @@
 %\subfile{chapters/fundamentals_referencing}
 %\subfile{chapters/structure_report}
 
-aaaaaaaaaaaaaaaaaaa
-
-%\begin{figure}[h!]
-%	\begin{center}
-%	    %\fbox{\subimport{./}{./fig/tikz/study_inclusion.tex}}
-%        %\includestandalone{./fig/tikz/error_estimationPCG}
-%        \subimport{.}{/fig/tikz/setup_quad4_basic_example}
-%        \caption[aaa]{aaa}
-%		\label{aaa}
-%    \end{center}
-%\end{figure}
-%
-%\subimport{.}{/fig/tikz/setup_quad4_basic_example}
+\subfile{chapters/problem_description}
+\section{The Finite Volume Method}
+\section{Sensitivity Derivation}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

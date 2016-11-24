@@ -1,0 +1,116 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\def\mainpath{/home/lukas/Desktop/project/independence/project/thesis/}
+\def\tikzpath{\mainpath/fig/tikz}
+
+\usetikzlibrary{positioning}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepgfplotslibrary{groupplots}
+
+\input{\mainpath/colordefinitions}
+\begin{document}
+\begin{tikzpicture}
+   \def\L{2.0}
+   \def\B{2.0}
+   \def1.0{1.0}
+   \def\H{2.0}
+   \begin{axis}[view={60}{30}, axis lines=none, xtick=\empty, ytick=\empty]
+
+     \addplot3[very thick] coordinates { ( 0, 0, 0) (\L, 0, 0) } node [red] {1};
+     \addplot3[very thick] coordinates { (\L, 0, 0) (\L,\B, 0) } node [red] {2};
+     \addplot3[dashed]     coordinates { (\L,\B, 0) (0 ,\B, 0) } node [red] {3};
+     \addplot3[dashed]     coordinates { (0 ,\B, 0) (0 ,0 , 0) } node [red] {4};
+     
+     \addplot3[very thick] coordinates { ( 0, 0,\H) (\L, 0,\H) } node [red] {5};
+     \addplot3[very thick] coordinates { (\L, 0,\H) (\L,\B,\H) } node [red] {6};
+     \addplot3[very thick] coordinates { (\L,\B,\H) (0 ,\B,\H) } node [red] {7};
+     \addplot3[very thick] coordinates { (0 ,\B,\H) (0 ,0 ,\H) } node [red] {8};
+    
+     \addplot3[very thick] coordinates { (\L, 0, 0) (\L, 0,\H) } node [red] {9};
+     \addplot3[very thick] coordinates { (\L,\B, 0) (\L,\B,\H) } node [red] {10};
+     \addplot3[dashed]     coordinates { (0 ,\B, 0) (0 ,\B,\H) } node [red] {11};
+     \addplot3[very thick] coordinates { (0 ,0 , 0) (0 ,0 ,\H) } node [red] {12};
+     
+\addplot3 [
+thick,smooth,
+color= darkgray,
+solid]
+table[row sep=crcr] {
+ 0.0000000 1.0 0.0000000\\
+ 0.0005839 1.0 0.0042603\\
+ 0.0023342 1.0 0.0084289\\
+ 0.0052468 1.0 0.0125011\\
+ 0.0093149 1.0 0.0164706\\
+ 0.0145291 1.0 0.0203300\\
+ 0.0208771 1.0 0.0240706\\
+ 0.0283441 1.0 0.0276827\\
+ 0.0369127 1.0 0.0311559\\
+ 0.0465628 1.0 0.0344792\\
+ 0.0572720 1.0 0.0376414\\
+ 0.0690152 1.0 0.0406310\\
+ 0.0817649 1.0 0.0434371\\
+ 0.0954915 1.0 0.0460489\\
+ 0.1101628 1.0 0.0484567\\
+ 0.1257446 1.0 0.0506513\\
+ 0.1422005 1.0 0.0526251\\
+ 0.1594921 1.0 0.0543715\\
+ 0.1775789 1.0 0.0558856\\
+ 0.1964187 1.0 0.0571640\\
+ 0.2159676 1.0 0.0582048\\
+ 0.2361799 1.0 0.0590081\\
+ 0.2570083 1.0 0.0595755\\
+ 0.2784042 1.0 0.0599102\\
+ 0.3003177 1.0 0.0600172\\
+ 0.3226976 1.0 0.0599028\\
+ 0.3454915 1.0 0.0595747\\
+ 0.3686463 1.0 0.0590419\\
+ 0.3921079 1.0 0.0583145\\
+ 0.4158215 1.0 0.0574033\\
+ 0.4397317 1.0 0.0563200\\
+ 0.4637826 1.0 0.0550769\\
+ 0.4879181 1.0 0.0536866\\
+ 0.5120819 1.0 0.0521620\\
+ 0.5362174 1.0 0.0505161\\
+ 0.5602683 1.0 0.0487619\\
+ 0.5841786 1.0 0.0469124\\
+ 0.6078921 1.0 0.0449802\\
+ 0.6313537 1.0 0.0429778\\
+ 0.6545085 1.0 0.0409174\\
+ 0.6773025 1.0 0.0388109\\
+ 0.6996823 1.0 0.0366700\\
+ 0.7215958 1.0 0.0345058\\
+ 0.7429917 1.0 0.0323294\\
+ 0.7638202 1.0 0.0301515\\
+ 0.7840324 1.0 0.0279828\\
+ 0.8035813 1.0 0.0258337\\
+ 0.8224211 1.0 0.0237142\\
+ 0.8405079 1.0 0.0216347\\
+ 0.8577995 1.0 0.0196051\\
+ 0.8742554 1.0 0.0176353\\
+ 0.8898372 1.0 0.0157351\\
+ 0.9045085 1.0 0.0139143\\
+ 0.9182351 1.0 0.0121823\\
+ 0.9309849 1.0 0.0105485\\
+ 0.9427280 1.0 0.0090217\\
+ 0.9534372 1.0 0.0076108\\
+ 0.9630873 1.0 0.0063238\\
+ 0.9716559 1.0 0.0051685\\
+ 0.9791229 1.0 0.0041519\\
+ 0.9854709 1.0 0.0032804\\
+ 0.9906850 1 0.0025595\\
+ 0.9947532 1 0.0019938\\
+ 0.9976658 1 0.0015870\\
+ 0.9994161 1 0.0013419\\
+ 1.0000000 1 0.0012600\\
+ };
+     
+     
+
+  \end{axis}
+\end{tikzpicture}
+\end{document}
+
+

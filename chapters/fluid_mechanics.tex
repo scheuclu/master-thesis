@@ -1,0 +1,158 @@
+\documentclass[../main.tex]{subfiles}
+%\usepackage{import}
+\begin{document}
+\setlength{\delimitershortfall}{0pt}
+\section{Fluid Mechanics basic Eqwuations}\label{sec:about}
+
+The Navier stokes Equations in vector(CONSERVATIVE???) form are:
+\begin{align}\label{eq:nsg}
+\pdfrac{\fstate}{t} + \nabla \cdot \fluxesconv(\fstate) + \nabla \cdot \fluxesdiff(\fstate) = \vec{0}
+\end{align}
+
+where
+\begin{align}\label{eq:fstate_definition}
+\fstate=
+\begin{bmatrix}
+  \dens            \\
+  \dens \fluidvel  \\
+  \energytot          \\
+\end{bmatrix}
+\end{align}
+is the so-called fluid state vector, where
+\begin{align}\label{eq:fluidvel_definition}
+\fluidvel=
+\begin{bmatrix}
+  \fluidvelx  \\
+  \fluidvely  \\
+  \fluidvelz  \\
+\end{bmatrix}
+\end{align}
+denotes the fluid velocity vector.
+
+The total energy $\energytot$ can be comuted via the so called internal energy and the fluid velocity as
+\begin{align}\label{eq:energytot}
+\underbrace{\energytot}_{\text{total energy}} = \underbrace{\rho \energyint}_{\text{internal energy}} + \underbrace{\frac{1}{2} \T{\fluidvel} \fluidvel}_{\text{kinematic energy}}
+\end{align}
+
+
+The convective fluxes are caluclated as
+\begin{align}\label{eq:fluxesconv}
+\fluxesconv&=
+(\frac{1}{\dens} \fstate \T{\fstate} + \pres + \tensor{R}_3 \T{\fstate})
+\begin{bmatrix}
+\vec{0} \\ \eye_{3} \\ \vec{0}
+\end{bmatrix} \\ %TODO check if this one is correct
+&=
+\fstate \T{\fluidvel} + \pres
+\begin{bmatrix}
+0\\ \eye \\ \T{\fluidvel}
+\end{bmatrix} \\
+  &=
+	\begin{bmatrix}
+	  \dens \T{\fluidvel} \\
+	  \dens(\fluidvel \T{\fluidvel} ) + \pres \eye \\
+	  (\energytot+\pres) \T{\fluidvel}
+	\end{bmatrix} \\
+	  &=
+	  \begin{bmatrix}
+	  \dens \fluidvelx             &  \dens\fluidvely              &  \dens\fluidvelz             \\
+	  \pres+\dens\fluidvelx^{2}    &  \dens\fluidvelx\fluidvely    &  \dens\fluidvelx\fluidvelz   \\
+	  \dens\fluidvely\fluidvelx    &  \pres+\dens\fluidvely^{2}    &  \dens\fluidvely\fluidvelz   \\
+	  \dens\fluidvelz\fluidvelx    &  \dens\fluidvelz\fluidvely    &  \pres+\dens\fluidvelz^{2}   \\
+	  \fluidvelx(\energytot+\pres) &  \fluidvelx(\energytot+\pres) & \fluidvelx(\energytot+\pres) \\
+	  \end{bmatrix}
+\end{align}
+depneding on the algorithm, one or another form can be advantageous.
+
+
+The diffusive fluxes can be written as
+\begin{align}\label{eq:fluxes_diff}
+\fluxesconv&=
+\begin{bmatrix}
+\vec{0}  \\
+\fluidstress \\
+\fluidstress \fluidvel + \heatflux
+\end{bmatrix} \\
+  &=
+  \T{\begin{bmatrix}
+  0                    &  0                 &  0          \\
+  -\fluidstresscomp_{xx}  &  -\fluidstresscomp_{yx}  &  -\fluidstresscomp_{zx} \\
+  -\fluidstresscomp_{xy}  &  -\fluidstresscomp_{yy}  &  -\fluidstresscomp_{zy} \\
+  -\fluidstresscomp_{xz}  &  -\fluidstresscomp_{yz}  &  -\fluidstresscomp_{zz}  \\
+  -\heatfluxcomp_x-\fluidvelx\fluidstresscomp_{xx}-\fluidvelx\fluidstresscomp_{yx}-\fluidvelx\fluidstresscomp_{zx} &
+  -\heatfluxcomp_y-\fluidvelx\fluidstresscomp_{xy}-\fluidvelx\fluidstresscomp_{yy}-\fluidvelx\fluidstresscomp_{zy} &
+  -\heatfluxcomp_z-\fluidvelx\fluidstresscomp_{xz}-\fluidvelx\fluidstresscomp_{yz}-\fluidvelx\fluidstresscomp_{zz} \\
+  \end{bmatrix}}
+\end{align}
+
+The definition of the stress tensor depends of the fluid model used. For the simle case of a Newtonian fluid, it can be written as
+\begin{align}\label{eq:fluidstress}
+\fluidstress = \viscosdyn(\nabla\fluidvel+\T{(\nabla\fluidvel)} )+\lambda(\nabla\cdot\fluidvel)\eye
+\end{align}
+
+For the heat flux, a simple Fourier's law is often assumed
+\begin{align}\label{eq:heatflux}
+\heatflux=-\thermcond\nabla\temp
+\end{align}
+
+\subsubsection{Euler equations}
+The euler equations are a simplified form of the Navier-Stokes Equations~\eqref{eq:nsg}, where the viscos effects are neglected by setting $\fluxesdiff=\dmat{0}$.
+\begin{align}\label{eq:euler}
+\pdfrac{\fstate}{t} + \nabla \cdot \fluxesconv(\fstate) = \vec{0}
+\end{align}
+The Euler equations are approriate for a wide range of applications. A typical indicator ist the Reynolds number, which describes the ratio between inertial forces and viscous forces:
+\begin{align}\label{eq:reynolds}
+\reynolds=\frac{\dens\fluidvel L}{\viscosdyn}=\frac{\fluidvel L}{\viscoskin}
+\end{align}
+where $L$ describes a characteristic length.
+
+A high Reynoldsnumber thus indicates that the flow is dominated by inertial forces, thus the Euler Equations should give statisfying results. However, an Euler flow lacks the ability to represent stick wall boundary conditions, thus it is unable to re[resent boundary layers.
+
+\subsubsection{Equations of State}
+Looking at the above Equations~\eqref{eq:nsg}-eq:heatflux, one might notice that the number of unknows is greater than the number of Equations. Particulary, the pressure onlly appears in Equation~\eqref{eq:fluxesconv} and is not linked to any other equations. This problem is solved by introducing an Equation of State(EOS) that relates pressure, internal energy and density. The equation of state depends on the fluid model, some well-known ones are: Perfect Gas(PG), Stiffened Gas(SG), Tait and Jones-Wilkins-Lee(JWL).\\
+For the simples one, PG, the EOS can be written as
+\begin{align}\label{eq:eos_pg}
+\pres=(\specheatratio-1)\dens\energyint
+\end{align}
+
+
+\subsubsection{Reynolds-averaged Navier-Stokes(RANS) Equations}
+The RANS Equations are time-averaged equations of motion for the fluid.
+\begin{align}\label{eq:rans_averaging}
+\fstate \rightarrow \av{\fstate} = \lim_{\temp \to \infty} \frac{1}{T} \int_{t^0}^{t^0+T} \fstate dt
+\end{align}
+
+The main 9idea of the approac is to decompose an instanteneous quantity into time-averaged and fluctuating components
+\begin{align}\label{eq:rans_decomposition}
+\fstate=\underbrace{\av{\fstate}}_{time-average}+\underbrace{\fluc{\fstate}}_{fluctuation}
+\end{align}
+
+When substituting this decomposition back into the NSG(and injecting several other approximations), a closure problem induced by the arising non-linear Reynolds stress term $\reynolds_{ij}=-\av{\fluc{v_i}\fluc{v_j}}$ arises. Additional modeling is therefore requyires to close the RANS equations, which has led to many different turbulence models.\\
+\\
+Whatever turbulence model is chosen, the fluid-state vector is augumented by the m parameters of the turbulence model
+\begin{align}
+\fstaterans \leftarrow
+\begin{bmatrix}
+\fstate            \\
+\turbulenceparam_1 \\
+\vdots             \\
+\turbulenceparam_m
+\end{bmatrix} =
+	\begin{bmatrix}
+	\dens              \\
+	\dens\T{\fluidvel} \\
+	\energytot         \\
+	\turbulenceparam_1 \\
+	\vdots             \\
+	\turbulenceparam_m
+	\end{bmatrix}
+\end{align}
+
+The RANS eqaution can then be written as
+\begin{align}\label{eq:rans_eqautions}
+\pdfrac{\av{\fstate}}{t} + \nabla\cdot\fluxesconv(\av{\fstate}) +  \nabla\cdot\fluxesdiff(\av{\fstate}) =
+\turbulencesource(\av{\fstate},\turbulenceparam_1,\cdots,\turbulenceparam_m)
+\end{align}
+
+
+\end{document}
