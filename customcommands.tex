@@ -1,3 +1,6 @@
+\newcommand{\abbrevation}[2]{\newcommand{#1}{#2}}
+\abbrevation{\SQP}{SQP}      %Sequential Quatdratic Programming
+
 %%==============================%
 % OPERATORS
 % Representation of scalars, tensors and other quantities
@@ -5,27 +8,27 @@
 \newcommand{\scalar}[1]{#1}                        %Scalar quantity with{A}
 \newcommand{\tensor}[1]{\mathcal{\boldsymbol{#1}}} %Tensor with{A}
 \newcommand{\derivtime}[1]{\dot{#1}}               %First time derivative at a fixed reference position with{A}
-\newcommand{\dderivtime}[1]{\ddot{#1}}             %Second time derivative at a fixed refrence position                       with{A} %partial derivative of a quantity
-\newcommand{\dvec}[1]{\boldsymbol{ \mathsf{#1} } } %discrete vector represenation of a scalar field with{A}
-\newcommand{\dmat}[1]{\boldsymbol{\mathsf{#1}}}    %discrete vector represenation of a tensor field with{A}
-\renewcommand{\it}[1]{{#1}^{(k)}}    %Iteration index in the optimization loop{A}
-\newcommand{\ito}[1]{{#1}^{(k)}}    %Iteration index in the optimization loop{A}
-\newcommand{\its}[1]{{#1}^{(n)}}    %Iteration index in thestaggered algorithm{A}
-\newcommand{\fic}[1]{\bar{#1}}      %Fictious entity
-\newcommand{\av}[1]{\bar{#1}}       %Time-averaged quantity
-\newcommand{\fluc}[1]{{#1}'}       %Time-averaged quantity
-\newcommand{\fstaterans}{\fstate_{RANS}} %Augumentes fluid state vector in the RANS formulation
-\newcommand{\turbulenceparam}{\chi} %Additional fluid state variable introduced by the turbulence model
-\newcommand{\turbulencesource}{\mathsf{S}} %Source term in the RANS equations
+\newcommand{\dderivtime}[1]{\ddot{#1}}             %Second time derivative at a fixed refrence position with{A}
+\newcommand{\dvec}[1]{\boldsymbol{ \mathsf{#1} } } %discrete vector represenation of a scalar field     with{A}
+\newcommand{\dmat}[1]{\boldsymbol{\mathsf{#1}}}    %discrete vector represenation of a tensor field     with{A}
+\renewcommand{\it}[1]{{#1}^{(k)}}                  %Iteration index in the optimization loop            with{A}
+\newcommand{\ito}[1]{{#1}^{(k)}}                   %Iteration index in the optimization loop            with{A}
+\newcommand{\its}[1]{{#1}^{(n)}}                   %Iteration index in thestaggered algorithm           with{A}
+\newcommand{\fic}[1]{\bar{#1}}                     %Fictious entity                                     with{A}
+\newcommand{\av}[1]{\bar{#1}}                      %Time-averaged quantity                              with{A}
+\newcommand{\fluc}[1]{{#1}'}                       %Time-averaged quantity                              with{A}
+\newcommand{\order}[1]{\mathcal{O}(#1)}            %Order of magnitude                                  with{A}
 
-\newcommand{\itn}[1]{{#1}^{(0)}}    %Iteration index 0{A}
-\newcommand{\itss}[1]{{#1}^{(n+1)}}    %Iteration index in thestaggered algorithm{A}
-\newcommand{\pd}{\mathrm{\partial}} %TODO check whether I need the partial or not
-\newcommand{\pdfrac}[2]{\frac{\pd #1}{\pd #2}} %partial derivative of one argument with respect to the other
-\newcommand{\ppdfrac}[2]{\frac{\pd^{2} #1}{\pd {#2}^{2}}} %Second partial derivative of one argument with respect to the other
-\renewcommand{\tfrac}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}} %First total derivative of one argument with respect to the other
-\renewcommand{\vec}[1]{\boldsymbol{#1}}            %Vector
-\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\itn}[1]{{#1}^{(0)}}                   %Iteration index 0                                   with{A}
+\newcommand{\itss}[1]{{#1}^{(n+1)}}                %Iteration index in thestaggered algorithm           with{A}
+\newcommand{\pd}{\mathrm{\partial}}                %TODO check whether I need the partial or not        with{A}
+\newcommand{\pdfrac}[2]{\frac{\pd #1}{\pd #2}}     %partial derivative of one argument with respect to the other                 with{A}
+\newcommand{\ppdfrac}[2]{\frac{\pd^{2} #1}{\pd {#2}^{2}}} %Second partial derivative of one argument with respect to the other   with{A}
+\newcommand{\mfrac}[2]{\frac{D #1}{D #2}}          %Material time derivative                                                     with{A}
+\renewcommand{\tfrac}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}} %First total derivative of one argument with respect to the other  with{A}
+\renewcommand{\vec}[1]{\boldsymbol{#1}}            %Vector                                                                       with{A}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}   %Norm of a vector                                                             with{A}
+\newcommand{\expression}[1]{\textit{#1}}
 
 \newcommand{\0}{\textcolor{lightgrey}{0}}
 
@@ -33,25 +36,40 @@
 % OPERATORS
 % Operators and Symbols
 %==============================%
-\newcommand{\T}[1]{{#1}^{T}}       %Transpose of a tensor with{A}
-\newcommand{\inv}[1]{ {#1}^{-1}}   %Inverse of a tensor   with{A}
+\newcommand{\T}[1]{{#1}^{T}}             %Transpose of a tensor with{A}
+\newcommand{\inv}[1]{ {#1}^{-1}}         %Inverse of a tensor   with{A}
 
 
 %==============================
 % SYMBOLS
 % 3-field formulations
 %==============================
-\newcommand{\EOSstruct}{\mathcal{S}}      %State equation of the structure
-\newcommand{\EOSmesh}  {\mathcal{D}}      %State equation of the mesh
-\newcommand{\EOSfluid} {\mathcal{F}}      %State equation of the fluid
+\newcommand{\EOSstruct}{\mathcal{S}}     %State equation of the structure
+\newcommand{\EOSmesh}  {\mathcal{D}}     %State equation of the mesh
+\newcommand{\EOSfluid} {\mathcal{F}}     %State equation of the fluid
 \newcommand{\mms}       {\vec{x}}        %Fluid mesh motion
+\newcommand{\mmsad}       {\vec{a}_{\vec{x}}}        %Adjoint fluid mesh motion
 \newcommand{\fstate}    {\vec{w}}        %Fluid state vector
+\newcommand{\fstatead}{\vec{a}_{\vec{w}}}  %Adjoint fluid state vector
+\newcommand{\dfstate}    {\dvec{w}}        %Discrete fsluid state vector
 \newcommand{\structdisp}{\vec{u}}        %Structure displacement
-\newcommand{\fload}{\vec{P}_F}           %Fluid load TODO
-\newcommand{\sload}{\vec{P}_T}           %Structure load TODO
-\newcommand{\jactwo}{\tensor{H}_2}       %Second order Jacobian  TODO
+\newcommand{\structdispad}{\vec{a}_{\vec{u}}}        %Adjoint structure displacement
+\newcommand{\load}{\vec{P} }          %Fluid load TODO
+\newcommand{\fload}{\vec{P}_F}           %Fluid load
+\newcommand{\sload}{\vec{P}_T}           %Structure load
+\newcommand{\jactwo}{\tensor{H}_2}       %Second order Jacobian
 \newcommand{\ifaceprojFtoS}{\dmat{T}_p}  %Interface projection matrix from fluid to structure mesh
 \newcommand{\ifaceprojStoF}{\dmat{T}_u}  %Interface projection matrix from structure to fluid mesh
+\newcommand{\fstaterans}{\fstate_{RANS}}   %Augumentes fluid state vector in the \ac{RANS} formulation
+\newcommand{\turbulenceparam}{\chi}        %Additional fluid state variable introduced by the turbulence model
+\newcommand{\turbparamvec}{\dvec{\chi}}        %Additional fluid state variable introduced by the turbulence model
+\newcommand{\turbulencesource}{\mathsf{S}} %Source term in the \ac{RANS} equations
+\newcommand{\fluxmatconv}{\dmat{F}}
+\newcommand{\fluxmatdiff}{\dmat{G}}
+\newcommand{\turbmat}{\dmat{S}}
+\newcommand{\cellvolmat}{\dmat{A}}
+
+\newcommand{\specificwork}{\vec{w}}
 
 
 
@@ -59,48 +77,56 @@
 % SYMBOLS
 % Optimization
 %==============================%
-\newcommand{\costfunc}{z}        %Target cost function
-\newcommand{\eqctr}{\vec{h}}     %Equality constraints
+\newcommand{\costfunc}{z}               %Target cost function
+\newcommand{\eqctr}{\vec{h}}            %Equality constraints
 \newcommand{\numeqctr}{n_{\vec{h}}}     %Number of equality constraints
-\newcommand{\neqctr}{\vec{g}}    %Non-equality constraints
-\newcommand{\numneqctr}{n_{\vec{g}}} %Number of non-equality constraints
-\newcommand{\absvar}{s}          %abstract optimazation variable
-\newcommand{\absvars}{\vec{s}}   %Vector of abstract optimization variables
-\newcommand{\optcrit}{q}  %Optimization criterium
+\newcommand{\neqctr}{\vec{g}}           %Non-equality constraints
+\newcommand{\numneqctr}{n_{\vec{g}}}    %Number of non-equality constraints
+\newcommand{\absvar}{s}                 %Abstract optimazation variable
+\newcommand{\absvars}{\vec{s}}          %Vector of abstract optimization variables
+\newcommand{\optcrit}{q}                %Optimization criterium
 \newcommand{\optcrits}{\vec{\optcrit}}  %Vector of optimization criteria
-\newcommand{\phydsgpar}{\vec{d}} %physical design parameters
-\newcommand{\Lagfunc}{L} %Lagrangian function of the optimization problem
-\newcommand{\lagmultseq}{\vec{\eta}} %Lagrange multipliers of the equality constraints
+\newcommand{\physvars}{\vec{d}}         %Physical design parameters
+\newcommand{\Lagfunc}{L}                %Lagrangian function of the optimization problem
+\newcommand{\lagmultseq}{\vec{\eta}}    %Lagrange multipliers of the equality constraints
 \newcommand{\lagmultsneq}{\vec{\gamma}} %Lagrange multipliers of the inequality constraints
-\newcommand{\adjoints}{\vec{a}} %Adjoint solutions
-\newcommand{\tolsa}{\epsilon^{SA}} %Specified tolerance in the Sensitivity analysis
+\newcommand{\adjoints}{\vec{a}}         %Adjoint solutions
+\newcommand{\tolsa}{\epsilon^{SA}}      %Specified tolerance in the Sensitivity analysis
 
 
 %==============================%
 % SYMBOLS
 % Fluid Mechanics
 %==============================%
-\newcommand{\fluxesconv}{\mathcal{F}} %Convective fluxed
+\newcommand{\fluxesconv}{\mathcal{F}} %Convective fluxes
 \newcommand{\fluxesdiff}{\mathcal{G}} %Diffusive fluxes
 \newcommand{\dens}{\rho}              %Density
-\newcommand{\pres}{p}              %Pressure
-\newcommand{\fluidvel}{\vec{v}}     %Fluid velocity vector
-\newcommand{\fluidvelx}{v_x}     %Fluid velocity in x-direction
-\newcommand{\fluidvely}{v_y}     %Fluid velocity in y-direction
-\newcommand{\fluidvelz}{v_z}     %Fluid velocity in z-direction
-\newcommand{\energytot}{E}         %Total energys
-\newcommand{\energyint}{e}        %Internal energy
-\newcommand{\eye}{\dmat{I}}        %Identity matrix
-\newcommand{\fluidstress}{\tensor{\tau}}      %Deviatoric fluid stress tensor
-\newcommand{\fluidstresscomp}{\tau}      %Deviatoric fluid stress tensor
-\newcommand{\thermcond}{k}         %Thermal conductivity of the fluid
-\newcommand{\temp}{T}         %Fluid temperature
-\newcommand{\heatfluxcomp}{q} %Heat flux comopnenent
+\newcommand{\pres}{p}                 %Pressure
+\newcommand{\fluidvel}{\vec{v}}       %Fluid velocity vector
+\newcommand{\fluidvelx}{v_x}          %Fluid velocity in x-direction
+\newcommand{\fluidvely}{v_y}          %Fluid velocity in y-direction
+\newcommand{\fluidvelz}{v_z}          %Fluid velocity in z-direction
+\newcommand{\energytot}{E}            %Total energies
+\newcommand{\energyint}{e}            %Internal energy
+\newcommand{\eye}{\dmat{I}}           %Identity matrix
+\newcommand{\fluidstrain}{\tensor{\epsilon}}    %Deviatoric fluid stress tensor
+\newcommand{\fluidstress}{\tensor{\tau}}    %Deviatoric fluid stress tensor
+\newcommand{\fluidstresscomp}{\tau}   %Deviatoric fluid stress tensor
+\newcommand{\thermcond}{k}            %Thermal conductivity of the fluid
+\newcommand{\temp}{T}                 %Fluid temperature
+\newcommand{\heatfluxcomp}{q}         %Heat flux comopnenent
 \newcommand{\heatflux}{\vec{\heatfluxcomp}} %Heat flux vector
-\newcommand{\viscosdyn}{\mu} %Dynamic viscosity
-\newcommand{\viscoskin}{\nu} %Kinematic viscosity
-\newcommand{\reynolds}{RE} %Reynolds number
-\newcommand{\specheatratio}{\gamma} %Specific heat ratio
+\newcommand{\viscosdyn}{\mu}          %Dynamic viscosity
+\newcommand{\viscoskin}{\nu}          %Kinematic viscosity
+\newcommand{\reynolds}{RE}            %Reynolds number
+\newcommand{\specheatratio}{\gamma}   %Specific heat ratio
+
+
+\newcommand{\normal}{\vec{n}}        %Symbol for dyadic product
+\newcommand{\testfunc}{\phi}         %Variational test function
+\newcommand{\vertex}{\boldsymbol{X}}  %Mesh vertex
+\newcommand{\vertexset}{\mathsf{\kappa}} %Set of vertices
+\newcommand{\fluxesnum}{\boldsymbol{\phi}} %numerical flux
 
 \newcommand{\dyadic}{\otimes}        %Symbol for dyadic product
 %%%==============================%
@@ -118,21 +144,21 @@
 % SYMBOLS
 % Sturctural Analysis
 %==============================%
-\newcommand{\stiffmat}{\dmat{K}}               %Finite Element stiffness matrix
+\newcommand{\stiffmat}{\dmat{K}}               %\ac{FE} stiffness matrix
 \newcommand{\disp}{u}                          %Displacement vector
-\newcommand{\dispvec}{\dvec{\disp}}            %Disrete displacement vector
+\newcommand{\dispvec}{\dvec{\disp}}            %Discrete displacement vector
 \newcommand{\motion}{\vec{x}}                  %Mesh motion
-\newcommand{\ifacedisp}{d}                     %Interface Displacement
-\newcommand{\ifacedispvec}{\dvec{\ifacedisp}}  %Interface Displacent 
+\newcommand{\ifacedisp}{d}                     %Interface displacement
+\newcommand{\ifacedispvec}{\dvec{\ifacedisp}}  %Interface displacement 
 
 
 %==========================================
 % SYMBOLS
 % Fluid Structure Interaction
 %==========================================
-\newcommand{\strucstateq}{\mathcal{P}}         %TODO
-\newcommand{\fluidstateq}{\mathcal{F}}         %TODO
-\newcommand{\mmsstateeq}{\mathcal{D}}          %TODO
+\newcommand{\strucstateq}{\mathcal{P}}         %State equation of the structure
+\newcommand{\fluidstateq}{\mathcal{F}}         %State equation of the fluid
+\newcommand{\mmsstateeq}{\mathcal{D}}          %State equation of the mesh motion
 
 %\def\abbrevation}[1]{~}
 
@@ -140,7 +166,7 @@
 % ABBREVATIONS
 % Abbrevations
 %==========================================
-%\abbrevation{SQP}      %Sequential Quatdratic Programming
+%\abbrevation{SQP}      %Sequential Quadratic Programming
 %\abbrevation{GSE}      %Gloabal Sensitivity Equations
 %\abbrevation{SA}       %Sensitivity Analysis
 %\abbrevation{VOF}      %Volume of Fluid Methods
@@ -165,26 +191,16 @@
 \newcommand{\nassitextbold}[2]{\makebox[#1\textwidth]{\textbf{\textit{\textcolor{nassitextcolor}{\small #2}}}\hfill}}
 \newcommand{\nassitexttwolines}[3]{\nassitext{#1}{#2}\hspace*{\hsize}\linebreak \nassitext{\df2}{#3}}
 
-%%%%%These commands are used to highlight specific parts of the diagramm, e.g.
-%%%%%algorithm parts that have changed compared to a previous implementation
-%%%%\usepackage{soul}
-%%%%\definecolor{hlcolor}{RGB}{230,230,230}
-%%%%\setulcolor{red}
-%%%%\newsavebox\MBox
-%%%%\newcommand\hlchange[2][red]{{\sbox\MBox{$#2$}%
-%%%%  \rlap{\usebox\MBox}\color{#1}\rule[-1.7\dp\MBox]{\wd\MBox}{1.0pt}}}
-
-
-%%%%% custom scale command; TODO usage unclear
-%%%%\newcommand*\MyScale{1}
-%%%%\newcommand*\Scale[1][1]{\renewcommand*\MyScale{#1}}
-%%%%\tikzset{%
-%%%%  every picture/.style={%
-%%%%    scale=\MyScale,
-%%%%  }
-%%%%}
-
-
-%\renewcommand\thesection{\roman{section}}
-%\renewcommand\thesubsection{\thesection.\roman{subsection}}
-%\renewcommand\thesubsubsection{\thesection.\thesubsection.\roman{subsection}}
+\newcommand{\tablesix}[6]{
+\begin{tabular}{|c|l|l|}
+\hline
+  \parbox[t]{2mm}{\multirow{3}{*}{\rotatebox[origin=c]{90}{Eulerian}}}  & EULER & #1 \\
+  \hhline{~--}                                                          & NSG   & #2 \\
+  \hhline{~--}                                                          & RANS  & #3 \\
+\hline
+  \parbox[t]{2mm}{\multirow{3}{*}{\rotatebox[origin=c]{90}{ALE}}}       & EULER & #4 \\
+  \hhline{~--}                                                          & NSG   & #5 \\
+  \hhline{~--}                                                          & RANS  & #6 \\
+\hline
+\end{tabular}
+}

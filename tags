@@ -10,22 +10,21 @@
 0pt	latexindent/documentation/manual.tex	/^\\titlespacing\\section{0pt}{12pt plus 4pt minus 2pt}{-5pt plus 2pt minus 2pt}$/;"	s
 0pt	latexindent/documentation/manual.tex	/^\\titlespacing\\subsection{0pt}{12pt plus 4pt minus 2pt}{-6pt plus 2pt minus 2pt}$/;"	u
 0pt	latexindent/documentation/manual.tex	/^\\titlespacing\\subsubsection{0pt}{12pt plus 4pt minus 2pt}{-6pt plus 2pt minus 2pt}$/;"	b
-Abbrevations	testfile.tex	/^\\end{tabular}$/;"	u
-Abbrevations	testfile.tex	/^\\subsection*{Abbrevations}$/;"	u
+3-field formulations	testfile.tex	/^\\subsection*{Symbols}$/;"	b
+Abbrevations	acronyms.tex	/^\\subsection*{Abbrevations}$/;"	u
 Abbreviations	SA_Thesis/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	u
 About this template	chapt_about.tex	/^\\section{About this template}$/;"	s
 About this template	chapters/about.tex	/^\\begin{document}$/;"	s
-About this template	chapters/problem_description.tex	/^\\begin{document}$/;"	s
 Abstract	Preface.tex	/^\\cleardoublepage$/;"	s
 Abstract	chapt_structure_report.tex	/^The typical sections are discussed below, but some specifics might vary according to the type of research project. Please discuss the actual structure of your thesis with your supervisor.$/;"	u
 Abstract	chapters/structure_report.tex	/^The typical sections are discussed below, but some specifics might vary according to the type of research project. Please discuss the actual structure of your thesis with your supervisor.$/;"	u
 Adaptive Multi Preconditioned Conjugate Gradient	SA_Thesis/thesis/cha_adaptive_mpcg.tex	/^\\chapter{Adaptive Multi Preconditioned Conjugate Gradient}$/;"	c
 Adaptive Simultaneous FETI  FETI-AS 	SA_Thesis/thesis/cha_feti-solvers.tex	/^\\end{figure}$/;"	s
+Aeroelastic Optimization	chapters/aeroelastic_analysis.tex	/^\\setlength{\\delimitershortfall}{0pt}$/;"	s
 After changing the boolean values with	SA_Thesis/thesis/struktex/struktex-test-3.tex	/^}$/;"	P
 An important example	SA_Thesis/latexindent/documentation/manual.tex	/^\\end{figure}$/;"	u
 An important example	latexindent/documentation/manual.tex	/^\\end{figure}$/;"	u
 Augmented Lagrange	SA_Thesis/thesis/cha_fe-formulation.tex	/^They main advantage of the penalty method lies in the fact, that it does not introduce any new unknows, und thus maintains the positive definitness of the system matrix. On the other hand, the constraints are not fulfilled exactly. Regarding the choice of $\\sigma_\\mathrm k$ one has to weight carefully between a more accurate constraint fulfillment and the overall systems constitution since a greater $\\sigma_k$ value might enforce the constraints stronger, but can also lead to numerical instabilities.$/;"	b
-Basics	chapters/problem_description.tex	/^\\section{About this template}\\label{sec:about}$/;"	u
 Before we begin	SA_Thesis/latexindent/documentation/manual.tex	/^\\lstlistoflistings$/;"	s
 Before we begin	latexindent/documentation/manual.tex	/^\\lstlistoflistings$/;"	s
 CLSDIR	SA_Thesis/thesis/struktex/struktex.mk	/^CLSDIR=$(INSTALLTEXMF)\/tex\/latex\/$(PACKAGE)$/;"	m
@@ -38,7 +37,6 @@ Conditioning of the FETI problem	SA_Thesis/thesis/cha_numerical-assesment.tex	/^
 DEVELOPER_OPTIONS	SA_Thesis/thesis/struktex/struktex.mk	/^DEVELOPER_OPTIONS = \\EnableCrossrefs\\RecordChanges\\AlsoImplementation\\CodelineIndex$/;"	m
 DOCDIR	SA_Thesis/thesis/struktex/struktex.mk	/^DOCDIR=$(INSTALLTEXMF)\/doc\/latex\/$(PACKAGE)$/;"	m
 DVIPS	SA_Thesis/thesis/struktex/struktex.mk	/^DVIPS = dvips$/;"	m
-Declare anything you have used	Nomenclature.tex	/^\\end{tabular}$/;"	u
 Default parameters	SA_Thesis/thesis/cha_numerical-assesment.tex	/^\\\\$/;"	s
 Default values  C  	SA_Thesis/thesis/struktex/struktex-test-3.tex	/^\\pBoolValue{\\texttt{WAHR}}{\\texttt{FALSCH}}$/;"	s
 Default values  Java  	SA_Thesis/thesis/struktex/struktex-test-3.tex	/^\\pBoolValue{\\texttt{WAHR}}{\\texttt{FALSCH}}$/;"	s
@@ -46,11 +44,14 @@ Default values  Pascal  	SA_Thesis/thesis/struktex/struktex-test-3.tex	/^\\pLang
 Default values  Python  	SA_Thesis/thesis/struktex/struktex-test-3.tex	/^\\pBoolValue{\\texttt{WAHR}}{\\texttt{FALSCH}}$/;"	s
 Demonstration  before and after	SA_Thesis/latexindent/documentation/manual.tex	/^\\end{warning}$/;"	s
 Demonstration  before and after	latexindent/documentation/manual.tex	/^\\end{warning}$/;"	s
+Desing Model	chapters/problem_description.tex	/^By construction of the algorithm, the constraints are statisfied only when the optimum point is reached.$/;"	u
 Domain decomposition	SA_Thesis/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	u
 ERROR	SA_Thesis/latexindent/latexindent.pl	/^ERROR: When using the -o flag you need to call latexindent.pl with 2 arguments$/;"	l
 ERROR	SA_Thesis/latexindent/latexindent.pl	/^ERROR:$/;"	l
 ERROR	latexindent/latexindent.pl	/^ERROR: When using the -o flag you need to call latexindent.pl with 2 arguments$/;"	l
 ERROR	latexindent/latexindent.pl	/^ERROR:$/;"	l
+Eulerian and Lagrangian view	chapters/fluid_mechanics.tex	/^\\setlength{\\delimitershortfall}{0pt}$/;"	s
+Eulerian derivative	chapters/fluid_mechanics.tex	/^The material derivative of a property, is a derivative(rate of change), that follows a specific particle 'p'. That means that at every time instance the material deivative gives as the current value of the property of a specific particle. Since in general, a particle will move its position in time quite a lot, some mean is required to track the particles motion. The material derivative is also known as the Lagrangian concept, and is commonly used in Solid mechanics, since the motion of the solid particles is typically little, or at least nearly uniform over the body, which makes positin tracking easy.$/;"	u
 FE space discretization	SA_Thesis/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	u
 FETI Solvers	SA_Thesis/thesis/cha_feti-solvers.tex	/^\\chapter{FETI Solvers}\\label{cha:feti_solvers}$/;"	c
 FETI-2	SA_Thesis/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	b
@@ -61,7 +62,10 @@ FETI-Method	SA_Thesis/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	u
 FETI-S	SA_Thesis/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	b
 FETI-S	SA_Thesis/thesis/temporary_formulas.tex	/^A mathematically appealing approach for the definition of the auxiliary coarse space $\\cspace$ are the so-called Geneo methods (Geneo). They try to identify the bad eigenmodes, corresponding to the bad eigenvalues (see Figure~\\ref{fig:TODO} and build the coarse space upon them. Extensive Analysis of this methods\\cite{Spillane2016,Spillane2013,Spillane2014} has shown their remarkable robustnes, espacially for the generally quite challenging FETI problems described in Section\\ref{sec:challenges}. However, althoug mathemetically found and robust the eigenvalue problems on the interface introduce a substantial computational overhead, thus other methods like FETI-S\\ref{sec:fetis} or FETI-B\\ref{sec:fetib} are more efficient for engineering problems.$/;"	u
 Fast Adaptive Simultaneous FETI  FETI-FAS 	SA_Thesis/thesis/cha_feti-solvers.tex	/^\\end{figure}$/;"	u
-Fluid Structure Interaction	testfile.tex	/^\\subsection*{Symbols}$/;"	b
+Fiver	chapters/fiver.tex	/^\\setlength{\\delimitershortfall}{0pt}$/;"	s
+Fluid Mechanics	testfile.tex	/^\\end{tabular}$/;"	b
+Fluid Mechanics basic Eqwuations	chapters/fluid_mechanics.tex	/^In this thesis, both Eulerian and ALE mehods will be covered. In general, no recomendation on to prefer one or the other method can be given. Instead, one should always be aware of the strength and weaknesses of either method and choose the approriate one fot a specific problem accordingly.$/;"	s
+Fluid Structure Interaction	testfile.tex	/^\\end{tabular}$/;"	b
 From the command line	SA_Thesis/latexindent/documentation/manual.tex	/^simply \\lstinline!latexindent!.$/;"	u
 From the command line	latexindent/documentation/manual.tex	/^simply \\lstinline!latexindent!.$/;"	u
 Fundamentals of LaTeX I  structure	chapt_fundamentals_structure.tex	/^\\section{Fundamentals of \\LaTeX I: structure}$/;"	s
@@ -74,6 +78,7 @@ General	SA_Thesis/thesis/Nomenclature.tex	/^\\subsection*{FETI-Method}$/;"	b
 General	SA_Thesis/thesis/cha_feti-formulation.tex	/^\\end{figure}$/;"	s
 General	SA_Thesis/thesis/temporary_formulas.tex	/^\\begin{document}$/;"	s
 Generalized eigenvalues in the overlap  Geneo 	SA_Thesis/thesis/cha_feti-solvers.tex	/^\\end{figure}$/;"	u
+Geomatrical approach	chapters/problem_description.tex	/^where $\\fic{\\stiffmat}_j$ is a fitious pseudo structre stiffness matrix representing the fluid domain compativbel to the current fictious support conditions.$/;"	P
 Governing equations and finite element formulations	SA_Thesis/thesis/cha_fe-formulation.tex	/^$/;"	c
 Graphing rational functions  horizontal asymptotes 	SA_Thesis/latexindent/success/sampleAFTER.tex	/^ 	\\end{exercises}$/;"	s
 Graphing rational functions  horizontal asymptotes 	SA_Thesis/latexindent/success/sampleBEFORE.tex	/^ 	\\end{exercises}$/;"	s
@@ -96,7 +101,7 @@ Introduction	SA_Thesis/latexindent/success/theorem.tex	/^\\begin{document}$/;"	s
 Introduction	SA_Thesis/thesis/cha_introduction.tex	/^\\chapter{Introduction}\\label{cha:introduction}$/;"	c
 Introduction	SA_Thesis/thesis/chapters/chapt_introduction.tex	/^\\chapter{Introduction} a$/;"	c
 Introduction	latexindent/success/theorem.tex	/^\\begin{document}$/;"	s
-Introduction	main.tex	/^\\include{testfile}$/;"	i
+Introduction	main.tex	/^\\include{acronyms}% abbrecvations$/;"	i
 Iterative Solution techniques	SA_Thesis/thesis/cha_iterative-solvers.tex	/^\\chapter{Iterative Solution techniques}$/;"	c
 Iterative Solution techniques	SA_Thesis/thesis/cha_iterative_solvers.tex	/^\\chapter{Iterative Solution techniques}\\label{cha:iterative_solvers}$/;"	c
 JacobiSolver	SA_Thesis/studies/2016-08-23_ConditionNumberTheory/JacobiSolver.m	/^function [ k ] = JacobiSolver( A,b,tol )$/;"	f
@@ -107,10 +112,12 @@ LaTeX-env-declaration	SA_Thesis/thesis/struktex/struktex.el	/^(defun LaTeX-env-d
 LaTeX-env-struktogramm	SA_Thesis/thesis/struktex/struktex.el	/^(defun LaTeX-env-struktogramm (environment)$/;"	f
 LaTeX-struktex-package-options	SA_Thesis/thesis/struktex/struktex.el	/^(defvar LaTeX-struktex-package-options '("curves" "draft" "emlines" "final"$/;"	f
 Lagrange multiplier approach	SA_Thesis/thesis/cha_fe-formulation.tex	/^Numerous methods have been proposed to solve this kind of problems. Among the most common ones are the Lagrange multiplier approach and the penalty method. This thesis focuses solemnly on the first on, nevertheless a quick introduction into the alternatives shall be provided, so that the pros and cons of each method can be discussed.$/;"	b
+Level-set method	chapters/fiver.tex	/^A possible solution to this problem is the \\ac{FIVER} method.$/;"	u
 License	SA_Thesis/latexindent/documentation/manual.tex	/^encouragement.$/;"	u
 License	latexindent/documentation/manual.tex	/^encouragement.$/;"	u
-List of Symbols	Nomenclature.tex	/^\\section*{List of Symbols}$/;"	s
+Material derivative	chapters/fluid_mechanics.tex	/^One view this issue from different perspectives, but what the difference points down to is the interpreation of the time derivative. Since we will be using the different derivatives frequently in this thesis, a short introduction shall be provided.$/;"	u
 Matrix notation	SA_Thesis/thesis/cha_feti-formulation.tex	/^as the local schur operator, assembled local schur operator and global schur operator respectively.$/;"	s
+Mechanical approach	chapters/problem_description.tex	/^As~REF explain, it is unpractival to identify an abstarct variable directly with an icrement of the coordinate of a grid point. Instead, two approaches, namely geometrical nbad mechanical can be adopted dfor constructing the generic design model.$/;"	P
 Methods of constraint enforcement	SA_Thesis/thesis/cha_fe-formulation.tex	/^\\end{align}$/;"	s
 Monitoring the realtive error in PCG	SA_Thesis/thesis/cha_adaptive_mpcg.tex	/^\\end{figure}$/;"	u
 Monitoring the realtive error in PCG	SA_Thesis/thesis/cha_iterative-solvers.tex	/^\\end{figure}$/;"	u
@@ -118,7 +125,6 @@ Motivation	Introduction.tex	/^\\section{Introduction}\\label{chapt:introduction}
 Motivation	SA_Thesis/thesis/cha_introduction.tex	/^\\chapter{Introduction}\\label{cha:introduction}$/;"	s
 Motivation	SA_Thesis/thesis/chapters/chapt_introduction.tex	/^\\chapter{Introduction} a$/;"	s
 Nitsche method	SA_Thesis/thesis/cha_fe-formulation.tex	/^Contrary to the Penalty approach, $\\mu \\rightarrow \\infty$ is not required in order to solve the original, unconstrained problem, thanks to the presence of the Lagrange multiplier term. The method is therefor especially favorable due to both, an exact fulfillment of the boundary conditions and no introduction of new Unknowns. It also avoids the ill conditioning of the standard quadratic penalty method.$/;"	b
-Nomenclature	Nomenclature.tex	/^\\section*{List of Symbols}$/;"	s
 Nomenclature	SA_Thesis/thesis/Nomenclature.tex	/^\\section*{Nomenclature}\\label{sec:nomenclature}$/;"	s
 Nomenclature	SA_Thesis/thesis/thesis.tex	/^\\PrintTablesAndListsOfContents$/;"	i
 Nomenclature	testfile.tex	/^\\section*{Nomenclature}\\label{sec:nomenclature}$/;"	s
@@ -128,9 +134,10 @@ Objective	SA_Thesis/thesis/cha_introduction.tex	/^A recent publication \\cite{Sp
 One-level FETI  FETI-1 	SA_Thesis/thesis/cha_feti-solvers.tex	/^The projection into the natural subspace however, is also used in all other FETI algorithms.$/;"	s
 Operators	testfile.tex	/^\\end{tabular}$/;"	u
 Operators and Symbols	testfile.tex	/^\\subsection*{Operators}$/;"	u
-Operators and symbols	Nomenclature.tex	/^\\end{tabular}$/;"	u
 Operators and symbols	SA_Thesis/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	u
+Optimization	chapters/problem_description.tex	/^\\setlength{\\delimitershortfall}{0pt}$/;"	s
 Optimization	testfile.tex	/^\\end{tabular}$/;"	b
+Optimization Model	chapters/problem_description.tex	/^Finally, the analysis model provides concepts of evaluationg the optimization criteria. Typically, the optimization criteria depend on $\\structdisp$ and $\\fstate$ which is why a coupled system of equations has to be solved in every design optimization process. The Sensitivity Analysis (SA) is alsopart of this model. Aeroelastic analysis and Sensitivity analysis are discussed in REF.$/;"	u
 Outlook	SA_Thesis/thesis/cha_outlook.tex	/^\\chapter{Outlook}$/;"	c
 Own work declaration	Preface.tex	/^\\cleardoublepage$/;"	s
 PACKAGE	SA_Thesis/thesis/struktex/struktex.mk	/^PACKAGE = struktex$/;"	m
@@ -149,7 +156,6 @@ Preconditioners	SA_Thesis/thesis/cha_feti-formulation.tex	/^The displacements ca
 Preface	main.tex	/^\\include{titlepage}$/;"	i
 Principle of Virtual Work	SA_Thesis/thesis/cha_fe-formulation.tex	/^Gauss divergence divergence is subsequently applied for further derivations.$/;"	P
 Problem Setup	SA_Thesis/thesis/cha_feti-formulation.tex	/^\\chapter{The FETI formulation}\\label{cha:feti_formulation}$/;"	s
-Representation of salars. tensors and other quatities	Nomenclature.tex	/^\\section*{Nomenclature}\\label{sec:nomenclature}$/;"	u
 Representation of scalars  tensors and other quantities	testfile.tex	/^\\end{tabular}$/;"	u
 Representation of scalars. tensors and other quantities	SA_Thesis/thesis/Nomenclature.tex	/^\\section*{Nomenclature}\\label{sec:nomenclature}$/;"	u
 Required lstinline  Perl  modules	SA_Thesis/latexindent/documentation/manual.tex	/^\\appendix$/;"	s
@@ -217,6 +223,7 @@ WARNING	latexindent/latexindent.pl	/^WARNING: \\t line count of original file an
 WARNING	latexindent/latexindent.pl	/^WARNING:$/;"	l
 abb	create_nomencature.py	/^            abb=abbrevations[secname][expl].split("{")[1].split("}")[0]$/;"	v
 abbrevations	create_nomencature.py	/^abbrevations={}$/;"	v
+acronyms	main.tex	/^\\include{testfile}%Nomenclature$/;"	i
 after changing the fonts with	SA_Thesis/thesis/struktex/struktex-test-3.tex	/^}$/;"	P
 at_beg_noindent	SA_Thesis/latexindent/latexindent.pl	/^sub at_beg_noindent{$/;"	s
 at_beg_noindent	latexindent/latexindent.pl	/^sub at_beg_noindent{$/;"	s

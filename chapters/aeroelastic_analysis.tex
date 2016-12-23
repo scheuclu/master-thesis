@@ -1,0 +1,147 @@
+%\documentclass[../main.tex]{subfiles}
+%%\usepackage{import}
+%\begin{document}
+%\setlength{\delimitershortfall}{0pt}
+%\section{Fluid structure interaction}
+%\acf{FSI} describes the aeroelastic response of a mechanical system under fluid load, as well as the interaction between fluid and structure itself. Synonymously thge term "Aeroelasticity" is often used.\\
+%
+%For this thesis, we first will focus on an \ac{ALE} formulation, a closer look into this topic in the context of en Embedded formulation will follow.\\
+%
+%\subsection{Coupled three-field formulation}
+%In an aeroelastic ALE problem, three solution fields have to be considered. Firstly, the ususal fluidprobelm has to be solved. Over the \ac{FSI} interface, the fluid now ionteracts with the structure, imposing a neumann problem on it. Finnally, since we are considering \ac{ALE} here, a governing equation for the fluid mesh motion has to be introduced, which closes the system.\\
+%Generally speaking, there exist two main approaches for solving this problem. Firstly, one can solve all three problems in one joint system, leading to a so-called monolytic algorithm. The advantage is, that the formulation is consistent and compared to the susequently introduced staggered algorithm it does not introduce errors in the coupling. However, the solution of the monolytic system is cumbersome, since completly different physics are involved.
+%In practice, using a so-called "staggered algorithm" has shown to be a more robust choice. In a staggered algorithm, fluid- and structure problem are updated from timestep $n$ to $n+1$ subsequently of one another. Therefore, consistency is lost, and (if no correction is applied) accuracy drops to first order. On the other hand each problem by itself can be treated by well established, optimized, existing solvers so the solution procedure is more robust.\\
+%This theisis utilizes the staggered approach. We hav coupled a three-dimensional second order finite volume code~\cite{Aerof} with a second order accurate finite element code\cite{Aeros} according to the popular three-field formulation of \cite{Farhat1995}.\\
+% \\
+%The three-field formulation of \ac{ALE} aeroelasticity can be written as:
+%\begin{align}
+%&\text{state equation of the structure:}  &\EOSstruct (\absvars,\structdisp,\mms,\fstate) = \vec{0} \label{eq:3field_structure}\\
+%&\text{governing equation of meshmotion:} &\EOSmesh   (\absvars,\structdisp,\mms)         = \vec{0} \label{eq:3field_mesh}\\
+%&\text{state equation of the fluid:}      &\EOSfluid  (\absvars,\mms,\fstate)             = \vec{0}
+%\label{eq:3field_fluid}\\
+%\end{align}
+%
+%\paragraph{State equation of the structure:}
+%For a simple linear case, that is assumed in this thesis, the structure state equation can be written as
+%\begin{align}\label{eq:eos_struct}
+%\EOSstruct = \stiffmat \structdisp - \vec{P}(\mms,\fstate)
+%\end{align}
+%where $\stiffmat$ represents the finite element stiffness matrix and $\vec{P}$ denotes the external load vector that combines aerodynamic loads $\fload$ that are inflected to the structure by the fluid, and gravity loads $\vec{P}_0$
+%\begin{align}
+%\vec{P}=\vec{P}_0 + \fload
+%\end{align}
+%
+%\paragraph{Governing equation of the mesh motion:}
+%In an Arbitrary Lagrangian Eulerian formulation, the fluid mesh deforms with the structure. A governing equation is thus required to describe that deformation; Typically a simple linear pseudo finite element approach or a spring analogy method~\cite{Farhat1998} is used to do so. A Dirichlet problem is solved to move the mesh.
+%\begin{align}\label{eq:eos_mesh}
+%\EOSmesh = \fic{\stiffmat} \mms~~~\text{with}~~~\mms=\structdisp~\text{on}~\Gamma_{F|S}
+%\end{align}
+%
+%\paragraph{State equation of the fluid:}
+%The state equation of the fluid depends on the flow model used, as well as ton whether a Eulerian or Lagrangian approach is used. A quick overview is provided in Section~\ref{sec:fluid_equations_basic}.\\
+%Please note, that the frame of reference(Eulerian, Lagrangian, Arbitrary Lagrangian Eulerian) has nothing to do with the fluid equation type.
+%
+%The state equation of the fluid(Equation three in \eqref{eq:3field_basic} for can be expressed as
+%\begin{align}
+%\def\arraystretch{1.5}
+%\EOSfluid= 
+%\tablesix
+%{$\fluxmatconv_2(\mms,\fstate)$}
+%{$\fluxmatconv_2(\mms,\fstate)+\fluxmatdiff_2(\mms,\fstate)$}
+%{$\fluxmatconv_2(\mms,\fstate)+\fluxmatdiff_2(\mms,\fstate)-\turbmat(\mms,\fstate,\turbparamvec)$}
+%{$\dot{(\cellvolmat(\mms)\fstate)}+\fluxmatconv_2(\mms,\fstate)$}
+%{$\dot{(\cellvolmat(\mms)\fstate)}+\fluxmatconv_2(\mms,\fstate)+\fluxmatdiff_2(\mms,\fstate)$}
+%{$\dot{(\cellvolmat(\mms)\fstate)}+\fluxmatconv_2(\mms,\fstate)+\fluxmatdiff_2(\mms,\fstate)-\turbmat(\mms,\fstate,\turbparamvec)$}
+%\end{align}
+%where $\fluxmatconv_2$ denotes the vector of Roe fluxes resulting from a second-order finite volume discretization of the convective part of the \ac{NSE} \ref{sec:fv_fluid_mechanics}, $\fluxmatdiff_2$ likewise denotes a second-order FV discretization oft the diffusive part, $\cellvolmat$ denotes the matrix of cell volumes and $\turbmat$ denotes the matrix resulting from the additional turbulence closures in the \ac{RANS} equations(see Section\ref{sec:rans}).\\
+%The above table also gives a very nice overview over the different equation types and the used simplifications. The Euler equations are obviously obtained by neglecting the diffusive part of the \ac{NSE}. One can also see that the \ac{RANS} equations are more difficult than the \ac{NSE} themselves. However, as explained in \textbf{TODO}, the advantage is that \ac{RANS} can operate on much coarser meshes that do not have to resolve the small scale turbulence phenomena, which makes the more numerically efficient overall in many applications.
+%\\
+%\subsection{Staggered algorithm}
+%The three-field couples system of equations \textbf{TODO}, can be solved very efficiently with an iterative staggered procedure, such as the one proposed by by \cite{Farhat1995}. This work utilizes the second-order staggered algorithm described in Figure~\ref{fig:staggered_algorithm}.
+%
+%
+%\begin{figure}[h!]
+%	\begin{center}
+%        \includegraphics{\mainpath/fig/tikz/build/staggered_algorithm.pdf}
+%        \caption[Staggered algorithm scheme]{Scheme for the staggered algorithm. Th picture depicts the sequential structure($\structdisp$) and fluid($\fstate$) solves. First, the structure is updated to a new time step. With this information, a corresponding fluid solution is obtained. After the fluid is progressed in time, the structure solutions is being corrected with that information. A detailed description of all steps follows below.}
+%		\label{fig:staggered_algorithm}
+%    \end{center}
+%\end{figure}
+%
+%
+%\paragraph{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt} {1}}} Determining structural response}
+%For a given external load $\its{\load}$, the structural response $\its{\structdisp}$ is determined by solving the state equation of the structure~\textbf{TODO}. To increase stability, and under-relaxation is typically performed:
+%\begin{align}
+%\its{\structdisp}=(1-\theta)\structdisp^{(n-1)}+\theta \tilde{\structdisp} \\
+%\tilde{\structdisp} = \inv{\stiffmat} \its{\load}
+%\end{align}
+%Typically, the relaxation factor is chosen as $0.5\leq\theta\leq 0.9$
+%
+%\paragraph{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt} {2}}} Motion transfer to wet surface}
+%The motion of the wet surface of the structure has to be transformed to the fluid.
+%\begin{align}
+%\its{\structdisp}_T = \ifaceprojStoF \its{\structdisp}
+%\end{align}
+%where $\ifaceprojStoF$ is a transfer matrix that also accounts for potentially non-matching meshes~REF32.
+%
+%
+%\paragraph{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt} {3}}} Fluid mesh motion update}
+%The fluid mesh motion is then updated by solving an auxiliary pseudo Dirichlet problem on the fluid mesh. This step is the very heart of the ALE algorithm.
+%\begin{align}
+%\fic{\stiffmat} \its{\mms} = 0~~~\text{}~~~\its{\mms}=\its{\structdisp}_T~\text{on}~\Gamma_{F|S}
+%\end{align}
+%where the Dirichlet conditions are introduced into the system via a decomposition:
+%\begin{align}
+%\fic{\stiffmat}=
+%\begin{bmatrix}
+%\fic{\stiffmat}_{\Omega\Omega}   &  \fic{\stiffmat}_{\Omega\Gamma}   \\
+%\fic{\stiffmat}_{\Gamma\Omega}   &  \fic{\stiffmat}_{\Gamma\Gamma}   \\
+%\end{bmatrix},~~~
+%\mms=
+%\begin{bmatrix}
+%\mms_{\Omega} \\
+%\mms_{\Gamma} \\
+%\end{bmatrix}
+%\end{align}
+%Here, the subscript $\Gamma$ denotes the fluid grid points at the FSI interface and the subscript $\Omega$ denotes the remainder. Hence, the fluid mesh is updated in two steps, by first transferring the structure motion to the fluid interface, and then solving the auxiliary pseudo Dirichlet problem:
+%\begin{align}
+%\its{\mms}_{\Gamma}&=\ifaceprojStoF \its{\structdisp}\label{eq:mms_update_1}\\
+%\fic{\stiffmat}_{\Omega\Omega} \its{\mms}_\Omega &= -\fic{\stiffmat}_{\Omega\Gamma} \its{\mms} \label{eq:mms_update_2}
+%\end{align}
+%It shall be noted that an exact solution of the preceding equation is not required. In fact it is an arbitrarily chosen auxiliary pseudo-problem anyway. Therefor, a valid update of the mesh motion, that does not produce crossovers is enough. Such an update can be obtained at low cost by allying a few \ac{PCG} iterations to Equation~\eqref{eq:mms_update_2}.
+%
+%\paragraph{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt} {4}}} Update fluid state vector}
+%After the mesh has been deformed, the fluid state~$\dfstate$ vector can be updated accordingly.
+%\begin{align}
+%\def\arraystretch{1.5}
+%\tablesix
+%{$\fluxmatconv_2(\its{\fstate})+\pdfrac{\fluxmatconv_2}{\fstate}(\itss{\fstate}-\its{\fstate})$}
+%{$1$}
+%{$1$}
+%{$1$}
+%{$1$}
+%{$1$}
+%=0
+%\end{align}
+%t%
+%\paragraph{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt} {5}}} Determining structural responses}
+%
+%TODO a lot of stuff is missing here!
+%
+%
+%
+%
+%\end{document}
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%

@@ -1,5 +1,11 @@
+% Please note that for this template a seperate build diretory named "build" should be used for everything
+% e.g "pdflatex --output-dir=build main.tex"
+
 \newcommand{\mainpath}{/home/lukas/Desktop/project/independence/project/thesis/}
 \input{\mainpath/Header}
+
+%\usepackage{biblatex}
+%\addbibresource{bibliography.bib}
 
 
 \graphicspath{{fig/}{../fig/}}
@@ -26,7 +32,9 @@
 \include{titlepage}
 \include{Preface}
 
-\include{testfile}
+\include{testfile}%Nomenclature
+\include{acronyms}% abbrecvations
+
 \include{Introduction}
 
 
@@ -51,14 +59,21 @@
 %%                Chapters                     %%
 %%                                             %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\subfile{chapters/about}
-%\subfile{chapters/fundamentals_structure}
-%\subfile{chapters/fundamentals_referencing}
-%\subfile{chapters/structure_report}
-
-\subfile{chapters/problem_description}
-\section{The Finite Volume Method}
-\section{Sensitivity Derivation}
+%\subfile{chapters/about}
+\cleardoublepage
+\subfile{chapters/fluid_mechanics}
+\cleardoublepage
+\subfile{chapters/finite_volume_method}
+\cleardoublepage
+\subfile{chapters/fsi}
+\cleardoublepage
+\subfile{chapters/optimization}
+\cleardoublepage
+\subfile{chapters/sensitivity_analysis}
+\cleardoublepage
+\subfile{chapters/fiver}
+%\section{The Finite Volume Method}
+%\section{Sensitivity Derivation}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -76,8 +91,11 @@
 \cleardoublepage
 
 %% Bibliography is provided via Bibtex.
+
+\bibliography{bibliography}{}
 \bibliographystyle{plain}
-\bibliography{templatebibtex}
+
+%\printbibliography
 % the referenced bibtex file is provided with this template
 
 %\include{Bibliografy}

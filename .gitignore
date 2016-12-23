@@ -1,2 +1,10 @@
 *build*
+*.aux*
+*.log*
+*.fls*
+*.lof
+*.blg
+*.toc
+*.nlo
+*_latexmk
 

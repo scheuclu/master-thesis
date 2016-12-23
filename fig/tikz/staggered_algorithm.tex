@@ -1,0 +1,73 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\def\mainpath{/home/lukas/Desktop/project/independence/project/thesis/}
+\def\tikzpath{\mainpath/fig/tikz}
+
+\usetikzlibrary{positioning}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepgfplotslibrary{groupplots}
+
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\input{\mainpath/customcommands}
+
+\tikzset{>=latex}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\input{\mainpath/colordefinitions}
+\begin{document}
+\begin{tikzpicture}[->]
+   \def\L{3.0}
+   \def\R{4pt}
+
+%defining the nodes
+\node [] (N1) at (0   ,0 ) [label=below:{$\structdisp^{(n-1)}$}] {};
+\node [] (N2) at (  \L,0 ) [label=below:{$\structdisp^{(n  )}$}] {};
+\node [] (N3) at (2*\L,0 ) [label=below:{$\structdisp^{(n+1)}$}] {};
+\node [] (N4) at (0   ,\L) [label=above:{$\fstate^{(n-1)}$}] {};
+\node [] (N5) at (  \L,\L) [label=above:{$\fstate^{(n  )}$}] {};
+\node [] (N6) at (2*\L,\L) [label=above:{$\fstate^{(n+1)}$}] {};
+\node [] (N7) at (-0.5*\L,0) {};
+\node [] (N8) at (-0.5*\L,\L) {};
+\node [] (N9) at (2.5 *\L,0) {};
+\node [] (N10) at (2.5 *\L,\L) {};
+
+
+%draw node circles
+\fill (N1) circle [radius=\R];
+\fill (N2) circle [radius=\R];
+\fill (N3) circle [radius=\R];
+\fill (N4) circle [radius=\R];
+\fill (N5) circle [radius=\R];
+\fill (N6) circle [radius=\R];
+
+
+%draw the lines
+\draw (N1) -- node[below] {\circled{1}} +(N2);
+\draw (N6) -- node[below] {\circled{5}} +(N2);
+\draw (N5) -- node[above] {\circled{4}} +(N6);
+\draw (N2) -- node[left] {\circled{2}} +(N5);
+\draw [dashed] (N2) -- +(N3);
+\draw [dashed] (N3) -- +(N6);
+\draw [dashed] (N1) -- +(N4);
+\draw [dashed] (N5) -- +(N1);
+\draw [dashed] (N4) -- node[above] {\circled{3}} +(N5);
+
+\draw [dashed] (N7) -- +(N1);
+\draw [dashed] (N8) -- +(N4);
+\draw [dashed] (N3) -- +(N9);
+\draw [dashed] (N6) -- +(N10);
+
+   
+  
+\end{tikzpicture}
+\end{document}
+
+

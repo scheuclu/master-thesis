@@ -1,0 +1,91 @@
+\begin{thebibliography}{10}
+
+\bibitem{Farhat1998}
+C.~Farhat, C.~Degand, B.~Koobus, and M.~Lesoinne.
+\newblock {Torsional springs for two-dimensional dynamic unstructured fluid
+  meshes}.
+\newblock {\em Computer Methods in Applied Mechanics and Engineering},
+  163(1-4):231--245, 1998.
+
+\bibitem{Farhat1995}
+Charbel Farhat, Michel Lesoinne, and Nathan Maman.
+\newblock {Mixed explicit/implicit time integration of coupled aeroelastic
+  problems: Three???field formulation, geometric conservation and distributed
+  solution}.
+\newblock {\em International Journal for Numerical Methods in Fluids},
+  21(10):807--835, 1995.
+
+\bibitem{Bonnans2006}
+J.~{Frederic Bonnans}, J.~{Charles Gilbert}, Claude Lemar??chal, and Claudia~A.
+  Sagastiz??bal.
+\newblock {Numerical optimization: Theoretical and practical aspects}.
+\newblock {\em Numerical Optimization: Theoretical and Practical Aspects},
+  pages 1--494, 2006.
+
+\bibitem{Aerof}
+Farhat~Research Group.
+\newblock {Aero-F}.
+
+\bibitem{Aeros}
+Farhat~Research Group.
+\newblock {Aero-S}.
+
+\bibitem{Lakshminarayan2014}
+V.~Lakshminarayan, C.~Farhat, and A.~Main.
+\newblock {An embedded boundary framework for compressible turbulent flow and
+  fluid-structure computations on structured and unstructured grids}.
+\newblock {\em International Journal for Numerical Methods in Fluids},
+  76(6):366--395, oct 2014.
+
+\bibitem{Lesoinne2001}
+Michel Lesoinne, Marcus Sarkis, Ulrich Hetmaniuk, and Charbel Farhat.
+\newblock {A linearized method for the frequency analysis of three-dimensional
+  ¯ uid / structure interaction problems in all ¯ ow regimes}.
+\newblock 190:1--38, 2001.
+
+\bibitem{Main2014}
+Alexander Main.
+\newblock {Algorithmic Problems in Social and Geometric Influence a
+  Dissertation Submitted To the Institute for Computational and Mathematical
+  Engineering and the Committee on Graduate Studies of Stanford University in
+  Partial Fulfillment of the Requirements for the}.
+\newblock 2014.
+
+\bibitem{Maute2001}
+K.~Maute, M.~Nikbay, and C.~Farhat.
+\newblock {Coupled analytical sensitivity analysis and optimization of
+  three-dimensional nonlinear aeroelastic systems}.
+\newblock {\em AIAA Journal}, 39(11):2051--2061, 2001.
+
+\bibitem{Maute2003}
+K.~Maute, M.~Nikbay, and C.~Farhat.
+\newblock {Sensitivity analysis and design optimization of three-dimensional
+  non-linear aeroelastic systems by the adjoint method}.
+\newblock {\em International Journal for Numerical Methods in Engineering},
+  2003.
+
+\bibitem{Piperno2000}
+Serge Piperno and Charbel Farhat.
+\newblock {Design of Efficient Partitioned Procedures for the Transient
+  Solution of Aeroelastic Problems}.
+\newblock {\em Revue Europ{\'{e}}enne des {\'{E}}l{\'{e}}ments Finis},
+  9(6-7):655--680, jan 2000.
+
+\bibitem{Schittkowski1994}
+K.~Schittkowski, C.~Zillober, and R.~Zotemantel.
+\newblock {Numerical comparison of nonlinear programming algorithms for
+  structural optimization}.
+\newblock {\em Structural Optimization}, 7(1-2):1--19, 1994.
+
+\bibitem{Sobieszczanski1990}
+Jaroslaw Sobieszczanski-Sobieski.
+\newblock {Sensitivity of complex, internally coupled systems}.
+\newblock {\em AIAA Journal}, 28(1):153--160, 1990.
+
+\bibitem{VanLeer1979}
+Bram van Leer.
+\newblock {Towards the ultimate conservative difference scheme. V. A
+  second-order sequel to Godunov's method}.
+\newblock {\em Journal of Computational Physics}, 32(1):101--136, 1979.
+
+\end{thebibliography}

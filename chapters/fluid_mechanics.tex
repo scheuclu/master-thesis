@@ -2,14 +2,141 @@
 %\usepackage{import}
 \begin{document}
 \setlength{\delimitershortfall}{0pt}
-\section{Fluid Mechanics basic Eqwuations}\label{sec:about}
 
-The Navier stokes Equations in vector(CONSERVATIVE???) form are:
-\begin{align}\label{eq:nsg}
-\pdfrac{\fstate}{t} + \nabla \cdot \fluxesconv(\fstate) + \nabla \cdot \fluxesdiff(\fstate) = \vec{0}
+\section{Fluid mechanics}\label{sec:fluid_mechanics}
+\subsection{Eulerian and Lagrangian view}\label{sec:eulerian_lagrangian}
+In time dependent analytical physics there are two basic concepts of how to view a system of interest: the Eulerian and the Lagrangian approach. It shall be stressed here, that Eulerian view and Euler equations are two totally separate things.\\
+One view this issue from different perspectives, but what the difference points down to is the interpretation of the time derivative. Since we will be using the different derivatives frequently in this thesis, a short introduction shall be provided.
+\subsubsection{Material derivative}
+The material derivative of a property, is a derivative(rate of change), that follows a specific particle 'p'. That means that at every time instance the material derivative gives as the current value of the property of a specific particle. Since in general, a particle will move its position in time quite a lot, some mean is required to track the particles motion. The material derivative is also known as the Lagrangian concept, and is commonly used in Solid mechanics, since the motion of the solid particles is typically little, or at least nearly uniform over the body, which makes position tracking easy.
+
+\subsubsection{Eulerian derivative}
+The Eulerian derivative takes a different approach. It refers to a fixed frame of reference in the domain, and gives the rate of change at that specific position. Due to the particle movement, it typically refers to different particles at different times.
+\\
+Material and Eulerian derivatives can be linked via the so-called convective rate of change as:
+\begin{align}
+\underbrace{\mfrac{\vec{G}}{t}}_{\text{Lagrangian rate of change}} = \underbrace{\pdfrac{\vec{G}}{t}}_{\text{Eulerian rate of change}} + \underbrace{\fluidvel\cdot\nabla\vec{G}}_{\text{Convective rate of change}}
 \end{align}
 
-where
+In fluid mechanics the Eulerian concept is typically proffered.\\
+However, when looking at fluid-structure interaction problems, the interface is typically moving. To account for that motion in the fluid, one either has to come up with some cell-intersection approach, or the fluid-mesh has to be deformed to.\\
+An appealing and straightforward approach to do so, is the so called Arbitrary Lagrangian Eulerian(\ac{ALE}) approach. As the name suggest, it is a hybrid between Eulerian and Lagrangian point of view. The \ac{ALE} approach allows to utilize the best of both approaches. The mesh can either be fixed, moved with the continuum in an Eulerian manner, or be moved in some arbitrarily specified manner in-between. The \ac{ALE} method can handle larger distortions than a pure Eulerian would, while stiff allowing to keep interface continuity between the structure an the fluid, such that no cell intersection will be necessary.\\
+In this thesis, both Eulerian and \ac{ALE} methods will be covered. In general, no recommendation on to prefer one or the other method can be given. Instead, one should always be aware of the strength and weaknesses of either method and choose the appropriate one for a specific problem accordingly.
+
+
+\subsection{Basic equations of fluid mechanics}\label{sec:fluid_equations_basic}
+
+The physics of fluid motion are governed by the so-called \acf{NSE}. These equations were derived independently of one another by Claude-Louis Navier and George Gabriel Stokes as a generalization of the Euler-equations that now includes viscosity effects.
+In general one distinguished the incompressible and the compressible \ac{NSE}. The validity of their application depends on the problem setup. As a rule of thumb, flows with Mach-numbers lower than $0.3$ can usually be safely approximated by the incompressible \ac{NSE}.\\
+The Navier stokes equation consist of the \acf{NSME}, the \ac{NSCE} and, if the compressible equations are solved, the \ac{NSEE}. In the literature, the term \ac{NSE} is often synonymously used for the \ac{NSCE}, in this thesis however, with \ac{NSE} we will always refer to the full set of eqautions ans will explicitly name the momentum, continuity or energy equation when intended.
+
+\subsubsection{Incompressible \acl{NSE}}
+The incompressible \ac{NSE} are derived by putting a few assumptions on the Cauchy stress tensor:
+\begin{itemize}
+\item Galilean invariance of the fluid stress tensor
+\item Isotropy of the fluid
+\item The stokes stress constitutive equation applies: $\fluidstress=2 \viscosdyn \fluidstrain$ with $\fluidstrain=\frac{1}{2}(\nabla \fluidvel+\T{(\nabla \fluidvel)})$
+\end{itemize}
+
+In convective form, the incompressible \ac{NSME} can be written as
+\begin{align}\label{eq:nsg_incompressible}
+\overbrace{
+           \underbrace{\pdfrac{\fluidvel}{t}}_{\text{Variation}}  +
+          \underbrace{(\fluidvel\cdot\nabla)\fluidvel}_{\text{Convection}}
+          }^{\text{Inertia per volume}}
+ -
+\overbrace{
+           \underbrace{\viscoskin\nabla^2\fluidvel}_{\text{Diffusion}} =
+          -\underbrace{\nabla\specificwork}_{\text{Internal source}}
+          }^{\text{Divergence of stress}}
++
+\underbrace{g}_{\text{Extrenal source}}
+\end{align}
+where $\specificwork$ is the specific thermodynamic work, whiuch statisfies
+\begin{align}
+\nabla\specificwork =
+\frac{1}{\rho}\nabla\pres
+\end{align}
+And the incompressible \ac{NSCE} can be written as
+\begin{align}
+\nabla\cdot\fluidvel=0
+\end{align}
+
+It shall be noted, that the in the incompressible \ac{NSE}, the pressure can only be solved up to a certain constant. The pressure at a certain point therefore has to be fixed, or the system will be singular.
+
+\subsubsection{Compressible \acl{NSE}}\label{sec:nsg_compressible}
+Compared to the incompressible \ac{NSG}, the compressible \ac{NSG} introduce one additional unknown, since the density can now vary. To close the system, on additional equation is required, the energy equation.\\
+The compressible \ac{NSE} are derived by making the following assumptions:
+\begin{itemize}
+\item Galilean invariance of the stress tensor
+\item Linearity of the stress in the velocity gradient: $\fluidstress(\nabla\fluidvel)=\tensor{C}:(\nabla\fluidvel)$, where $\tensor{C}$ is called the viscosity or elasticity tensor.
+\item Isotopy of the fluid
+\end{itemize}
+
+The compressible \ac{NSME} can be written as
+\begin{align}\label{eq:nsg_compressible}
+\pdfrac{\fluidvel}{t} +
+\fluidvel\cdot\nabla\fluidvel =
+-\pdfrac{1}{\rho}\nabla\pres +
+\viscoskin\nabla^2\fluidvel +
+\frac{1}{3} \viscoskin\nabla(\nabla\cdot\fluidvel) +
+g
+\end{align}
+where it shall be noted that for the special case of an incompressible flow, the volume of the fluid elements is constant, resulting in a solenoidal velocity field. Thus $\nabla\cdot\fluidvel=\vec{0}$ and $\nabla\pres=0$, which gives equation \ref{eq:nsg_incompressible}.
+\\
+The \ac{NSCE} now takes into accounts for the variable density
+\begin{align}
+\pdfrac{\dens}{t}=\nabla\cdot(\rho\fluidvel)=0
+\end{align}
+
+And finally the \ac{NSEE} writes
+\begin{align}
+\pdfrac{s}{t}=-\fluidvel\cdot s + \frac{Q}{T}
+\end{align}
+where $s$ is the entroipy per unit mass, $Q$ is the heat transferred, and $T$ is the temperature.
+
+
+\subsubsection{Euler equations}\label{sec:euler_convective}
+The Euler equations can be regarded as a special case of the Navier stokes equations where the diffusive(viscous) contibutions are neglected. Dimesion analysis \textbf{TODO} reveals that this is usually justified for high Machnumbers and distant from walls. In fact, boundary Layer therory suggests that a lot of problems can be well approximated by solving the full, diffusive equations only near the wall boundary and using the Euler equaions everywhere else.
+Although the Euler equation can be derived for both incompressible and compressible flows, the statement above suggests that only the compressible ones give actual, physically correct results. We therefor restrict our considerations to the compressible Euler equations.\\
+Summing up, these equations can be written in convective form as
+\begin{align}
+\begin{cases}
+\pdfrac{\dens}{t}+\fluidvel\cdot\nabla\dens+\rho\nabla\cdot\fluidvel = 0           &\text{ Continuity equation} \\[0.5em]
+\pdfrac{\fluidvel}{t}+\fluidvel\cdot\nabla\fluidvel+\frac{\pres}{\dens} = \vec{g}  &\text{ Momentum equation} \\[0.5em]
+\pdfrac{e}{t}+\fluidvel\cdot\nabla e + \frac{\pres}{\dens}\nabla\cdot\fluidvel = 0 &\text{ Energy equation} \\[0.5em]
+\end{cases}
+\end{align}
+
+
+
+
+
+
+
+\subsubsection{Conservative Form}\label{sec:conservative_form_nsg}
+For the purpose of \ac{FV} discretization one usually brings the equations into the so-called conservative form, which can be written generally as
+\begin{align}\label{eq:conservative_form_general}
+\tfrac{\vec{\xi}}{t}+\nabla\cdot f(\vec{\xi}) = \vec{0} \\
+\end{align}
+where $\vec{\xi}$ is the conserved qunatity of interest and $f(\vec{\xi})$ is denoted as "flux function".\\
+This equation can then be transformed into an integral form using the divergence theorem
+\begin{align}\label{eq:conservation_form_integral}
+\tfrac{~}{t}\int_{V} \vec{\xi} dV + \int_{\partial V} f(\vec{\xi})\cdot\normal~dS
+\end{align}
+This equations states that the rate of change of the integral of the quantity $\vec{\xi}$ over an arbitrary control volume $V$ is equal to the negative of the "flux" through the boundary of the control volume $\pd V$.\\
+A simple choice for $f$ would be $f(\xi)=\xi\fluidvel$, which means that the quantity $\vec{\xi}$ follows the fluid field and gives the so-called "advection equation".\\
+Although one form is derived from the other, these two are not equivalent. Particularly, it is possible to find solutions to the integral equations that are non-differentiable and therefore not a solutions to the differential form. This leads to so called "weak solutions" and is the cause for many numerical difficulties in the finite volume simulation of such problems.
+ \\
+ \\
+This thesis focuses on the compressible \ac{NSE} only. They can be brought to conservative form as:
+
+\begin{align}\label{eq:nsg_conservative_form}
+\pdfrac{\fstate}{t} + \nabla \cdot \fluxesconv(\fstate) + \nabla \cdot \fluxesdiff(\fstate) = \vec{0}
+\end{align}
+where, comparing to the general conservative form, one can see that $\vec{\xi}=\fstate$ and $f(\vec{\xi})=\fluxesconv(\fstate) +\fluxesdiff(\fstate)$
+ \\
+In the conservative form of the \ac{NSE} the so-called "fluid state vector" $\fstate$ is defined as
 \begin{align}\label{eq:fstate_definition}
 \fstate=
 \begin{bmatrix}
@@ -18,7 +145,7 @@ where
   \energytot          \\
 \end{bmatrix}
 \end{align}
-is the so-called fluid state vector, where
+with
 \begin{align}\label{eq:fluidvel_definition}
 \fluidvel=
 \begin{bmatrix}
@@ -27,15 +154,16 @@ is the so-called fluid state vector, where
   \fluidvelz  \\
 \end{bmatrix}
 \end{align}
-denotes the fluid velocity vector.
-
-The total energy $\energytot$ can be comuted via the so called internal energy and the fluid velocity as
+denoting the fluid velocity vector.
+ \\
+ \\
+The total energy $\energytot$ can be computed as a sum of the so called internal energy and the kinematic energy due to fluid velocity as
 \begin{align}\label{eq:energytot}
 \underbrace{\energytot}_{\text{total energy}} = \underbrace{\rho \energyint}_{\text{internal energy}} + \underbrace{\frac{1}{2} \T{\fluidvel} \fluidvel}_{\text{kinematic energy}}
 \end{align}
 
 
-The convective fluxes are caluclated as
+Bringing the convective form of the compressible \ac{NSE}~\eqref{eq:nsg_compressible}\textbf{TODO} into the conservative form~\eqref{eq:nsg_conservative form}, one can derive $\fluxesconv$ and $\fluxesdiff$ as
 \begin{align}\label{eq:fluxesconv}
 \fluxesconv&=
 (\frac{1}{\dens} \fstate \T{\fstate} + \pres + \tensor{R}_3 \T{\fstate})
@@ -62,12 +190,12 @@ The convective fluxes are caluclated as
 	  \fluidvelx(\energytot+\pres) &  \fluidvelx(\energytot+\pres) & \fluidvelx(\energytot+\pres) \\
 	  \end{bmatrix}
 \end{align}
-depneding on the algorithm, one or another form can be advantageous.
+depending on the algorithm, one or another form can be advantageous.
 
 
 The diffusive fluxes can be written as
 \begin{align}\label{eq:fluxes_diff}
-\fluxesconv&=
+\fluxesdiff&=
 \begin{bmatrix}
 \vec{0}  \\
 \fluidstress \\
@@ -85,51 +213,51 @@ The diffusive fluxes can be written as
   \end{bmatrix}}
 \end{align}
 
-The definition of the stress tensor depends of the fluid model used. For the simle case of a Newtonian fluid, it can be written as
+The definition of the stress tensor depends of the fluid model used. For the simple case of a Newtonian fluid, it can be written as
 \begin{align}\label{eq:fluidstress}
 \fluidstress = \viscosdyn(\nabla\fluidvel+\T{(\nabla\fluidvel)} )+\lambda(\nabla\cdot\fluidvel)\eye
 \end{align}
 
-For the heat flux, a simple Fourier's law is often assumed
+For the relation between Temperature and heat flux an assumption has to be made. Most often, a simple Fourier's law is assumed
 \begin{align}\label{eq:heatflux}
 \heatflux=-\thermcond\nabla\temp
 \end{align}
 
 \subsubsection{Euler equations}
-The euler equations are a simplified form of the Navier-Stokes Equations~\eqref{eq:nsg}, where the viscos effects are neglected by setting $\fluxesdiff=\dmat{0}$.
+The euler equations are a simplified form of the Navier-Stokes Equations~\eqref{eq:nsg_incompressible}\eqref{eq:nsg_compressible}, where the viscous effects are neglected by setting $\fluxesdiff=\dmat{0}$.
 \begin{align}\label{eq:euler}
 \pdfrac{\fstate}{t} + \nabla \cdot \fluxesconv(\fstate) = \vec{0}
 \end{align}
-The Euler equations are approriate for a wide range of applications. A typical indicator ist the Reynolds number, which describes the ratio between inertial forces and viscous forces:
+The Euler equations are appropriate for a wide range of applications. A typical indicator is the Reynolds number, which describes the ratio between inertial forces and viscous forces:
 \begin{align}\label{eq:reynolds}
 \reynolds=\frac{\dens\fluidvel L}{\viscosdyn}=\frac{\fluidvel L}{\viscoskin}
 \end{align}
 where $L$ describes a characteristic length.
 
-A high Reynoldsnumber thus indicates that the flow is dominated by inertial forces, thus the Euler Equations should give statisfying results. However, an Euler flow lacks the ability to represent stick wall boundary conditions, thus it is unable to re[resent boundary layers.
+A high Reynolds number thus indicates that the flow is dominated by inertial forces, thus the Euler Equations should give satisfying results. However, an Euler flow lacks the ability to represent stick wall boundary conditions, thus it is unable to re[resent boundary layers.
 
 \subsubsection{Equations of State}
-Looking at the above Equations~\eqref{eq:nsg}-eq:heatflux, one might notice that the number of unknows is greater than the number of Equations. Particulary, the pressure onlly appears in Equation~\eqref{eq:fluxesconv} and is not linked to any other equations. This problem is solved by introducing an Equation of State(EOS) that relates pressure, internal energy and density. The equation of state depends on the fluid model, some well-known ones are: Perfect Gas(PG), Stiffened Gas(SG), Tait and Jones-Wilkins-Lee(JWL).\\
-For the simples one, PG, the EOS can be written as
+Looking at the above Equations, one might notice that the number of unknowns is greater than the number of Equations. Particularly, the pressure only appears in Equation~\eqref{eq:fluxesconv} and is not linked to any other equations. This problem is solved by introducing an \acf{EOS} that relates pressure, internal energy and density. The equation of state depends on the fluid model, some well-known ones are: \ac{PG}, \ac{SG}, \ac{JWL}.\\
+For the simples one, PG, the \ac{EOS} can be written as
 \begin{align}\label{eq:eos_pg}
 \pres=(\specheatratio-1)\dens\energyint
 \end{align}
 
 
-\subsubsection{Reynolds-averaged Navier-Stokes(RANS) Equations}
-The RANS Equations are time-averaged equations of motion for the fluid.
+\subsubsection{\acl{RANS} Equations}
+The \acf{RANS} Equations are time-averaged equations of motion for the fluid.
 \begin{align}\label{eq:rans_averaging}
 \fstate \rightarrow \av{\fstate} = \lim_{\temp \to \infty} \frac{1}{T} \int_{t^0}^{t^0+T} \fstate dt
 \end{align}
 
-The main 9idea of the approac is to decompose an instanteneous quantity into time-averaged and fluctuating components
+The main idea of the approach is to decompose an instantaneous quantity into time-averaged and fluctuating components
 \begin{align}\label{eq:rans_decomposition}
 \fstate=\underbrace{\av{\fstate}}_{time-average}+\underbrace{\fluc{\fstate}}_{fluctuation}
 \end{align}
 
-When substituting this decomposition back into the NSG(and injecting several other approximations), a closure problem induced by the arising non-linear Reynolds stress term $\reynolds_{ij}=-\av{\fluc{v_i}\fluc{v_j}}$ arises. Additional modeling is therefore requyires to close the RANS equations, which has led to many different turbulence models.\\
+When substituting this decomposition back into the \ac{NSE}(and injecting several other approximations), a closure problem induced by the arising non-linear Reynolds stress term $\reynolds_{ij}=-\av{\fluc{v_i}\fluc{v_j}}$ arises. Additional modeling is therefore requires to close the \ac{RANS} equations, which has led to many different turbulence models.\\
 \\
-Whatever turbulence model is chosen, the fluid-state vector is augumented by the m parameters of the turbulence model
+Whatever turbulence model is chosen, the fluid-state vector is augmented by the m parameters of the turbulence model
 \begin{align}
 \fstaterans \leftarrow
 \begin{bmatrix}
@@ -148,7 +276,7 @@ Whatever turbulence model is chosen, the fluid-state vector is augumented by the
 	\end{bmatrix}
 \end{align}
 
-The RANS eqaution can then be written as
+The \ac{RANS} equation can then be written as
 \begin{align}\label{eq:rans_eqautions}
 \pdfrac{\av{\fstate}}{t} + \nabla\cdot\fluxesconv(\av{\fstate}) +  \nabla\cdot\fluxesdiff(\av{\fstate}) =
 \turbulencesource(\av{\fstate},\turbulenceparam_1,\cdots,\turbulenceparam_m)
