@@ -27,8 +27,12 @@
 \newcommand{\mfrac}[2]{\frac{D #1}{D #2}}          %Material time derivative                                                     with{A}
 \renewcommand{\tfrac}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}} %First total derivative of one argument with respect to the other  with{A}
 \renewcommand{\vec}[1]{\boldsymbol{#1}}            %Vector                                                                       with{A}
-\newcommand{\norm}[1]{\left\lVert#1\right\rVert}   %Norm of a vector                                                             with{A}
-\newcommand{\expression}[1]{\textit{#1}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}   %Norm of a vector
+\newcommand{\abs}[1]{\lvert#1\rvert}   %Norm of a vector                                                             with{A}
+\newcommand{\expression}[1]{\textit{#1}}           %To mark a new term beein introduced
+\newcommand{\prim}[1]{\tilde{#1}}                  %To mark a variabla as being expressen in primitive variables
+
+\renewcommand{\st}[1]{{#1}^{0}}                  %Value at steady state
 
 \newcommand{\0}{\textcolor{lightgrey}{0}}
 
@@ -51,6 +55,7 @@
 \newcommand{\mmsad}       {\vec{a}_{\vec{x}}}        %Adjoint fluid mesh motion
 \newcommand{\fstate}    {\vec{w}}        %Fluid state vector
 \newcommand{\fstatead}{\vec{a}_{\vec{w}}}  %Adjoint fluid state vector
+\newcommand{\fstateprim}{\prim{\fstate}}        %Primitive ffluid state vector
 \newcommand{\dfstate}    {\dvec{w}}        %Discrete fsluid state vector
 \newcommand{\structdisp}{\vec{u}}        %Structure displacement
 \newcommand{\structdispad}{\vec{a}_{\vec{u}}}        %Adjoint structure displacement
@@ -103,9 +108,10 @@
 \newcommand{\dens}{\rho}              %Density
 \newcommand{\pres}{p}                 %Pressure
 \newcommand{\fluidvel}{\vec{v}}       %Fluid velocity vector
-\newcommand{\fluidvelx}{v_x}          %Fluid velocity in x-direction
-\newcommand{\fluidvely}{v_y}          %Fluid velocity in y-direction
-\newcommand{\fluidvelz}{v_z}          %Fluid velocity in z-direction
+\newcommand{\fluidvelcomp}{v}         %Fluid velocity vector
+\newcommand{\fluidvelx}{{v_1}}          %Fluid velocity in x-direction
+\newcommand{\fluidvely}{{v_2}}          %Fluid velocity in y-direction
+\newcommand{\fluidvelz}{{v_3}}          %Fluid velocity in z-direction
 \newcommand{\energytot}{E}            %Total energies
 \newcommand{\energyint}{e}            %Internal energy
 \newcommand{\eye}{\dmat{I}}           %Identity matrix
@@ -120,15 +126,27 @@
 \newcommand{\viscoskin}{\nu}          %Kinematic viscosity
 \newcommand{\reynolds}{RE}            %Reynolds number
 \newcommand{\specheatratio}{\gamma}   %Specific heat ratio
+\newcommand{\jac}{\mathcal{H}}
+\newcommand{\fluxjac}{\mathcal{A}}    %Flux Jacobian
+\newcommand{\jaceigvecs}{\tensor{P}}  %Matrix that contains the eigenvectors of the jacobian matrix of $\fluxmatconv$
+\newcommand{\jaceigvals}{\tensor{\Lambda}}  %Diagonal matrix that contains the eigenvalues of the jacobian matrix of $\fluxmatconv$
+\newcommand{\roeavgfunc}{\tensor{M}}  %Averaging function associated with the Roe flux
 
 
 \newcommand{\normal}{\vec{n}}        %Symbol for dyadic product
+\newcommand{\normalx}{n_1}        %Symbol for dyadic product
+\newcommand{\normaly}{n_2}        %Symbol for dyadic product
+\newcommand{\normalz}{n_3}        %Symbol for dyadic product
 \newcommand{\testfunc}{\phi}         %Variational test function
 \newcommand{\vertex}{\boldsymbol{X}}  %Mesh vertex
 \newcommand{\vertexset}{\mathsf{\kappa}} %Set of vertices
 \newcommand{\fluxesnum}{\boldsymbol{\phi}} %numerical flux
+\newcommand{\roeavgmat}{\tensor{A}_{\text{Roe}}}
+\newcommand{\eigval}{\lambda}
+\newcommand{\sspeed}{c} %Speed of sound
 
 \newcommand{\dyadic}{\otimes}        %Symbol for dyadic product
+\newcommand{\REF}{\textbf{REF}}
 %%%==============================%
 %%% SYMBOLS
 %%% Fluid Analysis

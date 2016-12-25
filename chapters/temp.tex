@@ -1,0 +1,361 @@
+\documentclass[../main.tex]{subfiles}
+%\usepackage{algorithm}
+%\usepackage{algorithmic}
+\everymath{\displaystyle}
+\def\arraystretch{2.0}
+\begin{document}
+\setlength{\delimitershortfall}{0pt}
+
+\section{Derivative of the Numerical flux with respect to the fluid state variables}
+This section is denoted to a thorough derivation of the derivative $\pdfrac{\fluxesnum}{\fstate_i}$.
+
+First, we recall the definition of the numerical flux as
+\begin{align}
+\fluxesnum(\fstate_i,\fstate_j,\normal_{ij}) =
+\frac{1}{2}\left[\fluxesconv(\fstate_i)\cdot\normal_{ij} +
+                 \fluxesconv(\fstate_i)\cdot\normal_{ij}   \right] -
+\frac{1}{2}\abs{\roeavgmat(\fstate_i,\fstate_j,\normal_{ij})} (\fstate_j-\fstate_i)
+\end{align}
+
+Similar to the MUSCL procedure \textbf{TODO} we trransform the fluid state vector to primitive form
+\begin{align}
+\fstate=\begin{pmatrix}
+        \dens \\ \dens\fluidvel \\ \energytot
+        \end{pmatrix}
+\overset{\mathsf{U}}{\mapsto}
+\prim{\fstate}=\begin{pmatrix}
+               \dens \\ \fluidvel \\ \pres
+               \end{pmatrix}
+\end{align}
+Of course, this transformation involves the Equation of state of the fluid. We will use $\prim{(\cdot)}$ from now on top mark any quantity as based on/formulated in primitive variables. The primitive state vector is also much more appealing when it comes to the implementation of boundary conditions, since the solution variables are seperated there.
+ \\
+Next we recall the conservative form of the Euler equations, which was presented in REF as
+\begin{align}
+\pdfrac{\fstate}{t}+\nabla\cdot\fluxesconv{\fstate}=\vec{0}
+\end{align}
+Where the convective flux matrix $\fluxesconv$ is provided in equation \REF, and can be writtes as
+\begin{align}
+\fluxesconv(\fstate)=\begin{pmatrix}
+                      \fluxesconv_x(\fstate)&\fluxesconv_x(\fstate)&\fluxesconv_x(\fstate)
+                      \end{pmatrix}
+\end{align}
+Therefore, applying the Nabla operator in Equation \REF gives
+\begin{align}
+\pdfrac{\fstate}{t}+
+\underbrace{\pdfrac{\fluxesconv_x(\fstate)}{\fstate}}_{\tensor{A}} \pdfrac{\fstate}{x} +
+\underbrace{\pdfrac{\fluxesconv_y(\fstate)}{\fstate}}_{\tensor{B}} \pdfrac{\fstate}{y} +
+\underbrace{\pdfrac{\fluxesconv_z(\fstate)}{\fstate}}_{\tensor{C}} \pdfrac{\fstate}{z}
+=\vec{0}
+\end{align}
+where the matrices $\tensor{A}$,$\tensor{B}$ and $\tensor{C}$ are called the \expression{flux Jacobians}.
+\end{document}
+
+\textbf{Notation error when it comes to marking qiantities as continous, discrete, etc}
+In Section \REF, we have derived that for any sensitivity calculation, the derivative of the flux matrix with respect to the fluid state vector $\pdfrac{\fluxmatconv}{\fstate}$is required.\\
+We have derived in Section \REF. that at an interior vertex point of the fluid mesh, we have
+\begin{align}
+\left[\fluxmatconv(\st{\fstate},\st{\mms},\st{\dot{\mms}})\right]_i=
+\sum_{j \in \vertexset(i)} mes(\partial C_{ij})\fluxesnum(\st{\fstate}_i,\st{\fstate}_j,\normal_{ij})
+\end{align}
+Since an equilibrium point is considered, $\st{\dot{\mms}}=\vec{0}$ and is neglected in the following derivations.
+
+In section \REF we have introduced $\fluxesnum$ as the numerical flux function. In this thesis, we consider the popular Roe flux, which is defined as given in eaution \REF.
+
+Let us remind, that $\fstate_i$ is the flux vector at vertex $i$, $\vertexset(i)$ is the set of vertices connected to vertex $i$ by an edge, $C_i$ is the control volume of the dual cell centered at vertex $i$ and $\partial C_ij$ is the segment of the boundary that intersects edge $(ij)$ and $\normal_{ij}$ is the outward facing normal to $\partial C_{ij}$
+ \\
+From Equation \REF it is obvious that when looking for the derivative $\pdfrac{\fluxmatconv}{\fstate}$, the derivative of the numerical flux with respect to the fluid state vector $\pdfrac{\fluxesnum}{\fstate}$ is required.
+
+To make things easier we will in the following derive the primitive version of that quantity $\pdfrac{\prim{\fluxesnum}}{\prim{\fstate}}$
+ \\
+ \\
+The primitive version of the numerical Roe flux can be expressed as
+\begin{align}
+\prim{\fluxesconv}(\prim{\fstate}_i,\prim{\fstate}_j,\normal_{ij}) =
+\frac{1}{2} \left(\prim{\fluxesconv}(\prim{\fstate}_i)\cdot\normal_{ij} +
+                  \prim{\fluxesconv}(\prim{\fstate}_i)\cdot\normal_{ij}
+            \right) -
+\frac{1}{2} \inv{\jaceigvecs}(\sim)\jaceigvals(\sim)\jaceigvecs(\sim)(\prim{\fstate}_j-\prim{\fstate}_i) \\
+\end{align}
+where, for ease of notation
+\begin{align}
+\inv{\jaceigvecs}(\sim) &= \inv{\jaceigvecs}(\roeavgfunc(\sim),\normal_{ij}) \\
+\roeavgfunc(\sim)       &= \roeavgfunc(\prim{\fstate}_i,\prim{\fstate}_j)    \\
+\jaceigvals(\sim)       &= \jaceigvals(\roeavgfunc(\sim),\normal_{ij})        \\
+\jaceigvecs(\sim)       &= \jaceigvecs(\roeavgfunc(\sim),\normal_{ij})        \\
+\end{align}
+
+
+The Jacobi matrix in prmitive form can be written as
+\def\vn{\fluidvel\cdot\normal}
+\def\enthalp{\mathsf{H}}
+\def\jfo{H~(\vn)-\dens\vn \frac{\gamma\pres}{\dens(\gamma)}}
+\def\jft{\dens\vn v_1+\dens H n_1}
+\def\jftt{\dens\vn v_2+\dens H n_2}
+\def\jff{\dens\vn v_3+\dens H n_3}
+\def\jfff{\dens\vn\frac{\gamma}{\dens(\gamma-1)}}
+
+\textbf{TODO notation}
+\begin{align}
+\prim{\fluxjac}&=\pdfrac{(\prim{\fluxesconv}\cdot\normal)}{\prim{\fstate}} \\
+&=
+\begin{bmatrix}
+\vn      &  \dens n_x                &  \dens n_y                &  \dens n_z                 &  0   \\
+v_1(\vn) &  \dens(\vn)+\dens v_1 n_1 &  \dens v_1 n_2            &  \dens v_1 n_3             &  n_1 \\
+v_2(\vn) &  \dens v_2 n_1            &  \dens(\vn)+\dens v_2 n_2 &  \dens v_2 n_3             &  n_2 \\
+v_3(\vn) &  \dens v_3 n_1            &  \dens v_3 n_2            &  \dens(\vn)+\dens v_3 n_3  &  n_2 \\
+A_{51}   &  A_{52}                   &  A_{53}                   &  A_{54}                    & A_{55}
+\end{bmatrix} \notag\\
+\fluxjac_{51}&=\jfo  \notag\\
+\fluxjac_{52}&=\jft  \notag\\
+\fluxjac_{53}&=\jftt \notag\\
+\fluxjac_{54}&=\jff  \notag\\
+\fluxjac_{55}&=\jfff \notag\\
+\end{align}
+
+
+For this Jacobian, one can now symbolically derive an eigenvalue decomposition, such that
+\textbf{TODO notation}
+\begin{align}
+\prim{\jac}=\inv{\jaceigvecs}\jaceigvals\jaceigvecs
+\end{align}
+
+
+The averaging function associated with the roe flux can be written as
+\begin{align}
+\roeavgfunc(\prim{\fstate}_i,\prim{\fstate}_j)=
+\frac{1}{\sqrt{\rho_i}+\sqrt{\rho_j}}
+\left(
+\sqrt{\dens_i}
+\begin{bmatrix}
+\dens_i\\ \fluidvel_i \\ \enthalp_i
+\end{bmatrix}
++
+\sqrt{\dens_j}
+\begin{bmatrix}
+\dens_j \\ \fluidvel_j \\ \enthalp_j
+\end{bmatrix}
+\right)
+\end{align}
+
+The total specific enthalpy for a perfect gas is given as
+\begin{align}
+\enthalp=\frac{\specheatratio\pres}{\dens(\specheatratio-1)}+\frac{1}{2}\T{\fluidvel}\fluidvel
+\end{align}
+where we note the following derivatives
+\begin{align}
+\pdfrac{\enthalp}{\dens}=-\frac{\specheatratio\pres}{\dens^2(\specheatratio-1)}~~~~~~
+\pdfrac{\enthalp}{\fluidvelcomp_i}=\fluidvelcomp_i~~~~~~
+\pdfrac{\enthalp}{\pres}=\frac{\specheatratio}{\dens(\specheatratio-1)}
+\end{align}
+
+Therefore, the derivative of the averaging function with respect to the primitive fluid state vector can be calculated as
+\def\sqdi{{\sqrt{\dens_{i}}}}
+\def\sqdj{{\sqrt{\dens_{j} }}}
+\def\Mwoneone{3\dens_i-\frac{\sqdi\dens_i+\sqdj\dens_j}{\sqdi+\sqdj}}
+\def\Mwonetwo  {\fluidvelx_i-\frac{\sqdi\fluidvelx_i+\sqdj\fluidvelx_j}{\sqdi+\sqdj}}
+\def\Mwonethree{\fluidvely_i-\frac{\sqdi\fluidvely_i+\sqdj\fluidvely_j}{\sqdi+\sqdj}}
+\def\Mwonefour {\fluidvelz_i-\frac{\sqdi\fluidvelz_i+\sqdj\fluidvelz_j}{\sqdi+\sqdj}}
+\def\Mwonefive{\frac{\T{\fluidvel}\fluidvel}{2}-\frac{\specheatratio\pres}{\dens(\specheatratio-1)}-\frac{\sqdi\enthalp_i+\sqdj\enthalp_j}{\sqdi+\sqdj}  }
+\begin{align}
+\pdfrac{\roeavgfunc(\sim)}{\dens_i}&=
+\frac{1}{2\sqrt{\dens_i}(\sqrt{\dens_i}+\sqrt{\dens_j})}
+\left(
+  -\roeavgfunc(\sim)+
+  \T{\begin{bmatrix}
+    3\dens_i & 2\sqrt{\dens_i}\fluidvel_i & 2\enthalp_i-2\dens_i\frac{\specheatratio\pres}{\dens^2(\specheatratio-1)}
+  \end{bmatrix}}
+\right)                                                                                                                      \notag\\
+\pdfrac{\roeavgfunc(\sim)}{\fluidvelcomp_i}&=
+\frac{1}{(\sqrt{\dens_i}+\sqrt{\dens_j})}\sqrt{\dens_i}
+\T{\begin{bmatrix}
+  0 & \T{\vec{e}_i} & \fluidvelcomp_i
+\end{bmatrix}}                                                                                                               \notag\\
+\pdfrac{\roeavgfunc(\sim)}{\pres_i} &=
+\frac{1}{(\sqrt{\dens_i}+\sqrt{\dens_j})}\sqrt{\dens_i}
+\T{\begin{bmatrix}
+  0 & \T{\vec{0}} & \frac{\specheatratio}{\dens(\specheatratio-1)}
+\end{bmatrix}}                                                                                                               \notag\\
+\pdfrac{\roeavgfunc(\sim)}{\prim{\fstate}_i}&=
+\begin{bmatrix}
+  \Mwoneone  &  0                    &  0                    &  0                    & 0                                         \\
+  \Mwonetwo   &  2\dens_i             &  0                    &  0                    & 0                                        \\
+  \Mwonethree &  0                    &  2\dens_i             &  0                    & 0                                        \\
+  \Mwonefour  &  0                    &  0                    &  2\dens_i             & 0                                        \\
+  \Mwonefive  &  2\dens_i\fluidvelx_i &  2\dens_i\fluidvelx_i &  2\dens_i\fluidvelx_i & \frac{2\specheatratio}{\specheatratio-1} \\
+\end{bmatrix}                                                                                                                      
+\end{align}
+
+
+The matrix $\jaceigvecs$ can be written as
+\def\gmo{\specheatratio-1}
+\def\tone{\normal-\frac{(\gmo)\T{\fluidvel}\fluidvel }{2 c^2}\normal+\normal\times\fluidvel}
+\begin{align}
+\resizebox{.9\hsize}{!}{$\jaceigvecs=
+\begin{bmatrix}
+\left(\tone\right)\cdot\vec{e}_1 &  \normalx(\gmo)\frac{\fluidvelx}{c^2} &  \normalx(\gmo)\frac{\fluidvely}{c^2}+\normalz &  \normalx(\gmo)\frac{\fluidvelz}{c^2}-\normaly  &  -\normalx\frac{\gmo}{c^2} \\
+\left(\tone\right)\cdot\vec{e}_2 &  \normaly(\gmo)\frac{\fluidvelx}{c^2}-\normalz &  \normaly(\gmo)\frac{\fluidvely}{c^2} &  \normaly(\gmo)\frac{\fluidvelz}{c^2}+\normalx  &  -\normaly\frac{\gmo}{c^2} \\
+\left(\tone\right)\cdot\vec{e}_3 &  \normalz(\gmo)\frac{\fluidvelx}{c^2}+\normaly &  \normalz(\gmo)\frac{\fluidvely}{c^2}-\normalx &  \normalz(\gmo)\frac{\fluidvelz}{c^2}  &  -\normaly\frac{\gmo}{c^2} \\
+(\gmo)\frac{\T{\fluidvel}\fluidvel}{c^2}-c\fluidvel\cdot\normal & -(\gmo)\fluidvelx+c\normalx & -(\gmo)\fluidvely+c\normaly & -(\gmo)\fluidvelz+c\normalz & \gmo \\
+(\gmo)\frac{\T{\fluidvel}\fluidvel}{c^2}-c\fluidvel\cdot\normal & -(\gmo)\fluidvelx-c\normalx & -(\gmo)\fluidvely-c\normaly & -(\gmo)\fluidvelz-c\normalz & \gmo \\
+\end{bmatrix}$}
+\end{align}
+where $c$ is the speed of sound given by $c=\sqrt{\frac{\specheatratio\pres}{\dens}}$
+
+The matrix $\jaceigvals$ derives to
+\begin{align}
+\jaceigvals=
+diag(\left[\fluidvel\cdot\normal,\fluidvel\cdot\normal,\fluidvel\cdot\normal,\fluidvel\cdot\normal+c,\fluidvel\cdot\normal-c)\right])
+\end{align}
+
+
+
+\begin{align}
+\pdfrac{\inv{\jaceigvecs}}{\fstateprim}(\fstateprim,\normal)\cdot b =
+\left[
+\pdfrac{r_1}{\fstateprim}(\fstateprim,\normal)\cdot b~~~~\pdfrac{r_2}{\fstateprim}(\fstateprim,\normal)\cdot b~~~~\pdfrac{r_3}{\fstateprim}(\fstateprim,\normal)\cdot b~~~~\pdfrac{r_4}{\fstateprim}(\fstateprim,\normal)\cdot b~~~~\pdfrac{r_5}{\fstateprim}(\fstateprim,\normal)\cdot b
+\right]
+\end{align}
+
+\begin{align}
+\pdfrac{r_1}{\fstateprim}(\fstateprim,\normal)=
+\begin{bmatrix}
+0    &  0                    &  0                           &  0                           &  0 \\
+0    &  \normal_x            &  0                           &  0                           &  0 \\
+0    &  0                    &  \normal_x                   &  0                           &  0 \\
+0    &  0                    &  0                           &  \normal_x                   &  0 \\
+0    &  \fluidvelx\normal_x  &  \fluidvely\normalx+\normalz &  \fluidvelz\normalx-\normaly &  0
+\end{bmatrix}
+\end{align}
+\begin{align}
+\pdfrac{r_2}{\fstateprim}(\fstateprim,\normal)=
+\begin{bmatrix}
+0    &  0                             &  0                  &  0                           &  0 \\
+0    &  \normal_y                     &  0                  &  0                           &  0 \\
+0    &  0                             &  \normal_y          &  0                           &  0 \\
+0    &  0                             &  0                  &  \normal_y                   &  0 \\
+0    &  \fluidvelx\normaly-\normalz   &  \fluidvely\normaly &  \fluidvelz\normaly-\normalx &  0
+\end{bmatrix}
+\end{align}
+\begin{align}
+\pdfrac{r_3}{\fstateprim}(\fstateprim,\normal)=
+\begin{bmatrix}
+0    &  0                             &  0                           &  0                  &  0 \\
+0    &  \normal_z                     &  0                           &  0                  &  0 \\
+0    &  0                             &  \normal_z                   &  0                  &  0 \\
+0    &  0                             &  0                           &  \normal_z          &  0 \\
+0    &  \fluidvelx\normalz+\normaly   &  \fluidvely\normalz-\normalx &  \fluidvelz\normalz &  0
+\end{bmatrix}
+\end{align}
+
+\begin{align}
+\pdfrac{r_4}{\fstateprim}(\fstateprim,\normal)=
+\begin{bmatrix}
+\frac{1}{2\specheatratio\pres}                            &  0                   &  0                   &  0              & -\frac{\dens}{2\gamma\pres^2}                             \\
+\frac{\fluidvelx}{2\dens c^2} + \frac{\normalx}{4\dens c} &  \frac{1}{2 c^2}     &  0                   &  0              &  -\frac{\fluidvelx}{2\pres c^2}-\frac{\normalx}{4\pres c} \\
+\frac{\fluidvely}{2\dens c^2} + \frac{\normaly}{4\dens c} &  0                   &  \frac{1}{2 c^2}     &  0              &  -\frac{\fluidvely}{2\pres c^2}-\frac{\normaly}{4\pres c} \\
+\frac{\fluidvelz}{2\dens c^2} + \frac{\normalz}{4\dens c} &  0                   &  0                   & \frac{1}{2 c^2} &  -\frac{\fluidvelz}{2\pres c^2}-\frac{\normalz}{4\pres c} \\
+\frac{1}{2\specheatratio}+\frac{\fluidvel\cdot\normal}{4\dens c} & \frac{\normalx}{2 c} & \frac{\normaly}{2 c} & \frac{\normalz}{2 c} & -\frac{\fluidvel\cdot\normal}{4\pres c}
+\end{bmatrix}
+\end{align}
+
+\begin{align}
+\pdfrac{r_5}{\fstateprim}(\fstateprim,\normal)=
+\begin{bmatrix}
+\frac{1}{2\specheatratio\pres}                            &  0                   &  0                   &  0              & -\frac{\dens}{2\gamma\pres^2}                             \\
+\frac{\fluidvelx}{2\dens c^2} - \frac{\normalx}{4\dens c} &  \frac{1}{2 c^2}     &  0                   &  0              &  -\frac{\fluidvelx}{2\pres c^2}+\frac{\normalx}{4\pres c} \\
+\frac{\fluidvely}{2\dens c^2} - \frac{\normaly}{4\dens c} &  0                   &  \frac{1}{2 c^2}     &  0              &  -\frac{\fluidvely}{2\pres c^2}+\frac{\normaly}{4\pres c} \\
+\frac{\fluidvelz}{2\dens c^2} - \frac{\normalz}{4\dens c} &  0                   &  0                   & \frac{1}{2 c^2} &  -\frac{\fluidvelz}{2\pres c^2}+\frac{\normalz}{4\pres c} \\
+\frac{1}{2\specheatratio}-\frac{\fluidvel\cdot\normal}{4\dens c} & -\frac{\normalx}{2 c} & -\frac{\normaly}{2 c} & -\frac{\normalz}{2 c} & \frac{\fluidvel\cdot\normal}{4\pres c}
+\end{bmatrix}
+\end{align}
+
+Due to its shape, the derivation of $\jaceigvals$ can be simplified to a diffrentiation of the eigenvalues $\eigval_i$.
+\begin{align}
+\pdfrac{\eigval_1}{\fstateprim}(\fstateprim,\normal)&=\pdfrac{\eigval_2}{\fstateprim}(\fstateprim,\normal)=\pdfrac{\eigval_3}{\fstateprim}(\fstateprim,\normal)=
+\T{\left[
+0~~~~\T{\normal}~~~~0
+\right] } \\
+\pdfrac{\eigval_4}{\fstateprim}(\fstateprim,\normal)&=
+\T{\left[
+-\frac{c}{2\dens}~~~~\T{\normal}~~~~\frac{c}{2 \pres}
+\right] } \\
+\pdfrac{\eigval_5}{\fstateprim}(\fstateprim,\normal)&=
+\T{\left[
+\frac{c}{2\dens}~~~~\T{\normal}~~~~-\frac{c}{2 \pres}
+\right] } \\
+\end{align}
+
+
+
+\begin{align}
+\pdfrac{\jaceigvecs}{\fstateprim}(\fstateprim,\normal)\cdot b=
+\begin{bmatrix}
+\pdfrac{\T{l_1}}{\fstateprim}(\fstateprim,\normal)\cdot b \\
+\pdfrac{\T{l_2}}{\fstateprim}(\fstateprim,\normal)\cdot b \\
+\pdfrac{\T{l_3}}{\fstateprim}(\fstateprim,\normal)\cdot b \\
+\pdfrac{\T{l_4}}{\fstateprim}(\fstateprim,\normal)\cdot b \\
+\pdfrac{\T{l_5}}{\fstateprim}(\fstateprim,\normal)\cdot b \\
+\end{bmatrix}
+\end{align}
+
+\begin{align}
+\resizebox{.9\hsize}{!}{$
+\pdfrac{l_1}{\fstateprim}(\fstateprim,\normal)=
+\begin{bmatrix}
+-\frac{\normalx(\gmo)\norm{\fluidvel}^2}{2\dens\sspeed^2} & -\frac{\normalx(\gmo)\fluidvelx}{\sspeed^2}        & -\frac{\normalx(\gmo)\fluidvely}{\sspeed^2}-\normalz & -\frac{\normalx(\gmo)\fluidvelz}{\sspeed^2}+\normaly & \frac{\normalx(\gmo)\norm{\fluidvel}^2}{2\dens\sspeed^2} \\
+\frac{\normalx(\gmo)\fluidvelx}{\specheatratio\pres} & \frac{\normalx\dens(\gmo)}{\specheatratio\pres} & 0 & 0 & -\frac{\normalx\fluidvelx\dens(\gmo)}{\specheatratio\pres^2} \\
+\frac{\normalx(\gmo)\fluidvely}{\specheatratio\pres} & 0 & \frac{\normalx\dens(\gmo)}{\specheatratio\pres} & 0 & -\frac{\normalx\fluidvely\dens(\gmo)}{\specheatratio\pres^2} \\
+\frac{\normalx(\gmo)\fluidvelz}{\specheatratio\pres} & 0 & 0 &\frac{\normalx\dens(\gmo)}{\specheatratio\pres}  & -\frac{\normalx\fluidvelz\dens(\gmo)}{\specheatratio\pres^2} \\
+-\frac{\normalx\gmo}{\dens\sspeed^2}                 & 0 & 0 & 0                                               &  \frac{\normalx\gmo}{\pres\sspeed^2}
+\end{bmatrix}
+$}
+\end{align}
+
+\begin{align}
+\resizebox{.9\hsize}{!}{$
+\pdfrac{l_2}{\fstateprim}(\fstateprim,\normal)=
+\begin{bmatrix}
+-\frac{\normaly(\gmo)\norm{\fluidvel}^2}{2\dens\sspeed^2} & -\frac{\normaly(\gmo)\fluidvelx}{\sspeed^2}+\normalz        & -\frac{\normaly(\gmo)\fluidvely}{\sspeed^2} & -\frac{\normaly(\gmo)\fluidvelz}{\sspeed^2}-\normalx & \frac{\normaly(\gmo)\norm{\fluidvel}^2}{2\dens\sspeed^2} \\
+\frac{\normaly(\gmo)\fluidvelx}{\specheatratio\pres} & \frac{\normaly\dens(\gmo)}{\specheatratio\pres} & 0 & 0 & -\frac{\normaly\fluidvelx\dens(\gmo)}{\specheatratio\pres^2} \\
+\frac{\normaly(\gmo)\fluidvely}{\specheatratio\pres} & 0 & \frac{\normaly\dens(\gmo)}{\specheatratio\pres} & 0 & -\frac{\normaly\fluidvely\dens(\gmo)}{\specheatratio\pres^2} \\
+\frac{\normaly(\gmo)\fluidvelz}{\specheatratio\pres} & 0 & 0 &\frac{\normaly\dens(\gmo)}{\specheatratio\pres}  & -\frac{\normaly\fluidvelz\dens(\gmo)}{\specheatratio\pres^2} \\
+-\frac{\normaly\gmo}{\dens\sspeed^2}                 & 0 & 0 & 0                                               &  \frac{\normaly\gmo}{\pres\sspeed^2}
+\end{bmatrix}
+$}
+\end{align}
+
+\begin{align}
+\resizebox{.9\hsize}{!}{$
+\pdfrac{l_3}{\fstateprim}(\fstateprim,\normal)=
+\begin{bmatrix}
+-\frac{\normalz(\gmo)\norm{\fluidvel}^2}{2\dens\sspeed^2} & -\frac{\normalz(\gmo)\fluidvelx}{\sspeed^2}-\normaly        & -\frac{\normalz(\gmo)\fluidvely}{\sspeed^2}+\normalx & -\frac{\normalz(\gmo)\fluidvelz}{\sspeed^2} & \frac{\normalz(\gmo)\norm{\fluidvel}^2}{2\dens\sspeed^2} \\
+\frac{\normalz(\gmo)\fluidvelx}{\specheatratio\pres} & \frac{\normalz\dens(\gmo)}{\specheatratio\pres} & 0 & 0 & -\frac{\normalz\fluidvelx\dens(\gmo)}{\specheatratio\pres^2} \\
+\frac{\normalz(\gmo)\fluidvely}{\specheatratio\pres} & 0 & \frac{\normaly\dens(\gmo)}{\specheatratio\pres} & 0 & -\frac{\normalz\fluidvely\dens(\gmo)}{\specheatratio\pres^2} \\
+\frac{\normalz(\gmo)\fluidvelz}{\specheatratio\pres} & 0 & 0 &\frac{\normaly\dens(\gmo)}{\specheatratio\pres}  & -\frac{\normalz\fluidvelz\dens(\gmo)}{\specheatratio\pres^2} \\
+-\frac{\normalz\gmo}{\dens\sspeed^2}                 & 0 & 0 & 0                                               &  \frac{\normalz\gmo}{\pres\sspeed^2}
+\end{bmatrix}
+$}
+\end{align}
+
+\begin{align}
+\pdfrac{l_4}{\fstateprim}(\fstateprim,\normal)=
+\begin{bmatrix}
+\frac{\sspeed}{2\dens}\fluidvel\cdot\normal & (\gmo)\fluidvelx-\sspeed\normalx & (\gmo)\fluidvely-\sspeed\normaly & (\gmo)\fluidvelz-\sspeed\normalz & -\frac{\sspeed}{2\pres}\fluidvel\cdot\normal \\
+-\frac{\sspeed\normalx}{2\dens} &  -(\gmo) &  0       &  0       &  \frac{\sspeed\normalx}{2\pres} \\
+-\frac{\sspeed\normaly}{2\dens} &  0       &  -(\gmo) &  0       &  \frac{\sspeed\normaly}{2\pres} \\
+-\frac{\sspeed\normalz}{2\dens} &  0       &  0       &  -(\gmo) &  \frac{\sspeed\normalz}{2\pres} \\
+0                               &  0       &  0       &  0       &  0                              \\
+\end{bmatrix}
+\end{align}
+
+
+\begin{align}
+\pdfrac{l_5}{\fstateprim}(\fstateprim,\normal)=
+\begin{bmatrix}
+\frac{\sspeed}{2\dens}\fluidvel\cdot\normal & (\gmo)\fluidvelx-\sspeed\normalx & (\gmo)\fluidvely-\sspeed\normaly & (\gmo)\fluidvelz-\sspeed\normalz & -\frac{\sspeed}{2\pres}\fluidvel\cdot\normal \\
+\frac{\sspeed\normalx}{2\dens} &  -(\gmo) &  0       &  0       &  -\frac{\sspeed\normalx}{2\pres} \\
+\frac{\sspeed\normaly}{2\dens} &  0       &  -(\gmo) &  0       &  -\frac{\sspeed\normaly}{2\pres} \\
+\frac{\sspeed\normalz}{2\dens} &  0       &  0       &  -(\gmo) &  -\frac{\sspeed\normalz}{2\pres} \\
+0                              &  0       &  0       &  0       &  0                               \\
+\end{bmatrix}
+\end{align}
