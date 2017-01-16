@@ -5,43 +5,58 @@
 % OPERATORS
 % Representation of scalars, tensors and other quantities
 %==============================%
-\newcommand{\scalar}[1]{#1}                        %Scalar quantity with{A}
-\newcommand{\tensor}[1]{\mathcal{\boldsymbol{#1}}} %Tensor with{A}
-\newcommand{\derivtime}[1]{\dot{#1}}               %First time derivative at a fixed reference position with{A}
-\newcommand{\dderivtime}[1]{\ddot{#1}}             %Second time derivative at a fixed refrence position with{A}
-\newcommand{\dvec}[1]{\boldsymbol{ \mathsf{#1} } } %discrete vector represenation of a scalar field     with{A}
-\newcommand{\dmat}[1]{\boldsymbol{\mathsf{#1}}}    %discrete vector represenation of a tensor field     with{A}
-\renewcommand{\it}[1]{{#1}^{(k)}}                  %Iteration index in the optimization loop            with{A}
-\newcommand{\ito}[1]{{#1}^{(k)}}                   %Iteration index in the optimization loop            with{A}
-\newcommand{\its}[1]{{#1}^{(n)}}                   %Iteration index in thestaggered algorithm           with{A}
+\newcommand{\s}[1]{#1}                        %Scalar quantity with{a}
+\renewcommand{\v}[1]{\mathcal{\boldsymbol{#1}}}      %Vector quantity with{a}
+\newcommand{\m}[1]{\mathcal{\boldsymbol{#1}}}      %Matrix quantity with{A}
+\renewcommand{\c}[1]{\mathnormal{#1}}              %continous quantity with{A,a}
+\renewcommand{\d}[1]{\mathrm{#1}}                  %discrete quantity  with{A,a}
+\renewcommand{\it}[1]{{#1}^{(k)}}                  %Iteration index in the optimization loop            with{a}
+\newcommand{\ito}[1]{{#1}^{(k)}}                   %Iteration index in the optimization loop            with{a}
+\newcommand{\its}[1]{{#1}^{(n)}}                   %Iteration index in thestaggered algorithm           with{a}
 \newcommand{\fic}[1]{\bar{#1}}                     %Fictious entity                                     with{A}
-\newcommand{\av}[1]{\bar{#1}}                      %Time-averaged quantity                              with{A}
-\newcommand{\fluc}[1]{{#1}'}                       %Time-averaged quantity                              with{A}
 \newcommand{\order}[1]{\mathcal{O}(#1)}            %Order of magnitude                                  with{A}
+
 
 \newcommand{\itn}[1]{{#1}^{(0)}}                   %Iteration index 0                                   with{A}
 \newcommand{\itss}[1]{{#1}^{(n+1)}}                %Iteration index in thestaggered algorithm           with{A}
 \newcommand{\pd}{\mathrm{\partial}}                %TODO check whether I need the partial or not        with{A}
-\newcommand{\pdfrac}[2]{\frac{\pd #1}{\pd #2}}     %partial derivative of one argument with respect to the other                 with{A}
-\newcommand{\ppdfrac}[2]{\frac{\pd^{2} #1}{\pd {#2}^{2}}} %Second partial derivative of one argument with respect to the other   with{A}
-\newcommand{\mfrac}[2]{\frac{D #1}{D #2}}          %Material time derivative                                                     with{A}
-\renewcommand{\tfrac}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}} %First total derivative of one argument with respect to the other  with{A}
 \renewcommand{\vec}[1]{\boldsymbol{#1}}            %Vector                                                                       with{A}
-\newcommand{\norm}[1]{\left\lVert#1\right\rVert}   %Norm of a vector
-\newcommand{\abs}[1]{\lvert#1\rvert}   %Norm of a vector                                                             with{A}
+\newcommand{\abs}[1]{\lvert#1\rvert}               %Norm of a vector                                                             with{A}
 \newcommand{\expression}[1]{\textit{#1}}           %To mark a new term beein introduced
 \newcommand{\prim}[1]{\tilde{#1}}                  %To mark a variabla as being expressen in primitive variables
+\newcommand{\dvec}[1]{\boldsymbol{ \mathsf{#1} } } %discrete vector represenation of a scalar field     with{A}
+\newcommand{\dmat}[1]{\boldsymbol{\mathsf{#1}}}    %discrete vector represenation of a tensor field     with{A}
+
+
+%%==============================%
+% OPERATORS
+% Algebraic operations
+%==============================%
+\newcommand{\T}[1]{{#1}^{T}}                      %Transpose of a tensor                with{A}
+\newcommand{\inv}[1]{ {#1}^{-1}}                  %Inverse of a tensor                  with{A}
+\newcommand{\av}[1]{\bar{#1}}                     %Average component of a quantity      with{a}
+\newcommand{\fluc}[1]{{#1}'}                      %Fluctuating component of a qunatity  with{a}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}  %Norm of a quatntity                  with{a}
+
+
+%%==============================%
+% OPERATORS
+% Analytic operations
+%==============================%
+\newcommand{\dderivtime}[1]{\ddot{#1}}                        %Second time derivative at a fixed refrence position                   with{A}
+\newcommand{\derivtime}[1]{\dot{#1}}                          %First time derivative at a fixed reference position                   with{A}
+\newcommand{\pdfrac}[2]{\frac{\pd #1}{\pd #2}}                %partial derivative of one argument with respect to the other          with{A&B}
+\newcommand{\ppdfrac}[2]{\frac{\pd^{2} #1}{\pd {#2}^{2}}}     %Second partial derivative of one argument with respect to the other   with{A&B}
+\newcommand{\mfrac}[2]{\frac{D #1}{D #2}}                     %Material time derivative                                              with{A&B}
+\renewcommand{\tfrac}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}} %First total derivative of one argument with respect to the other      with{A&B}
+
+
+
 
 \renewcommand{\st}[1]{{#1}^{0}}                  %Value at steady state
-
 \newcommand{\0}{\textcolor{lightgrey}{0}}
-
-%==============================%
-% OPERATORS
-% Operators and Symbols
-%==============================%
-\newcommand{\T}[1]{{#1}^{T}}             %Transpose of a tensor with{A}
-\newcommand{\inv}[1]{ {#1}^{-1}}         %Inverse of a tensor   with{A}
+\newcommand{\tensor}[1]{\mathcal{\boldsymbol{#1}}} %Vector quantity with{a}
+\newcommand{\scalar}[1]{\s #1}                        %Scalar quantity with{a}
 
 
 %==============================
@@ -69,12 +84,12 @@
 \newcommand{\turbulenceparam}{\chi}        %Additional fluid state variable introduced by the turbulence model
 \newcommand{\turbparamvec}{\dvec{\chi}}        %Additional fluid state variable introduced by the turbulence model
 \newcommand{\turbulencesource}{\mathsf{S}} %Source term in the \ac{RANS} equations
-\newcommand{\fluxmatconv}{\dmat{F}}
-\newcommand{\fluxmatdiff}{\dmat{G}}
-\newcommand{\turbmat}{\dmat{S}}
-\newcommand{\cellvolmat}{\dmat{A}}
+\newcommand{\fluxmatconv}{\dmat{F}}       %Convective part of the flux matrix
+\newcommand{\fluxmatdiff}{\dmat{G}}       %diffusive part of the flux matrix
+\newcommand{\turbmat}{\dmat{S}}           %Turbulence term
+\newcommand{\cellvolmat}{\dmat{A}}        %Diagonal matrix with vell volumes
 
-\newcommand{\specificwork}{\vec{w}}
+\newcommand{\specificwork}{\vec{w}}       %specific work
 
 
 
@@ -126,7 +141,7 @@
 \newcommand{\viscoskin}{\nu}          %Kinematic viscosity
 \newcommand{\reynolds}{RE}            %Reynolds number
 \newcommand{\specheatratio}{\gamma}   %Specific heat ratio
-\newcommand{\jac}{\mathcal{H}}
+\newcommand{\jac}{\mathcal{H}}        %Jacoian matrix
 \newcommand{\fluxjac}{\mathcal{A}}    %Flux Jacobian
 \newcommand{\jaceigvecs}{\tensor{P}}  %Matrix that contains the eigenvectors of the jacobian matrix of $\fluxmatconv$
 \newcommand{\jaceigvals}{\tensor{\Lambda}}  %Diagonal matrix that contains the eigenvalues of the jacobian matrix of $\fluxmatconv$
@@ -141,8 +156,8 @@
 \newcommand{\vertex}{\boldsymbol{X}}  %Mesh vertex
 \newcommand{\vertexset}{\mathsf{\kappa}} %Set of vertices
 \newcommand{\fluxesnum}{\boldsymbol{\phi}} %numerical flux
-\newcommand{\roeavgmat}{\tensor{A}_{\text{Roe}}}
-\newcommand{\eigval}{\lambda}
+\newcommand{\roeavgmat}{\tensor{A}_{\text{Roe}}}  %Averaging matrix of the Roe flux
+\newcommand{\eigval}{\lambda}         %Eigen value
 \newcommand{\sspeed}{c} %Speed of sound
 
 \newcommand{\dyadic}{\otimes}        %Symbol for dyadic product
@@ -177,24 +192,6 @@
 \newcommand{\strucstateq}{\mathcal{P}}         %State equation of the structure
 \newcommand{\fluidstateq}{\mathcal{F}}         %State equation of the fluid
 \newcommand{\mmsstateeq}{\mathcal{D}}          %State equation of the mesh motion
-
-%\def\abbrevation}[1]{~}
-
-%==========================================
-% ABBREVATIONS
-% Abbrevations
-%==========================================
-%\abbrevation{SQP}      %Sequential Quadratic Programming
-%\abbrevation{GSE}      %Gloabal Sensitivity Equations
-%\abbrevation{SA}       %Sensitivity Analysis
-%\abbrevation{VOF}      %Volume of Fluid Methods
-%\abbrevation{GFM}      %GFMP
-%\abbrevation{GFMP}     %Ghost Fluid Method of the Poor
-%\abbrevation{EOS}      %Equation of state
-%\abbrevation{JWL}      %Jones-Wilkins-Lee
-%\abbrevation{SG}       %Stiffend Gas
-%\abbrevation{MUSCL}    %Monotonic Upwind scheme for Conservation Laws
-%\abbrevation{FIVER}    %Finite Volume Method with exact two-phase Riemann integrals
 
 
 %=============================================================================%

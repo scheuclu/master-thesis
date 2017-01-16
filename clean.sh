@@ -6,3 +6,7 @@ find . -regex './.*\.*~' -type f -delete
 find . -regex './.*\.toc' -type f -delete
 find . -regex './.*\.lof' -type f -delete
 find . -regex './.*\.log' -type f -delete
+find . -regex './.*\_latexmk' -type f -delete
+find . -regex './.*\.nlo' -type f -delete
+find . -regex './.*\.out' -type f -delete
+find . -regex './.*\.fls' -type f -delete

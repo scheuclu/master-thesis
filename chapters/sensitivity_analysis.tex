@@ -61,9 +61,9 @@
 
 
 \section{Fluid \acl{SA}}\label{sec:about}
-As explained in section \ref{sec:optimization}, optimization is based on the calculations of gradients, also denoted as sensitivity analysis. When it comes to sensitivity analysis within the context of \ac{CFD}, one has to distinguish between \ac{SA} of the non-coupled fluid problem and the \ac{SA} in the fully coupled aeroelastic case. The latter case is much more involved, since it requires additional terms from the Structure and mesh motion equations. In the following we will therefore begin with the \ac{SA} of a regular fluid problem. A generalization to a coupled FSI problem will follow afterwards.
+As explained in section \ref{sec:optimization}, optimization is based on the calculations of gradients, also denoted as \acf{SA}. When it comes to \ac{SA} within the context of \ac{CFD}, one has to distinguish between \ac{SA} of the non-coupled fluid problem and the \ac{SA} in the fully coupled aeroelastic case. The latter case is much more involved, since it requires additional terms from the Structure and mesh motion equations. In the following we will therefore begin with the \ac{SA} of a regular fluid problem. A generalization to a coupled FSI problem will follow.
  \\
-As mentioned in section~\ref{sec:optimization}, we typically deal with an optimization criteria $\optcrit_j$, that is in this case dependent on the fluid state variables $\fstate$ that themselves may depend on abstract variables $\absvar_i$
+As mentioned in Section~\ref{sec:optimization}, we typically deal with an optimization criteria $\optcrit_j$, that is in this case dependent on the fluid state variables $\fstate$ that themselves may depend on abstract variables $\absvar_i$
 \begin{align}
 \optcrit_j=\optcrit_j(\fstate(\absvar_i))
 \end{align}
@@ -74,14 +74,14 @@ As mentioned in section~\ref{sec:optimization}, we typically deal with an optimi
 \DoptcritJBYabsvarI\bigg\rvert_{\fstate_0}=
 \underbrace{\PoptcritJBYabsvarI\bigg\rvert_{\fstate_0}}_{
                                                         \substack{
-                                                                 \text{directy derivev from} \\
+                                                                 \text{directy derived from} \\
                                                                  \text{the definition of $\optcrit$}
                                                                  } 
                                                         }  +
 \underbrace{\PoptcritJBYfstate\bigg\rvert_{\fstate_0}}_ {
                                                         \substack{
                                                                  \text{derived analytically or~~}\\
-                                                                 \text{by finite difference}
+                                                                 \text{by \ac{FD}}
                                                                  }
                                                         }
 \underbrace{\DfstateBYabsvarI\bigg\rvert_{\fstate_0}}_  {
@@ -95,7 +95,7 @@ As mentioned in section~\ref{sec:optimization}, we typically deal with an optimi
 \begin{align}
 \EOSfluid(\fstate(\absvar_i),\mms(\absvar_i),\absvar_i)=\vec{0}
 \end{align}
-Therefor, the total derivative must be zero as well:
+Therefore, the total derivative must be zero as well:
 \begin{align}
 \DEOSfluidBYabsvarI=\vec{0}=
 \PEOSfluidBYabsvarI+
@@ -108,7 +108,7 @@ Therefore the total derivative of the fluid state with respect to the shape vari
 \PEOSfluidBYabsvarI -
 \PEOSfluidBYmms\DmmsBYabsvarI
 \end{align}
-In this equation, $\PEOSfluidBYabsvarI$ can be computed analytically or by finite differencing. The derivative of the mesh motion with respect to the abstract variables is often denoted as "shape gradient". It can be divided into two components:
+In this equation, $\PEOSfluidBYabsvarI$ can be computed analytically or by \ac{FD}. The derivative of the mesh motion with respect to the abstract variables is often denoted as "shape gradient". It can be divided into two components:
 \begin{itemize}
 \item The interface component $\tfrac{\mms_\Gamma}{\absvar_i}$, which is associated with the grid points lying on the fluid boundary
 \item The interior component $\tfrac{\mms_\Omega}{\absvar_i}$, which is associated with the grid points located in the interior $\Omega$ of the computational domain.
@@ -237,6 +237,7 @@ Combining the previous two equations, it follows that the total derivative of th
   \PEOSfluidBYabsvarI
   \end{bmatrix}}_{n_{eq}\times n_{\absvars}}
 \end{align}
+Where $n_{eq}$ is the total number of equations(e.g. five fluid state equations for the compressible NSG in 3D, three equations of the mesh motions and another three equations for the structure motion), $n_{q}$ is the number of optimization criteria and $n_s$ is the number of abstract variables.
 
 \subsection{Direct vs. adjoint approach}
 Equation~\ref{eq:totderiv_optcritBYabsvar} suggests, that there are two alternatives to compute vector-matrix-vector product above.\\
@@ -304,7 +305,7 @@ Secondly, one could also first compute the derivatives of the optimization crite
 Where the total complexity can be approximated as $\order{n_{eq}^2n_{\optcrits}+n_{\optcrits}n_{eq}n_{\absvars}}$\\
 
 
-If one or the other approach is to be preferred depends in on the optimization setup, particularly the number of optimization criteria and the number of optimization variables. Looking at the orders above, one can conclude that if the number of abstract parameters $n_{\absvars}$ is smaller than the number of optimization criteria, the direct approach is more efficient, otherwise the adjoint approach is to be preferred. Additionally the on can argue, that the relevant term in the orders above is the one with $n_{eq}^2$  since it dominates the sum.
+If one or the other approach is to be preferred depends in on the optimization setup, particularly the number of optimization criteria and the number of optimization variables. Looking at the orders above, one can conclude that if the number of abstract parameters $n_{\absvars}$ is smaller than the number of optimization criteria, the direct approach is more efficient, otherwise the adjoint approach is to be preferred. Additionally the on can argue, that the relevant term in the orders above is the one with $n_{eq}^2$  since it dominates the sum. Therefore, depending on whether $n_s$ or $n_q$ is bigger, the direct or the adjoint method is to be preferred.
 
 
 \subsubsection{Direct \acl{SA} for the Euler equations}\label{sec:direct_sa}

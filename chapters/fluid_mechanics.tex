@@ -18,17 +18,17 @@ Material and Eulerian derivatives can be linked via the so-called convective rat
 \underbrace{\mfrac{\vec{G}}{t}}_{\text{Lagrangian rate of change}} = \underbrace{\pdfrac{\vec{G}}{t}}_{\text{Eulerian rate of change}} + \underbrace{\fluidvel\cdot\nabla\vec{G}}_{\text{Convective rate of change}}
 \end{align}
 
-In fluid mechanics the Eulerian concept is typically proffered.\\
+In fluid mechanics the Eulerian concept is typically prefered.\\
 However, when looking at fluid-structure interaction problems, the interface is typically moving. To account for that motion in the fluid, one either has to come up with some cell-intersection approach, or the fluid-mesh has to be deformed to.\\
-An appealing and straightforward approach to do so, is the so called Arbitrary Lagrangian Eulerian(\ac{ALE}) approach. As the name suggest, it is a hybrid between Eulerian and Lagrangian point of view. The \ac{ALE} approach allows to utilize the best of both approaches. The mesh can either be fixed, moved with the continuum in an Eulerian manner, or be moved in some arbitrarily specified manner in-between. The \ac{ALE} method can handle larger distortions than a pure Eulerian would, while stiff allowing to keep interface continuity between the structure an the fluid, such that no cell intersection will be necessary.\\
+An appealing and straightforward approach to do so, is the so called Arbitrary Lagrangian Eulerian(\ac{ALE}) approach. As the name suggest, it is a hybrid between Eulerian and Lagrangian point of view. The \ac{ALE} approach allows to utilize the best of both approaches. The mesh can either be fixed, moved with the continuum in an Eulerian manner, or be moved in some arbitrarily specified manner in between. The \ac{ALE} method can handle larger distortions than a pure Eulerian would, while still allowing to keep interface continuity between the structure and the fluid, such that no intersection of fluid cells is necessary.\\
 In this thesis, both Eulerian and \ac{ALE} methods will be covered. In general, no recommendation on to prefer one or the other method can be given. Instead, one should always be aware of the strength and weaknesses of either method and choose the appropriate one for a specific problem accordingly.
 
 
 \subsection{Basic equations of fluid mechanics}\label{sec:fluid_equations_basic}
 
 The physics of fluid motion are governed by the so-called \acf{NSE}. These equations were derived independently of one another by Claude-Louis Navier and George Gabriel Stokes as a generalization of the Euler-equations that now includes viscosity effects.
-In general one distinguished the incompressible and the compressible \ac{NSE}. The validity of their application depends on the problem setup. As a rule of thumb, flows with Mach-numbers lower than $0.3$ can usually be safely approximated by the incompressible \ac{NSE}.\\
-The Navier stokes equation consist of the \acf{NSME}, the \ac{NSCE} and, if the compressible equations are solved, the \ac{NSEE}. In the literature, the term \ac{NSE} is often synonymously used for the \ac{NSCE}, in this thesis however, with \ac{NSE} we will always refer to the full set of eqautions ans will explicitly name the momentum, continuity or energy equation when intended.
+In general one distinguishes the incompressible and the compressible \ac{NSE}. The validity of their application depends on the problem setup. As a rule of thumb, flows with Mach-numbers lower than $0.3$ can usually be safely approximated by the incompressible \ac{NSE}.\\
+The Navier stokes equation consist of the \acf{NSME}, the \ac{NSCE} and, if the compressible equations are solved, the \ac{NSEE}. In the literature, the term \ac{NSE} is often synonymously used for the \ac{NSCE}, in this thesis however, with \ac{NSE} we will always refer to the full set of equations ans will explicitly name the momentum, continuity or energy equation otherwise.
 
 \subsubsection{Incompressible \acl{NSE}}
 The incompressible \ac{NSE} are derived by putting a few assumptions on the Cauchy stress tensor:
@@ -50,7 +50,7 @@ In convective form, the incompressible \ac{NSME} can be written as
           -\underbrace{\nabla\specificwork}_{\text{Internal source}}
           }^{\text{Divergence of stress}}
 +
-\underbrace{g}_{\text{Extrenal source}}
+\underbrace{g}_{\text{External source}}
 \end{align}
 where $\specificwork$ is the specific thermodynamic work, whiuch statisfies
 \begin{align}
@@ -65,7 +65,7 @@ And the incompressible \ac{NSCE} can be written as
 It shall be noted, that the in the incompressible \ac{NSE}, the pressure can only be solved up to a certain constant. The pressure at a certain point therefore has to be fixed, or the system will be singular.
 
 \subsubsection{Compressible \acl{NSE}}\label{sec:nsg_compressible}
-Compared to the incompressible \ac{NSG}, the compressible \ac{NSG} introduce one additional unknown, since the density can now vary. To close the system, on additional equation is required, the energy equation.\\
+Compared to the incompressible \ac{NSE}, the compressible \ac{NSE} introduce one additional unknown, since the density can now vary. To close the system, one additional equation is required, the energy equation.\\
 The compressible \ac{NSE} are derived by making the following assumptions:
 \begin{itemize}
 \item Galilean invariance of the stress tensor
@@ -93,12 +93,12 @@ And finally the \ac{NSEE} writes
 \begin{align}
 \pdfrac{s}{t}=-\fluidvel\cdot s + \frac{Q}{T}
 \end{align}
-where $s$ is the entroipy per unit mass, $Q$ is the heat transferred, and $T$ is the temperature.
+where $s$ is the entropy per unit mass, $Q$ is the heat transferred, and $T$ is the temperature.
 
 
 \subsubsection{Euler equations}\label{sec:euler_convective}
-The Euler equations can be regarded as a special case of the Navier stokes equations where the diffusive(viscous) contibutions are neglected. Dimesion analysis \textbf{TODO} reveals that this is usually justified for high Machnumbers and distant from walls. In fact, boundary Layer therory suggests that a lot of problems can be well approximated by solving the full, diffusive equations only near the wall boundary and using the Euler equaions everywhere else.
-Although the Euler equation can be derived for both incompressible and compressible flows, the statement above suggests that only the compressible ones give actual, physically correct results. We therefor restrict our considerations to the compressible Euler equations.\\
+The Euler equations can be regarded as a special case of the Navies stokes equations where the diffusive(viscous) contributions are neglected. Dimension analysis \cite{Doering1995} reveals that this is usually justified for high Mach numbers and distant from walls. In fact, boundary Layer theory suggests that a lot of problems can be well approximated by solving the full, diffusive equations only near the wall boundary and using the Euler equations everywhere else.
+Although the Euler equations can be derived for both incompressible and compressible flows, the statement above suggests that only the compressible ones give actual, physically correct results. We therefore restrict our considerations to the compressible Euler equations.\\
 Summing up, these equations can be written in convective form as
 \begin{align}
 \begin{cases}
@@ -163,13 +163,14 @@ The total energy $\energytot$ can be computed as a sum of the so called internal
 \end{align}
 
 
-Bringing the convective form of the compressible \ac{NSE}~\eqref{eq:nsg_compressible}\textbf{TODO} into the conservative form~\eqref{eq:nsg_conservative form}, one can derive $\fluxesconv$ and $\fluxesdiff$ as
+Bringing the convective form of the compressible \ac{NSE}~\eqref{eq:nsg_compressible} into the conservative form~\eqref{eq:nsg_conservative_form_nsg}, one can derive $\fluxesconv$ and $\fluxesdiff$ as
 \begin{align}\label{eq:fluxesconv}
-\fluxesconv&=
-(\frac{1}{\dens} \fstate \T{\fstate} + \pres + \tensor{R}_3 \T{\fstate})
-\begin{bmatrix}
-\vec{0} \\ \eye_{3} \\ \vec{0}
-\end{bmatrix} \\ %TODO check if this one is correct
+\fluxesconv
+%&=
+%(\frac{1}{\dens} \fstate \T{\fstate} + \pres + \tensor{R}_3 \T{\fstate})
+%\begin{bmatrix}
+%\vec{0} \\ \eye_{3} \\ \vec{0}
+%\end{bmatrix} \\ %TODO check if this one is correct
 &=
 \fstate \T{\fluidvel} + \pres
 \begin{bmatrix}
@@ -224,7 +225,7 @@ For the relation between Temperature and heat flux an assumption has to be made.
 \end{align}
 
 \subsubsection{Euler equations}
-The euler equations are a simplified form of the Navier-Stokes Equations~\eqref{eq:nsg_incompressible}\eqref{eq:nsg_compressible}, where the viscous effects are neglected by setting $\fluxesdiff=\dmat{0}$.
+The euler equations are a simplified form of the Navier-Stokes Equations~\eqref{eq:nsg_incompressible}\eqref{eq:nsg_compressible}, where the viscous effects are neglected by setting $\fluxesdiff=\vec{0}$.
 \begin{align}\label{eq:euler}
 \pdfrac{\fstate}{t} + \nabla \cdot \fluxesconv(\fstate) = \vec{0}
 \end{align}
@@ -234,11 +235,11 @@ The Euler equations are appropriate for a wide range of applications. A typical 
 \end{align}
 where $L$ describes a characteristic length.
 
-A high Reynolds number thus indicates that the flow is dominated by inertial forces, thus the Euler Equations should give satisfying results. However, an Euler flow lacks the ability to represent stick wall boundary conditions, thus it is unable to re[resent boundary layers.
+A high Reynolds number thus indicates that the flow is dominated by inertial forces, thus the Euler Equations should give satisfying results. However, an Euler flow lacks the ability to represent stick wall boundary conditions, thus it is unable to represent boundary layers.
 
 \subsubsection{Equations of State}
-Looking at the above Equations, one might notice that the number of unknowns is greater than the number of Equations. Particularly, the pressure only appears in Equation~\eqref{eq:fluxesconv} and is not linked to any other equations. This problem is solved by introducing an \acf{EOS} that relates pressure, internal energy and density. The equation of state depends on the fluid model, some well-known ones are: \ac{PG}, \ac{SG}, \ac{JWL}.\\
-For the simples one, PG, the \ac{EOS} can be written as
+Looking at the above Equations, one might notice that the number of unknowns is greater than the number of equations. Particularly, the pressure only appears in Equation~\eqref{eq:fluxesconv} and is not linked to the other formulas. This problem is solved by introducing an \acf{EOS} that relates pressure, internal energy and density. The \ac{EOS} depends on the fluid model, some well-known ones are: \ac{PG}, \ac{SG}, \ac{JWL}.\\
+For the simplest one, PG, the \ac{EOS} can be written as
 \begin{align}\label{eq:eos_pg}
 \pres=(\specheatratio-1)\dens\energyint
 \end{align}

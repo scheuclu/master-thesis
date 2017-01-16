@@ -221,7 +221,6 @@ WARNING	SA_Thesis/latexindent/latexindent.pl	/^WARNING:$/;"	l
 WARNING	latexindent/latexindent.pl	/^WARNING:  $indentconfig$/;"	l
 WARNING	latexindent/latexindent.pl	/^WARNING: \\t line count of original file and indented file does$/;"	l
 WARNING	latexindent/latexindent.pl	/^WARNING:$/;"	l
-abb	create_nomencature.py	/^            abb=abbrevations[secname][expl].split("{")[1].split("}")[0]$/;"	v
 abbrevations	create_nomencature.py	/^abbrevations={}$/;"	v
 acronyms	main.tex	/^\\include{testfile}%Nomenclature$/;"	i
 after changing the fonts with	SA_Thesis/thesis/struktex/struktex-test-3.tex	/^}$/;"	P
@@ -249,8 +248,8 @@ chapter long title	SA_Thesis/latexindent/success/testHeadings.tex	/^         par
 chapter long title	latexindent/success/testHeadings.tex	/^         part text$/;"	c
 check_for_else	SA_Thesis/latexindent/latexindent.pl	/^sub check_for_else{$/;"	s
 check_for_else	latexindent/latexindent.pl	/^sub check_for_else{$/;"	s
-command	create_nomencature.py	/^            command=operators[secname][expl].split("{")[1].split("}")[0]$/;"	v
 command	create_nomencature.py	/^            command=symbols[descr][expl].split("{")[1].split("}")[0]$/;"	v
+command	create_nomencature.py	/^            command=temp[1].split("{")[1].split("}")[0]$/;"	v
 commandline	create_nomencature.py	/^                commandline=content.pop(0)$/;"	v
 commandline	create_nomencature.py	/^            commandline=content.pop(0)$/;"	v
 content	create_nomencature.py	/^content=file.read().splitlines()$/;"	v
@@ -265,8 +264,7 @@ end_command_or_key_unmatched_brackets	latexindent/latexindent.pl	/^sub end_comma
 end_command_with_alignment	SA_Thesis/latexindent/latexindent.pl	/^sub end_command_with_alignment{$/;"	s
 end_command_with_alignment	latexindent/latexindent.pl	/^sub end_command_with_alignment{$/;"	s
 explanation	create_nomencature.py	/^                explanation=commandline.split("%")[1].strip()$/;"	v
-explanation	create_nomencature.py	/^                explanation=commandline.split("%")[2].strip()$/;"	v
-explclean	create_nomencature.py	/^            explclean=expl.replace(withexpr,"").strip()$/;"	v
+explclean	create_nomencature.py	/^            explclean=temp[0].replace(withexpr,"").strip()$/;"	v
 file	create_nomencature.py	/^file = open('.\/customcommands.tex','r')$/;"	v
 for the toc	SA_Thesis/latexindent/success/testHeadings.tex	/^          	subsection text$/;"	s
 for the toc	SA_Thesis/latexindent/success/testHeadings.tex	/^          	subsection text$/;"	u
@@ -309,8 +307,7 @@ lstinline  indentconfig.yaml  and lstinline  .indentconfig.yaml   for user setti
 lstinline  localSettings.yaml 	SA_Thesis/latexindent/documentation/manual.tex	/^\\end{warning}$/;"	u
 lstinline  localSettings.yaml 	latexindent/documentation/manual.tex	/^\\end{warning}$/;"	u
 macro	create_nomencature.py	/^                macro=commandline.split("%")[0].strip()$/;"	v
-macro	create_nomencature.py	/^                macro=commandline.split("%")[1].strip()$/;"	v
-numarg	create_nomencature.py	/^            numarg=int(operators[secname][expl].split("{")[1].split("}")[1][1])$/;"	v
+numarg	create_nomencature.py	/^            numarg=int(temp[1].split("{")[1].split("}")[1][1])$/;"	v
 operators	create_nomencature.py	/^operators={}$/;"	v
 paragraph	SA_Thesis/latexindent/success/testHeadings.tex	/^           	subsubsection text$/;"	P
 paragraph	latexindent/success/testHeadings.tex	/^           	subsubsection text$/;"	P
@@ -340,5 +337,5 @@ toc	latexindent/success/testHeadings.tex	/^         part text$/;"	c
 usage	SA_Thesis/latexindent/latexindent.pl	/^usage: latexindent.pl [options] [file][.tex]$/;"	l
 usage	latexindent/latexindent.pl	/^usage: latexindent.pl [options] [file][.tex]$/;"	l
 what a great subsection	SA_Thesis/thesis/main.tex	/^all god stuff of the first section can be found at \\secref{sec:firstsection}$/;"	u
-withexpr	create_nomencature.py	/^            withexpr=re.search("with{.*}",expl).group(0)$/;"	v
+withexpr	create_nomencature.py	/^            withexpr=re.search("with{.*}",temp[0]).group(0)$/;"	v
 withexpr	create_nomencature.py	/^            withexpr=withexpr.replace('with{','').replace('}','')$/;"	v
