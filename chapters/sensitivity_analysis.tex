@@ -61,8 +61,28 @@
 
 
 \section{Fluid \acl{SA}}\label{sec:about}
-As explained in section \ref{sec:optimization}, optimization is based on the calculations of gradients, also denoted as \acf{SA}. When it comes to \ac{SA} within the context of \ac{CFD}, one has to distinguish between \ac{SA} of the non-coupled fluid problem and the \ac{SA} in the fully coupled aeroelastic case. The latter case is much more involved, since it requires additional terms from the Structure and mesh motion equations. In the following we will therefore begin with the \ac{SA} of a regular fluid problem. A generalization to a coupled FSI problem will follow.
+As explained in section \ref{sec:optimization}, optimization is based on the calculations of gradients, also denoted as \acf{SA}.
+When it comes to calculating the gradients of a solution of a PDE, there are two fundamentally different approaches one could take.\\
+Firstly one could think of first deriving the continous equation and then applying the discretization scheme. On the other hand its equaly legitimate to first apply the discretization and compute the gradients of that, approximated solution. This thesis focuses uses the latter one, the reasons being explained in Figure~\ref{fig:discretization_differentiation_sequence}.
+
+
+ \begin{figure}[h!]
+	\begin{center}
+        \includegraphics{\mainpath/fig/tikz/build/discretization_differentiation_sequence.pdf}
+        \caption[Sensitivity Analysis approaches]{Two different approaches of \ac{SA}. The question here is whether on discretized the system of equations first and then computes the derivative of the approximate solution, or whether the continuous system of equation is first derived and discretized afterwards. Both approaches are valid, the final result however will generally not be the same. We have solemnly focused on the case of derivation after discretization in this thesis(thick lines). There are several reason to this. Firstly, if one chose to first derive and then compute a discretized solution, one would solve a completely different equation. If on the other hand the discretization(e.g. Finite Volumes) is done first, standard solvers can be utilized. What is more, approximating the derivative by a Finite difference becomes much easier, since the finite difference evaluation involved only a evaluation of $\dmat{F}$, which a standard fluid solver is perfectly capable of, whereas the \ac{FD} approximation in the other case would involve evaluations of the continuous function and the discretization of the obtained expression which would be much more cumbersome.\REF Think about whether this is correct}
+		\label{fig:discretization_differentiation_sequence}
+    \end{center}
+\end{figure}
+
+
+
+
+
+
+When it comes to \ac{SA} within the context of \ac{CFD}, one also has to distinguish between \ac{SA} of the non-coupled fluid problem and the \ac{SA} in the fully coupled aeroelastic case. The latter case is much more involved, since it requires additional terms from the Structure and mesh motion equations. In the following we will therefore begin with the \ac{SA} of a regular fluid problem. A generalization to a coupled FSI problem will follow.
  \\
+
+
 As mentioned in Section~\ref{sec:optimization}, we typically deal with an optimization criteria $\optcrit_j$, that is in this case dependent on the fluid state variables $\fstate$ that themselves may depend on abstract variables $\absvar_i$
 \begin{align}
 \optcrit_j=\optcrit_j(\fstate(\absvar_i))
@@ -86,16 +106,20 @@ As mentioned in Section~\ref{sec:optimization}, we typically deal with an optimi
                                                         }
 \underbrace{\DfstateBYabsvarI\bigg\rvert_{\fstate_0}}_  {
                                                         \substack{
-                                                                 \text{derived from dynamic}\\
-                                                                 \text{fluid equilibrium}
+                                                                 \text{\hltyellow{derived from dynamic}}\\
+                                                                 \text{\hltyellow{fluid equilibrium}}
                                                                  }
                                                         }
 \end{align}
-
+Also, we keep in mind, that the state equation of the fluid can be expressed as
 \begin{align}
-\EOSfluid(\fstate(\absvar_i),\mms(\absvar_i),\absvar_i)=\vec{0}
+\EOSfluid(\fstate(\absvar_i),\mms(\absvar_i),\absvar_i)=
+\pdfrac{\fstate(\absvar_i)}{t}+\nabla\cdot\fluxesconv(\fstate(\absvar_i))+\nabla\fluxesdiff(\fstate(\absvar_i))+S=
+\vec{0}
 \end{align}
-Therefore, the total derivative must be zero as well:
+\textbf{TODO how does the mesh motion come into the right hand side?}
+
+Therefore, deriving the fluid \ac{EOS} gives:
 \begin{align}
 \DEOSfluidBYabsvarI=\vec{0}=
 \PEOSfluidBYabsvarI+
@@ -104,9 +128,11 @@ Therefore, the total derivative must be zero as well:
 \end{align}
 Therefore the total derivative of the fluid state with respect to the shape variable, needed in equation REF, can be obtained by solving
 \begin{align}
-\PEOSfluidBYfstate\DfstateBYabsvarI= -
-\PEOSfluidBYabsvarI -
-\PEOSfluidBYmms\DmmsBYabsvarI
+\hleyellow{
+  \PEOSfluidBYfstate\DfstateBYabsvarI= -
+  \PEOSfluidBYabsvarI -
+  \PEOSfluidBYmms\DmmsBYabsvarI
+}
 \end{align}
 In this equation, $\PEOSfluidBYabsvarI$ can be computed analytically or by \ac{FD}. The derivative of the mesh motion with respect to the abstract variables is often denoted as "shape gradient". It can be divided into two components:
 \begin{itemize}
@@ -121,12 +147,12 @@ where $\fic{\stiffmat}$ is a pseudo stiffness matrix that can be obtained by a s
 For the later introduced Embedded framework, $\tfrac{\mms}{\absvar_i}$ is the position vector of the embedded discrete surface
  \\
 In summary, the derivative of an optimization criteria with respect to an abstract variable can be computed as
-\begin{align}
+\begin{align}\label{eq:full_sa_nostruct}
 \tfrac{\optcrit_j}{\absvar_i}\bigg\rvert_{\fstate_0} &=
 -\tfrac{\optcrit_j}{\fstate}\bigg\rvert_{\fstate_0}
-\inv{\left[\pdfrac{\EOSfluid}{\fstate}\right]}
+\inv{\left[\pdfrac{\EOSfluid}{\fstate}\bigg\rvert_{\fstate_0}\right]}
 \left(
-  \pdfrac{\EOSfluid}{\fstate}\bigg\rvert_{\fstate_0} +
+  \pdfrac{\EOSfluid}{\absvar_i}\bigg\rvert_{\fstate_0} +
   \begin{bmatrix}
     \alpha\pdfrac{\EOSfluid}{\mms_\Omega}\bigg\rvert_{\fstate_0}~
     \pdfrac{\EOSfluid}{\mms_\Gamma}\bigg\rvert_{\fstate_0}

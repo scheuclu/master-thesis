@@ -2,6 +2,7 @@
 % e.g "pdflatex --output-dir=build main.tex"
 
 \newcommand{\mainpath}{/home/lukas/Desktop/project/independence/project/thesis/}
+%%%%%\documentclass[12pt,a4paper]{article}
 \input{\mainpath/Header}
 
 %\usepackage{biblatex}
@@ -29,13 +30,11 @@
 \fancyhead[LO]{\fancyplain{}{\thesistype:\ \shorttitle}}
 \pagenumbering{roman}
 
-\include{titlepage}
-\include{Preface}
-
-\include{Nomenclature}%Nomenclature
-\include{acronyms}% abbrecvations
-
-\include{Introduction}
+%\include{titlepage}
+%\include{Preface}
+%\include{Nomenclature}
+%\include{acronyms}
+%\include{Introduction}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -60,22 +59,23 @@
 %%                                             %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %\subfile{chapters/about}
-\cleardoublepage
-\subfile{chapters/fluid_mechanics}
-\cleardoublepage
-\subfile{chapters/finite_volume_method}
-\cleardoublepage
-\subfile{chapters/fsi}
-\cleardoublepage
-\subfile{chapters/optimization}
-\cleardoublepage
-\subfile{chapters/sensitivity_analysis}
-\cleardoublepage
-\subfile{chapters/fiver}
-\cleardoublepage
-\subfile{chapters/temp}
+%\cleardoublepage
+%\subfile{chapters/fluid_mechanics}
+%\cleardoublepage
+%\subfile{chapters/finite_volume_method}
+%\cleardoublepage
+%\subfile{chapters/fsi}
+%\cleardoublepage
+%\subfile{chapters/optimization}
+%\cleardoublepage
+%\subfile{chapters/sensitivity_analysis}
+%\cleardoublepage
+%\subfile{chapters/fiver}
+%\cleardoublepage
+%\subfile{chapters/temp}
 %\section{The Finite Volume Method}
 %\section{Sensitivity Derivation}
+\subfile{chapters/temp2}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

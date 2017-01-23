@@ -5,9 +5,9 @@
 % OPERATORS
 % Representation of scalars, tensors and other quantities
 %==============================%
-\newcommand{\s}[1]{#1}                        %Scalar quantity with{a}
-\renewcommand{\v}[1]{\mathcal{\boldsymbol{#1}}}      %Vector quantity with{a}
-\newcommand{\m}[1]{\mathcal{\boldsymbol{#1}}}      %Matrix quantity with{A}
+\newcommand{\s}[1]{#1}                             %Scalar quantity with{a}
+\renewcommand{\v}[1]{\boldsymbol{#1}}              %Vector quantity with{a}
+\newcommand{\m}[1]{\boldsymbol{#1}}                %Matrix quantity with{A}
 \renewcommand{\c}[1]{\mathnormal{#1}}              %continous quantity with{A,a}
 \renewcommand{\d}[1]{\mathrm{#1}}                  %discrete quantity  with{A,a}
 \renewcommand{\it}[1]{{#1}^{(k)}}                  %Iteration index in the optimization loop            with{a}
@@ -27,6 +27,8 @@
 \newcommand{\dvec}[1]{\boldsymbol{ \mathsf{#1} } } %discrete vector represenation of a scalar field     with{A}
 \newcommand{\dmat}[1]{\boldsymbol{\mathsf{#1}}}    %discrete vector represenation of a tensor field     with{A}
 
+\newcommand{\cvec}[1]{\c{\v{#1}}}    %discrete vector represenation of a scalar field     with{A}
+\newcommand{\cmat}[1]{\c{\m{#1}}}    %discrete vector represenation of a tensor field     with{A}
 
 %%==============================%
 % OPERATORS
@@ -53,7 +55,7 @@
 
 
 
-\renewcommand{\st}[1]{{#1}^{0}}                  %Value at steady state
+\newcommand{\stdy}[1]{{#1}^{0}}                  %Value at steady state
 \newcommand{\0}{\textcolor{lightgrey}{0}}
 \newcommand{\tensor}[1]{\mathcal{\boldsymbol{#1}}} %Vector quantity with{a}
 \newcommand{\scalar}[1]{\s #1}                        %Scalar quantity with{a}
@@ -63,9 +65,9 @@
 % SYMBOLS
 % 3-field formulations
 %==============================
-\newcommand{\EOSstruct}{\mathcal{S}}     %State equation of the structure
-\newcommand{\EOSmesh}  {\mathcal{D}}     %State equation of the mesh
-\newcommand{\EOSfluid} {\mathcal{F}}     %State equation of the fluid
+\newcommand{\EOSstruct}{\mathcal{S}_{EOS}}     %State equation of the structure
+\newcommand{\EOSmesh}  {\mathcal{D}_{EOS}}     %State equation of the mesh
+\newcommand{\EOSfluid} {\mathcal{F}_{EOS}}     %State equation of the fluid
 \newcommand{\mms}       {\vec{x}}        %Fluid mesh motion
 \newcommand{\mmsad}       {\vec{a}_{\vec{x}}}        %Adjoint fluid mesh motion
 \newcommand{\fstate}    {\vec{w}}        %Fluid state vector
@@ -112,6 +114,8 @@
 \newcommand{\lagmultsneq}{\vec{\gamma}} %Lagrange multipliers of the inequality constraints
 \newcommand{\adjoints}{\vec{a}}         %Adjoint solutions
 \newcommand{\tolsa}{\epsilon^{SA}}      %Specified tolerance in the Sensitivity analysis
+\newcommand{\lift}{L}                   %Lift of an airfoil
+\newcommand{\drag}{D}                   %Drag of an airfoil
 
 
 %==============================%
@@ -146,6 +150,8 @@
 \newcommand{\jaceigvecs}{\tensor{P}}  %Matrix that contains the eigenvectors of the jacobian matrix of $\fluxmatconv$
 \newcommand{\jaceigvals}{\tensor{\Lambda}}  %Diagonal matrix that contains the eigenvalues of the jacobian matrix of $\fluxmatconv$
 \newcommand{\roeavgfunc}{\tensor{M}}  %Averaging function associated with the Roe flux
+\newcommand{\machnum}{M_a}              %Mach number
+
 
 
 \newcommand{\normal}{\vec{n}}        %Symbol for dyadic product
@@ -161,6 +167,7 @@
 \newcommand{\sspeed}{c} %Speed of sound
 
 \newcommand{\dyadic}{\otimes}        %Symbol for dyadic product
+\newcommand{\fot}{\frac{1}{2}}
 \newcommand{\REF}{\textbf{REF}}
 %%%==============================%
 %%% SYMBOLS

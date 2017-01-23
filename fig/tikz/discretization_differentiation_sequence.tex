@@ -1,0 +1,192 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\def\mainpath{/home/lukas/Desktop/project/independence/project/thesis/}
+\def\tikzpath{\mainpath/fig/tikz}
+
+\usetikzlibrary{positioning}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepgfplotslibrary{groupplots}
+
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+%\input{\mainpath/Header}
+\input{\mainpath/customcommands}
+
+
+\tikzset{>=latex}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\input{\mainpath/colordefinitions}
+
+
+\usetikzlibrary{shapes,arrows}
+%
+
+
+
+\begin{document}
+
+\tikzstyle{block} = [draw, fill=blue!20, rectangle,
+    minimum height=1cm, minimum width=1cm]
+%\tikzstyle{sum} = [draw, fill=blue!20, circle, node distance=2cm]
+\tikzstyle{neqblock} = [fill=none, node distance=2cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{pinstyle} = [pin edge={to-,thick,black}]
+
+\begin{tikzpicture}%[->]    
+   \def\dy{2.0cm}
+   \def\dx{8.0cm}
+   
+   
+       % We start by placing the blocks
+    \node [block,
+           thick,
+           pin={[pinstyle]left:Starting Point}
+          ] (continousflux) {$\cmat{F}(\fstate)=0$};
+    \node [block ,
+           right of=continousflux,
+           node distance=\dx                  
+          ]
+          (continousfluxderiv) {$\cmat{F}'(\fstate)$};
+                 
+    \node [block,
+           thick,
+           below of=continousflux,
+           node distance=\dy
+          ]
+          (discreteflux) {$\d{\fluxmatconv}(\d{\dvec{w}})=0$};
+          
+    \node [block,
+           below of=continousfluxderiv,
+           node distance=\dy
+          ]
+          (discretefluxderiv2) {$\tfrac{\d{\fluxmatconv}(\d{\dvec{w}})}{\dvec{w}}$};  
+          
+    \node [neqblock,
+            left of=discretefluxderiv2,
+            node distance=0.15*\dx
+          ]
+          (notequal) {$\mathbf{\neq}$};      
+          
+          
+    \node [block,
+           thick,
+           left of=notequal,
+           node distance=0.15*\dx
+          ]
+          (discretefluxderiv1) {$\tfrac{\d{\fluxmatconv}(\d{\dvec{w}})}{\dvec{w}}$};
+          
+     %============================================%
+     % Finite Difference blocks                   %
+     %============================================%
+    \node [block,
+            above of=continousfluxderiv,
+            node distance=0.8*\dy
+          ]
+          (fd_continous) {e.g. $\frac{\cmat{F}(aa+\epsilon)-\cmat{F}(aa-\epsilon)}{2\epsilon}$};
+     \node [block,
+            thick,
+            below of=discretefluxderiv2,
+            node distance=0.8*\dy
+          ]
+          (fd_discrete) {e.g. $\frac{\dmat{F}(\dvec{w}+\dvec{\epsilon})-\dmat{F}(\dvec{w}-\dvec{\epsilon})}{2\epsilon}$};  
+      
+     %============================================%
+     % Connecting lines                           %
+     %============================================%      
+     \draw [draw,->,above] (continousflux) -- node {Analytic Derivation} (continousfluxderiv);
+     \draw [draw,->,left,thick] (continousflux) -- node {Discretization} (discreteflux);
+     
+     \draw [draw,->,above,thick] (discreteflux) -- node {Analytic Derivation} (discretefluxderiv1);
+     
+     \draw [draw,->,left] (continousfluxderiv) -- node {Discretization} (discretefluxderiv2);
+     
+     %nodes to FD blocks
+     \draw [draw,->,above] (continousflux) |- node {FD approximation} (fd_continous);
+     \draw [draw,->,below,thick] (discreteflux)  |- node {FD approximation} (fd_discrete);
+     
+     
+     
+
+
+   
+%    % We start by placing the blocks
+%    \node [input, name=input] {};
+%    \node [sum, right of=input] (sum) {};
+%    \node [block, right of=sum] (controller) {Controller};
+%     \node [block, right of=controller, pin={[pinstyle]above:Disturbances},
+%            node distance=5cm] (system) {System};
+%    % We draw an edge between the controller and system block to 
+%    % calculate the coordinate u. We need it to place the measurement block. 
+%    \draw [->] (controller) -- node[name=u] {$u$} (system);
+%    \node [output, right of=system] (output) {};
+%    \node [block, below of=u] (measurements) {Measurements};
+%
+%    % Once the nodes are placed, connecting them is easy. 
+%    \draw [draw,->] (input) -- node {$r$} (sum);
+%    \draw [->] (sum) -- node {$e$} (controller);
+%    \draw [->] (system) -- node [name=y] {$y$}(output);
+%    \draw [->] (y) |- (measurements);
+%    \draw [->] (measurements) -| node[pos=0.99] {$-$} 
+%        node [near end] {$y_m$} (sum);   
+   
+   
+   
+   
+   
+   
+   
+   
+%
+   %defining the nodes
+%   \node [] (N1) at (0  ,0    ) [label=below:{$\structdisp^{(n-1)}$}] {};
+%   \node [] (N2) at (0  ,-\dy ) [label=below:{$\structdisp^{(n  )}$}] {};
+%\node [] (N3) at (2*\L,0 ) [label=below:{$\structdisp^{(n+1)}$}] {};
+%\node [] (N4) at (0   ,\L) [label=above:{$\fstate^{(n-1)}$}] {};
+%\node [] (N5) at (  \L,\L) [label=above:{$\fstate^{(n  )}$}] {};
+%\node [] (N6) at (2*\L,\L) [label=above:{$\fstate^{(n+1)}$}] {};
+%\node [] (N7) at (-0.5*\L,0) {};
+%\node [] (N8) at (-0.5*\L,\L) {};
+%\node [] (N9) at (2.5 *\L,0) {};
+%\node [] (N10) at (2.5 *\L,\L) {};
+%
+%
+%%draw node circles
+%\fill (N1) circle [radius=\R];
+%\fill (N2) circle [radius=\R];
+%\fill (N3) circle [radius=\R];
+%\fill (N4) circle [radius=\R];
+%\fill (N5) circle [radius=\R];
+%\fill (N6) circle [radius=\R];
+%
+%
+   %draw the lines
+%   \draw (N1) -- node[below] {\circled{1}} +(N2);
+%\draw (N6) -- node[below] {\circled{5}} +(N2);
+%\draw (N5) -- node[above] {\circled{4}} +(N6);
+%\draw (N2) -- node[left] {\circled{2}} +(N5);
+%\draw [dashed] (N2) -- +(N3);
+%\draw [dashed] (N3) -- +(N6);
+%\draw [dashed] (N1) -- +(N4);
+%\draw [dashed] (N5) -- +(N1);
+%\draw [dashed] (N4) -- node[above] {\circled{3}} +(N5);
+%
+%\draw [dashed] (N7) -- +(N1);
+%\draw [dashed] (N8) -- +(N4);
+%\draw [dashed] (N3) -- +(N9);
+%\draw [dashed] (N6) -- +(N10);
+
+   
+  
+\end{tikzpicture}
+\end{document}
+
+

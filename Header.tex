@@ -46,7 +46,13 @@
 \usepackage{multirow}
 \usepackage{hhline}
 
-\usepackage[inline]{showlabels}
+
+\usepackage[makeroom]{cancel} %useful for explicitly cancelling terms in equations
+
+\usepackage{numdef}
+\num\def\f12{\frac{1}{2}}
+
+%\usepackage[inline]{showlabels}
 
 
 \usepackage{color}
@@ -86,6 +92,8 @@
 \usepackage{pgfplots}
 \usepackage{pgfplotstable}
 \usepgfplotslibrary{groupplots}
+
+\hfuzz=50.00pt%maximum amount of box overflow before a warning
 
 
 

@@ -1,0 +1,400 @@
+\documentclass[../main.tex]{subfiles}
+%\usepackage{algorithm}
+%\usepackage{algorithmic}
+\everymath{\displaystyle}
+\def\arraystretch{2.0}
+\begin{document}
+\setlength{\delimitershortfall}{0pt}
+
+\section{Manual derivation of Mach sensitivity for ideal gas}
+
+The prupose of this chapter is exemplarily manual derivation of the sensitivity of the Lift over Drag ratio with respect to the Mach number. This example is chosen over shape sensitivity since it promises to be much simpler and straightforward to apply.
+
+
+\subsection{Formulation of the objective function}
+The first step will be the formulation of the objective function and constraints. For simplicity, we ignore the equality and inequailty constraints here, since we are only interested in the derivation of the sensitivity terms and not in the optimiazation routines themeselves.
+
+Also, we are considering the sensitivity analsyis wit respect to a rigid structure, as explained in REF, rather then the fully aeroelastic one.
+
+If TODO denotes the fluid structure interface, which in the \ac{ALE} context coincides with the airfoil surface, one can formulate the lift and drag of an airfoil in a steady state as:
+\begin{align}
+\lift=\int_{S} p(\fstate,\cvec{x}) \normal(\cvec{x})\cdot \cvec{e}_2 dS \\
+\drag=\int_{S} p(\fstate,\cvec{x}) \normal(\cvec{x})\cdot \cvec{e}_1 dS \\
+\end{align}
+
+The optimization criterion as introduced in \REF thus becomes
+\begin{align}
+\optcrit=\frac{\lift(\fstate)}{\drag\fstate}
+\end{align}
+
+
+\subsection{Formulation of the sensitivity equation}
+Now, we recall from equation \eqref{eq:full_sa_nostruct} ,that if the abstract variable is not a shape parameter, we end up with the simple relation
+\begin{align}\label{eq:manualmach_ToptcritBYabsvarI_expansion}
+\tfrac{\optcrit}{\absvar_i}\bigg\rvert_{\fstate_0} &=
+-\tfrac{\optcrit}{\fstate}\bigg\rvert_{\fstate_0}
+\inv{\left[\pdfrac{\EOSfluid}{\fstate}\bigg\rvert_{\fstate_0}\right]}
+\pdfrac{\EOSfluid}{\absvar_i}\bigg\rvert_{\fstate_0}
+\end{align}
+
+
+Now we can substitute the last term as
+\begin{align}\label{eq:manualmach_PEOSfluidBYabsvarI_expansion}
+\pdfrac{\EOSfluid}{\absvar_i}                                  \bigg\rvert_{\fstate_0}=
+\pdfrac{\EOSfluid}{\fstate}\pdfrac{\fstate}{\absvar_i}         \bigg\rvert_{\fstate_0}+
+\cancelto{0}{\pdfrac{\EOSfluid}{\mms}\pdfrac{\mms}{\absvar_i}} \bigg\rvert_{\fstate_0}
+\end{align}
+where the last term cancels again, since the mesh motion at the fluid interface only depends on $\absvar_i$ if $\absvar_i$ is a shape variable.
+
+\\
+Inserting Equation~\eqref{eq:manualmach_PEOSfluidBYabsvarI_expansion} into Equation~\eqref{eq:manualmach_ToptcritBYabsvarI_expansion} gives
+\begin{align}\label{eq:simplified_expression_sensitivity}
+\tfrac{\optcrit}{\absvar_i}\bigg\rvert_{\fstate_0} &=
+-\tfrac{\optcrit}{\fstate}\bigg\rvert_{\fstate_0}
+\cancelto{1}
+{
+  \inv{\left[\pdfrac{\EOSfluid}{\fstate} \bigg\rvert_{\fstate_0}\right] }
+  \pdfrac{\EOSfluid}{\fstate}            \bigg\rvert_{\fstate_0}
+}
+\pdfrac{\fstate}{\absvar_i}\bigg\rvert_{\fstate_0}                       \notag\\
+&=
+-\tfrac{\optcrit}{\fstate}\bigg\rvert_{\fstate_0}
+ \pdfrac{\fstate}{\absvar_i}\bigg\rvert_{\fstate_0}                      \notag\\
+&=
+-\tfrac{\optcrit}{\fstate}\bigg\rvert_{\fstate_0}
+ \pdfrac{\fstate}{\machnum}\bigg\rvert_{\fstate_0}
+\end{align}
+
+We will therefor denote the following two paragraphs to the derivation of the two terms $\tfrac{\optcrit}{\fstate}\bigg\rvert_{\fstate_0}$ and $\pdfrac{\fstate}{\machnum}\bigg\rvert_{\fstate_0}$. It should also be pointed out, that the first one is independent of $\absvar_i$ and thus can be efficently re-used in the case of multiple abstract parameters, e.g. a range of shape variables.
+
+
+
+
+\subsection{Derivatiopn of the sensitivity equation terms}
+\subsubsection{Derivation of $\tfrac{\optcrit}{\fstate}\bigg\rvert_{\fstate_0}$}
+As a first step, the chain rule gives
+\begin{align}
+\tfrac{\optcrit}{\fstate}
+=
+\cancelto{0}{\pdfrac{\optcrit}{\fstate}}\bigg\rvert_{\fstate_0}+
+\pdfrac{\optcrit}{\lift}\pdfrac{\lift}{\fstate}\bigg\rvert_{\fstate_0}+
+\pdfrac{\optcrit}{\drag}\pdfrac{\drag}{\fstate}\bigg\rvert_{\fstate_0}
+\end{align}
+where
+\begin{align}
+\pdfrac{\optcrit}{\lift}&=\frac{1}{\drag} \\
+\pdfrac{\optcrit}{\drag}&=-\frac{\lift}{\drag} \\
+\tfrac{\lift}{\fstate}  &=\int_S \pdfrac{\pres}{\fstate} \normal(\cvec{x})\cdot \cvec{e}_2 dS\\
+\tfrac{\drag}{\fstate}  &=\int_S \pdfrac{\pres}{\fstate} \normal(\cvec{x})\cdot \cvec{e}_1 dS\\
+\end{align}
+which inserted into \REF finally gives
+\begin{align}
+\tfrac{\optcrit}{\fstate}=
+\frac{\drag \int \pdfrac{\pres}{\fstate} \normal(\cvec{x})\cdot \cvec{e}_2- 
+      \lift \int \pdfrac{\pres}{\fstate} \normal(\cvec{x})\cdot \cvec{e}_1}
+{\drag^2}
+\end{align}
+\textbf{Everything is in the continous setting here! Check if I can to the derivation here and just do the disceretization at the end}
+
+
+
+\subsubsection{Derivation of $\pdfrac{\fstate}{\machnum}\bigg\rvert_{\fstate_0}$}
+
+If we define our primitive variable set to be $(\dens,\fluidvel,\pres)$, one can write
+\begin{align}
+\pdfrac{\fstate}{\machnum}=
+\underbrace{\pdfrac{\fstate}{\dens}}_{\textcircled{2}}    \underbrace{\pdfrac{\dens}{\machnum}}_{\textcircled{1}}+
+\underbrace{\pdfrac{\fstate}{\fluidvel}}_{\textcircled{2}}\underbrace{\pdfrac{\fluidvel}{\machnum}}_{\textcircled{1}}+
+\underbrace{\pdfrac{\fstate}{\pres}}_{\textcircled{2}}    \underbrace{\pdfrac{\pres}{\machnum}}_{\textcircled{1}}
+\end{align}
+
+%=======================================================%
+% derivatives of machnumber                             %
+%=======================================================%
+\paragraph{\textcircled{1} Mach number derivatives}
+The Mach number is defined in terms of the speed of sound as
+\begin{align}\label{eq:machnum_definition}
+\machnum=\frac{\norm{\fluidvel}_2}{\sspeed}=\frac{\norm{\fluidvel}_2}{\sqrt{\specheatratio R \temp}}
+\end{align}
+where the temperature is related to the pressure through the perfect gas equation as
+
+Inserting the perfect gas relation $\pres=\dens R \temp$ into Equation~\eqref{eq:machnum_definition} leads to the following expression for the machnumber, which is solemnly dependent on primitive variables:
+\begin{align}
+\machnum=\sqrt{\frac{\dens \T{\fluidvel}\fluidvel}{\specheatratio \pres}}
+\end{align}
+The derivatives of the machnumber can therefor be easily obtained as
+\begin{align}
+\pdfrac{\machnum}{\dens}&=\f12 \left(\frac{\T{\fluidvel}\fluidvel\dens}{\specheatratio\pres}\right)^{-\f12}
+\frac{\T{\fluidvel}\fluidvel}{\specheatratio\pres}=&&...&&=
+\f12\frac{\machnum}{\dens}                                    \\
+\pdfrac{\machnum}{\fluidvel}&=&&...&&=\frac{\dens}{\machnum\specheatratio\pres} \fluidvel  \\
+\pdfrac{\machnum}{\pres}&=&&...&&=-\f12 \frac{\machnum}{\pres}
+\end{align}
+
+%=======================================================%
+% derivatives of fstate                         %
+%=======================================================%
+\paragraph{\textcircled{2} $\pdfrac{\fstate}{\dens}$    }
+for the derivatives of the fluid state vector, we first recall the definition of the state vector as
+\begin{align}
+\fstate=
+\begin{bmatrix}
+  \dens          \\
+  \dens\fluidvel \\
+  \energytot     \\
+\end{bmatrix}
+~
+\fluidvel=
+\begin{bmatrix}
+  \fluidvelx \\
+  \fluidvely \\
+  \fluidvelz \\
+\end{bmatrix}
+~
+\energytot=\dens e+\frac{1}{2}\T{\fluidvel}\fluidvel
+\end{align}
+
+This gives the following for the derivatives:
+
+\def\PfstateBVdens{\begin{bmatrix}
+                     1 \\ \fluidvel \\ \pdfrac{E}{\dens}
+                   \end{bmatrix}
+                  }
+\def\PfstateBYfluidvel{
+											\begin{bmatrix}
+											  0     & 0     & 0 \\ 
+											  \dens & 0     & 0 \\
+											  0     & \dens & 0 \\
+											  0     & 0     & \dens \\ 
+											  \pdfrac{E}{\fluidvelx} &  \pdfrac{E}{\fluidvely} &  \pdfrac{E}{\fluidvelz} \\
+											\end{bmatrix}
+                      }
+\def\PfstateBYp{
+							 \begin{bmatrix}
+							   0 \\ \cvec{0} \\ \pdfrac{E}{p}
+							 \end{bmatrix}
+               }
+\begin{align}
+\pdfrac{\fstate}{\dens}=\PfstateBVdens          ~~~~
+\pdfrac{\fstate}{\fluidvel}=\PfstateBYfluidvel  ~~~~
+\pdfrac{\fstate}{E}=\PfstateBYp
+\end{align}
+
+Where, taking into account Equation \REF for the total energy, one gets:
+\begin{align}
+\pdfrac{\energytot}{\dens}    =e+\dens\pdfrac{e}{\dens}             ~~~~
+\pdfrac{\energytot}{\fluidvel}=\dens\pdfrac{e}{\fluidvel}+\fluidvel ~~~~
+\pdfrac{\energytot}{\pres}   =\dens\pdfrac{e}{p}
+\end{align}
+
+Since we are considering an ideal gas, one can write
+\begin{align}
+e=\frac{R \temp}{\specheatratio-1}=\frac{\pres}{\dens(\specheatratio-1)}~~~~R,\specheatratio=const.
+\end{align}
+Thus the sought derivatives are
+\begin{align}
+\pdfrac{e}{\dens}=\frac{-\pres}{\dens^2 (\specheatratio-1)} ~~~~
+\pdfrac{e}{\dens}=\cvec{0}                                  ~~~~
+\pdfrac{e}{\dens}=\frac{1}{\dens (\specheatratio-1)}
+\end{align}
+
+Therefor, backward substitution of Eqautions \REF into ref finally gives
+\begin{align}
+\pdfrac{e}{\dens}    =\frac{-\pres}{\dens^2 (\specheatratio-1)} ~~~~
+\pdfrac{e}{\fluidvel}=\cvec{0}                                  ~~~~
+\pdfrac{e}{\pres}    =\frac{1}{\dens (\specheatratio-1)}
+\end{align}
+\begin{align}
+\pdfrac{\energytot}{\dens}    =0                            ~~~~
+\pdfrac{\energytot}{\fluidvel}=\fluidvel                    ~~~~
+\pdfrac{\energytot}{\pres}    =\frac{1}{\specheatratio-1}
+\end{align}
+
+\begin{align}
+\pdfrac{\fstate}{\dens}    =\begin{bmatrix} 0 \\ \fluidvel \\ \frac{1}{\specheatratio-1} \end{bmatrix}
+\pdfrac{\fstate}{\fluidvel}=\begin{bmatrix}
+                              0     & 0     & 0   \\
+                              \dens & 0     & 0   \\
+                              0     & \dens & 0   \\
+                              0     & 0     & \dens \\
+                              \fluidvelx & \fluidvely & \fluidvelz
+                            \end{bmatrix}
+\pdfrac{\fstate}{\pres}    =\begin{bmatrix} 0 \\ \cvec{0} \\ \frac{1}{\specheatratio-1} \end{bmatrix}
+\end{align}
+
+
+
+\vspace{2cm}
+
+
+
+
+
+
+Putting everything together Equation \REF finally becomes
+
+
+\begin{align}
+\pdfrac{\fstate}{\machnum}=
+\begin{bmatrix}
+\frac{2\pres}{\machnum} \\
+\frac{2\pres}{\machnum}\fluidvelx+\frac{\machnum\specheatratio\pres}{\fluidvelx} \\
+\frac{2\pres}{\machnum}\fluidvely+\frac{\machnum\specheatratio\pres}{\fluidvely} \\
+\frac{2\pres}{\machnum}\fluidvelz+\frac{\machnum\specheatratio\pres}{\fluidvelz} \\
+3-\frac{2\pres}{(\specheatratio-1)\machnum}
+\end{bmatrix}
+\end{align}
+\textbf{TODO do a dimensionanalysis here and check whether the sums even make sense}
+
+
+
+\subsection{Final result}
+Putting Equations \REF and \REF together, one can finally obtain the follwoing expression for $\pdfrac{\optcrit}{\machnum}$:
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%
+%We recall that the fluid state vector is defined as
+%
+%
+%
+%Therefor the derivative of the total energy gives
+%\begin{align}
+%\energytot=\frac{\dens R \temp}{\specheatratio-1}+\frac{1}{2}\T{\fluidvel}{\fluidvel} \\
+%\end{align}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% partial derivatives of total energy                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\PenergytotBYdens{\frac{R \temp}{\specheatratio-1}}
+%\def\PenergytotBYfluidvel{\fluidvel }
+%\def\PenergytotBYtemp{\frac{\dens R}{\specheatratio -1}}
+%\begin{align}
+%%\energytot=\frac{\dens R \temp}{\specheatratio-1}+\frac{1}{2}\T{\fluidvel}{\fluidvel} \\
+%\pdfrac{\energytot}{\dens}    =\PenergytotBYdens     ~~~~
+%\pdfrac{\energytot}{\fluidvel}=\PenergytotBYfluidvel ~~~~
+%\pdfrac{\energytot}{\temp}    =\PenergytotBYtemp     
+%\end{align}
+%
+%Which means that the fluid state vector can be written as
+%\begin{align}
+%\fstate=
+%\begin{bmatrix}
+%  \dens \\
+%  \dens \fluidvel \\
+%  \frac{\dens R \temp}{\specheatratio-1}+\frac{1}{2}\T{\fluidvel}\fluidvel
+%\end{bmatrix}
+%\end{align}
+%
+%
+%
+%Also, the speet of sound is given by
+%\begin{align}
+%\sspeed=\sqrt{\specheatratio R \temp}
+%\end{align}
+%
+%
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% partial derivatives of the fluid state vector       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% partial derivatives of the mach number              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\PmachnumBYdens{0}
+%\def\PmachnumBYfluidvelx{\frac{\fluidvelx}{\sqrt{\specheatratio R \temp} \norm{\fluidvel}_2}=\frac{\fluidvelx}{\specheatratio R \temp \machnum}}
+%\def\PmachnumBYfluidvely{\frac{\fluidvely}{\sqrt{\specheatratio R \temp} \norm{\fluidvel}_2}=\frac{\fluidvely}{\specheatratio R \temp \machnum}}
+%\def\PmachnumBYfluidvelz{\frac{\fluidvelz}{\sqrt{\specheatratio R \temp} \norm{\fluidvel}_2}=\frac{\fluidvelz}{\specheatratio R \temp \machnum}}
+%\def\PmachnumBYtemp{-\frac{\specheatratio R}{2} \frac{\norm{\fluidvel}_2}{(\specheatratio R \temp)^{\frac{3}{2}}}}
+%\begin{align}
+%\pdfrac{\machnum}{\dens}     &=\PmachnumBYdens      \\
+%\pdfrac{\machnum}{\fluidvelx}&=\PmachnumBYfluidvelx \\
+%\pdfrac{\machnum}{\fluidvely}&=\PmachnumBYfluidvely \\
+%\pdfrac{\machnum}{\fluidvelz}&=\PmachnumBYfluidvelz \\
+%\pdfrac{\machnum}{\temp}     &=\PmachnumBYtemp      \\
+%\end{align}
+%
+%
+%
+%\begin{align}
+%\pdfrac{\machnum}{\energytot}&=
+%\pdfrac{\machnum}{\dens}\pdfrac{\dens}{\energytot}+
+%\pdfrac{\machnum}{\fluidvel}\pdfrac{\fluidvel}{\energytot}+
+%\pdfrac{\machnum}{\temp}\pdfrac{\temp}{\energytot}           \\
+%&=...=
+%\frac{1}{\specheatratio R \temp \machnum}-\frac{\machnum (\specheatratio-1)}{2\dens R \temp}
+%\end{align}
+%
+%
+%The derivative of the fluid state vector with respect to the Mach number can therefore be written as
+%%\begin{align}
+%%\pdfrac{\fstate}{\machnum}=
+%%\pdfrac{\fstate}{\dens}\pdfrac{\dens}{\machnum}+
+%%\pdfrac{\fstate}{\fluidvel}\pdfrac{\fluidvel}{\machnum}+
+%%\pdfrac{\fstate}{\temp}\pdfrac{\temp}{\machnum}
+%%\end{align}
+%\begin{align}
+%\pdfrac{\fstate}{\machnum}=
+%\pdfrac{\fstate}{\dens}\pdfrac{\dens}{\machnum}+
+%\pdfrac{\fstate}{\fluidvel}\pdfrac{\fluidvel}{\machnum}+
+%\pdfrac{\fstate}{E}\pdfrac{E}{\machnum}                     \\
+%=...=
+%\specheatratio \dens R \temp \machnum
+%\begin{bmatrix}
+%  0                    \\
+%  1/\fluidvelx \\
+%  1/\fluidvely \\
+%  1/\fluidvelz \\
+%  \frac{3}{\dens}+\frac{2\dens}{2\dens-\machnum^2\specheatratio(\specheatratio-1)} \\
+%\end{bmatrix}
+%\end{align}
+%\textbf{TODO redo an verify calculation}
+%
+%
+%
+%
+%
+%
+%%\begin{align}
+%%&A=B+C \\
+%%&\hspace{1cm}B=E+F \\
+%%&\hspace{2cm}E+4 \\
+%%&\hspace{2cm}F=5 \\
+%%&\hspace{2cm}=1 \\
+%%&\hspace{1cm}C=1 \\
+%%&=10 \\
+%%\end{align}
+%
+%%\begin{align}
+%%a\\
+%% \begin{align}
+%%  a\\
+%%  \end{align}
+%%\end{align}
+
+
+
