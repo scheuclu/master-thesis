@@ -1,6 +1,7 @@
 \documentclass[../main.tex]{subfiles}
 %\usepackage{algorithm}
 %\usepackage{algorithmic}
+
 \everymath{\displaystyle}
 \def\arraystretch{2.0}
 \begin{document}
@@ -11,6 +12,136 @@
 The prupose of this chapter is exemplarily manual derivation of the sensitivity of the Lift over Drag ratio with respect to the Mach number. This example is chosen over shape sensitivity since it promises to be much simpler and straightforward to apply.
 
 
+
+\def\nddens{\nd{\dens}}
+\def\ndpres{\nd{\pres}}
+\def\ndM{\nd{\M}}
+\def\nddisp{\nd{\disp}}
+\def\ndtemp{\nd{\temp}}
+\def\ndtotpres{\nd{\totpres}}
+\def\ndsspeed{\nd{\sspeed}}
+
+\section{Non Dimensional State Variables}
+
+\begin{align}
+&\text{length: }&\nd{\vec{x}}&=\frac{\vec{x}}{ \reference{L} } \\
+&\text{time: }&\nd{t}&=\frac{t \reference{\disp} }{ \reference{L} } \\
+&\text{density: }&\nd{\dens}&=\frac{\dens}{ \reference{\dens} } \\
+&\text{velocity: }&\nd{\disp}&=\frac{\disp}{ \reference{\disp} } \\
+&\text{pressure: }&\nd{\pres}&=\frac{\pres}{ \reference{\dens}\reference{\disp}^2  } \\
+&\text{temperature: }&\nd{\temp}&=\frac{c_v \temp}{ \reference{\disp}^2 } \\
+&\text{force: }&\nd{F}&=\frac{F}{ \reference{\disp}^2 \reference{L}^2 \reference{\dens}  }
+\end{align}
+
+The gas models therefore comes to:
+Ideal gas:
+\begin{align}
+\pres=\dens R \temp ~~~\rightarrow~~~   \nd{\pres}=\nd{\dens}\nd{\temp}(\specheatratio-1) \\
+\pres=(\specheatratio-1)\dens\energyint-\specheatratio\pres_{SG} ~~~\rightarrow~~~
+\end{align}
+
+
+
+The derivatives ot the mach number can be written as
+\def\machnumeq  {$\machnum      =\sqrt{\frac{\dens \T{\fluidvel}\fluidvel}{\shr \pres}}$}
+\def\ndmachnumeq{$\nd{\machnum} =\sqrt{\frac{\nd{\dens} \T{\nd{\fluidvel}}\nd{\fluidvel}}{\shr \nd{\pres}}}$}
+\def\pdmachnumBYdens{$\pdfrac{\machnum}{\dens}    =\f12\frac{\machnum}{\dens}$}
+\def\pdmachnumBYvel {$\pdfrac{\machnum}{\fluidvel}=\frac{\dens}{\machnum\specheatratio\pres} \fluidvel$}
+\def\pdmachnumBYpres{$\pdfrac{\machnum}{\pres}    =-\f12 \frac{\machnum}{\pres}$}
+\def\pdndmachnumBYnddens{$\pdfrac{\nd{\machnum}}{\nd{\dens}}    =\f12\frac{\nd{\machnum}}{\dens}$}
+\def\pdndmachnumBYndvel {$\pdfrac{\nd{\machnum}}{\nd{\fluidvel}}=\frac{\nd{\dens}}{\nd{\machnum}\specheatratio\nd{\pres}} \nd{\fluidvel}$}
+\def\pdndmachnumBYndpres{$\pdfrac{\nd{\machnum}}{\nd{\pres}}    =-\f12 \frac{\nd{\machnum}}{\nd{\pres}}$}
+\begin{center}
+\begin{tabular}{ m{0.45\textwidth} | m{0.45\textwidth} }\hline
+\rowcolor{black!20} \textbf{Dimensional} &  \textbf{Non-Dimensional} \\ \hline
+\machnumeq & \ndmachnumeq \\
+\pdmachnumBYdens & \pdndmachnumBYnddens \\
+\pdmachnumBYvel  & \pdndmachnumBYndvel  \\
+\pdmachnumBYpres & \pdndmachnumBYndpres
+\end{tabular}
+\end{center}
+
+
+
+
+The derivatives of the temperature can be written as:
+\def\temper{$\temp =\frac{\pres}{\dens R}$}
+\def\ndtemper{$\nd{\temp} =\frac{\nd{\pres}}{\nd{\dens} (\specheatratio-1)}$}
+\def\pdtempBYdens{$\pdfrac{\temp}{\dens} = -\frac{\temp}{\dens}$}
+\def\pdtempBYvel {$\pdfrac{\temp}{v_i}  = 0$}
+\def\pdtempBYpres{$\pdfrac{\temp}{\pres} = \frac{\temp}{\pres}$}
+\def\pdndtempBYnddens{$\pdfrac{\nd{\temp}}{\nd{\dens}} = -\frac{\nd{\temp}}{\nd{\dens}}$}
+\def\pdndtempBYndvel {$\pdfrac{\nd{\temp}}{\nd{v_i}}   = 0$} 
+\def\pdndtempBYndpres{$\pdfrac{\nd{\temp}}{\nd{\pres}} = \frac{\nd{\temp}}{\nd{\pres}}$}
+\begin{center}
+\begin{tabular}{ m{0.45\textwidth} | m{0.45\textwidth} }\hline
+\rowcolor{black!20} \textbf{Dimensional} &  \textbf{Non-Dimensional} \\ \hline
+\temper & \ndtemper \\
+\pdtempBYdens~~~~\pdtempBYvel~~~~\pdtempBYpres & \pdndtempBYnddens~~~~\pdndtempBYndvel~~~~~\pdndtempBYndpres \\
+\end{tabular}
+\end{center}
+
+
+
+The derivatives of the total pressure  can be written as:
+\def\totpress  {$\totpres = \pres (1+\frac{\shr-1}{2} \M^2)^{\frac{\shr}{\shr-1}} = \pres (\sim)^{\frac{\shr}{\shr-1}}$}
+\def\ndtotpress      {$\ndtotpres = \ndpres (1+\frac{\shr-1}{2} \ndM^2)^{\frac{\shr}{\shr-1}} = \ndpres (\sim)^{\frac{\shr}{\shr-1}}$}
+\def\pdtotpressBYdens{$\pdfrac{\totpres}{\dens} =\frac{\pres \shr \M^2}{2 \dens} (\sim)^{\frac{1}{\shr-1}}$}
+\def\pdtotpressBYvel {$\pdfrac{\totpres}{v_i}   = \dens v_i (\sim)^{\frac{1}{\shr-1}}$}
+\def\pdtotpressBYpres    {$\pdfrac{\totpres}{\pres} = (\sim)^{\frac{\shr}{\shr-1}}-\frac{\M^2\shr}{2} (\sim)^{\frac{1}{\shr-1}}$}
+\def\pdndtotpressBYnddens{$\pdfrac{\ndtotpres}{\nddens}  = \frac{\ndpres \shr \ndM^2}{2 \nddens} (\sim)^{\frac{1}{\shr-1}}$ }
+\def\pdndtotpressBYndvel {$\pdfrac{\ndtotpres}{\nd{v_i}} = \nddens \nd{v_i} (\sim)^{\frac{1}{\shr-1}}$}
+\def\pdndtotpressBYndpres{$\pdfrac{\ndtotpres}{\ndpres}  = (\sim)^{\frac{\shr}{\shr-1}}-\frac{\ndM^2\shr}{2} (\sim)^{\frac{1}{\shr-1}}$}
+\begin{center}
+\begin{tabular}{ m{0.45\textwidth} | m{0.45\textwidth} }\hline
+\rowcolor{black!20} \textbf{Dimensional} &  \textbf{Non-Dimensional} \\ \hline
+\totpress & \ndtotpress \\
+\pdtotpressBYdens & \pdndtotpressBYnddens \\
+\pdtotpressBYvel  & \pdndtotpressBYndvel  \\
+\pdtotpressBYpres & \pdndtotpressBYndpres
+\end{tabular}
+\end{center}
+
+
+The derivatives of the sound-speed follow as:
+\def\sspeedeq{$\sspeed=\sqrt{\frac{\shr\pres}{\dens}}$}
+\def\ndsspeedeq{$\ndsspeed=\sqrt{\frac{\shr\ndpres}{\nddens}}$}
+\def\pdsspeedBYdens{$\pdfrac{\sspeed}{\dens} = \frac{\shr}{s\sspeed\dens}$}
+\def\pdsspeedBYvel {$\pdfrac{\sspeed}{v_i}  = 0$}
+\def\pdsspeedBYpres{$\pdfrac{\sspeed}{\pres} = -\frac{\shr}{s\sspeed\dens}\frac{\pres}{\dens}$}
+\def\pdndsspeedBYnddens{$\pdfrac{\ndsspeed}{\nddens} = \frac{\shr}{2\ndsspeed\nddens}$}
+\def\pdndsspeedBYndvel {$\pdfrac{\ndsspeed}{\nd{v_{i}}}  = 0 $}
+\def\pdndsspeedBYndpres{$\pdfrac{\ndsspeed}{\ndpres} = -\frac{\shr}{2\ndsspeed\nddens}\frac{\ndpres}{\nddens}$}
+\begin{center}
+\begin{tabular}{ m{0.45\textwidth} | m{0.45\textwidth} }\hline
+\rowcolor{black!20} \textbf{Dimensional} &  \textbf{Non-Dimensional} \\ \hline
+\sspeedeq & \ndsspeedeq \\
+\pdsspeedBYdens & \pdndsspeedBYnddens \\
+\pdsspeedBYvel  & \pdndsspeedBYndvel  \\
+\pdsspeedBYpres & \pdndsspeedBYndpres
+\end{tabular}
+\end{center}
+
+
+
+\section{Derivatives at the inlet}
+The following assumes that the inlet is the reference state \textbf{TODO true?}
+TODO check whether correct
+
+
+
+
+
+
+
+
+
+
+
+\clear
+\cleardoublepage
+
+%
 \subsection{Formulation of the objective function}
 The first step will be the formulation of the objective function and constraints. For simplicity, we ignore the equality and inequailty constraints here, since we are only interested in the derivation of the sensitivity terms and not in the optimiazation routines themeselves.
 
@@ -44,9 +175,8 @@ Now we can substitute the last term as
 \pdfrac{\EOSfluid}{\fstate}\pdfrac{\fstate}{\absvar_i}         \bigg\rvert_{\fstate_0}+
 \cancelto{0}{\pdfrac{\EOSfluid}{\mms}\pdfrac{\mms}{\absvar_i}} \bigg\rvert_{\fstate_0}
 \end{align}
-where the last term cancels again, since the mesh motion at the fluid interface only depends on $\absvar_i$ if $\absvar_i$ is a shape variable.
+where the last term cancels again, since the mesh motion at the fluid interface only depends on $\absvar_i$ if $\absvar_i$ is a shape variable.\\
 
-\\
 Inserting Equation~\eqref{eq:manualmach_PEOSfluidBYabsvarI_expansion} into Equation~\eqref{eq:manualmach_ToptcritBYabsvarI_expansion} gives
 \begin{align}\label{eq:simplified_expression_sensitivity}
 \tfrac{\optcrit}{\absvar_i}\bigg\rvert_{\fstate_0} &=
@@ -255,146 +385,6 @@ Putting Equations \REF and \REF together, one can finally obtain the follwoing e
 \end{document}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%
-%We recall that the fluid state vector is defined as
-%
-%
-%
-%Therefor the derivative of the total energy gives
-%\begin{align}
-%\energytot=\frac{\dens R \temp}{\specheatratio-1}+\frac{1}{2}\T{\fluidvel}{\fluidvel} \\
-%\end{align}
-%
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% partial derivatives of total energy                 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\def\PenergytotBYdens{\frac{R \temp}{\specheatratio-1}}
-%\def\PenergytotBYfluidvel{\fluidvel }
-%\def\PenergytotBYtemp{\frac{\dens R}{\specheatratio -1}}
-%\begin{align}
-%%\energytot=\frac{\dens R \temp}{\specheatratio-1}+\frac{1}{2}\T{\fluidvel}{\fluidvel} \\
-%\pdfrac{\energytot}{\dens}    =\PenergytotBYdens     ~~~~
-%\pdfrac{\energytot}{\fluidvel}=\PenergytotBYfluidvel ~~~~
-%\pdfrac{\energytot}{\temp}    =\PenergytotBYtemp     
-%\end{align}
-%
-%Which means that the fluid state vector can be written as
-%\begin{align}
-%\fstate=
-%\begin{bmatrix}
-%  \dens \\
-%  \dens \fluidvel \\
-%  \frac{\dens R \temp}{\specheatratio-1}+\frac{1}{2}\T{\fluidvel}\fluidvel
-%\end{bmatrix}
-%\end{align}
-%
-%
-%
-%Also, the speet of sound is given by
-%\begin{align}
-%\sspeed=\sqrt{\specheatratio R \temp}
-%\end{align}
-%
-%
-%
-%
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% partial derivatives of the fluid state vector       %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%
-%
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% partial derivatives of the mach number              %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\def\PmachnumBYdens{0}
-%\def\PmachnumBYfluidvelx{\frac{\fluidvelx}{\sqrt{\specheatratio R \temp} \norm{\fluidvel}_2}=\frac{\fluidvelx}{\specheatratio R \temp \machnum}}
-%\def\PmachnumBYfluidvely{\frac{\fluidvely}{\sqrt{\specheatratio R \temp} \norm{\fluidvel}_2}=\frac{\fluidvely}{\specheatratio R \temp \machnum}}
-%\def\PmachnumBYfluidvelz{\frac{\fluidvelz}{\sqrt{\specheatratio R \temp} \norm{\fluidvel}_2}=\frac{\fluidvelz}{\specheatratio R \temp \machnum}}
-%\def\PmachnumBYtemp{-\frac{\specheatratio R}{2} \frac{\norm{\fluidvel}_2}{(\specheatratio R \temp)^{\frac{3}{2}}}}
-%\begin{align}
-%\pdfrac{\machnum}{\dens}     &=\PmachnumBYdens      \\
-%\pdfrac{\machnum}{\fluidvelx}&=\PmachnumBYfluidvelx \\
-%\pdfrac{\machnum}{\fluidvely}&=\PmachnumBYfluidvely \\
-%\pdfrac{\machnum}{\fluidvelz}&=\PmachnumBYfluidvelz \\
-%\pdfrac{\machnum}{\temp}     &=\PmachnumBYtemp      \\
-%\end{align}
-%
-%
-%
-%\begin{align}
-%\pdfrac{\machnum}{\energytot}&=
-%\pdfrac{\machnum}{\dens}\pdfrac{\dens}{\energytot}+
-%\pdfrac{\machnum}{\fluidvel}\pdfrac{\fluidvel}{\energytot}+
-%\pdfrac{\machnum}{\temp}\pdfrac{\temp}{\energytot}           \\
-%&=...=
-%\frac{1}{\specheatratio R \temp \machnum}-\frac{\machnum (\specheatratio-1)}{2\dens R \temp}
-%\end{align}
-%
-%
-%The derivative of the fluid state vector with respect to the Mach number can therefore be written as
-%%\begin{align}
-%%\pdfrac{\fstate}{\machnum}=
-%%\pdfrac{\fstate}{\dens}\pdfrac{\dens}{\machnum}+
-%%\pdfrac{\fstate}{\fluidvel}\pdfrac{\fluidvel}{\machnum}+
-%%\pdfrac{\fstate}{\temp}\pdfrac{\temp}{\machnum}
-%%\end{align}
-%\begin{align}
-%\pdfrac{\fstate}{\machnum}=
-%\pdfrac{\fstate}{\dens}\pdfrac{\dens}{\machnum}+
-%\pdfrac{\fstate}{\fluidvel}\pdfrac{\fluidvel}{\machnum}+
-%\pdfrac{\fstate}{E}\pdfrac{E}{\machnum}                     \\
-%=...=
-%\specheatratio \dens R \temp \machnum
-%\begin{bmatrix}
-%  0                    \\
-%  1/\fluidvelx \\
-%  1/\fluidvely \\
-%  1/\fluidvelz \\
-%  \frac{3}{\dens}+\frac{2\dens}{2\dens-\machnum^2\specheatratio(\specheatratio-1)} \\
-%\end{bmatrix}
-%\end{align}
-%\textbf{TODO redo an verify calculation}
-%
-%
-%
-%
-%
-%
-%%\begin{align}
-%%&A=B+C \\
-%%&\hspace{1cm}B=E+F \\
-%%&\hspace{2cm}E+4 \\
-%%&\hspace{2cm}F=5 \\
-%%&\hspace{2cm}=1 \\
-%%&\hspace{1cm}C=1 \\
-%%&=10 \\
-%%\end{align}
-%
-%%\begin{align}
-%%a\\
-%% \begin{align}
-%%  a\\
-%%  \end{align}
-%%\end{align}
 
 
 

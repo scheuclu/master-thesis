@@ -30,6 +30,9 @@
 \newcommand{\cvec}[1]{\c{\v{#1}}}    %discrete vector represenation of a scalar field     with{A}
 \newcommand{\cmat}[1]{\c{\m{#1}}}    %discrete vector represenation of a tensor field     with{A}
 
+\newcommand{\nd}[1]{\bar{#1}} %asdasd
+\newcommand{\reference}[1]{ {#1}_{ref} }
+
 %%==============================%
 % OPERATORS
 % Algebraic operations
@@ -126,6 +129,7 @@
 \newcommand{\fluxesdiff}{\mathcal{G}} %Diffusive fluxes
 \newcommand{\dens}{\rho}              %Density
 \newcommand{\pres}{p}                 %Pressure
+\newcommand{\totpres}{p_{tot}}                 %Pressure
 \newcommand{\fluidvel}{\vec{v}}       %Fluid velocity vector
 \newcommand{\fluidvelcomp}{v}         %Fluid velocity vector
 \newcommand{\fluidvelx}{{v_1}}          %Fluid velocity in x-direction
@@ -145,12 +149,14 @@
 \newcommand{\viscoskin}{\nu}          %Kinematic viscosity
 \newcommand{\reynolds}{RE}            %Reynolds number
 \newcommand{\specheatratio}{\gamma}   %Specific heat ratio
+\newcommand{\shr}{\gamma}   %Specific heat ratio
 \newcommand{\jac}{\mathcal{H}}        %Jacoian matrix
 \newcommand{\fluxjac}{\mathcal{A}}    %Flux Jacobian
 \newcommand{\jaceigvecs}{\tensor{P}}  %Matrix that contains the eigenvectors of the jacobian matrix of $\fluxmatconv$
 \newcommand{\jaceigvals}{\tensor{\Lambda}}  %Diagonal matrix that contains the eigenvalues of the jacobian matrix of $\fluxmatconv$
 \newcommand{\roeavgfunc}{\tensor{M}}  %Averaging function associated with the Roe flux
 \newcommand{\machnum}{M_a}              %Mach number
+\newcommand{\M}{M_a}              %Mach number
 
 
 
@@ -225,4 +231,16 @@
   \hhline{~--}                                                          & RANS  & #6 \\
 \hline
 \end{tabular}
+}
+
+
+\newcommand{\tablestatederivs}[6]{
+\begin{center}
+\begin{tabular}{ m{0.45\textwidth} | m{0.45\textwidth} }\hline
+\rowcolor{black!20}\Centering Dimensional & \Centering Non-Dimensional\\ \hline
+#1 & #2 \\
+#3 & #4 \\
+#5 & #6 \\
+\end{tabular}
+\end{center}
 }
