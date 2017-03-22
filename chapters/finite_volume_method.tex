@@ -1,9 +1,11 @@
 \documentclass[../main.tex]{subfiles}
 %\usepackage{import}
+
 \begin{document}
+
 \setlength{\delimitershortfall}{0pt}
 
-\section{The Finite Volume method}
+\section{The Finite Volume methodaaa}
 \subsection{General}
 Like \ac{FD} or \ac{FE}, the \ac{FV} method is a mean to solving a \ac{PDE} by transforming it into a discrete algebraic form. In the field of fluid mechanics, the finite volume method is the most popular approach. Other than \ac{FD} or \ac{FE}, the finite volume is conservative by construction. Other than \ac{FD} it can easily be implemented for unstructured grids. Compared to the \ac{FE} method, where boundary conditions come naturally from the formulation, this causes some difficulties in \ac{FV}.\\
 It shall also be mentioned that the introduction of stabilization schemes(like streamline upwinding), is much easier in an \ac{FV} formulation.
@@ -33,7 +35,7 @@ So that finally, the equation can be written as
 \tfrac{\dvec{\bar{\xi}}}{t} + \frac{1}{V_i} \int_{\partial V_i} f(\vec{\xi})\cdot\normal~dS_i
 \end{align}
 which can easily be interpreted. The cell average of the conserved properties changes according to the total flux through the cells surface.
-Of course, the conservative value is defined as being constant within one cell, so there will be different values on faces or edges, depending on which side one is looking at. There are different approaches on how to choose an appropriate value. And the choice may greatly effect the numerical properties. \textbf{Is this accurate? If so, provide more details.}
+Of course, the conservative value is defined as being constant within one cell, so there will be different values on faces or edges, depending on which side one is looking at. There are different approaches on how to choose an appropriate value. And the choice may greatly effect the numerical properties. In a \ac{FV} solver, the numerical flux at the interface is typically constructed such, that upwinding is achieved.
 
 \subsection{Finite Volume method for fluid mechanics}\label{sec:fv_fluid_mechanics}
 It has already been shown in Section~\ref{sec:conservative_form_nsg}, that the \ac{NSE} can be brought into the conservative form~\eqref{eq:nsg_conservative_form}. The flux has been shown to consist of a convective and a diffusive part\eqref{eq:fluxesconv}\eqref{eq:fluxes_diff}.
@@ -107,5 +109,102 @@ where $\fluxesnum_{ij}$ denotes the chosen numerical flux function along the edg
  \\
  \\
 As for the volume integral of the diffusive term in Equation~\eqref{eq:nsg_basic_fv-form}, it shall be noted that the shape function is still denoted in the primal cell. Since the gradient of the test function is constant, as is the diffusive flux itself, the integral becomes a summation of the primal sub-tetrahedral contributions.
+
+
+\cleardoublepage
+\subsection{Treatment of the viscous term}
+The equivalence of the finite volume representation of the viscous term, with the finite element-like representation provided in Equation \textbf{TODO} might not be obvious to the reader. This section is therefore denoted to a \ac{FE} discretiation of the governing equations, that can then be reformulated such that the mixed \ac{FV}-\ac{FE} formulation is obtained.\\
+First, we start with the full \ac{NSE} in conservative form, as provided in Equation~\textbf{TODO12}. Next, a test function is defined. We chose the function $({\chi_i})_{i\in \primmesh}$ where $\primmesh$ represents the primal mesh, as step functions over the dual cells of $\dualmesh$.
+A multiplication with the test-functions and subsequent integration thus gives the following weak form
+
+\begin{align}\label{fv_weak_form_felike}
+  \int_\Omega \pdfrac{\fstate}{t}\chi_i dx + \int_\Omega \nabla \cdot \fluxesconv(\fstate)\chi_i dx + \int_\Omega \nabla \cdot \fluxesdiff(\fstate,\nabla  \fstate)\chi_i dx = \vec{0} \\
+\end{align}
+where by using the divergence theorem, we obtain
+\begin{align}\label{eq:divtheorem_felike}
+  \int_\Omega \nabla \cdot \fluxesconv(\fstate)\chi_i dx = \int_{\partial C_i} \fluxesconv(\fstate)\cdot \normal ds \\
+  \int_\Omega \nabla \cdot \fluxesdiff(\fstate,\nabla \fstate)\chi_i dx = \underbrace{\int_{\partial C_i} \difftensor \nabla\fstate\cdot \normal ds}_{II}
+\end{align}
+Where the first term is already equivalent to what we have derived by the \ac{FV} approach in \textbf{TODO}.\\
+
+
+
+It the diffusive tensor $\difftensor$ is approximated to be constant over the triangle, which is justified in \textbf{TODO}, th product $\difftensor\fstate$ is constant on can now write the above integral as
+\begin{align}
+II=\sum_{T \in \mathcal{D}_i} \difftensor \nabla\fstate\int_{\partial C_i \cap T} \normal_C ds
+\end{align}
+
+
+Now, we use a particular geometric relation, that holds for primitive elements like triangles and tetrahedra, and will be derived in Section \ref{sec:geometric_considerations}
+\begin{align}
+  \int_{C_i\cap T} \normal ds = \frac{\normal_i^T}{2}
+\end{align}
+where $\normal_i^T$ is the normal to the primal mesh triangle $T$ on the edge opposite of node $i$.
+This is where the geometric considerations of section \ref{sec:geometric_considerations} come int place. As shown in equations \eqref{eq:final_relation}, the integral over the dual face edge can be written via the normal of the primal mesh triangle as
+\begin{align}
+  -\sum_{T\in\mathcal{D}_i} \difftensor \nabla\fstate \frac{\normal_i^T}{2}
+\end{align}
+Also, we have shown in Section \ref{sec:geometric_considerations}, that for the case of a simple triangle (but equally applicable to tetrahedra), the last term of the above equation can be written as
+\begin{align}
+  -\sum_{T\in\mathcal{D}_i} \difftensor \nabla\fstate \int_T \nabla \phi_i dx
+\end{align}
+where $\phi_i$ is the P1 shape-function defined in \eqref{eq:p1_triangle_eq1}.
+Finally we can go the opposite way, and join the summations over integrals over triangular contributions back to an overall integral over the whole dual cell. Doing this finally leads to
+\begin{align}
+  II = -\int_{\mathcal{D}_i} \difftensor \nabla\fstate\cdot\nabla \phi_i dx
+\end{align}
+which is exactly the term provided in equation \textbf{TODO}.
+Since we used the same step-function based test-functions for all terms in equation \eqref{fv_weak_form_felike}, this approach is not only consistent, for the special case, of linear triangles we have shown that our finite element term is equivalent to a FV approximation.
+
+
+
+\subsubsection{Geometric considerations}\label{sec:geometric_considerations}
+This section is dedicated to the the derivation of a particular link between the shape-funtion of a linear triangle/tetrahedra and its outward facing normals that we use in chapter \ref{sec:} to proof the equivalence of the FE-formualtion of the finite volume term with the \ac{FV} formulation.
+
+\begin{figure}[h]
+\centering
+\includegraphics{\mainpath/fig/tikz/build/P1_shapefunction_normal.pdf}
+\caption{One Triangle $T$ out of the set of triangles $\sum_T$, that are connected to vertex $i$. $C$ denotes the dual cell related to vertex $i$.}
+\label{fig:p1_linear_shape_function}
+\end{figure}
+
+
+We first look at one triangle of the set of triangles $\sum_T$ that belong to node $i$.\\
+The setup is visualized in Figure~\ref{fig:p1_linear_shape_function}.\\
+The reader can easily verify, that a linear shape-function of node $i$ can be written as:
+\begin{align}\label{eq:p1_triangle_eq1}
+  \phi_i(\vec{x})=\frac{\vec{hx}\cdot\vec{hi}}{\norm{\vec{hi}}^2}
+\end{align}
+where $hx$ is the vector from point $h$ to any point $x$ in the triangle, and $hi$ is the vector from point $h$ to point $i$.
+For this particular representation of the shape function, the gradient can be elegantly written as
+\begin{align}\label{eq:p1_triangle_eq2}
+\nabla \phi_i(\vec{x})=\frac{\vec{hi}}{\norm{\vec{hi}}^2}=\frac{\hat{\vec{hi}}}{\norm{\vec{hi}}}
+\end{align}
+where $\hat{\vec{hi}}$ is the normalized vector in $h-i$ direction.
+Moreover, simple geometry tells us that
+\begin{align}\label{eq:p1_triangle_eq3}
+\norm{\vec{hi}} \norm{\vec{kj}} = 2 \abs{T}
+\end{align}
+where $\abs{T}$ is the area of the triangle $T$
+
+Substituting equation \ref{eq:p1_triangle_eq3} into equation \ref{eq:p1_triangle_eq2} therefore leads to
+\begin{align}\label{eq:p1_triangle_eq4}
+\nabla \phi_i(\vec{x})= \vec{hi}\cdot\frac{\norm{\vec{kj}}}{2\abs{T}}=-\frac{\vec{\nu}}{2\abs{T}}
+\end{align}
+where $\vec{\nu}$ is the weighted outward facing normal to edge $jk$.
+
+\begin{align}
+    \vec{\nu}=-\hat{\vec{hi}} \norm{kj} = -\int_{[jk]} \vec{n}_T d \Gamma
+\end{align}
+
+Referring to previous chapter we remind the reader that in the vertex based \ac{FV} approach, and integration over the dual face interface (dashed line in Figure~\ref{fig:p1_linear_shape_function}) via the weighted interface normal is typically performed.
+
+By simple geometrical considerations we can now determine, that the following relation holds
+\begin{align}\label{eq:final_relation}
+\int_{\Gamma_C \cap T} const.~\vec{n}_c &= \frac{1}{2}\int_{\Gamma_T} const.~\vec{n}_T
+                                        &= \frac{\vec{\vec{\nu}_i^T}}{2}
+\end{align}
+
+
 
 \end{document}

@@ -1,0 +1,327 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+defaultIndent	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^defaultIndent: "  "$/;"	function	line:13
+backupExtension	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^backupExtension: .bak$/;"	function	line:21
+onlyOneBackUp	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^onlyOneBackUp: 0$/;"	function	line:29
+maxNumberOfBackUps	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^maxNumberOfBackUps: 0$/;"	function	line:35
+cycleThroughBackUps	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^cycleThroughBackUps: 0$/;"	function	line:47
+indentPreamble	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^indentPreamble: 0$/;"	function	line:50
+alwaysLookforSplitBraces	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^alwaysLookforSplitBraces: 1$/;"	function	line:54
+alwaysLookforSplitBrackets	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^alwaysLookforSplitBrackets: 1$/;"	function	line:58
+removeTrailingWhitespace	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^removeTrailingWhitespace: 0$/;"	function	line:61
+lookForAlignDelims	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^lookForAlignDelims:$/;"	function	line:65
+tabular	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^   tabular: 1$/;"	function	line:66
+tabularx	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^   tabularx: 1$/;"	function	line:67
+longtable	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^   longtable: 1$/;"	function	line:68
+array	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^   array: 1$/;"	function	line:69
+matrix	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^   matrix: 1$/;"	function	line:70
+bmatrix	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^   bmatrix: 1$/;"	function	line:71
+pmatrix	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^   pmatrix: 1$/;"	function	line:72
+align	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^   align: 1$/;"	function	line:73
+alignat	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^   alignat: 1$/;"	function	line:75
+aligned	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^   aligned: 1$/;"	function	line:77
+cases	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^   cases: 1$/;"	function	line:78
+dcases	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^   dcases: 1$/;"	function	line:79
+listabla	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^   listabla: 1$/;"	function	line:80
+indentRules	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^indentRules:$/;"	function	line:85
+myenvironment	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^   myenvironment: "\\t\\t"$/;"	function	line:86
+anotherenvironment	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^   anotherenvironment: "\\t\\t\\t\\t"$/;"	function	line:87
+chapter	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^   chapter: " "$/;"	function	line:88
+section	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^   section: " "$/;"	function	line:89
+item	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^   item: "      "$/;"	function	line:90
+verbatimEnvironments	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^verbatimEnvironments:$/;"	function	line:94
+verbatim	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    verbatim: 1$/;"	function	line:95
+lstlisting	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    lstlisting: 1$/;"	function	line:96
+noIndentBlock	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^noIndentBlock:$/;"	function	line:102
+noindent	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    noindent: 1$/;"	function	line:103
+cmhtest	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    cmhtest: 1$/;"	function	line:104
+noAdditionalIndent	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^noAdditionalIndent:$/;"	function	line:111
+myexample	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    myexample: 1$/;"	function	line:112
+mydefinition	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    mydefinition: 1$/;"	function	line:113
+problem	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    problem: 1$/;"	function	line:114
+exercises	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    exercises: 1$/;"	function	line:115
+mysolution	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    mysolution: 1$/;"	function	line:116
+foreach	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    foreach: 0$/;"	function	line:117
+widepage	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    widepage: 1$/;"	function	line:118
+comment	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    comment: 1$/;"	function	line:119
+document	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    document: 1$/;"	function	line:122
+frame	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    frame: 0$/;"	function	line:123
+indentAfterHeadings	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^indentAfterHeadings:$/;"	function	line:133
+part	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    part:$/;"	function	line:134
+indent	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^       indent: 0$/;"	function	line:135
+level	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^       level: 1$/;"	function	line:136
+chapter	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    chapter: $/;"	function	line:137
+indent	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^       indent: 0$/;"	function	line:138
+level	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^       level: 2$/;"	function	line:139
+section	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    section:$/;"	function	line:140
+indent	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^       indent: 0$/;"	function	line:141
+level	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^       level: 3$/;"	function	line:142
+subsection	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    subsection:$/;"	function	line:143
+indent	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^       indent: 0$/;"	function	line:144
+level	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^       level: 4$/;"	function	line:145
+indent	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^       indent: 0$/;"	function	line:147
+level	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^       level: 4$/;"	function	line:148
+subsubsection	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    subsubsection:$/;"	function	line:149
+indent	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^       indent: 0$/;"	function	line:150
+level	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^       level: 5$/;"	function	line:151
+paragraph	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    paragraph:$/;"	function	line:152
+indent	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^       indent: 0$/;"	function	line:153
+level	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^       level: 6$/;"	function	line:154
+subparagraph	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    subparagraph:$/;"	function	line:155
+indent	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^       indent: 0$/;"	function	line:156
+level	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^       level: 7$/;"	function	line:157
+indentAfterItems	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^indentAfterItems:$/;"	function	line:168
+itemize	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    itemize: 1$/;"	function	line:169
+enumerate	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    enumerate: 1$/;"	function	line:170
+list	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    list: 1$/;"	function	line:171
+itemNames	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^itemNames:$/;"	function	line:177
+item	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    item: 1$/;"	function	line:178
+myitem	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    myitem: 1$/;"	function	line:179
+constructIfElseFi	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^constructIfElseFi:$/;"	function	line:190
+ifnum	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    ifnum: 1$/;"	function	line:191
+ifdim	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    ifdim: 1$/;"	function	line:192
+ifodd	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    ifodd: 1$/;"	function	line:193
+ifvmode	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    ifvmode: 1$/;"	function	line:194
+ifhmode	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    ifhmode: 1$/;"	function	line:195
+ifmmode	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    ifmmode: 1$/;"	function	line:196
+ifinner	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    ifinner: 1$/;"	function	line:197
+if	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    if: 1$/;"	function	line:198
+ifcat	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    ifcat: 1$/;"	function	line:199
+ifx	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    ifx: 1$/;"	function	line:200
+ifvoid	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    ifvoid: 1$/;"	function	line:201
+ifeof	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    ifeof: 1$/;"	function	line:202
+iftrue	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    iftrue: 1$/;"	function	line:203
+ifcase	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    ifcase: 1$/;"	function	line:204
+checkunmatched	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^checkunmatched:$/;"	function	line:222
+parbox	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    parbox: 1$/;"	function	line:223
+vbox	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    vbox: 1$/;"	function	line:224
+checkunmatchedELSE	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^checkunmatchedELSE:$/;"	function	line:228
+pgfkeysifdefined	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    pgfkeysifdefined: 1$/;"	function	line:229
+DTLforeach	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    DTLforeach: 1$/;"	function	line:230
+ifthenelse	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    ifthenelse: 1$/;"	function	line:231
+checkunmatchedbracket	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^checkunmatchedbracket:$/;"	function	line:235
+pgfplotstablecreatecol	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    pgfplotstablecreatecol: 1$/;"	function	line:236
+pgfplotstablesave	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    pgfplotstablesave: 1$/;"	function	line:237
+pgfplotstabletypeset	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    pgfplotstabletypeset: 1$/;"	function	line:238
+mycommand	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    mycommand: 1$/;"	function	line:239
+psSolid	/home/lukas/Desktop/project/independence/project/thesis/latexindent/defaultSettings.yaml	/^    psSolid: 1$/;"	function	line:240
+0pt	/home/lukas/Desktop/project/independence/project/thesis/latexindent/documentation/manual.tex	/^\\titlespacing\\section{0pt}{12pt plus 4pt minus 2pt}{-5pt plus 2pt minus 2pt}$/;"	section	line:148
+0pt	/home/lukas/Desktop/project/independence/project/thesis/latexindent/documentation/manual.tex	/^\\titlespacing\\subsection{0pt}{12pt plus 4pt minus 2pt}{-6pt plus 2pt minus 2pt}$/;"	subsection	line:149
+0pt	/home/lukas/Desktop/project/independence/project/thesis/latexindent/documentation/manual.tex	/^\\titlespacing\\subsubsection{0pt}{12pt plus 4pt minus 2pt}{-6pt plus 2pt minus 2pt}$/;"	subsubsection	line:150
+Before we begin	/home/lukas/Desktop/project/independence/project/thesis/latexindent/documentation/manual.tex	/^\\lstlistoflistings$/;"	section	line:182
+Thanks	/home/lukas/Desktop/project/independence/project/thesis/latexindent/documentation/manual.tex	/^\\section{Before we begin}$/;"	subsection	line:184
+License	/home/lukas/Desktop/project/independence/project/thesis/latexindent/documentation/manual.tex	/^encouragement.$/;"	subsection	line:199
+Demonstration  before and after	/home/lukas/Desktop/project/independence/project/thesis/latexindent/documentation/manual.tex	/^\\end{warning}$/;"	section	line:224
+How to use the script	/home/lukas/Desktop/project/independence/project/thesis/latexindent/documentation/manual.tex	/^\\end{adjustwidth}$/;"	section	line:320
+From the command line	/home/lukas/Desktop/project/independence/project/thesis/latexindent/documentation/manual.tex	/^simply \\lstinline!latexindent!.$/;"	subsection	line:334
+Hierarchy of fields	/home/lukas/Desktop/project/independence/project/thesis/latexindent/documentation/manual.tex	/^\\end{itemize}$/;"	subsubsection	line:858
+lstinline  indentconfig.yaml  and lstinline  .indentconfig.yaml   for user settings 	/home/lukas/Desktop/project/independence/project/thesis/latexindent/documentation/manual.tex	/^\\end{enumerate}$/;"	subsection	line:909
+lstinline  localSettings.yaml 	/home/lukas/Desktop/project/independence/project/thesis/latexindent/documentation/manual.tex	/^\\end{warning}$/;"	subsection	line:999
+Settings load order	/home/lukas/Desktop/project/independence/project/thesis/latexindent/documentation/manual.tex	/^\\lstinline!latexindent.pl! has read \\lstinline!localSettings.yaml!.$/;"	subsection	line:1031
+An important example	/home/lukas/Desktop/project/independence/project/thesis/latexindent/documentation/manual.tex	/^\\end{figure}$/;"	subsection	line:1076
+Known limitations	/home/lukas/Desktop/project/independence/project/thesis/latexindent/documentation/manual.tex	/^as a verbatim environment.$/;"	section	line:1099
+Required lstinline  Perl  modules	/home/lukas/Desktop/project/independence/project/thesis/latexindent/documentation/manual.tex	/^\\appendix$/;"	section	line:1139
+The lstinline  arara  rule	/home/lukas/Desktop/project/independence/project/thesis/latexindent/documentation/manual.tex	/^wish to see where they are cached, use the  \\lstinline!trace! option, e.g  \\lstinline!latexindent.exe -t myfile.tex!.$/;"	section	line:1176
+identifier	/home/lukas/Desktop/project/independence/project/thesis/latexindent/indent.yaml	/^identifier: indent$/;"	function	line:21
+name	/home/lukas/Desktop/project/independence/project/thesis/latexindent/indent.yaml	/^name: Indent$/;"	function	line:22
+command	/home/lukas/Desktop/project/independence/project/thesis/latexindent/indent.yaml	/^command: <arara> @{ isWindows( "cmd \/c latexindent.exe", "latexindent.pl" ) } @{silent} @{trace} @{localSettings} @{cruft}@{ isNotEmpty( cruft, '="'.concat(parameters.cruft).concat('"') ) } @{overwrite}  @{onlyDefault} @{output} "@{file}" @{ isNotEmpty( output, '"'.concat(parameters.output).concat('"') ) }$/;"	function	line:23
+arguments	/home/lukas/Desktop/project/independence/project/thesis/latexindent/indent.yaml	/^arguments:$/;"	function	line:24
+flag	/home/lukas/Desktop/project/independence/project/thesis/latexindent/indent.yaml	/^  flag: <arara> @{ isTrue( parameters.overwrite, "-w" ) }$/;"	function	line:26
+flag	/home/lukas/Desktop/project/independence/project/thesis/latexindent/indent.yaml	/^  flag: <arara> @{ isTrue( parameters.silent, "-s" ) }$/;"	function	line:28
+flag	/home/lukas/Desktop/project/independence/project/thesis/latexindent/indent.yaml	/^  flag: <arara> @{ isTrue( parameters.trace, "-t" ) }$/;"	function	line:30
+flag	/home/lukas/Desktop/project/independence/project/thesis/latexindent/indent.yaml	/^  flag: <arara> @{ isTrue( parameters.localSettings, "-l" ) }$/;"	function	line:32
+flag	/home/lukas/Desktop/project/independence/project/thesis/latexindent/indent.yaml	/^  flag: <arara> @{ isNotEmpty( parameters.output, "-o" ) }$/;"	function	line:34
+flag	/home/lukas/Desktop/project/independence/project/thesis/latexindent/indent.yaml	/^  flag: <arara> @{ isTrue( parameters.onlyDefault, "-d" ) }$/;"	function	line:36
+flag	/home/lukas/Desktop/project/independence/project/thesis/latexindent/indent.yaml	/^  flag: <arara> @{ isNotEmpty( parameters.cruft, "-c" ) }$/;"	function	line:38
+strict	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^use strict;$/;"	use	line:17
+warnings	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^use warnings;$/;"	use	line:18
+FindBin	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^use FindBin;            # help find defaultSettings.yaml$/;"	use	line:38
+YAML::Tiny	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^use YAML::Tiny;         # interpret defaultSettings.yaml and other potential settings files$/;"	use	line:39
+File::Copy	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^use File::Copy;         # to copy the original file to backup (if overwrite option set)$/;"	use	line:40
+File::Basename	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^use File::Basename;     # to get the filename and directory path$/;"	use	line:41
+Getopt::Long	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^use Getopt::Long;       # to get the switches\/options\/flags$/;"	use	line:42
+File::HomeDir	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^use File::HomeDir;      # to get users home directory, regardless of OS$/;"	use	line:43
+usage	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^usage: latexindent.pl [options] [file][.tex]$/;"	label	line:74
+WARNING	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^WARNING:$/;"	label	line:149
+ERROR	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^ERROR:$/;"	label	line:163
+the -o switch	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^\\t need to call it with the -o switch; for example$/;"	role	line:166
+ERROR	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^ERROR:$/;"	label	line:183
+ERROR	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^ERROR: When using the -o flag you need to call latexindent.pl with 2 arguments$/;"	label	line:200
+WARNING	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^WARNING:  $indentconfig$/;"	label	line:329
+WARNING	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^WARNING: \\t line count of original file and indented file does$/;"	label	line:900
+indent_if_else_fi	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^sub indent_if_else_fi{$/;"	subroutine	line:934
+indent_after_if_else_fi	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^sub indent_after_if_else_fi{$/;"	subroutine	line:958
+indent_item	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^sub indent_item{$/;"	subroutine	line:994
+indent_after_item	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^sub indent_after_item{$/;"	subroutine	line:1010
+begin_command_with_alignment	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^sub begin_command_with_alignment{$/;"	subroutine	line:1030
+end_command_with_alignment	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^sub end_command_with_alignment{$/;"	subroutine	line:1055
+indent_heading	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^sub indent_heading{$/;"	subroutine	line:1090
+indent_after_heading	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^sub indent_after_heading{$/;"	subroutine	line:1159
+at_end_noindent	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^sub at_end_noindent{$/;"	subroutine	line:1188
+at_beg_noindent	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^sub at_beg_noindent{$/;"	subroutine	line:1209
+start_command_or_key_unmatched_brackets	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^sub start_command_or_key_unmatched_brackets{$/;"	subroutine	line:1228
+end_command_or_key_unmatched_brackets	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^sub end_command_or_key_unmatched_brackets{$/;"	subroutine	line:1277
+start_command_or_key_unmatched_braces	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^sub start_command_or_key_unmatched_braces{$/;"	subroutine	line:1333
+end_command_or_key_unmatched_braces	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^sub end_command_or_key_unmatched_braces{$/;"	subroutine	line:1455
+check_for_else	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^sub check_for_else{$/;"	subroutine	line:1538
+at_beg_of_env_or_eq	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^sub at_beg_of_env_or_eq{$/;"	subroutine	line:1588
+at_end_of_env_or_eq	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^sub at_end_of_env_or_eq{$/;"	subroutine	line:1665
+print_aligned_block	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^sub print_aligned_block{$/;"	subroutine	line:1762
+format_block	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^sub format_block{$/;"	subroutine	line:1795
+increase_indent	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^sub increase_indent{$/;"	subroutine	line:2066
+decrease_indent	/home/lukas/Desktop/project/independence/project/thesis/latexindent/latexindent.pl	/^sub decrease_indent{$/;"	subroutine	line:2128
+functions	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/bigTest.tex	/^\\pagestyle{fancy}$/;"	include	line:14
+ifnum value  chapter	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/ifelsefi.tex	/^\\preto\\chapter{%$/;"	chapter	line:43
+Polynomial functions	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/sampleAFTER.tex	/^% arara: indent: {overwrite: yes}$/;"	section	line:0
+Power functions with positive exponents	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/sampleAFTER.tex	/^ \\end{essentialskills}$/;"	subsection	line:163
+Graphing rational functions  horizontal asymptotes 	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/sampleAFTER.tex	/^ 	\\end{exercises}$/;"	section	line:4565
+Polynomial functions	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/sampleBEFORE.tex	/^% arara: indent: {overwrite: true, trace: on}$/;"	section	line:0
+Power functions with positive exponents	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/sampleBEFORE.tex	/^ \\end{essentialskills}$/;"	subsection	line:163
+Graphing rational functions  horizontal asymptotes 	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/sampleBEFORE.tex	/^ 	\\end{exercises}$/;"	section	line:4565
+part	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/testHeadings.tex	/^% arara: indent: {onlyDefault: no, overwrite: true, trace: on, silent: yes, localSettings: true}$/;"	part	line:0
+chapter long title	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/testHeadings.tex	/^         part text$/;"	chapter	line:4
+for the toc	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/testHeadings.tex	/^          \\]$/;"	section	line:10
+for the toc	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/testHeadings.tex	/^           section text$/;"	section	line:13
+for the toc	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/testHeadings.tex	/^           section text$/;"	subsection	line:16
+for the toc	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/testHeadings.tex	/^          	subsection text$/;"	subsection	line:19
+for the toc	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/testHeadings.tex	/^          	subsection text$/;"	section	line:22
+chapter	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/testHeadings.tex	/^           section text$/;"	chapter	line:25
+part	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/testHeadings.tex	/^          chapter text$/;"	part	line:28
+toc	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/testHeadings.tex	/^         part text$/;"	chapter	line:31
+for the toc	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/testHeadings.tex	/^          chapter text$/;"	section	line:34
+for the toc	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/testHeadings.tex	/^           section text$/;"	subsubsection	line:37
+paragraph	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/testHeadings.tex	/^           	subsubsection text$/;"	paragraph	line:40
+subparagraph	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/testHeadings.tex	/^           		paragraph text$/;"	subparagraph	line:43
+for the toc	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/testHeadings.tex	/^           			subparagraph text$/;"	section	line:46
+for the toc	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/testHeadings.tex	/^           section text$/;"	subsubsection	line:49
+paragraph	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/testHeadings.tex	/^           	subsubsection text$/;"	paragraph	line:52
+subparagraph	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/testHeadings.tex	/^           		paragraph text$/;"	subparagraph	line:55
+somethingelse	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/testHeadings.tex	/^           			subparagraph text$/;"	chapter	line:58
+Introduction	/home/lukas/Desktop/project/independence/project/thesis/latexindent/success/theorem.tex	/^\\begin{document}$/;"	section	line:32
+About this template	/home/lukas/Desktop/project/independence/project/thesis/chapters/about.tex	/^\\begin{document}$/;"	section	line:3
+Optimization	/home/lukas/Desktop/project/independence/project/thesis/chapters/problem_description.tex	/^\\setlength{\\delimitershortfall}{0pt}$/;"	section	line:7
+Test	/home/lukas/Desktop/project/independence/project/thesis/chapters/problem_description.tex	/^\\end{figure}$/;"	paragraph	line:171
+Analysis Model	/home/lukas/Desktop/project/independence/project/thesis/chapters/problem_description.tex	/^acid$/;"	subsection	line:178
+Fluid mechanics	/home/lukas/Desktop/project/independence/project/thesis/chapters/fluid_mechanics.tex	/^\\setlength{\\delimitershortfall}{0pt}$/;"	section	line:4
+Eulerian and Lagrangian view	/home/lukas/Desktop/project/independence/project/thesis/chapters/fluid_mechanics.tex	/^\\section{Fluid mechanics}\\label{sec:fluid_mechanics}$/;"	subsection	line:6
+Material derivative	/home/lukas/Desktop/project/independence/project/thesis/chapters/fluid_mechanics.tex	/^One view this issue from different perspectives, but what the difference points down to is the interpretation of the time derivative. Since we will be using the different derivatives frequently in this thesis, a short introduction shall be provided.$/;"	subsubsection	line:9
+Eulerian derivative	/home/lukas/Desktop/project/independence/project/thesis/chapters/fluid_mechanics.tex	/^The material derivative of a property, is a derivative(rate of change), that follows a specific particle 'p'. That means that at every time instance the material derivative gives as the current value of the property of a specific particle. Since in general, a particle will move its position in time quite a lot, some mean is required to track the particles motion. The material derivative is also known as the Lagrangian concept, and is commonly used in Solid mechanics, since the motion of the solid particles is typically little, or at least nearly uniform over the body, which makes position tracking easy.$/;"	subsubsection	line:11
+Basic equations of fluid mechanics	/home/lukas/Desktop/project/independence/project/thesis/chapters/fluid_mechanics.tex	/^In this thesis, both Eulerian and \\ac{ALE} methods will be covered. In general, no recommendation on to prefer one or the other method can be given. Instead, one should always be aware of the strength and weaknesses of either method and choose the appropriate one for a specific problem accordingly.$/;"	subsection	line:24
+Incompressible acl  NSE	/home/lukas/Desktop/project/independence/project/thesis/chapters/fluid_mechanics.tex	/^The Navier stokes equation consist of the \\acf{NSME}, the \\ac{NSCE} and, if the compressible equations are solved, the \\ac{NSEE}. In the literature, the term \\ac{NSE} is often synonymously used for the \\ac{NSCE}, in this thesis however, with \\ac{NSE} we will always refer to the full set of equations ans will explicitly name the momentum, continuity or energy equation otherwise.$/;"	subsubsection	line:31
+Compressible acl  NSE	/home/lukas/Desktop/project/independence/project/thesis/chapters/fluid_mechanics.tex	/^It shall be noted, that the in the incompressible \\ac{NSE}, the pressure can only be solved up to a certain constant. The pressure at a certain point therefore has to be fixed, or the system will be singular.$/;"	subsubsection	line:65
+Euler equations	/home/lukas/Desktop/project/independence/project/thesis/chapters/fluid_mechanics.tex	/^where $s$ is the entropy per unit mass, $Q$ is the heat transferred, and $T$ is the temperature.$/;"	subsubsection	line:96
+Conservative Form	/home/lukas/Desktop/project/independence/project/thesis/chapters/fluid_mechanics.tex	/^\\end{align}$/;"	subsubsection	line:109
+Fiver	/home/lukas/Desktop/project/independence/project/thesis/chapters/fiver.tex	/^\\setlength{\\delimitershortfall}{0pt}$/;"	section	line:7
+Level-set method	/home/lukas/Desktop/project/independence/project/thesis/chapters/fiver.tex	/^A possible solution to this problem is the \\ac{FIVER} method.$/;"	subsection	line:12
+The Finite Volume methodaaa	/home/lukas/Desktop/project/independence/project/thesis/chapters/finite_volume_method.tex	/^\\setlength{\\delimitershortfall}{0pt}$/;"	section	line:6
+General	/home/lukas/Desktop/project/independence/project/thesis/chapters/finite_volume_method.tex	/^\\section{The Finite Volume methodaaa}$/;"	subsection	line:8
+Finite Volume method for fluid mechanics	/home/lukas/Desktop/project/independence/project/thesis/chapters/finite_volume_method.tex	/^Of course, the conservative value is defined as being constant within one cell, so there will be different values on faces or edges, depending on which side one is looking at. There are different approaches on how to choose an appropriate value. And the choice may greatly effect the numerical properties. In a \\ac{FV} solver, the numerical flux at the interface is typically constructed such, that upwinding is achieved.$/;"	subsection	line:38
+Treatment of the viscous term	/home/lukas/Desktop/project/independence/project/thesis/chapters/finite_volume_method.tex	/^\\cleardoublepage$/;"	subsection	line:114
+Geometric considerations	/home/lukas/Desktop/project/independence/project/thesis/chapters/finite_volume_method.tex	/^Since we used the same step-function based test-functions for all terms in equation \\eqref{fv_weak_form_felike}, this approach is not only consistent, for the special case, of linear triangles we have shown that our finite element term is equivalent to a FV approximation.$/;"	subsubsection	line:157
+Fluid acl  SA	/home/lukas/Desktop/project/independence/project/thesis/chapters/sensitivity_analysis.tex	/^\\def\\PfstateBYabsvarI    {\\pdfrac{\\fstate}     {\\absvar_i}}$/;"	section	line:59
+Aero-elastic acl  SA	/home/lukas/Desktop/project/independence/project/thesis/chapters/sensitivity_analysis.tex	/^\\pagebreak$/;"	section	line:173
+Direct vs. adjoint approach	/home/lukas/Desktop/project/independence/project/thesis/chapters/sensitivity_analysis.tex	/^Where $n_{eq}$ is the total number of equations(e.g. five fluid state equations for the compressible NSG in 3D, three equations of the mesh motions and another three equations for the structure motion), $n_{q}$ is the number of optimization criteria and $n_s$ is the number of abstract variables.$/;"	subsection	line:266
+Direct approach	/home/lukas/Desktop/project/independence/project/thesis/chapters/sensitivity_analysis.tex	/^Equation~\\ref{eq:totderiv_optcritBYabsvar} suggests, that there are two alternatives to compute vector-matrix-vector product above.\\\\$/;"	paragraph	line:269
+Adjoint approach	/home/lukas/Desktop/project/independence/project/thesis/chapters/sensitivity_analysis.tex	/^Where the total complexity can be approximated as $\\order{n_{eq}^2n_{\\absvars}+n_{\\optcrits}n_{eq}n_{\\absvars}}\$$/;"	paragraph	line:300
+Direct acl  SA	/home/lukas/Desktop/project/independence/project/thesis/chapters/sensitivity_analysis.tex	/^If one or the other approach is to be preferred depends in on the optimization setup, particularly the number of optimization criteria and the number of optimization variables. Looking at the orders above, one can conclude that if the number of abstract parameters $n_{\\absvars}$ is smaller than the number of optimization criteria, the direct approach is more efficient, otherwise the adjoint approach is to be preferred. Additionally the on can argue, that the relevant term in the orders above is the one with $n_{eq}^2$  since it dominates the sum. Therefore, depending on whether $n_s$ or $n_q$ is bigger, the direct or the adjoint method is to be preferred.$/;"	subsubsection	line:334
+1  Update the structural displacement sensitivity to a new time step	/home/lukas/Desktop/project/independence/project/thesis/chapters/sensitivity_analysis.tex	/^The derivation of the sensitivities, can be achieved in a staggered scheme, very similar to the one, described in \\ref{sec:3field}\\textbf{TODO}. It consists of five steps.$/;"	paragraph	line:378
+2  Transfer sensitivity of structure motion to the interface	/home/lukas/Desktop/project/independence/project/thesis/chapters/sensitivity_analysis.tex	/^\\end{align}$/;"	paragraph	line:394
+3  Compute derivative of fluid mesh motion	/home/lukas/Desktop/project/independence/project/thesis/chapters/sensitivity_analysis.tex	/^\\end{equation}$/;"	paragraph	line:401
+4  Compute the sensitivity of the fluid state variables	/home/lukas/Desktop/project/independence/project/thesis/chapters/sensitivity_analysis.tex	/^\\end{align}$/;"	paragraph	line:414
+5  Compute the sensitivity of the structure load vector	/home/lukas/Desktop/project/independence/project/thesis/chapters/sensitivity_analysis.tex	/^\\end{align}$/;"	paragraph	line:422
+Adjoint acl  SA	/home/lukas/Desktop/project/independence/project/thesis/chapters/sensitivity_analysis.tex	/^\\end{align}$/;"	subsubsection	line:451
+1  Update the adjoint structure displacement to the new time step	/home/lukas/Desktop/project/independence/project/thesis/chapters/sensitivity_analysis.tex	/^A stated earlier, the matrices $\\pdfrac{\\optcrits}{\\mms}$ and $\\pdfrac{\\optcrits}{\\fstate}$ can be computed analytically. As for $\\AthreethreeALE$, we follow the methodology outlined in \\cite{Lesoinne2001} for evaluating ans storing it efficiently as the product of flux operators. Again the staggered procedure for solving the adjoint state problem shares the same computational kernels with the partitioned aeroelastic scheme described in~\\cite{Farhat1995}\\\\$/;"	paragraph	line:496
+2  Compute the adjoint fluid state by solving	/home/lukas/Desktop/project/independence/project/thesis/chapters/sensitivity_analysis.tex	/^\\end{align}\\textbf{TODO derive this equation}$/;"	paragraph	line:505
+3  Compute adjoint mesh motion in domain and on the interface	/home/lukas/Desktop/project/independence/project/thesis/chapters/sensitivity_analysis.tex	/^Again, $\\pdfrac{\\optcrits}{\\fstate}$ is computed analytically from the relations defined in the design and aeroelastic model.$/;"	paragraph	line:511
+Optimization	/home/lukas/Desktop/project/independence/project/thesis/chapters/optimization.tex	/^\\setlength{\\delimitershortfall}{0pt}$/;"	section	line:7
+Analysis Model	/home/lukas/Desktop/project/independence/project/thesis/chapters/optimization.tex	/^\\end{figure}$/;"	subsection	line:179
+Fluid structure interaction	/home/lukas/Desktop/project/independence/project/thesis/chapters/fsi.tex	/^\\setlength{\\delimitershortfall}{0pt}$/;"	section	line:4
+Coupled three-field formulation	/home/lukas/Desktop/project/independence/project/thesis/chapters/fsi.tex	/^For this thesis, we first will focus on an \\ac{ALE} formulation, a closer look into this topic in the context of en Embedded formulation will follow.\\\\$/;"	subsection	line:8
+State equation of the structure 	/home/lukas/Desktop/project/independence/project/thesis/chapters/fsi.tex	/^\\end{align}$/;"	paragraph	line:22
+Governing equation of the mesh motion 	/home/lukas/Desktop/project/independence/project/thesis/chapters/fsi.tex	/^\\end{align}$/;"	paragraph	line:32
+State equation of the fluid 	/home/lukas/Desktop/project/independence/project/thesis/chapters/fsi.tex	/^\\end{align}$/;"	paragraph	line:38
+Staggered algorithm	/home/lukas/Desktop/project/independence/project/thesis/chapters/fsi.tex	/^\\\\$/;"	subsubsection	line:58
+raisebox  .5pt	/home/lukas/Desktop/project/independence/project/thesis/chapters/fsi.tex	/^\\end{figure}$/;"	paragraph	line:70
+raisebox  .5pt	/home/lukas/Desktop/project/independence/project/thesis/chapters/fsi.tex	/^Typically, the relaxation factor is chosen as $0.5\\leq\\theta\\leq 0.9\$$/;"	paragraph	line:79
+raisebox  .5pt	/home/lukas/Desktop/project/independence/project/thesis/chapters/fsi.tex	/^where $\\ifaceprojStoF$ is a transfer matrix that also accounts for potentially non-matching meshes~\\cite{Maute2001}.$/;"	paragraph	line:86
+raisebox  .5pt	/home/lukas/Desktop/project/independence/project/thesis/chapters/fsi.tex	/^It shall be noted that an exact solution of the preceding equation is not required. In fact it is an arbitrarily chosen auxiliary pseudo-problem anyway. Therefor, a valid update of the mesh motion, that does not produce crossovers is enough. Such an update can be obtained at low cost by allying a few \\ac{PCG} iterations to Equation~\\eqref{eq:mms_update_2}.$/;"	paragraph	line:112
+raisebox  .5pt	/home/lukas/Desktop/project/independence/project/thesis/chapters/fsi.tex	/^t%$/;"	paragraph	line:127
+Derivative of the Numerical flux with respect to the fluid state variables	/home/lukas/Desktop/project/independence/project/thesis/chapters/temp.tex	/^\\setlength{\\delimitershortfall}{0pt}$/;"	section	line:7
+Manual derivation of Mach sensitivity for ideal gas	/home/lukas/Desktop/project/independence/project/thesis/chapters/temp2.tex	/^\\setlength{\\delimitershortfall}{0pt}$/;"	section	line:8
+Non Dimensional State Variables	/home/lukas/Desktop/project/independence/project/thesis/chapters/temp2.tex	/^\\def\\ndsspeed{\\nd{\\sspeed}}$/;"	section	line:22
+Derivatives at the inlet	/home/lukas/Desktop/project/independence/project/thesis/chapters/temp2.tex	/^\\end{center}$/;"	section	line:123
+Formulation of the objective function	/home/lukas/Desktop/project/independence/project/thesis/chapters/temp2.tex	/^\\cleardoublepage$/;"	subsection	line:137
+Formulation of the sensitivity equation	/home/lukas/Desktop/project/independence/project/thesis/chapters/temp2.tex	/^\\end{align}$/;"	subsection	line:154
+Derivatiopn of the sensitivity equation terms	/home/lukas/Desktop/project/independence/project/thesis/chapters/temp2.tex	/^We will therefor denote the following two paragraphs to the derivation of the two terms $\\tfrac{\\optcrit}{\\fstate}\\bigg\\rvert_{\\fstate_0}$ and $\\pdfrac{\\fstate}{\\machnum}\\bigg\\rvert_{\\fstate_0}$. It should also be pointed out, that the first one is independent of $\\absvar_i$ and thus can be efficently re-used in the case of multiple abstract parameters, e.g. a range of shape variables.$/;"	subsection	line:193
+Derivation of $ tfrac  optcrit	/home/lukas/Desktop/project/independence/project/thesis/chapters/temp2.tex	/^\\subsection{Derivatiopn of the sensitivity equation terms}$/;"	subsubsection	line:198
+Derivation of $ pdfrac  fstate	/home/lukas/Desktop/project/independence/project/thesis/chapters/temp2.tex	/^\\textbf{Everything is in the continous setting here! Check if I can to the derivation here and just do the disceretization at the end}$/;"	subsubsection	line:222
+textcircled  1	/home/lukas/Desktop/project/independence/project/thesis/chapters/temp2.tex	/^\\end{align}$/;"	paragraph	line:234
+textcircled  2	/home/lukas/Desktop/project/independence/project/thesis/chapters/temp2.tex	/^\\end{align}$/;"	paragraph	line:257
+Final result	/home/lukas/Desktop/project/independence/project/thesis/chapters/temp2.tex	/^\\textbf{TODO do a dimensionanalysis here and check whether the sums even make sense}$/;"	subsection	line:372
+genlocvec	/home/lukas/Desktop/project/independence/project/thesis/fig/scripts/sdesign_visualization_2D/genlocvec.m	/^function locvec = genlocvec(pos)$/;"	function	line:1
+movenodes	/home/lukas/Desktop/project/independence/project/thesis/fig/scripts/sdesign_visualization_2D/movenodes.m	/^function [nodesout] = movenodes(nodesin,sevalmat,disp)$/;"	function	line:1
+plotall	/home/lukas/Desktop/project/independence/project/thesis/fig/scripts/sdesign_visualization_2D/plotall.m	/^function p = plotall(f,nodes,style_nodes,nodesfine,style_nodesfine,nacanodes,style_nacanodes)$/;"	function	line:1
+seval	/home/lukas/Desktop/project/independence/project/thesis/fig/scripts/sdesign_visualization_2D/seval.m	/^function [svals] = seval(sevalmat,loc)$/;"	function	line:1
+About this template	/home/lukas/Desktop/project/independence/project/thesis/chapt_about.tex	/^\\section{About this template}$/;"	section	line:0
+The actual structure of your report	/home/lukas/Desktop/project/independence/project/thesis/chapt_structure_report.tex	/^\\section{The actual structure of your report} %Your new development\/method\/finding$/;"	section	line:0
+Abstract	/home/lukas/Desktop/project/independence/project/thesis/chapt_structure_report.tex	/^The typical sections are discussed below, but some specifics might vary according to the type of research project. Please discuss the actual structure of your thesis with your supervisor.$/;"	subsection	line:6
+Introduction	/home/lukas/Desktop/project/independence/project/thesis/Introduction.tex	/^$/;"	section	line:0
+Motivation	/home/lukas/Desktop/project/independence/project/thesis/Introduction.tex	/^\\section{Introduction}\\label{chapt:introduction}$/;"	subsection	line:2
+Objective	/home/lukas/Desktop/project/independence/project/thesis/Introduction.tex	/^The main purpose of \\ac{SA} lies in optimization. Given a set of design parameters one can imagine that the methodology above is able to give reliable values for the target function, e.g. airfoil lift, with respect to these parameters like airfoil thickness at specific locations. Based on this information it is now possible to slightly modify the airfoil, according to these new results. After that the whole process starts again until it finally converges to the optimal configuration.$/;"	subsection	line:18
+titlepage	/home/lukas/Desktop/project/independence/project/thesis/main.tex	/^\\pagenumbering{roman}$/;"	include	line:31
+Preface	/home/lukas/Desktop/project/independence/project/thesis/main.tex	/^\\include{titlepage}$/;"	include	line:34
+Nomenclature	/home/lukas/Desktop/project/independence/project/thesis/main.tex	/^\\include{Preface}$/;"	include	line:35
+acronyms	/home/lukas/Desktop/project/independence/project/thesis/main.tex	/^\\include{Nomenclature}$/;"	include	line:36
+Nomenclature	/home/lukas/Desktop/project/independence/project/thesis/Nomenclature.tex	/^\\section*{Nomenclature}\\label{sec:nomenclature}$/;"	section	line:0
+Operators	/home/lukas/Desktop/project/independence/project/thesis/Nomenclature.tex	/^\\section*{Nomenclature}\\label{sec:nomenclature}$/;"	subsection	line:1
+Algebraic operations	/home/lukas/Desktop/project/independence/project/thesis/Nomenclature.tex	/^\\subsection*{Operators}$/;"	subsection	line:3
+Analytic operations	/home/lukas/Desktop/project/independence/project/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	subsection	line:12
+Representation of scalars  tensors and other quantities	/home/lukas/Desktop/project/independence/project/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	subsection	line:22
+Symbols	/home/lukas/Desktop/project/independence/project/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	subsection	line:36
+3-field formulations	/home/lukas/Desktop/project/independence/project/thesis/Nomenclature.tex	/^\\subsection*{Symbols}$/;"	subsubsection	line:38
+Fluid Structure Interaction	/home/lukas/Desktop/project/independence/project/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	subsubsection	line:66
+Sturctural Analysis	/home/lukas/Desktop/project/independence/project/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	subsubsection	line:73
+Optimization	/home/lukas/Desktop/project/independence/project/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	subsubsection	line:82
+Fluid Mechanics	/home/lukas/Desktop/project/independence/project/thesis/Nomenclature.tex	/^\\end{tabular}$/;"	subsubsection	line:101
+Own work declaration	/home/lukas/Desktop/project/independence/project/thesis/Preface.tex	/^\\cleardoublepage$/;"	section	line:4
+Abstract	/home/lukas/Desktop/project/independence/project/thesis/Preface.tex	/^\\cleardoublepage$/;"	section	line:30
+file	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^file = open('.\/customcommands.tex','r')$/;"	variable	line:5
+content	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^content=file.read().splitlines()$/;"	variable	line:6
+symbols	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^symbols={}$/;"	variable	line:7
+abbrevations	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^abbrevations={}$/;"	variable	line:8
+operators	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^operators={}$/;"	variable	line:9
+curline	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^    curline=content.pop(0) #get a line$/;"	variable	line:15
+description	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^            description=content.pop(0)[2:].strip()$/;"	variable	line:18
+commandline	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^            commandline=content.pop(0)$/;"	variable	line:21
+macro	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^                macro=commandline.split("%")[0].strip()$/;"	variable	line:23
+explanation	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^                explanation=commandline.split("%")[1].strip()$/;"	variable	line:24
+commandline	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^                commandline=content.pop(0)$/;"	variable	line:25
+description	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^            description=content.pop(0)[2:].strip()$/;"	variable	line:28
+commandline	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^            commandline=content.pop(0)$/;"	variable	line:31
+macro	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^                macro=commandline.split("%")[0].strip()$/;"	variable	line:33
+explanation	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^                explanation=commandline.split("%")[1].strip()$/;"	variable	line:34
+commandline	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^                commandline=content.pop(0)$/;"	variable	line:35
+withexpr	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^            withexpr=re.search("with{.*}",temp[0]).group(0)$/;"	variable	line:56
+explclean	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^            explclean=temp[0].replace(withexpr,"").strip()$/;"	variable	line:58
+withexpr	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^            withexpr=withexpr.replace('with{','').replace('}','')$/;"	variable	line:59
+command	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^            command=temp[1].split("{")[1].split("}")[0]$/;"	variable	line:60
+numarg	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^            numarg=int(temp[1].split("{")[1].split("}")[1][1])$/;"	variable	line:61
+command	/home/lukas/Desktop/project/independence/project/thesis/create_nomencature.py	/^            command=symbols[descr][expl].split("{")[1].split("}")[0]$/;"	variable	line:83
+Abbrevations	/home/lukas/Desktop/project/independence/project/thesis/acronyms.tex	/^\\subsection*{Abbrevations}$/;"	subsection	line:0
+master-thesis	/home/lukas/Desktop/project/independence/project/thesis/README.md	/^# master-thesis$/;"	function	line:1
+Build	/home/lukas/Desktop/project/independence/project/thesis/README.md	/^## Build$/;"	function	line:4
+Structure	/home/lukas/Desktop/project/independence/project/thesis/README.md	/^## Structure$/;"	function	line:8
+main.tex	/home/lukas/Desktop/project/independence/project/thesis/README.md	/^### main.tex$/;"	function	line:10
+header.tex	/home/lukas/Desktop/project/independence/project/thesis/README.md	/^### header.tex$/;"	function	line:13
+customcommands.tex	/home/lukas/Desktop/project/independence/project/thesis/README.md	/^### customcommands.tex$/;"	function	line:16
+colordefinitions.tex	/home/lukas/Desktop/project/independence/project/thesis/README.md	/^### colordefinitions.tex$/;"	function	line:20
+/chapters/*	/home/lukas/Desktop/project/independence/project/thesis/README.md	/^### \/chapters\/*$/;"	function	line:23
+The Finite Volume methodaaa	/home/lukas/Desktop/project/independence/project/thesis/finite_volume_method.tex	/^\\setlength{\\delimitershortfall}{0pt}$/;"	section	line:6
+General	/home/lukas/Desktop/project/independence/project/thesis/finite_volume_method.tex	/^\\section{The Finite Volume methodaaa}$/;"	subsection	line:8
+Finite Volume method for fluid mechanics	/home/lukas/Desktop/project/independence/project/thesis/finite_volume_method.tex	/^Of course, the conservative value is defined as being constant within one cell, so there will be different values on faces or edges, depending on which side one is looking at. There are different approaches on how to choose an appropriate value. And the choice may greatly effect the numerical properties. In a \\ac{FV} solver, the numerical flux at the interface is typically constructed such, that upwinding is achieved.$/;"	subsection	line:38
+Treatment of the viscous term	/home/lukas/Desktop/project/independence/project/thesis/finite_volume_method.tex	/^\\cleardoublepage$/;"	subsection	line:114
+Geometric considerations	/home/lukas/Desktop/project/independence/project/thesis/finite_volume_method.tex	/^Since we used the same step-function based test-functions for all terms in equation \\eqref{fv_weak_form_felike}, this approach is not only consistent, for the special case, of linear triangles we have shown that our finite element term is equivalent to a FV approximation.$/;"	subsubsection	line:157

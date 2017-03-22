@@ -30,24 +30,25 @@
 \fancyhead[LO]{\fancyplain{}{\thesistype:\ \shorttitle}}
 \pagenumbering{roman}
 
+
 \include{titlepage}
 \include{Preface}
 \include{Nomenclature}
 \include{acronyms}
-\include{Introduction}
+% \include{Introduction}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% beginning of actual thessis content         %%
 %% provide all chapters in seperate files, and %%
 %% use the \include command                    %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \cleardoublepage
 %%%\insertblankpage
 
 \pagenumbering{arabic}
-\setboolean{@twoside}{true} 
+\setboolean{@twoside}{true}
 \fancyhead[RO,LE,LO]{\fancyplain{}{}}
 \fancyhead[CE]{\fancyplain{}{\leftmark}}
 \fancyhead[CO]{\fancyplain{}{\rightmark}}
@@ -57,7 +58,7 @@
 %%                                             %%
 %%                Chapters                     %%
 %%                                             %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subfile{chapters/about}
 \cleardoublepage
 \subfile{chapters/fluid_mechanics}
@@ -72,16 +73,17 @@
 \cleardoublepage
 \subfile{chapters/fiver}
 \cleardoublepage
-\subfile{chapters/temp}
-\cleardoublepage
-\subfile{chapters/temp2}
+%\subfile{chapters/temp}
+%\cleardoublepage
+%\subfile{chapters/temp2}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                             %%
 %%                Appendix                     %%
 %%                                             %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \cleardoublepage
 \appendix{}
 %\section{First Appendix}
@@ -90,9 +92,9 @@
 
 
 \cleardoublepage
-
 %% Bibliography is provided via Bibtex.
 
+%TODO uncomment
 \bibliography{bibliography}{}
 \bibliographystyle{plain}
 

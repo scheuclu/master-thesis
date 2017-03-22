@@ -1,0 +1,266 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\def\mainpath{/home/lukas/Desktop/project/independence/project/thesis/}
+\def\tikzpath{\mainpath/fig/tikz}
+
+\usetikzlibrary{positioning}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepgfplotslibrary{groupplots}
+
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\input{\mainpath/customcommands}
+
+\tikzset{>=latex}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+            
+            
+\tikzset{cross/.style={cross out, draw=black, minimum size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt},
+cross/.default={1pt}}
+
+\input{\mainpath/colordefinitions}
+\begin{document}
+
+
+
+\begin{tikzpicture}
+
+\def\R{4pt}
+\def\styleprimal{thick};
+\def\styledual{[dashed,thick]};
+\def\stylesurrogate{[dashed, ultra thick]};
+
+\def\d{1}
+
+\def\x{0}
+\def\y{0}
+
+\def\xx{3}
+\def\yy{3}
+
+\def\xxx{0}
+\def\yyy{5}
+
+
+\node (i) at (\x,\y)      [label=below:{i}] {};
+\node (j) at (\xx,\yy)    [label=above:{j},label=left:{T}] {};
+\node (k) at (\xxx,\yyy)  [label=above:{k}] {};
+
+\node (mij) at ($(i)!0.5!(j)$)      [label=left:{C}]{};
+\node (mjk) at ($(j)!0.5!(k)$)      [label=above:{h}] {};
+\node (mik) at ($(i)!0.5!(k)$)      {};
+
+\node (c) at (\x/3+\xx/3+\xxx/3,\y/3+\yy/3+\yyy/3)      {};
+
+
+%triangle normal
+\node (mkmjk) at ($(k)!0.5!(mjk)$) {};
+\node (atip) at (1.20,5.1)  [] {$n_T$};
+\draw [->] (mkmjk) -- (atip);
+
+%dual grid normal
+\node (mcmik) at ($(c)!0.5!(mik)$) {};
+\node (btip) at (0.4,3.2) {$n_C$};
+\draw [->] (mcmik) -- (btip);
+
+
+\draw [\styleprimal]  (i) edge (j);
+\draw [\styleprimal]  (j) edge (k);
+\draw [\styleprimal]  (k) edge (i);
+
+\fill (i) circle [radius=\R];
+\fill (j) circle [radius=\R];
+\fill (k) circle [radius=\R];
+
+\fill [draw=black, fill=white](mij) circle [radius=\R/2];
+\fill [draw=black, fill=white](mjk) circle [radius=\R/2];
+\fill [draw=black, fill=white](mik) circle [radius=\R/2];
+
+\fill [draw=black, fill=white](c) circle [radius=\R/2];
+
+
+
+\draw [dashed,thick]  (mij) edge (c);
+\draw [dashed,thick]  (mik) edge (c);
+%\draw [dashed]  (mjk) edge (c);
+\draw [dashed]  (i) edge (mjk);
+
+\draw [dashed,red]  (mij) edge (mik);
+
+
+
+
+\node (p1) at (\x+\d,\y)  [] {};
+\node (p2) at (\xx,\yy-\d)  [] {};
+\node (p3) at (\x-\d/2,\y+\d)  [] {};
+\node (p4) at (\xxx-\d,\yyy-\d/2)  [] {};
+
+\draw [\styleprimal]  (i) edge (p1);
+\draw [\styleprimal]  (j) edge (p2);
+\draw [\styleprimal]  (i) edge (p3);
+\draw [\styleprimal]  (k) edge (p4);
+
+\node (p5) at (2,1)  [] {};
+\node (p6) at (-0.6,2.5)  [] {};
+\draw \styledual  (mij) edge (p5);
+\draw \styledual  (mik) edge (p6);
+
+
+%legend
+\node (l1) at (5,4.5) [label=right:{vertices}]{};
+\node (l2)at  (5,3.5) [label=right:{median points}]{};
+\fill (l1) circle [radius=\R];
+\fill [draw=black, fill=white](l2) circle [radius=\R];
+
+\node (l3) at  (4,2.5) []{};
+\node (l4) at  (5,2.5) [label=right:{primal grid}]{};
+\draw [\styleprimal]  (l3) edge (l4);
+
+\node (l5) at  (4,1.5) []{};
+\node (l6) at  (5,1.5) [label=right:{dual grid}]{};
+\draw \styledual  (l5) edge (l6);
+
+
+
+%%nodes of primal cells
+%\node (v1) at (-5,3)      {};
+%\node (v3) at (-2.5,5.5)  {};
+%\node (v4) at (-3.5,-0.5) {};
+%\node (v2) at (-2,2) [label=below:{i}] {};
+%\node (v6) at (1,2)  [label=below:{j}] {};
+%\node (v5) at (0,-1)      {};
+%\node (v9) at (2.5,4.5)   {};
+%\node (v8) at (4.5,1)     {};
+%\node (v7) at (3.5,-1)    {};
+%
+%%edges of primal cells
+%\draw [\styleprimal]  (v1) edge (v2)
+%                      (v3) edge (v2)
+%                      (v4) edge (v2)
+%                      (v5) edge (v2)
+%                      (v6) edge (v2)
+%                      (v5) edge (v6)
+%                      (v7) edge (v6)
+%                      (v8) edge (v6)
+%                      (v9) edge (v6)
+%                      (v3) edge (v6)
+%                      (v3) edge (v1)
+%                      (v1) edge (v4)
+%                      (v4) edge (v5)
+%                      (v7) edge (v5)
+%                      (v7) edge (v8)
+%                      (v8) edge (v9)
+%                      (v3) edge (v9);
+%
+%
+%
+%
+%%nodes of dual cells
+%\node (v19) at (-3.5,3.5)       {};
+%\node (v11) at (-3.5,1.5)       {};
+%\node (v13) at (-1.973,0.1486)  {};
+%\node (v15) at (-0.5,1)         {};
+%\node (v17) at (-1.1785,3.0384) {};
+%\node (v21) at (0.6188,3.9709)  {};
+%\node (v23) at (2.5,2.5)        {};
+%\node (v25) at (2.9161,0.8087)  {};
+%\node (v27) at (1.389,0.0655)   {};
+%\node (v18) at (-2.2553,3.5655) {};
+%\node (v10) at (-3.5,2.5)       {};
+%\node (v12) at (-2.8407,0.633)  {};
+%\node (v14) at (-1,0.5)         {};
+%\node (v16) at (-0.5,2)         {};
+%\node (v20) at (-0.6486,3.6486) {};
+%\node (v22) at (1.6998,3.2006)  {};
+%\node (v24) at (2.7674,1.4979)  {};
+%\node (v26) at (2.4161,0.2952)  {};
+%\node (v28) at (0.4566,0.4574)  {};
+%
+%
+%%edges of dual cells
+%\draw [\styledual] (v10) edge (v11)
+%                   (v11) edge (v12)
+%                   (v12) edge (v13)
+%                   (v13) edge (v14)
+%                   (v14) edge (v15)
+%                   (v15) edge (v16)
+%                   (v16) edge (v17)
+%                   (v17) edge (v18)
+%                   (v18) edge (v19)
+%                   (v19) edge (v10)
+%                   (v17) edge (v20)
+%                   (v20) edge (v21)
+%                   (v21) edge (v22)
+%                   (v22) edge (v23)
+%                   (v23) edge (v24)
+%                   (v24) edge (v25)
+%                   (v25) edge (v26)
+%                   (v26) edge (v27)
+%                   (v27) edge (v28)
+%                   (v28) edge (v15);
+%
+%
+%%draw the material interface
+%\node (v29) at (0.8379,5.0682) {};
+%\node (v30) at (1.312,-1.2561) {};
+%\draw [fill=black, opacity=0.2](3.6472,5.2422) .. controls (-1.4069,3.7557) and (-0.9474,-2.2848) .. (3.2805,-2.245);
+%\draw [draw=black, thick](3.6472,5.2422) .. controls (-1.4069,3.7557) and (-0.9474,-2.2848) .. (3.2943,-2.2589);
+%
+%
+%%draw the surrogate interface
+%\draw \stylesurrogate (v29) edge (v21)
+%                      (v21) edge (v20)
+%                      (v20) edge (v17)
+%                      (v17) edge (v16)
+%                      (v16) edge (v15)
+%                      (v15) edge (v28)
+%                      (v28) edge (v27)
+%                      (v27) edge (v30);
+%
+%
+%%annotations-
+%\node (v31) at (-3.4,-2.2) {Surrogate interface};
+%\node (v33) at (0.1771,-2.2) {Material interface};
+%\node (v32) at (-0.1176,0.7609) {};
+%\node (v34) at (0.8024,-1.3391) {};
+%\draw [->] (v31) edge (v32);
+%\draw [->] (v33) edge (v34);
+%\node (v35) at (-3.9577,6) {dual cell};
+%\node (v36) at (-2.8576,3.5409) {};
+%\draw [->] (v35) edge (v36);
+%\node (v37) at (-1,6) {primal cell};
+%\node (v38) at (-1.5,4.5) {};
+%\draw [->] (v37) edge (v38);
+%
+%%legend
+%\node (l1) at (5,4.5) [label=right:{active fluid node}]{};
+%\node (l2)at (5,3.5) [label=right:{ghost node}]{};
+%\fill (l1) circle [radius=\R];
+%\fill [draw=black, fill=white](l2) circle [radius=\R];
+%
+%
+%%node circles
+%\fill (v1) circle [radius=\R];
+%\fill (v2) circle [radius=\R];
+%\fill (v3) circle [radius=\R];
+%\fill (v4) circle [radius=\R];
+%\fill (v5) circle [radius=\R];
+%\fill [draw=black, fill=white](v6) circle [radius=\R];
+%\fill [draw=black, fill=white](v7) circle [radius=\R];
+%\fill [draw=black, fill=white](v8) circle [radius=\R];
+%\fill [draw=black, fill=white](v9) circle [radius=\R];
+
+\end{tikzpicture}
+
+
+
+\end{document}
+
+
