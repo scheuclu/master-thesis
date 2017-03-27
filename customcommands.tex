@@ -68,10 +68,11 @@
 % SYMBOLS
 % 3-field formulations
 %==============================
-\newcommand{\EOSstruct}{\mathcal{S}_{EOS}}     %State equation of the structure
-\newcommand{\EOSmesh}  {\mathcal{D}_{EOS}}     %State equation of the mesh
-\newcommand{\EOSfluid} {\mathcal{F}_{EOS}}     %State equation of the fluid
-\newcommand{\mms}       {\vec{x}}        %Fluid mesh motion
+\newcommand{\EOSstruct}{\mathcal{S}_{gov}}     %State equation of the structure
+\newcommand{\EOSmesh}  {\mathcal{D}_{gov}}     %State equation of the mesh
+\newcommand{\EOSfluid} {\mathcal{F}_{gov}}     %State equation of the fluid
+\newcommand{\mpos}       {\vec{x}}        %Fluid mesh motion
+\newcommand{\mms}       {\dot{\vec{x}}}        %Fluid mesh motion
 \newcommand{\mmsad}       {\vec{a}_{\vec{x}}}        %Adjoint fluid mesh motion
 \newcommand{\fstate}    {\vec{w}}        %Fluid state vector
 \newcommand{\fstatead}{\vec{a}_{\vec{w}}}  %Adjoint fluid state vector
@@ -147,7 +148,7 @@
 \newcommand{\heatflux}{\vec{\heatfluxcomp}} %Heat flux vector
 \newcommand{\viscosdyn}{\mu}          %Dynamic viscosity
 \newcommand{\viscoskin}{\nu}          %Kinematic viscosity
-\newcommand{\reynolds}{RE}            %Reynolds number
+\newcommand{\reynolds}{R_{e}}            %Reynolds number
 \newcommand{\specheatratio}{\gamma}   %Specific heat ratio
 \newcommand{\shr}{\gamma}   %Specific heat ratio
 \newcommand{\jac}{\mathcal{H}}        %Jacoian matrix
@@ -159,16 +160,20 @@
 \newcommand{\M}{M_a}              %Mach number
 
 
+
+\newcommand{\dualcell}{\mathcal{C}}
 \newcommand{\difftensor}{\mathbb{K}}
 \newcommand{\primmesh}{\mathcal{P}_h}
 \newcommand{\dualmesh}{\mathcal{D}_h}
 \newcommand{\normal}{\vec{n}}        %Symbol for dyadic product
+\newcommand{\wnormal}{\vec{\nu}}        %Weighted normal
 \newcommand{\normalx}{n_1}        %Symbol for dyadic product
 \newcommand{\normaly}{n_2}        %Symbol for dyadic product
 \newcommand{\normalz}{n_3}        %Symbol for dyadic product
 \newcommand{\testfunc}{\phi}         %Variational test function
 \newcommand{\vertex}{\boldsymbol{X}}  %Mesh vertex
 \newcommand{\vertexset}{\mathsf{\kappa}} %Set of vertices
+\newcommand{\elementset}{\mathsf{\lambda}} %Set of elements related to vertex i
 \newcommand{\fluxesnum}{\boldsymbol{\phi}} %numerical flux
 \newcommand{\roeavgmat}{\tensor{A}_{\text{Roe}}}  %Averaging matrix of the Roe flux
 \newcommand{\eigval}{\lambda}         %Eigen value
@@ -224,13 +229,13 @@
 \newcommand{\tablesix}[6]{
 \begin{tabular}{|c|l|l|}
 \hline
-  \parbox[t]{2mm}{\multirow{3}{*}{\rotatebox[origin=c]{90}{Eulerian}}}  & EULER & #1 \\
-  \hhline{~--}                                                          & NSG   & #2 \\
-  \hhline{~--}                                                          & RANS  & #3 \\
+  \parbox[t]{2mm}{\multirow{3}{*}{\rotatebox[origin=c]{90}{Eulerian}}}  & Euler      & #1 \\
+  \hhline{~--}                                                          & \ac{NSE}   & #2 \\
+  \hhline{~--}                                                          & \ac{RANS}  & #3 \\
 \hline
-  \parbox[t]{2mm}{\multirow{3}{*}{\rotatebox[origin=c]{90}{ALE}}}       & EULER & #4 \\
-  \hhline{~--}                                                          & NSG   & #5 \\
-  \hhline{~--}                                                          & RANS  & #6 \\
+  \parbox[t]{2mm}{\multirow{3}{*}{\rotatebox[origin=c]{90}{ALE}}}       & Euler      & #4 \\
+  \hhline{~--}                                                          & \ac{NSE}   & #5 \\
+  \hhline{~--}                                                          & \ac{RANS}  & #6 \\
 \hline
 \end{tabular}
 }

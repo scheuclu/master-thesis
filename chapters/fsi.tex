@@ -9,19 +9,19 @@ For this thesis, we first will focus on an \ac{ALE} formulation, a closer look i
 
 \subsection{Coupled three-field formulation}
 In an aeroelastic ALE problem, three solution fields have to be considered. Firstly, the usual fluid problem has to be solved. Over the \ac{FSI} interface, the fluid now interacts with the structure, imposing a Neumann problem on it. Finally, since we are considering \ac{ALE} here, a governing equation for the fluid mesh motion has to be introduced, which closes the system.\\
-Generally speaking, there exist two main approaches for solving this problem. Firstly, one can solve all three problems in one joint system, leading to a so-called monolithic algorithm. The advantage is, that the formulation is consistent and compared to the subsequently introduced staggered algorithm it does not introduce errors in the coupling. However, the solution of the monolithic system is cumbersome, since completely different physics are involved.
+Generally speaking, there exist two main approaches for solving this problem. Firstly, one can solve all three problems in one joint system, leading to a so-called monolithic algorithm. The advantage is, that the formulation is consistent and compared to the subsequently introduced staggered algorithm it does not introduce errors in the coupling. However, the solution of the monolithic system is cumbersome, since completely different physics are involved.\\
 In practice, using a so-called "staggered algorithm" has shown to be a more robust choice. In a staggered algorithm, fluid- and structure problem are updated from time step $n$ to $n+1$ one after the other. Therefore, consistency is lost, and (if no correction is applied) accuracy drops to first order. On the other hand each problem by itself can be treated by well established, optimized, existing solvers so the solution procedure is more robust.\\
 This thesis utilizes the staggered approach. We have coupled a three-dimensional second order finite volume code~\cite{Aerof} with a second order accurate finite element code\cite{Aeros} according to the popular three-field formulation of \cite{Farhat1995}.\\
  \\
 The three-field formulation of \ac{ALE} aeroelasticity can be written as:
 \begin{align}
-&\text{state equation of the structure:}  &\EOSstruct (\absvars,\structdisp,\mms,\fstate) = \vec{0} \label{eq:3field_structure}\\
+&\text{governing equation of structure:}  &\EOSstruct (\absvars,\structdisp,\mms,\fstate) = \vec{0} \label{eq:3field_structure}\\
 &\text{governing equation of meshmotion:} &\EOSmesh   (\absvars,\structdisp,\mms)         = \vec{0} \label{eq:3field_mesh}\\
-&\text{state equation of the fluid:}      &\EOSfluid  (\absvars,\mms,\fstate)             = \vec{0}
+&\text{governing equation of the fluid:}  &\EOSfluid  (\absvars,\mms,\fstate)             = \vec{0}
 \label{eq:3field_fluid}\\
 \end{align}
 
-\paragraph{State equation of the structure:}
+\paragraph{Governing equation of the structure:}
 For a simple linear case, that is assumed in this thesis, the structure state equation can be written as
 \begin{align}\label{eq:eos_struct}
 \EOSstruct = \stiffmat \structdisp - \vec{P}(\mms,\fstate)
@@ -32,13 +32,13 @@ where $\stiffmat$ represents the finite element stiffness matrix and $\vec{P}$ d
 \end{align}
 
 \paragraph{Governing equation of the mesh motion:}
-In an Arbitrary Lagrangian Eulerian formulation, the fluid mesh deforms with the structure. A governing equation is thus required to describe that deformation; Typically a simple linear pseudo finite element approach or a spring analogy method~\cite{Farhat1998} is used to do so. A Dirichlet problem is solved to move the mesh.
+In an Arbitrary Lagrangian Eulerian formulation, the fluid mesh deforms with the structure. A governing equation is thus required to describe that deformation. Typically a simple linear pseudo finite element approach or a spring analogy method~\cite{Farhat1998} is used to do so. A Dirichlet problem is solved to move the mesh.
 \begin{align}\label{eq:eos_mesh}
 \EOSmesh = \fic{\stiffmat} \mms~~~\text{with}~~~\mms=\structdisp~\text{on}~\Gamma_{F|S}
 \end{align}
 
-\paragraph{State equation of the fluid:}
-The state equation of the fluid depends on the flow model used, as well as ton whether a Eulerian or Lagrangian approach is used. A quick overview is provided in Section~\ref{sec:fluid_equations_basic}.\\
+\paragraph{Governing equation of the fluid:}
+The state equation of the fluid depends on the flow model used, as well as on whether a Eulerian or Lagrangian approach is used. A quick overview is provided in Section~\ref{sec:fluid_equations_basic}.\\
 Please note, that the frame of reference(Eulerian, Lagrangian, Arbitrary Lagrangian Eulerian) has nothing to do with the fluid equation type.
 
 The state equation of the fluid(Equation three in \eqref{eq:3field_basic} for can be expressed as
@@ -46,12 +46,28 @@ The state equation of the fluid(Equation three in \eqref{eq:3field_basic} for ca
 \def\arraystretch{1.5}
 \EOSfluid= 
 \tablesix
-{$\fluxmatconv_2(\mms,\fstate)$}
-{$\fluxmatconv_2(\mms,\fstate)+\fluxmatdiff_2(\mms,\fstate)$}
-{$\fluxmatconv_2(\mms,\fstate)+\fluxmatdiff_2(\mms,\fstate)-\turbmat(\mms,\fstate,\turbparamvec)$}
-{$\dot{(\cellvolmat(\mms)\fstate)}+\fluxmatconv_2(\mms,\fstate)$}
-{$\dot{(\cellvolmat(\mms)\fstate)}+\fluxmatconv_2(\mms,\fstate)+\fluxmatdiff_2(\mms,\fstate)$}
-{$\dot{(\cellvolmat(\mms)\fstate)}+\fluxmatconv_2(\mms,\fstate)+\fluxmatdiff_2(\mms,\fstate)-\turbmat(\mms,\fstate,\turbparamvec)$}
+{$\pdfrac{\fstate}{t}+\nabla\fluxesconv(\mpos,\fstate)$}
+{$\pdfrac{\fstate}{t}+\nabla\fluxesconv(\mpos,\fstate)+\nabla\fluxesdiff(\mpos,\fstate)$}
+{$\pdfrac{\fstate}{t}+\nabla\fluxesconv(\mpos,\fstate)+\nabla\fluxesdiff(\mpos,\fstate)-\mathcal{S}(\mpos,\fstate,\turbparamvec)$}
+{$\pdfrac{\fstate}{t}+\nabla\fluxesconv(\mpos,\mms,\fstate)$}
+{$\pdfrac{\fstate}{t}+\nabla\fluxesconv(\mpos,\mms,\fstate)+\nabla\fluxesdiff(\mpos,\mms,\fstate)$}
+{$\pdfrac{\fstate}{t}+\nabla\fluxesconv(\mpos,\mms,\fstate)+\nabla\fluxesdiff(\mpos,\mms,\fstate)-\mathcal{S}(\mpos,\mms,\fstate,\turbparamvec)$}
+ = \vec{0}
+\end{align}
+
+After \ac{FV} discretization of the convective part, and \ac{FE} discretization of the diffusive part, as explained in section \textbf{TODO}, the discrete system can be written as
+
+\begin{align}
+\def\arraystretch{1.5}
+\EOSfluid= 
+\tablesix
+{$\fluxmatconv(\mpos,\fstate)$}
+{$\fluxesconv(\mpos,\fstate)+\fluxesdiff(\mpos,\fstate)$}
+{$\fluxesconv(\mpos,\fstate)+\fluxesdiff(\mpos,\fstate)-\mathcal{S}(\mpos,\fstate,\turbparamvec)$}
+{$\dot{(\cellvolmat(\mms)\fstate)}+\fluxesconv(\mms,\fstate)$}
+{$\dot{(\cellvolmat(\mms)\fstate)}+\fluxesconv(\mms,\fstate)+\fluxesdiff(\mms,\fstate)$}
+{$\dot{(\cellvolmat(\mms)\fstate)}+\fluxesconv(\mms,\fstate)+\fluxesdiff(\mms,\fstate)-\mathcal{S}(\mms,\fstate,\turbparamvec)$}
+ = \vec{0}
 \end{align}
 where $\fluxmatconv_2$ denotes the vector of Roe fluxes resulting from a second-order finite volume discretization of the convective part of the \ac{NSE} \ref{sec:fv_fluid_mechanics}, $\fluxmatdiff_2$ likewise denotes a second-order FV discretization oft the diffusive part, $\cellvolmat$ denotes the matrix of cell volumes and $\turbmat$ denotes the matrix resulting from the additional turbulence closures in the \ac{RANS} equations(see Section\ref{sec:rans}).\\
 The above table also gives a very nice overview over the different equation types and the used simplifications. The Euler equations are obviously obtained by neglecting the diffusive part of the \ac{NSE}. One can also see that the \ac{RANS} equations are more difficult than the \ac{NSE} themselves. However, as explained in \textbf{TODO}, the advantage is that \ac{RANS} can operate on much coarser meshes that do not have to resolve the small scale turbulence phenomena, which makes the more numerically efficient overall in many applications.

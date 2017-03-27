@@ -6,7 +6,7 @@
 \section{Fluid mechanics}\label{sec:fluid_mechanics}
 \subsection{Eulerian and Lagrangian view}\label{sec:eulerian_lagrangian}
 In time dependent analytical physics there are two basic concepts of how to view a system of interest: the Eulerian and the Lagrangian approach. It shall be stressed here, that Eulerian view and Euler equations are two totally separate things.\\
-One view this issue from different perspectives, but what the difference points down to is the interpretation of the time derivative. Since we will be using the different derivatives frequently in this thesis, a short introduction shall be provided.
+One view this issue from different perspectives, but what the difference boils down to is the interpretation of the time derivative. Since we will be using the different derivatives frequently in this thesis, a short introduction shall be provided.
 \subsubsection{Material derivative}
 The material derivative of a property, is a derivative(rate of change), that follows a specific particle 'p'. That means that at every time instance the material derivative gives as the current value of the property of a specific particle. Since in general, a particle will move its position in time quite a lot, some mean is required to track the particles motion. The material derivative is also known as the Lagrangian concept, and is commonly used in Solid mechanics, since the motion of the solid particles is typically little, or at least nearly uniform over the body, which makes position tracking easy.
 
@@ -20,15 +20,15 @@ Material and Eulerian derivatives can be linked via the so-called convective rat
 
 In fluid mechanics the Eulerian concept is typically prefered.\\
 However, when looking at fluid-structure interaction problems, the interface is typically moving. To account for that motion in the fluid, one either has to come up with some cell-intersection approach, or the fluid-mesh has to be deformed to.\\
-An appealing and straightforward approach to do so, is the so called Arbitrary Lagrangian Eulerian(\ac{ALE}) approach. As the name suggest, it is a hybrid between Eulerian and Lagrangian point of view. The \ac{ALE} approach allows to utilize the best of both approaches. The mesh can either be fixed, moved with the continuum in an Eulerian manner, or be moved in some arbitrarily specified manner in between. The \ac{ALE} method can handle larger distortions than a pure Eulerian would, while still allowing to keep interface continuity between the structure and the fluid, such that no intersection of fluid cells is necessary.\\
-In this thesis, both Eulerian and \ac{ALE} methods will be covered. In general, no recommendation on to prefer one or the other method can be given. Instead, one should always be aware of the strength and weaknesses of either method and choose the appropriate one for a specific problem accordingly.
+An appealing and straightforward approach to do so, is the so called Arbitrary Lagrangian Eulerian(\ac{ALE}) approach. As the name suggest, it is a hybrid between Eulerian and Lagrangian point of view. The \ac{ALE} approach allows to utilize the best of both approaches. The mesh can either be fixed, moved with the continuum in an Eulerian manner, or be moved in some arbitrarily specified manner inbetween. The \ac{ALE} method can handle larger distortions than a pure Eulerian would, while still allowing to keep interface continuity between the structure and the fluid, such that no intersection of fluid cells is necessary.\\
+In this thesis, both Eulerian and \ac{ALE} methods will be covered. In general, no recommendation on to prefer one or the other method can be given. Instead, one should always be aware of the pros and cons of either method and choose the appropriate one for a specific problem accordingly.
 
 
 \subsection{Basic equations of fluid mechanics}\label{sec:fluid_equations_basic}
 
 The physics of fluid motion are governed by the so-called \acf{NSE}. These equations were derived independently of one another by Claude-Louis Navier and George Gabriel Stokes as a generalization of the Euler-equations that now includes viscosity effects.
 In general one distinguishes the incompressible and the compressible \ac{NSE}. The validity of their application depends on the problem setup. As a rule of thumb, flows with Mach-numbers lower than $0.3$ can usually be safely approximated by the incompressible \ac{NSE}.\\
-The Navier stokes equation consist of the \acf{NSME}, the \ac{NSCE} and, if the compressible equations are solved, the \ac{NSEE}. In the literature, the term \ac{NSE} is often synonymously used for the \ac{NSCE}, in this thesis however, with \ac{NSE} we will always refer to the full set of equations ans will explicitly name the momentum, continuity or energy equation otherwise.
+The Navier stokes equation consist of the \acf{NSME}, the \ac{NSCE} and, if the compressible equations are solved, the \ac{NSEE}. In the literature, the term \ac{NSE} is often synonymously used for the \ac{NSCE}, in this thesis however, with \ac{NSE} we will always refer to the full set of equations and will explicitly name the momentum, continuity or energy equation otherwise.
 
 \subsubsection{Incompressible \acl{NSE}}
 The incompressible \ac{NSE} are derived by putting a few assumptions on the Cauchy stress tensor:
@@ -52,7 +52,7 @@ In convective form, the incompressible \ac{NSME} can be written as
 +
 \underbrace{g}_{\text{External source}}
 \end{align}
-where $\specificwork$ is the specific thermodynamic work, whiuch statisfies
+where $\specificwork$ is the specific thermodynamic work, which satisfies
 \begin{align}
 \nabla\specificwork =
 \frac{1}{\rho}\nabla\pres
@@ -62,10 +62,11 @@ And the incompressible \ac{NSCE} can be written as
 \nabla\cdot\fluidvel=0
 \end{align}
 
-It shall be noted, that the in the incompressible \ac{NSE}, the pressure can only be solved up to a certain constant. The pressure at a certain point therefore has to be fixed, or the system will be singular.
+It shall be noted, that in the incompressible \ac{NSE}, the pressure can only be solved up to a certain constant. The pressure at a certain point therefore has to be fixed, or the system will be singular.
+
 
 \subsubsection{Compressible \acl{NSE}}\label{sec:nsg_compressible}
-Compared to the incompressible \ac{NSE}, the compressible \ac{NSE} introduce one additional unknown, since the density can now vary. To close the system, one additional equation is required, the energy equation.\\
+Compared to the incompressible \ac{NSE}, the compressible \ac{NSE} introduce one additional unknown, since the density can now vary. To close the system, one additional equation is required: the energy equation.\\
 The compressible \ac{NSE} are derived by making the following assumptions:
 \begin{itemize}
 \item Galilean invariance of the stress tensor
@@ -163,7 +164,7 @@ The total energy $\energytot$ can be computed as a sum of the so called internal
 \end{align}
 
 
-Bringing the convective form of the compressible \ac{NSE}~\eqref{eq:nsg_compressible} into the conservative form~\eqref{eq:nsg_conservative_form_nsg}, one can derive $\fluxesconv$ and $\fluxesdiff$ as
+Bringing the convective form of the compressible \ac{NSE}~\eqref{eq:nsg_compressible} into the conservative form~\eqref{eq:nsg_conservative_form}, one can derive the convective fluxes $\fluxesconv$ as
 \begin{align}\label{eq:fluxesconv}
 \fluxesconv
 %&=
@@ -256,9 +257,9 @@ The main idea of the approach is to decompose an instantaneous quantity into tim
 \fstate=\underbrace{\av{\fstate}}_{time-average}+\underbrace{\fluc{\fstate}}_{fluctuation}
 \end{align}
 
-When substituting this decomposition back into the \ac{NSE}(and injecting several other approximations), a closure problem induced by the arising non-linear Reynolds stress term $\reynolds_{ij}=-\av{\fluc{v_i}\fluc{v_j}}$ arises. Additional modeling is therefore requires to close the \ac{RANS} equations, which has led to many different turbulence models.\\
+When substituting this decomposition back into the \ac{NSE}(and injecting several other approximations), a closure problem induced by the arising non-linear Reynolds stress term ${\reynolds}_{ij}=-\av{\fluc{v_i}\fluc{v_j}}$ arises. Additional modeling is therefore required to close the \ac{RANS} equations, which has led to many different turbulence models.\\
 \\
-Whatever turbulence model is chosen, the fluid-state vector is augmented by the m parameters of the turbulence model
+Whatever turbulence model is chosen, the fluid-state vector is augmented by the $m$ parameters of the turbulence model
 \begin{align}
 \fstaterans \leftarrow
 \begin{bmatrix}
@@ -277,7 +278,7 @@ Whatever turbulence model is chosen, the fluid-state vector is augmented by the 
 	\end{bmatrix}
 \end{align}
 
-The \ac{RANS} equation can then be written as
+The \ac{RANS} equations can then be written as
 \begin{align}\label{eq:rans_eqautions}
 \pdfrac{\av{\fstate}}{t} + \nabla\cdot\fluxesconv(\av{\fstate}) +  \nabla\cdot\fluxesdiff(\av{\fstate}) =
 \turbulencesource(\av{\fstate},\turbulenceparam_1,\cdots,\turbulenceparam_m)

@@ -5,22 +5,23 @@
 
 \setlength{\delimitershortfall}{0pt}
 
-\section{The Finite Volume methodaaa}
+\section{The Finite Volume method}\label{sec:finite_volume_method}
 \subsection{General}
-Like \ac{FD} or \ac{FE}, the \ac{FV} method is a mean to solving a \ac{PDE} by transforming it into a discrete algebraic form. In the field of fluid mechanics, the finite volume method is the most popular approach. Other than \ac{FD} or \ac{FE}, the finite volume is conservative by construction. Other than \ac{FD} it can easily be implemented for unstructured grids. Compared to the \ac{FE} method, where boundary conditions come naturally from the formulation, this causes some difficulties in \ac{FV}.\\
+Like \ac{FD} or \acf{FE}, the \acf{FV} method is a mean of solving a \ac{PDE} by transforming it into a discrete algebraic form. In the field of fluid mechanics, the finite volume method is the most popular approach. Other than \ac{FD} or \ac{FE}, the finite volume is conservative by construction. In contrast to \ac{FD} it can easily be implemented for unstructured grids. Compared to the \ac{FE} method, where boundary conditions come naturally from the formulation, this causes some difficulties in \ac{FV}.\\
 It shall also be mentioned that the introduction of stabilization schemes(like streamline upwinding), is much easier in an \ac{FV} formulation.
 Overall, for \ac{CFD}, \ac{FV} has so far shown to be the best compromise between accuracy, stability and efficiency.
  \\
  \\
-Finite volume methods are typically derived from the so called conservative form of a \ac{PDE}. It is shown in Section~\ref{sec:conservative_form_nsg}, that the \ac{NSE} equation can be  brought to the same form. In general, the conservative form can be written as:
-\begin{align}
+Finite volume methods are typically derived from the so called conservative form of a \ac{PDE}. It is shown in Section~\ref{sec:conservative_form_nsg}, that the \ac{NSE} equation can be  brought to the conservative form. In general, the conservative form can be written as:
+\begin{align}\label{eq:general_conservative_form}
 \tfrac{\vec{\xi}}{t}+\nabla\cdot f(\vec{\xi}) = \vec{0} \\
 \end{align}
 where $\vec{\xi}$ represents a vector of states and $f$ is the so-called flux tensor.\\
-After subdividing the domain into finite volumes, also called cells, on can write for each particular cell $i$
+After subdividing the domain into finite volumes, also called cells, one can write for each particular cell $i$
 \begin{align}
 \int_{V_i} \tfrac{\vec{\xi}}{t} dV_i + \int_{V_i} \nabla\cdot f(\vec{\xi}) dV_i
 \end{align}
+It shall be stressed again that reformulating the equations in integral form has already changed the space of admissible solutions. Particlularly, the integral form is capable of capturing discontinuities, like shocks whereas the derivative term would be undefined  at a shock in equation \eqref{eq:general_conservative_form}.
 
 After applying the divergence theorem to the second term this gives:
 \begin{align}
@@ -31,7 +32,7 @@ And after integration the first term to get the volume average
 V_i \tfrac{\dvec{\bar{\xi}}}{t} + \int_{\partial V_i} f(\vec{\xi})\cdot\normal~dS_i
 \end{align}
 So that finally, the equation can be written as
-\begin{align}
+\begin{align}\label{eq:final_fv_general}
 \tfrac{\dvec{\bar{\xi}}}{t} + \frac{1}{V_i} \int_{\partial V_i} f(\vec{\xi})\cdot\normal~dS_i
 \end{align}
 which can easily be interpreted. The cell average of the conserved properties changes according to the total flux through the cells surface.
@@ -41,52 +42,85 @@ Of course, the conservative value is defined as being constant within one cell, 
 It has already been shown in Section~\ref{sec:conservative_form_nsg}, that the \ac{NSE} can be brought into the conservative form~\eqref{eq:nsg_conservative_form}. The flux has been shown to consist of a convective and a diffusive part\eqref{eq:fluxesconv}\eqref{eq:fluxes_diff}.
 For this thesis, a \ac{MUSCL} type \ac{FV} framework for unstructured three-dimensional grids, as described in~\cite{Main2014} has been used.
 
-The formulation is derived by re-writing equation~\ref{eq:nsg_conservative_form} in variational form by multiplying with a test function:
-\begin{align}
-\int_\Omega \pdfrac{\fstate}{t}\testfunc_i d\Omega +
-\int_\Omega \nabla\cdot\fluxesconv(\fstate)\testfunc_i d\Omega +
- \int_{\Omega} \nabla\cdot\fluxesdiff(\fstate)\testfunc_i d\Omega = \vec{0}
-\end{align}
-where $\testfunc_i \in C^0(\Omega)$. For this formulation $\testfunc_i$ is chosen to be piecewise linear. Particularly, the test functions fulfill
-\begin{align}
-\testfunc_i(\vertex_j)=\delta_{ij}
-\end{align}
-Now, Gauss divergence theorem is applied to the last part, giving
-\begin{align}
-\int_\Omega \pdfrac{\fstate}{t}\testfunc_i ~d\Omega +
-\int_\Omega \nabla\cdot\fluxesconv(\fstate)\testfunc_i ~d\Omega +
-\left(
-  \int_{\Gamma} \fluxesdiff(\fstate)\cdot\normal ~d\Gamma - \int_\Omega \fluxesdiff(\fstate)\cdot\nabla\testfunc_i ~d\Omega
-\right)
-=\vec{0}
-\end{align}
-In contrast to a real \ac{FE} formulation, the contribution of the viscous flux at the far field boundary is now neglected, as explained in \cite{Lakshminarayan2014}. How the boundary conditions at the far fields are taken care of will be explained at a proper place.
-We finally get the mixed \ac{FV}-\ac{FE} form by mass lumping the first two terms. Since we are using a vertex-centered approach here, mass lumping is equivalent to using a constant test function of $\testfunc_i$ on the dual cell. We therefore get:
-\begin{align}
-\int_{\Omega_i} \pdfrac{\fstate}{t} ~d\Omega +
-\int_{\Omega_i} \nabla\cdot\fluxesconv(\fstate) ~d\Omega -
-\int_\Omega \fluxesdiff(\fstate)\cdot\nabla\testfunc_i ~d\Omega  =
+
+
+In equivalent manner as in equations \eqref{eq:general_conservative_form} to \eqref{eq:final_fv_general} one can now write the conservative form of the \ac{NSE} as
+
+\begin{align}\label{eq:NSE_full_FV formulation}
+\pdfrac{\bar{\fstate_i}}{t} +
+\frac{1}{\norm{\Omega_i}} \int_{\partial\Omega_i} \fluxesconv(\fstate)\cdot dS +
+\frac{1}{\norm{\Omega_i}} \int_{\partial\Omega_i} \fluxesdiff(\fstate,\nabla \fstate)\cdot dS =
 \vec{0}
 \end{align}
-Please note that we have switched from an integral over the whole domain to an integral across the dual cells here.
-Finally by averaging $\fstate$ over the cell in the first term, we can derive the \ac{FV} formulation as
-\begin{align}
+
+
+\subsection{Mixed \ac{FV}-\ac{FE} formulation}\label{sec:mixed_FV_FE_formulation}
+It would be totally correct to now solve both terms with classical \ac{FV} methods. However, we note two things. First, there is no need for upwinding in the diffusive term due to its elliptic nature.
+Secondly, the integration of the second term also becomes much more cumbersome than the first one to the gradient of the fluid state vector demanding at least a first order representation.\\
+For this reasons, we introduce the following, mixed \ac{FV}-\ac{FE} formulation
+
+\begin{align}\label{eq_mixed_FV_FE}
 \pdfrac{\fstate_i}{t} +
-\frac{1}{\norm{\Omega_i}} \int_{\Omega_i} \nabla\cdot\fluxesconv(\fstate) ~d\Omega_i -
-\frac{1}{\norm{\Omega_i}} \int_\Omega \fluxesdiff(\fstate)\cdot\nabla\testfunc_i ~d\Omega  =
+\int_{\partial\dualcell_i} \fluxesconv(\fstate)\cdot dS -
+\int_{\sum_{T_i}} \difftensor \fstate \nabla \phi_i dx =
 \vec{0}
 \end{align}
-Where now, $\fstate_i$ denotes the average of $\fstate$ in the dual cell $\Omega_i$, which is by construction the value of $\fstate$ at vertex $i$. The volume of cell $\Omega_i$ is denoted as $\norm{\Omega_i}$ here.
-Finally, gauss divergence theorem is applied to the convective term, resulting in
-\begin{align}\label{eq:nsg_basic_fv-form}
-\pdfrac{\fstate_i}{t} +
-\frac{1}{\norm{\Omega_i}} \int_{\partial\Omega_i} \fluxesconv(\fstate)\cdot dS -
-\frac{1}{\norm{\Omega_i}} \int_\Omega \fluxesdiff(\fstate)\cdot\nabla\testfunc_i ~d\Omega  =
-\vec{0}
-\end{align}
- \\
- \\
-As can be seen from figure \ref{fig:dualcell_unstructured}, the dual cells themselves can have very random shapes. This makes the integration over the boundary of the second term in Equation \eqref{eq:nsg_basic_fv-form} more cumbersome than in a primal approach. Also, the volume integral in the \ac{FE}-like expression has to be splitted into regular shaped subdomains, e.g. tetrahedra, such that standard integration rules, like gauss rule, can be applied.
+
+where $\difftensor$ is the diffusive tensor introduced in \textbf{TODO} and $\phi_i$ is a linear P1 shape-function over the triangle.
+Please also note that the convective term is now integrated over the dual cell related to vertex $i$, whereas the diffusive term integrated over all primal triangles connected to vertex $i$.\\
+We will justify this re-formulation in section~\ref{sec:viscous_term_treatment}.
+
+
+
+
+
+
+
+%The formulation is derived by re-writing equation~\ref{eq:nsg_conservative_form} in variational form by multiplying with a test function:
+%\begin{align}
+%\int_\Omega \pdfrac{\fstate}{t}\testfunc_i d\Omega +
+%\int_\Omega \nabla\cdot\fluxesconv(\fstate)\testfunc_i d\Omega +
+% \int_{\Omega} \nabla\cdot\fluxesdiff(\fstate)\testfunc_i d\Omega = \vec{0}
+%\end{align}
+%where $\testfunc_i \in C^0(\Omega)$. For this formulation $\testfunc_i$ is chosen to be piecewise linear. Particularly, the test functions fulfill
+%\begin{align}
+%\testfunc_i(\vertex_j)=\delta_{ij}
+%\end{align}
+%Now, Gauss divergence theorem is applied to the last part, giving
+%\begin{align}
+%\int_\Omega \pdfrac{\fstate}{t}\testfunc_i ~d\Omega +
+%\int_\Omega \nabla\cdot\fluxesconv(\fstate)\testfunc_i ~d\Omega +
+%\left(
+%  \int_{\Gamma} \fluxesdiff(\fstate)\cdot\normal ~d\Gamma - \int_\Omega \fluxesdiff(\fstate)\cdot\nabla\testfunc_i ~d\Omega
+%\right)
+%=\vec{0}
+%\end{align}
+%In contrast to a real \ac{FE} formulation, the contribution of the viscous flux at the far field boundary is now neglected, as explained in \cite{Lakshminarayan2014}. How the boundary conditions at the far fields are taken care of will be explained at a proper place.
+%We finally get the mixed \ac{FV}-\ac{FE} form by mass lumping the first two terms. Since we are using a vertex-centered approach here, mass lumping is equivalent to using a constant test function of $\testfunc_i$ on the dual cell. We therefore get:
+%\begin{align}
+%\int_{\Omega_i} \pdfrac{\fstate}{t} ~d\Omega +
+%\int_{\Omega_i} \nabla\cdot\fluxesconv(\fstate) ~d\Omega -
+%\int_\Omega \fluxesdiff(\fstate)\cdot\nabla\testfunc_i ~d\Omega  =
+%\vec{0}
+%\end{align}
+%Please note that we have switched from an integral over the whole domain to an integral across the dual cells here.
+%Finally by averaging $\fstate$ over the cell in the first term, we can derive the \ac{FV} formulation as
+%\begin{align}
+%\pdfrac{\fstate_i}{t} +
+%\frac{1}{\norm{\Omega_i}} \int_{\Omega_i} \nabla\cdot\fluxesconv(\fstate) ~d\Omega_i -
+%\frac{1}{\norm{\Omega_i}} \int_\Omega \fluxesdiff(\fstate)\cdot\nabla\testfunc_i ~d\Omega  =
+%\vec{0}
+%\end{align}
+%Where now, $\fstate_i$ denotes the average of $\fstate$ in the dual cell $\Omega_i$, which is by construction the value of $\fstate$ at vertex $i$. The volume of cell $\Omega_i$ is denoted as $\norm{\Omega_i}$ here.
+%Finally, gauss divergence theorem is applied to the convective term, resulting in
+%\begin{align}\label{eq:nsg_basic_fv-form}
+%\pdfrac{\fstate_i}{t} +
+%\frac{1}{\norm{\Omega_i}} \int_{\partial\Omega_i} \fluxesconv(\fstate)\cdot dS -
+%\frac{1}{\norm{\Omega_i}} \int_\Omega \fluxesdiff(\fstate)\cdot\nabla\testfunc_i ~d\Omega  =
+%\vec{0}
+%\end{align}
+\vskip 1cm 
+As can be seen from Figure \ref{fig:dualcell_unstructured}, the dual cells themselves can have very random shapes. This makes the integration over the boundary of the second term in Equation \eqref{eq_mixed_FV_FE} more cumbersome than in a primal approach. Also, the volume integral in the \ac{FE}-like expression has to be splitted into regular shaped subdomains, e.g. tetrahedra, such that standard integration rules, like gauss-rule, can be applied.
 
 
 
@@ -100,7 +134,7 @@ As can be seen from figure \ref{fig:dualcell_unstructured}, the dual cells thems
 
 
 For a closer look into the convective fluxes integral, we decompose the boundary as $\pd \Omega_i = \sum_{i \in \vertexset(i)} \pd\Omega_{ij}$, where $\vertexset(i)$ denotes the set of vertices connected by an edge to vertex $i$.\\
-In this thesis, the surface integral in equation \eqref{eq:nsg_basic_fv-form} is than approximated using a Riemann solver and a \ac{MUSCL} \cite{VanLeer1979} technique. This approximation can be written as
+In this thesis, the surface integral in equation \eqref{eq_mixed_FV_FE} is than approximated using a Riemann solver and a \ac{MUSCL} \cite{VanLeer1979} technique. This approximation can be written as
 \begin{align}
 \int_{\partial\Omega_i} \fluxesconv(\fstate)\cdot dS \approx
 \sum_{j \in \vertexset(i)} \fluxesnum_{ij}(\fstate_{ij},\fstate{ji},\normal_{ij})
@@ -108,13 +142,23 @@ In this thesis, the surface integral in equation \eqref{eq:nsg_basic_fv-form} is
 where $\fluxesnum_{ij}$ denotes the chosen numerical flux function along the edge $i-j$ and the two extrapolated fluid states at the $i$ and the $j$-side of the the intersection of the cell boundary $\partial \Omega_{ij}$ and edge $i-j$ are denoted by $\fstate_{ij}$ and $\fstate_{ji}$ respectively. The area-weighted normal of edge $i-j$ is denoted as $\normal_{ij}$.
  \\
  \\
-As for the volume integral of the diffusive term in Equation~\eqref{eq:nsg_basic_fv-form}, it shall be noted that the shape function is still denoted in the primal cell. Since the gradient of the test function is constant, as is the diffusive flux itself, the integral becomes a summation of the primal sub-tetrahedral contributions.
+As for the volume integral of the diffusive term in Equation~\eqref{eq_mixed_FV_FE}, it shall be noted that the shape function is still denoted in the primal cell. Since the gradient of the test function is constant, as is the diffusive flux itself, the integral becomes a summation of the primal sub-tetrahedral contributions.
 
 
+The final numerical approximation can therefor be summarized as
+\begin{align}\label{eq:nse_final_discretized}
+\pdfrac{\bar{\fstate_i}}{t} +
+\sum_{j \in \vertexset(i)} \fluxesnum_{ij}(\fstate_{ij},\fstate_{ji},\wnormal_{ij}) -
+\sum_{T_i \in \elementset(i)} \int_{T_i} \difftensor \nabla \fstate \nabla \phi_i dx =
+\vec{0}
+\end{align}
+where $\vertexset(i)$ is the set of vertices connected to vertex $i$ by an edge, and $\elementset(i)$ is the set of primal elements connected to vertex $i$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \cleardoublepage
-\subsection{Treatment of the viscous term}
-The equivalence of the finite volume representation of the viscous term, with the finite element-like representation provided in Equation \textbf{TODO} might not be obvious to the reader. This section is therefore denoted to a \ac{FE} discretiation of the governing equations, that can then be reformulated such that the mixed \ac{FV}-\ac{FE} formulation is obtained.\\
-First, we start with the full \ac{NSE} in conservative form, as provided in Equation~\textbf{TODO12}. Next, a test function is defined. We chose the function $({\chi_i})_{i\in \primmesh}$ where $\primmesh$ represents the primal mesh, as step functions over the dual cells of $\dualmesh$.
+\subsection{Derivation of the mixed \ac{FV}-\ac{FE} formulation}\label{sec:viscous_term_treatment}
+The equivalence of the finite volume representation of the viscous term, with the finite element-like representation provided in Equation \eqref{eq_mixed_FV_FE} might not be obvious to the reader. This section is therefore denoted to a \ac{FE} discretization of the governing equations, that can then be reformulated such that the mixed \ac{FV}-\ac{FE} formulation is obtained.\\
+First, we start with the full \ac{NSE} in conservative form, as provided in Equation~\eqref{eq:nsg_conservative_form}. Next, a test function is defined. We chose the function $({\chi_i})_{i\in \primmesh}$ where $\primmesh$ represents the primal mesh, as step functions over the dual cells of $\dualmesh$.
 A multiplication with the test-functions and subsequent integration thus gives the following weak form
 
 \begin{align}\label{fv_weak_form_felike}
@@ -125,22 +169,22 @@ where by using the divergence theorem, we obtain
   \int_\Omega \nabla \cdot \fluxesconv(\fstate)\chi_i dx = \int_{\partial C_i} \fluxesconv(\fstate)\cdot \normal ds \\
   \int_\Omega \nabla \cdot \fluxesdiff(\fstate,\nabla \fstate)\chi_i dx = \underbrace{\int_{\partial C_i} \difftensor \nabla\fstate\cdot \normal ds}_{II}
 \end{align}
-Where the first term is already equivalent to what we have derived by the \ac{FV} approach in \textbf{TODO}.\\
+Where the first term is already equivalent to what we have derived by the \ac{FV} approach in \eqref{eq:NSE_full_FV formulation}.\\
 
 
 
-It the diffusive tensor $\difftensor$ is approximated to be constant over the triangle, which is justified in \textbf{TODO}, th product $\difftensor\fstate$ is constant on can now write the above integral as
+It the diffusive tensor $\difftensor$ is approximated to be constant over the triangle, which is justified in \textbf{TODO}, the product $\difftensor\fstate$ is constant, one can now write the above integral as
 \begin{align}
 II=\sum_{T \in \mathcal{D}_i} \difftensor \nabla\fstate\int_{\partial C_i \cap T} \normal_C ds
 \end{align}
 
 
-Now, we use a particular geometric relation, that holds for primitive elements like triangles and tetrahedra, and will be derived in Section \ref{sec:geometric_considerations}
+Now, we use a particular geometric relation, that holds for primitive elements like triangles and tetrahedra, and is  derived in Section \ref{sec:geometric_considerations}
 \begin{align}
   \int_{C_i\cap T} \normal ds = \frac{\normal_i^T}{2}
 \end{align}
 where $\normal_i^T$ is the normal to the primal mesh triangle $T$ on the edge opposite of node $i$.
-This is where the geometric considerations of section \ref{sec:geometric_considerations} come int place. As shown in equations \eqref{eq:final_relation}, the integral over the dual face edge can be written via the normal of the primal mesh triangle as
+This is where the geometric considerations of section \ref{sec:geometric_considerations} come into place. As shown in equations \eqref{eq:final_relation}, the integral over the dual face edge can be written via the normal of the primal mesh triangle as
 \begin{align}
   -\sum_{T\in\mathcal{D}_i} \difftensor \nabla\fstate \frac{\normal_i^T}{2}
 \end{align}
@@ -153,13 +197,13 @@ Finally we can go the opposite way, and join the summations over integrals over 
 \begin{align}
   II = -\int_{\mathcal{D}_i} \difftensor \nabla\fstate\cdot\nabla \phi_i dx
 \end{align}
-which is exactly the term provided in equation \textbf{TODO}.
+which is exactly the term provided in equation \eqref{eq:nse_final_discretized}.
 Since we used the same step-function based test-functions for all terms in equation \eqref{fv_weak_form_felike}, this approach is not only consistent, for the special case, of linear triangles we have shown that our finite element term is equivalent to a FV approximation.
 
 
 
 \subsubsection{Geometric considerations}\label{sec:geometric_considerations}
-This section is dedicated to the the derivation of a particular link between the shape-funtion of a linear triangle/tetrahedra and its outward facing normals that we use in chapter \ref{sec:} to proof the equivalence of the FE-formualtion of the finite volume term with the \ac{FV} formulation.
+This section is dedicated to the derivation of a particular link between the shape-function of a linear triangle/tetrahedra and its outward facing normals that we use in chapter \ref{sec:viscous_term_treatment} to proof the equivalence of the FE-formulation of the finite volume term with the \ac{FV} formulation.
 
 \begin{figure}[h]
 \centering
@@ -175,7 +219,7 @@ The reader can easily verify, that a linear shape-function of node $i$ can be wr
 \begin{align}\label{eq:p1_triangle_eq1}
   \phi_i(\vec{x})=\frac{\vec{hx}\cdot\vec{hi}}{\norm{\vec{hi}}^2}
 \end{align}
-where $hx$ is the vector from point $h$ to any point $x$ in the triangle, and $hi$ is the vector from point $h$ to point $i$.
+where $\vec{hx}$ is the vector from point $h$ to any point $x$ in the triangle, and $\vec{hi}$ is the vector from point $h$ to point $i$.
 For this particular representation of the shape function, the gradient can be elegantly written as
 \begin{align}\label{eq:p1_triangle_eq2}
 \nabla \phi_i(\vec{x})=\frac{\vec{hi}}{\norm{\vec{hi}}^2}=\frac{\hat{\vec{hi}}}{\norm{\vec{hi}}}
@@ -201,7 +245,7 @@ Referring to previous chapter we remind the reader that in the vertex based \ac{
 
 By simple geometrical considerations we can now determine, that the following relation holds
 \begin{align}\label{eq:final_relation}
-\int_{\Gamma_C \cap T} const.~\vec{n}_c &= \frac{1}{2}\int_{\Gamma_T} const.~\vec{n}_T
+\int_{\Gamma_C \cap T} const.~\vec{n}_c &= \frac{1}{2}\int_{\Gamma_T} const.~\vec{n}_T \\
                                         &= \frac{\vec{\vec{\nu}_i^T}}{2}
 \end{align}
 
