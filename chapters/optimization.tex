@@ -21,7 +21,7 @@ A generic, aeroelastic optimization problem can be written as
 \end{cases} \label{eq:generic_optimization_problem_1}\\
 &\absvars = \{ \absvars \in \mathbb{R}^{n_{\absvars}} | \absvars_L \leq \absvars \leq \absvars_U \}\label{eq:generic_optimization_problem_2}
 \end{align}
-Here,  $\costfunc$ is an arbitrary cost function that should be minimized. Note that a maximization problem can easily be obtained by multiplying the cost function by a factor of $-1$. In aerodynamics, a typical example for a cost function would be the \ac{LDR} ratio of an airfoil. The cost-function is described in terms of so-called \textit{abstract variables}. These can have some physical interpretation, but don't necessarily have to(see Section~\ref{sec:design_model}). Since typically, these optimization problems have no finite solution on an unbounded domain, some restrictions/conditions are introduced. In the airfoil example, we would probably specify a minimum lift that is required to support the configuration. Also a maximum stress for the structure will likely have be specified. These are classical examples of non-equality constraints, denoted by $\neqctr(\absvars)$ in the above formulation. Constraints can also be formulated in an equality sense, for instance geometrical restrictions due to the turbine suspensions.\\
+Here,  $\costfunc$ is an arbitrary cost function that should be minimized. Note that a maximization problem can easily be obtained by multiplying the cost function by a factor of $-1$. In aerodynamics, a typical example for a cost function would be the \ac{LDR} ratio of an airfoil. The cost-function is described in terms of so-called \textit{abstract variables}. These can have some physical interpretation, but don't necessarily have to(see Section~\ref{sec:design_model}). Since typically, these optimization problems have no finite solution on an unbounded domain, some restrictions/conditions are introduced. In the airfoil example, we would probably specify a minimum lift that is required to support the configuration. Also a maximum stress for the structure will likely have to be specified. These are classical examples of non-equality constraints, denoted by $\neqctr(\absvars)$ in the above formulation. Constraints can also be formulated in an equality sense, for instance geometrical restrictions due to the turbine suspensions.\\
 Furthermore, the abstract optimization variables $\absvars$ themselves are typically restricted by lower($\absvars_L$) and upper($\absvars_U$) bounds.\\
 The combinations of objective function~$\costfunc$ and constraints $\eqctr$ and $\neqctr$ is typically denoted as optimization criteria $\optcrit$.
 \begin{align}\label{eq:optimization_criteria}
@@ -165,7 +165,7 @@ Both approaches have pros and cons, that are quickly discussed in \cite{Maute200
 \begin{figure}[h!]
 	\begin{center}
         \includegraphics[width=1.0\textwidth]{\mainpath/fig/pdf/sdesign.pdf}
-        \caption[Design-model: geometrical approach]{Geometrical approach for the design model as explained in Section~\ref{sec:design_model}. A NACA type airfoil is exemplarily considered here. The airfoil is embedded in a bounding box defined by eight so-called control nodes. The position of these control nodes can be varied, which alternates the shape of the airfoil according to some interpolation functions defined on the nodes. The 24 displacement unknowns are denoted as "abstract shape parameters". Abstract shape variables can be arbitrarily defined. As an example, a rotation axis is defined through the wing. \textbf{REFORMOLATE: With only one independent abstract variable($\alpha$) the whole wing can now be rotated, e.g. to find the optimum angle of attack}}
+        \caption[Design-model: geometrical approach]{Geometrical approach for the design model as explained in Section~\ref{sec:design_model}. A NACA type airfoil is considered here as an example. The airfoil is embedded in a bounding box defined by eight so-called control nodes. The position of these control nodes can be varied, which alternates the shape of the airfoil according to some interpolation functions defined on the nodes. The 24 displacement unknowns are denoted as "abstract shape parameters". Abstract shape variables can be arbitrarily defined. As an example, a rotation axis is defined through the wing.}
 		\label{fig:sketch_geometrical_approach}
     \end{center}
 \end{figure}
@@ -180,7 +180,6 @@ Both approaches have pros and cons, that are quickly discussed in \cite{Maute200
 
 %TODO talk about SDESIGN
 \subsection{Analysis Model}\label{sec:analysis_model}
-
-The Saddle point formulation of the Lagrangian
+In the analysis model, the optimization criteria $\optcrit$ are determined for a given set of obtimization variables $\absvar$. Since the optimization algorithm choses in this thesis is based on gradients, the gradients of the optimization criteria with respect to the abstract variables are determined in this step. A main focus on this thesis has been the appropriate evaluation of these derivatives, we therfore denote the subsequent chapter~\ref{sec:SA} to the issue.
 
 \end{document}

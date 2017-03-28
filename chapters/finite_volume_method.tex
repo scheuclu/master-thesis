@@ -135,21 +135,28 @@ As can be seen from Figure \ref{fig:dualcell_unstructured}, the dual cells thems
 
 For a closer look into the convective fluxes integral, we decompose the boundary as $\pd \Omega_i = \sum_{i \in \vertexset(i)} \pd\Omega_{ij}$, where $\vertexset(i)$ denotes the set of vertices connected by an edge to vertex $i$.\\
 In this thesis, the surface integral in equation \eqref{eq_mixed_FV_FE} is than approximated using a Riemann solver and a \ac{MUSCL} \cite{VanLeer1979} technique. This approximation can be written as
-\begin{align}
+\begin{align}\label{eq:convectiveterm_approximation}
 \int_{\partial\Omega_i} \fluxesconv(\fstate)\cdot dS \approx
 \sum_{j \in \vertexset(i)} \fluxesnum_{ij}(\fstate_{ij},\fstate{ji},\normal_{ij})
 \end{align}
 where $\fluxesnum_{ij}$ denotes the chosen numerical flux function along the edge $i-j$ and the two extrapolated fluid states at the $i$ and the $j$-side of the the intersection of the cell boundary $\partial \Omega_{ij}$ and edge $i-j$ are denoted by $\fstate_{ij}$ and $\fstate_{ji}$ respectively. The area-weighted normal of edge $i-j$ is denoted as $\normal_{ij}$.
  \\
+ A popular choice for the numerical approximation of the convective fluxes is the so-called Roe flux. Appropriate upwinding is directly built into the definition of the Roe flux ~\cite{Roe1981}. In 1D it is defined as:
+ \begin{align}
+\fluxesnum_{ij}=\frac{1}{2} \left(\fluxesconv(\dfstate_j)+\fluxesconv(\dfstate_i) \right)-\frac{1}{2}\abs{
+\dmat{A}} \left( \dfstate_j-\dfstate_i \right)
+ \end{align}
  \\
+To evaluate a roe-flux between two points in 2D or 3D, a normal vector is required to project the higher, dimensional flux on the connecting line.
+\\
 As for the volume integral of the diffusive term in Equation~\eqref{eq_mixed_FV_FE}, it shall be noted that the shape function is still denoted in the primal cell. Since the gradient of the test function is constant, as is the diffusive flux itself, the integral becomes a summation of the primal sub-tetrahedral contributions.
 
 
-The final numerical approximation can therefor be summarized as
+The final numerical approximation can therefore be summarized as
 \begin{align}\label{eq:nse_final_discretized}
-\pdfrac{\bar{\fstate_i}}{t} +
-\sum_{j \in \vertexset(i)} \fluxesnum_{ij}(\fstate_{ij},\fstate_{ji},\wnormal_{ij}) -
-\sum_{T_i \in \elementset(i)} \int_{T_i} \difftensor \nabla \fstate \nabla \phi_i dx =
+\pdfrac{\bar{\dfstate_i}}{t} +
+\sum_{j \in \vertexset(i)} \fluxesnum_{ij}(\dfstate_{ij},\dfstate_{ji},\wnormal_{ij}) -
+\sum_{T_i \in \elementset(i)} \int_{T_i} \difftensor \nabla \dfstate \nabla \phi_i dx =
 \vec{0}
 \end{align}
 where $\vertexset(i)$ is the set of vertices connected to vertex $i$ by an edge, and $\elementset(i)$ is the set of primal elements connected to vertex $i$.

@@ -10,14 +10,14 @@
 This section is denoted to a thorough derivation of the derivative $\pdfrac{\fluxesnum}{\fstate_i}$.
 
 First, we recall the definition of the numerical flux as
-\begin{align}
-\fluxesnum(\fstate_i,\fstate_j,\normal_{ij}) =
-\frac{1}{2}\left[\fluxesconv(\fstate_i)\cdot\normal_{ij} +
-                 \fluxesconv(\fstate_i)\cdot\normal_{ij}   \right] -
-\frac{1}{2}\abs{\roeavgmat(\fstate_i,\fstate_j,\normal_{ij})} (\fstate_j-\fstate_i)
+\begin{align}\label{eq:roe_flux}
+\fluxesnum(\dfstate_i,\dfstate_j,\normal_{ij}) =
+\frac{1}{2}\left[\fluxesconv(\dfstate_i)\cdot\normal_{ij} +
+                 \fluxesconv(\dfstate_i)\cdot\normal_{ij}   \right] -
+\frac{1}{2}\abs{\roeavgmat(\dfstate_i,\dfstate_j,\normal_{ij})} (\dfstate_j-\dfstate_i)
 \end{align}
 
-Similar to the MUSCL procedure \textbf{TODO} we trransform the fluid state vector to primitive form
+Similar to the \ac{MUSCL} procedure we transform the fluid state vector to primitive form
 \begin{align}
 \fstate=\begin{pmatrix}
         \dens \\ \dens\fluidvel \\ \energytot
@@ -27,20 +27,21 @@ Similar to the MUSCL procedure \textbf{TODO} we trransform the fluid state vecto
                \dens \\ \fluidvel \\ \pres
                \end{pmatrix}
 \end{align}
-Of course, this transformation involves the Equation of state of the fluid. We will use $\prim{(\cdot)}$ from now on top mark any quantity as based on/formulated in primitive variables. The primitive state vector is also much more appealing when it comes to the implementation of boundary conditions, since the solution variables are seperated there.
+Of course, this transformation involves the \ac{EOS} of the fluid. We will use $\prim{(\cdot)}$ from now on top mark any quantity as based on/formulated in primitive variables.\\
+The primitive state vector is also much more appealing when it comes to the implementation of boundary conditions, since the solution variables are separated there.
  \\
-Next we recall the conservative form of the Euler equations, which was presented in REF as
-\begin{align}
+Next we recall the conservative form of the Euler equations, which was presented in section~\ref{sec:conservative_form_nsg} as
+\begin{align}\label{eq:t1}
 \pdfrac{\fstate}{t}+\nabla\cdot\fluxesconv{\fstate}=\vec{0}
 \end{align}
-Where the convective flux matrix $\fluxesconv$ is provided in equation \REF, and can be writtes as
+Where the convective flux matrix $\fluxesconv$ is provided in equation \eqref{eq:fluxesconv}, and can be written as
 \begin{align}
 \fluxesconv(\fstate)=\begin{pmatrix}
                       \fluxesconv_x(\fstate)&\fluxesconv_x(\fstate)&\fluxesconv_x(\fstate)
                       \end{pmatrix}
 \end{align}
-Therefore, applying the Nabla operator in Equation \REF gives
-\begin{align}
+Therefore, applying the Nabla operator in Equation \eqref{eq:t1} gives
+\begin{align}\label{eq:euler_coinservative_splitted}
 \pdfrac{\fstate}{t}+
 \underbrace{\pdfrac{\fluxesconv_x(\fstate)}{\fstate}}_{\tensor{A}} \pdfrac{\fstate}{x} +
 \underbrace{\pdfrac{\fluxesconv_y(\fstate)}{\fstate}}_{\tensor{B}} \pdfrac{\fstate}{y} +
@@ -50,44 +51,63 @@ Therefore, applying the Nabla operator in Equation \REF gives
 where the matrices $\tensor{A}$,$\tensor{B}$ and $\tensor{C}$ are called the \expression{flux Jacobians}.
 \end{document}
 
-\textbf{Notation error when it comes to marking qiantities as continous, discrete, etc}
-In Section \REF, we have derived that for any sensitivity calculation, the derivative of the flux matrix with respect to the fluid state vector $\pdfrac{\fluxmatconv}{\fstate}$is required.\\
-We have derived in Section \REF. that at an interior vertex point of the fluid mesh, we have
-\begin{align}
-\left[\fluxmatconv(\st{\fstate},\st{\mms},\st{\dot{\mms}})\right]_i=
-\sum_{j \in \vertexset(i)} mes(\partial C_{ij})\fluxesnum(\st{\fstate}_i,\st{\fstate}_j,\normal_{ij})
+In Section~\ref{sec:SA}, we have derived that for any sensitivity calculation, the derivative of the flux matrix with respect to the fluid state vector $\pdfrac{\fluxmatconv}{\fstate}$ is required.\\
+We have derived in Section~\ref{sec:mixed_FV_FE_formulation} that at an interior vertex point of the fluid mesh, we have
+\begin{align}\label{eq:convectiveterm _approximation2}
+\left[\fluxmatconv(\dfstate,\dmpos,\dmms)\right]_i=
+\sum_{j \in \vertexset(i)} mes(\partial C_{ij})\fluxesnum(\dfstate_i,\dfstate_j,\normal_{ij})
 \end{align}
-Since an equilibrium point is considered, $\st{\dot{\mms}}=\vec{0}$ and is neglected in the following derivations.
+Since an equilibrium point is considered, $\dmms=\vec{0}$ and is neglected in the following derivations.
 
-In section \REF we have introduced $\fluxesnum$ as the numerical flux function. In this thesis, we consider the popular Roe flux, which is defined as given in eaution \REF.
+In equation~\eqref{eq:convectiveterm_approximation} we have introduced $\fluxesnum$ as the numerical flux function. In this thesis, we consider the popular Roe flux, which is defined as given in equation~\eqref{eq:roe_flux}.
 
-Let us remind, that $\fstate_i$ is the flux vector at vertex $i$, $\vertexset(i)$ is the set of vertices connected to vertex $i$ by an edge, $C_i$ is the control volume of the dual cell centered at vertex $i$ and $\partial C_ij$ is the segment of the boundary that intersects edge $(ij)$ and $\normal_{ij}$ is the outward facing normal to $\partial C_{ij}$
+Let us remind, that $\dfstate_i$ is the flux vector at vertex $i$, $\vertexset(i)$ is the set of vertices connected to vertex $i$ by an edge, $C_i$ is the control volume of the dual cell centered at vertex $i$ and $\partial C_{ij}$ is the segment of the boundary that intersects edge $(ij)$ and $\wnormal_{ij}$ is the outward-facing weighted normal to $\partial C_{ij}$
  \\
-From Equation \REF it is obvious that when looking for the derivative $\pdfrac{\fluxmatconv}{\fstate}$, the derivative of the numerical flux with respect to the fluid state vector $\pdfrac{\fluxesnum}{\fstate}$ is required.
+From Equation \eqref{eq:convectiveterm _approximation2} it is obvious that when looking for the derivative $\pdfrac{\fluxmatconv}{\dfstate}$, the derivative of the numerical flux with respect to the fluid state vector $\pdfrac{\fluxesnum}{\dfstate}$ is required.
 
-To make things easier we will in the following derive the primitive version of that quantity $\pdfrac{\prim{\fluxesnum}}{\prim{\fstate}}$
+To make things easier we will in the following derive the primitive version of that quantity $\pdfrac{\prim{\fluxesnum}}{\prim{\dfstate}}$
  \\
  \\
 The primitive version of the numerical Roe flux can be expressed as
 \begin{align}
-\prim{\fluxesconv}(\prim{\fstate}_i,\prim{\fstate}_j,\normal_{ij}) =
-\frac{1}{2} \left(\prim{\fluxesconv}(\prim{\fstate}_i)\cdot\normal_{ij} +
-                  \prim{\fluxesconv}(\prim{\fstate}_i)\cdot\normal_{ij}
+\prim{\fluxesconv}(\prim{\dfstate}_i,\prim{\dfstate}_j,\normal_{ij}) =
+\frac{1}{2} \left(\prim{\fluxesconv}(\prim{\dfstate}_i)\cdot\normal_{ij} +
+                  \prim{\fluxesconv}(\prim{\dfstate}_i)\cdot\normal_{ij}
             \right) -
-\frac{1}{2} \inv{\jaceigvecs}(\sim)\jaceigvals(\sim)\jaceigvecs(\sim)(\prim{\fstate}_j-\prim{\fstate}_i) \\
+\frac{1}{2} \inv{\jaceigvecs}(\sim)\abs{\jaceigvals(\sim)}\jaceigvecs(\sim)(\prim{\dfstate}_j-\prim{\dfstate}_i) \\
 \end{align}
+\textbf{TODO where did the absolute value go?}
+\textbf{TODO what is M}
 where, for ease of notation
 \begin{align}
-\inv{\jaceigvecs}(\sim) &= \inv{\jaceigvecs}(\roeavgfunc(\sim),\normal_{ij}) \\
-\roeavgfunc(\sim)       &= \roeavgfunc(\prim{\fstate}_i,\prim{\fstate}_j)    \\
-\jaceigvals(\sim)       &= \jaceigvals(\roeavgfunc(\sim),\normal_{ij})        \\
-\jaceigvecs(\sim)       &= \jaceigvecs(\roeavgfunc(\sim),\normal_{ij})        \\
+\inv{\jaceigvecs}(\sim) &= \inv{\jaceigvecs}\left(\roeavgfunc(\sim),\normal_{ij}\right) \\
+\roeavgfunc(\sim)       &= \roeavgfunc\left(\prim{\fstate}_i,\prim{\fstate}_j\right)    \\
+\jaceigvals(\sim)       &= \jaceigvals\left(\roeavgfunc(\sim),\normal_{ij}\right)        \\
+\jaceigvecs(\sim)       &= \jaceigvecs\left(\roeavgfunc(\sim),\normal_{ij}\right)        \\
 \end{align}
 
 
-The Jacobi matrix in prmitive form can be written as
-\def\vn{\fluidvel\cdot\normal}
 \def\enthalp{\mathsf{H}}
+Here, $\roeavgfunc(\prim{\fstate}_i,\prim{\fstate}_j)$  is the averaging function associated with the roe flux. It can be written as
+\begin{align}
+\roeavgfunc(\prim{\fstate}_i,\prim{\fstate}_j)=
+\frac{1}{\sqrt{\rho_i}+\sqrt{\rho_j}}
+\left(
+\sqrt{\dens_i}
+\begin{bmatrix}
+\dens_i\\ \fluidvel_i \\ \enthalp_i
+\end{bmatrix}
++
+\sqrt{\dens_j}
+\begin{bmatrix}
+\dens_j \\ \fluidvel_j \\ \enthalp_j
+\end{bmatrix}
+\right)
+\end{align}
+
+The Jacobi matrix in primitive form can be written as
+\def\vn{\fluidvel\cdot\normal}
+
 \def\jfo{H~(\vn)-\dens\vn \frac{\gamma\pres}{\dens(\gamma)}}
 \def\jft{\dens\vn v_1+\dens H n_1}
 \def\jftt{\dens\vn v_2+\dens H n_2}
@@ -120,22 +140,7 @@ For this Jacobian, one can now symbolically derive an eigenvalue decomposition, 
 \end{align}
 
 
-The averaging function associated with the roe flux can be written as
-\begin{align}
-\roeavgfunc(\prim{\fstate}_i,\prim{\fstate}_j)=
-\frac{1}{\sqrt{\rho_i}+\sqrt{\rho_j}}
-\left(
-\sqrt{\dens_i}
-\begin{bmatrix}
-\dens_i\\ \fluidvel_i \\ \enthalp_i
-\end{bmatrix}
-+
-\sqrt{\dens_j}
-\begin{bmatrix}
-\dens_j \\ \fluidvel_j \\ \enthalp_j
-\end{bmatrix}
-\right)
-\end{align}
+
 
 The total specific enthalpy for a perfect gas is given as
 \begin{align}
@@ -269,7 +274,7 @@ diag(\left[\fluidvel\cdot\normal,\fluidvel\cdot\normal,\fluidvel\cdot\normal,\fl
 \end{bmatrix}
 \end{align}
 
-Due to its shape, the derivation of $\jaceigvals$ can be simplified to a diffrentiation of the eigenvalues $\eigval_i$.
+Due to its shape, the derivation of $\jaceigvals$ can be simplified to a differentiation of the eigenvalues $\eigval_i$.
 \begin{align}
 \pdfrac{\eigval_1}{\fstateprim}(\fstateprim,\normal)&=\pdfrac{\eigval_2}{\fstateprim}(\fstateprim,\normal)=\pdfrac{\eigval_3}{\fstateprim}(\fstateprim,\normal)=
 \T{\left[

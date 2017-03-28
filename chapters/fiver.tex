@@ -7,13 +7,13 @@
 \setlength{\delimitershortfall}{0pt}
 \section{Fiver}\label{sec:fiver}
 
-It was already outlined in Section \ref{sec:fluid_mechanics}, that using an Eulerian approach int the context of an aeroelastic simulation leads to a so-called embedded formulation, where the interface of the structure mesh no longer coincides with the fluid mesh. This was appealing, since it allowed for the usage of fixed meshes and an Eulerian formulation, on the other hand as  explained in Section \ref{sec:fiver_setup}, an error of the order $\order(\frac{h}{2})$ is introduced. A possible solution to recover second order convergence rate is quickly described in section~\textbf{TODO}.
+It was already outlined in Section \ref{sec:fluid_mechanics}, that using an Eulerian approach int the context of an aeroelastic simulation leads to a so-called embedded formulation, where the interface of the structure mesh no longer coincides with the fluid mesh. This was appealing, since it allowed for the usage of fixed meshes and an Eulerian formulation, on the other hand as  explained in Section \ref{sec:fiver_setup}, an error of the order $\order{\frac{h}{2}}$ is introduced. A possible solution to recover second order convergence rate is quickly described in section~\textbf{TODO}.
 
 
 \subsection{Setup}
 In this thesis, we consider embedded structure interfaces only. Whether the structure is deformable or rigid does not really make a difference for the subsequent considerations.\\
 The basic setup is depicted in Figure~\ref{fig:FIVER_intersection}.\\
-Several issues have to be addresses in an embedded framework. Firstly, the interface may move during the simulation. In fact, large deformations of the structure have been on on the primary aspects for the development of an embedded framework in the first place. The question thus becomes how th interface is being tracked during the simulation. This is addressed in section~\ref{sec:interface_tracking}.\\
+Several issues have to be addresses in an embedded framework. Firstly, the interface may move during the simulation. In fact, large deformations of the structure have been on on the primary aspects for the development of an embedded framework in the first place. The question thus becomes how to track the interface during the simulation. This is addressed in section~\ref{sec:interface_tracking}.\\
 Secondly, the evaluation of the inviscid \eqref{eq:fiver_inviscid_split} and viscous \eqref{eq:fiver_viscous_split} term becomes cumbersome for cells that are being intersected. We address this issue separate for the inviscid and the viscous term in sections \ref{sec:fiver_inviscid_term} and \ref{sec:fiver_viscous_term}.\\
 Finally, in an \ac{FSI} simulation we are typically interested in integral quantities over the structure surface, e.g. the lift and drag values of an airfoil. We now have several possibilities to define the structure surface to perform integration on in an embedded simulation. This issues will is discussed in section~\ref{sec:fiver_force_evaluation}.
 
@@ -57,8 +57,11 @@ First, we notice that we can split the summation as follows
 \sum_{j \in \vertexset(i)^a} \fluxesnum_{ij}(\fstate_{i},\fstate_{j},\wnormal_{ij}) +
 \sum_{j \in \vertexset(i)\setminus\vertexset(i)^a} \fluxesnum_{ij}(\fstate_{i},\fstate_{*},\wnormal_{ij})
 \end{align}
+%\begin{align}\label{eq:fiver_inviscid_split}
+%\fluxesnum_{ij}
+%\end{align}
 
-where $\fstate_{*}$ is the fluid state at the auxiliary intersection beween edge $ij$ and the auxiliary interface.
+where $\fstate_{*}$ is the fluid state at the auxiliary intersection between edge $ij$ and the auxiliary interface.
 To obtain $\fstate_{8}$ a one-sided Riemann problem is defined
 \begin{align}
 \pdfrac{\fstateprim}{t}=\pdfrac{\fluxesconv}{s}(\fstateprim) = \vec{0}

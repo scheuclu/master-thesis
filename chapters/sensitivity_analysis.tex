@@ -60,7 +60,7 @@
 
 
 
-\section{Fluid \acl{SA}}\label{sec:about}
+\section{Fluid \acf{SA}}\label{sec:SA}
 As explained in section \ref{sec:optimization}, optimization is based on the calculations of gradients, also denoted as \acf{SA}.
 When it comes to calculating the gradients of a solution of a PDE, there are two fundamentally different approaches one could take.\\
 Firstly one could think of first deriving the continous equation and then applying the discretization scheme. On the other hand its equaly legitimate to first apply the discretization and compute the gradients of that, approximated solution. This thesis focuses uses the latter one, the reasons being explained in Figure~\ref{fig:discretization_differentiation_sequence}.
@@ -69,7 +69,7 @@ Firstly one could think of first deriving the continous equation and then applyi
  \begin{figure}[h!]
 	\begin{center}
         \includegraphics{\mainpath/fig/tikz/build/discretization_differentiation_sequence.pdf}
-        \caption[Sensitivity Analysis approaches]{Two different approaches of \ac{SA}. The question here is whether on discretized the system of equations first and then computes the derivative of the approximate solution, or whether the continuous system of equation is first derived and discretized afterwards. Both approaches are valid, the final result however will generally not be the same. We have solemnly focused on the case of derivation after discretization in this thesis(thick lines). There are several reason to this. Firstly, if one chose to first derive and then compute a discretized solution, one would solve a completely different equation. If on the other hand the discretization(e.g. Finite Volumes) is done first, standard solvers can be utilized. What is more, approximating the derivative by a Finite difference becomes much easier, since the finite difference evaluation involved only a evaluation of $\dmat{F}$, which a standard fluid solver is perfectly capable of, whereas the \ac{FD} approximation in the other case would involve evaluations of the continuous function and the discretization of the obtained expression which would be much more cumbersome.\REF Think about whether this is correct}
+        \caption[Sensitivity Analysis approaches]{Two different approaches of \ac{SA}. The question here is whether to discretize the system of equations first and then compute the derivatives of the approximate solution, or whether the continuous system of equation is first derived and discretized afterwards. Both approaches are valid, the final result however will generally not be the same. We have solemnly focused on the case of derivation after discretization in this thesis(thick lines). There are several reason to this. Firstly, if one chose to first derive and then compute a discretized solution, one would solve a completely different equation. If on the other hand the discretization(e.g. Finite Volumes) is done first, standard solvers can be utilized. What is more, approximating the derivative by a Finite difference becomes much easier, since the finite difference evaluation involves only a evaluation of $\dmat{F}$, which a standard fluid solver is perfectly capable of, whereas the \ac{FD} approximation in the other case would involve evaluations of the continuous function and the discretization of the obtained expression which would be much more cumbersome. \textbf{Think about whether this is correct} }
 		\label{fig:discretization_differentiation_sequence}
     \end{center}
 \end{figure}

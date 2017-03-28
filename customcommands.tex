@@ -33,6 +33,8 @@
 \newcommand{\nd}[1]{\bar{#1}} %asdasd
 \newcommand{\reference}[1]{ {#1}_{ref} }
 
+\newcommand{\conv}[1]{{#1}^{c}} %convective form of a quantity (quantity in ALE-description}
+
 %%==============================%
 % OPERATORS
 % Algebraic operations
@@ -72,7 +74,9 @@
 \newcommand{\EOSmesh}  {\mathcal{D}_{gov}}     %State equation of the mesh
 \newcommand{\EOSfluid} {\mathcal{F}_{gov}}     %State equation of the fluid
 \newcommand{\mpos}       {\vec{x}}        %Fluid mesh motion
+\newcommand{\dmpos}       {\dvec{x}}        %Fluid mesh motion
 \newcommand{\mms}       {\dot{\vec{x}}}        %Fluid mesh motion
+\newcommand{\dmms}       {\dot{\dvec{x}}}        %Fluid mesh motion
 \newcommand{\mmsad}       {\vec{a}_{\vec{x}}}        %Adjoint fluid mesh motion
 \newcommand{\fstate}    {\vec{w}}        %Fluid state vector
 \newcommand{\fstatead}{\vec{a}_{\vec{w}}}  %Adjoint fluid state vector
@@ -84,6 +88,7 @@
 \newcommand{\fload}{\vec{P}_F}           %Fluid load
 \newcommand{\sload}{\vec{P}_T}           %Structure load
 \newcommand{\jactwo}{\tensor{H}_2}       %Second order Jacobian
+\newcommand{\jacale}{\tensor{J}}       %Second order Jacobian
 \newcommand{\ifaceprojFtoS}{\dmat{T}_p}  %Interface projection matrix from fluid to structure mesh
 \newcommand{\ifaceprojStoF}{\dmat{T}_u}  %Interface projection matrix from structure to fluid mesh
 \newcommand{\fstaterans}{\fstate_{RANS}}   %Augumentes fluid state vector in the \ac{RANS} formulation
@@ -163,8 +168,8 @@
 
 \newcommand{\dualcell}{\mathcal{C}}
 \newcommand{\difftensor}{\mathbb{K}}
-\newcommand{\primmesh}{\mathcal{P}_h}
-\newcommand{\dualmesh}{\mathcal{D}_h}
+\newcommand{\primmesh}{\mathcal{P}_{h}}
+\newcommand{\dualmesh}{\mathcal{D}_{h}}
 \newcommand{\normal}{\vec{n}}        %Symbol for dyadic product
 \newcommand{\wnormal}{\vec{\nu}}        %Weighted normal
 \newcommand{\normalx}{n_1}        %Symbol for dyadic product
@@ -174,7 +179,7 @@
 \newcommand{\vertex}{\boldsymbol{X}}  %Mesh vertex
 \newcommand{\vertexset}{\mathsf{\kappa}} %Set of vertices
 \newcommand{\elementset}{\mathsf{\lambda}} %Set of elements related to vertex i
-\newcommand{\fluxesnum}{\boldsymbol{\phi}} %numerical flux
+\newcommand{\fluxesnum}{\boldsymbol{\mathsf{{\phi}}}} %numerical flux
 \newcommand{\roeavgmat}{\tensor{A}_{\text{Roe}}}  %Averaging matrix of the Roe flux
 \newcommand{\eigval}{\lambda}         %Eigen value
 \newcommand{\sspeed}{c} %Speed of sound
