@@ -82,6 +82,7 @@
 \newcommand{\fstatead}{\vec{a}_{\vec{w}}}  %Adjoint fluid state vector
 \newcommand{\fstateprim}{\prim{\fstate}}        %Primitive ffluid state vector
 \newcommand{\dfstate}    {\dvec{w}}        %Discrete fsluid state vector
+\newcommand{\dresidual}    {\dvec{R}}        %Discrete fsluid state vector
 \newcommand{\structdisp}{\vec{u}}        %Structure displacement
 \newcommand{\structdispad}{\vec{a}_{\vec{u}}}        %Adjoint structure displacement
 \newcommand{\load}{\vec{P} }          %Fluid load TODO
@@ -135,6 +136,7 @@
 \newcommand{\fluxesdiff}{\mathcal{G}} %Diffusive fluxes
 \newcommand{\dens}{\rho}              %Density
 \newcommand{\pres}{p}                 %Pressure
+\newcommand{\dpres}{\mathsf{p}}                 %Pressure
 \newcommand{\totpres}{p_{tot}}                 %Pressure
 \newcommand{\fluidvel}{\vec{v}}       %Fluid velocity vector
 \newcommand{\fluidvelcomp}{v}         %Fluid velocity vector
@@ -256,3 +258,16 @@
 \end{tabular}
 \end{center}
 }
+
+
+%\newenvironment{salign}
+%    {
+%    \begingroup\makeatletter\def\f@size{8}\check@mathfonts
+%    \def\maketag@@@#1{\hbox{\m@th\large\normalfont#1}}
+%    \begin{align}
+%    }
+%    { 
+%    \end{align}
+%    \endgroup
+%    }
+

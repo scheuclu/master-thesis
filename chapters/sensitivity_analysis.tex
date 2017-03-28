@@ -36,11 +36,11 @@
 
 \def\PEOSstructBYabsvarI{\pdfrac{\EOSstruct} {\absvar_i}}
 \def\PEOSmeshBYabsvarI  {\pdfrac{\EOSmesh}  {\absvar_i}}
-\def\PEOSfluidBYabsvarI{\pdfrac{\EOSfluid}{\absvar_i}}
+   %\def\PEOSfluidBYabsvarI{\pdfrac{\EOSfluid}{\absvar_i}}
 
 \def\DEOSstructBYabsvarI{\tfrac{\EOSstruct} {\absvar_i}}
 \def\DEOSmeshBYabsvarI  {\tfrac{\EOSmesh}  {\absvar_i}}
-\def\DEOSfluidBYabsvarI{\tfrac{\EOSfluid}{\absvar_i}}
+  %\def\DEOSfluidBYabsvarI{\tfrac{\EOSfluid}{\absvar_i}}
 
 \def\PEOSstructBYstructdisp{\pdfrac{\EOSstruct} {\structdisp}}
 \def\PEOSstructBYmms{\pdfrac{\EOSstruct}{\mms}}
@@ -51,8 +51,8 @@
 \def\PEOSmeshBYfstate    {\vec{0}}
 
 \def\PEOSfluidBYstructdisp{\vec{0}}
-\def\PEOSfluidBYmms       {\pdfrac{\EOSfluid} {\mms}}
-\def\PEOSfluidBYfstate    {\pdfrac{\EOSfluid} {\fstate}}
+   %\def\PEOSfluidBYmms       {\pdfrac{\EOSfluid} {\mms}}
+   %\def\PEOSfluidBYfstate    {\pdfrac{\EOSfluid} {\fstate}}
 
 \def\PstructdispBYabsvarI{\pdfrac{\structdisp} {\absvar_i}}
 \def\PmmsBYabsvarI       {\pdfrac{\mms}        {\absvar_i}}
@@ -62,6 +62,8 @@
 
 \section{Fluid \acf{SA}}\label{sec:SA}
 As explained in section \ref{sec:optimization}, optimization is based on the calculations of gradients, also denoted as \acf{SA}.
+
+\subsection{Connection between discretization and differentiation}\label{sec:discretization_vs_differentiation}
 When it comes to calculating the gradients of a solution of a PDE, there are two fundamentally different approaches one could take.\\
 Firstly one could think of first deriving the continous equation and then applying the discretization scheme. On the other hand its equaly legitimate to first apply the discretization and compute the gradients of that, approximated solution. This thesis focuses uses the latter one, the reasons being explained in Figure~\ref{fig:discretization_differentiation_sequence}.
 
@@ -78,7 +80,7 @@ Firstly one could think of first deriving the continous equation and then applyi
 
 
 
-
+\subsection{Sensitivity derivation}
 When it comes to \ac{SA} within the context of \ac{CFD}, one also has to distinguish between \ac{SA} of the non-coupled fluid problem and the \ac{SA} in the fully coupled aeroelastic case. The latter case is much more involved, since it requires additional terms from the Structure and mesh motion equations. In the following we will therefore begin with the \ac{SA} of a regular fluid problem. A generalization to a coupled FSI problem will follow.
  \\
 
@@ -90,18 +92,18 @@ As mentioned in Section~\ref{sec:optimization}, we typically deal with an optimi
 
 
 
-\begin{align}
+\begin{align}\label{eq:sensitivity_startingpoint}
 \DoptcritJBYabsvarI\bigg\rvert_{\fstate_0}=
 \underbrace{\PoptcritJBYabsvarI\bigg\rvert_{\fstate_0}}_{
                                                         \substack{
-                                                                 \text{directy derived from} \\
-                                                                 \text{the definition of $\optcrit$}
+                                                                 \text{\hltblue{directy derived from}} \\
+                                                                 \text{\hltblue{the definition of} $\optcrit$}
                                                                  } 
                                                         }  +
 \underbrace{\PoptcritJBYfstate\bigg\rvert_{\fstate_0}}_ {
                                                         \substack{
-                                                                 \text{derived analytically or~~}\\
-                                                                 \text{by \ac{FD}}
+                                                                 \text{\hltgreen{derived analytically or~~}}\\
+                                                                 \text{\hltgreen{by} \ac{FD}}
                                                                  }
                                                         }
 \underbrace{\DfstateBYabsvarI\bigg\rvert_{\fstate_0}}_  {
@@ -111,30 +113,116 @@ As mentioned in Section~\ref{sec:optimization}, we typically deal with an optimi
                                                                  }
                                                         }
 \end{align}
+\subsubsection{Calculation of $\PoptcritJBYabsvarI\bigg\rvert_{\fstate_0}$}
+In this thesis, we restrict ourselves to Lift($L$), Drag($D$) and combinations of  these quantities( e.g. Lift-Drag ration $\frac{L}{D}$ ) as optimization criteria $\optcrit$. As abstract variables we only consider the free stream mach-number $\machnum_{\infty}$, the free-stream angle of attack $\aoa$ and an airfoil shape parameter as explained in section \ref{sec:design_model}.
+The formula for the lift over an airfoil can be written as
+
+
+If $\Gamma_{FS}$ denotes the fluid structure interface, which in the \ac{ALE} context coincides with the airfoil surface, one can formulate the lift and drag of an airfoil in a steady state as:
+\begin{align}\label{eq:lift_and_drag_integrals}
+\lift=\int_{\Gamma_{FS}} p(\fstate,\cvec{x}) \normal(\cvec{x})\cdot \cvec{e}_L dS \nonumber\\
+\drag=\int_{\Gamma_{FS}} p(\fstate,\cvec{x}) \normal(\cvec{x})\cdot \cvec{e}_D dS \\
+\end{align}
+where $\cvec{e}_D$ is the unit vector pointing in the direction of the free stream, and $\cvec{e}_L$ is the unit vector perpendicular to that.
+We therefor note, that $\pdfrac{\lift}{\absvar_i}$ and $\pdfrac{\drag}{\absvar_i}$ are zero for $\absvar_i=\machnum_{\infty}$ and $\absvar_i=\aoa$ and non-zero if $\absvar_i$ is a shape parameter.\\
+Also, having determined the derivatives $\pdfrac{\lift}{\absvar_i}$ and $\pdfrac{\drag}{\absvar_i}$, the derivative of the Lift-Drag ratio follows simply as
+\begin{align}\label{eq:lifttoddrag_by_absvar}
+-\pdfrac{(\frac{\lift}{\drag})}{\absvar_i}\rvert_{\fstate_0}=
+-\frac{\drag_0 \pdfrac{\lift}{\absvar_i}\rvert_{\fstate_0} - \lift_0 \pdfrac{\drag}{\absvar_i}\rvert_{\fstate_0} }{{\drag_0}^2}
+\end{align}
+
+
+\subsubsection{Calculation of $\PoptcritJBYfstate\bigg\rvert_{\fstate_0}$}
+The derivative of the optimization criteria with respect to the fluid state vector can again be splitted into Lift and Drag part.
+For an aeroelastic simulations, the biggest difficulty here is the dependence on the fluid state by the fluid-srtucture interface itself.
+We are therefore faced with a derivative of an integral quantity, where the integration area itself is dependent on the quantiti of interest.\\
+For this purpose, we recall the leibnitz rule from calculus:
+\begin{align}\label{eq:leibnitz_rule}
+\frac{d}{dx}\Big(\int_{a(x)}^{b(x)} f(x,t) dt \Big) =
+f(x,b(x))\cdot \frac{d}{dx}b(x)-
+f(x,a(x))\cdot \frac{d}{dx}a(x)+
+\int_{a(x)}^{b(x)} \frac{d}{dx} f(x,t) dt
+\end{align}
+
+Alternatively, we can directly switch to the discrete form, where the calculation of Lift and drag as outlined in Equation~\eqref{eq:lift_and_drag_integrals} can be performed as
+\begin{align}\label{eq:discrete_lift_and_drag_formulas}
+L=\sum_{e \in \sum_{\Gamma_{FS}}} \sum_{i=1}^{n_g} g_i \dpres(\dfstate_i,\dmpos_i) \normal_e \cdot e_L
+D=\sum_{e \in \sum_{\Gamma_{FS}}} \sum_{i=1}^{n_g} g_i \dpres(\dfstate_i,\dmpos_i) \normal_e \cdot e_D
+\end{align}
+where $\sum_{\Gamma_{FS}}$ is the set of surface elements on the fluid-structure interface, $n_g$ is the number of gauss-points and $g_i$ are the gauss weights. The dependency of the surface shape, on the fluid state vector is now reflected in non-zero derivatives of the gauss point locations.
+
+Finally, the derivative of the lift-to-drag ratio can be obtained analogously to equation~\eqref{eq:lifttoddrag_by_absvar} as
+\begin{align}\label{eq:lifttodrag_by_dfstate}
+\pdfrac{(\frac{\mathsf{L}}{\mathsf{D}})}{\dfstate}\rvert_{\fstate_0}=
+\frac{\mathsf{D}_0 \pdfrac{\mathsf{L}}{\dfstate}\rvert_{\fstate_0} - \mathsf{L}_0 \pdfrac{\drag}{\dfstate}\rvert_{\dfstate_0} }{{\mathsf{D}_0}^2}
+\end{align}
+
+
+\subsubsection{Calculation of $\DfstateBYabsvarI\bigg\rvert_{\fstate_0}$}
+AAA
+
+
+
 Also, we keep in mind, that the state equation of the fluid can be expressed as
 \begin{align}
 \EOSfluid(\fstate(\absvar_i),\mms(\absvar_i),\absvar_i)=
 \pdfrac{\fstate(\absvar_i)}{t}+\nabla\cdot\fluxesconv(\fstate(\absvar_i))+\nabla\fluxesdiff(\fstate(\absvar_i))+S=
 \vec{0}
 \end{align}
-\textbf{TODO how does the mesh motion come into the right hand side?}
 
-Therefore, deriving the fluid \ac{EOS} gives:
-\begin{align}
-\DEOSfluidBYabsvarI=\vec{0}=
-\PEOSfluidBYabsvarI+
-\PEOSfluidBYfstate\DfstateBYabsvarI+
-\PEOSfluidBYmms\DmmsBYabsvarI
+After discretization, we have derived our discrete governing equation as 
+\begin{align}\label{eq:nse_final_discretized_2}
+\pdfrac{\bar{\dfstate_i}}{t} +
+\sum_{j \in \vertexset(i)} \fluxesnum_{ij}(\dfstate_{ij},\dfstate_{ji},\wnormal_{ij}) -
+\sum_{T_i \in \elementset(i)} \int_{T_j} \difftensor \nabla \dfstate \nabla \phi_j dx =
+\vec{0}
 \end{align}
+For the pupose of Sensitivity analysis around a given steady state, the fluid-state vector does not change in time, and can thus be ommitted, also we summaraize the convective and the diffusivee part as $\dresidual$ 
+\begin{align}\label{eq:nse_final_discretized_notationchange}
+\cancelto{\infty}{\pdfrac{\bar{\dfstate_i}}{t}} +
+\underbrace{\sum_{j \in \vertexset(i)} \fluxesnum_{ij}(\dfstate_{ij},\dfstate_{ji},\wnormal_{ij}) -
+\sum_{T_i \in \elementset(i)} \int_{T_j} \difftensor \nabla \dfstate \nabla \phi_j dx}_{\dresidual} =
+\vec{0}
+\end{align}
+which brings us the following, handy notation of our discrete steady state system:
+\begin{align}\label{eq:discrete_steady_state}
+\dresidual=\dvec{0}
+\end{align}
+
+
+
+Now, deriving the residual by an abstract design variable can be expanded via the chain rule to
+%\begin{align}
+%\DEOSfluidBYabsvarI=\vec{0}=
+%\PEOSfluidBYabsvarI+
+%\PEOSfluidBYfstate\DfstateBYabsvarI+
+%\PEOSfluidBYmms\DmmsBYabsvarI
+%\end{align}
+
+\def\DdresidualBYabsvarI{ \tfrac{\dresidual}{\absvar_i} }
+\def\PdresidualBYabsvarI{ \pdfrac{\dresidual}{\absvar_i} }
+\def\PdresidualBYdfstate{ \pdfrac{\dresidual}{\dfstate}  }
+\def\DdfstateBYabsvarI  { \tfrac{\dfstate}{\absvar_i}   }
+\def\PdresidualBYdmms   { \pdfrac{\dresidual}{\dmms}     }
+\def\DdmmsBYabsvarI     { \tfrac{\dmms}{\absvar_i}      }
+\begin{align}
+\DdresidualBYabsvarI=\vec{0}=
+\DdresidualBYabsvarI                      +
+\PdresidualBYdfstate    \DdfstateBYabsvarI +
+\PdresidualBYdmms       \DdmmsBYabsvarI
+\end{align}
+
+
+
 Therefore the total derivative of the fluid state with respect to the shape variable, needed in equation REF, can be obtained by solving
-\begin{align}
-\hleyellow{
-  \PEOSfluidBYfstate\DfstateBYabsvarI= -
-  \PEOSfluidBYabsvarI -
-  \PEOSfluidBYmms\DmmsBYabsvarI
-}
+\begin{align}\label{eq:dfstate_by_absvarI}
+\PdresidualBYdfstate    \hleyellow{\DdfstateBYabsvarI}=
+-\DdresidualBYabsvarI 
+-\PdresidualBYdmms       \DdmmsBYabsvarI
 \end{align}
-In this equation, $\PEOSfluidBYabsvarI$ can be computed analytically or by \ac{FD}. The derivative of the mesh motion with respect to the abstract variables is often denoted as "shape gradient". It can be divided into two components:
+
+
+In this equation, $\PdresidualBYabsvarI$ can be computed analytically or by \ac{FD}. The derivative of the mesh motion with respect to the abstract variables is often denoted as "shape gradient". It can be divided into two components:
 \begin{itemize}
 \item The interface component $\tfrac{\mms_\Gamma}{\absvar_i}$, which is associated with the grid points lying on the fluid boundary
 \item The interior component $\tfrac{\mms_\Omega}{\absvar_i}$, which is associated with the grid points located in the interior $\Omega$ of the computational domain.
@@ -146,22 +234,24 @@ The interface component is determined by the structure. Having obtained this one
 where $\fic{\stiffmat}$ is a pseudo stiffness matrix that can be obtained by a simple spring analogy or similar approaches.
 For the later introduced Embedded framework, $\tfrac{\mms}{\absvar_i}$ is the position vector of the embedded discrete surface
  \\
-In summary, the derivative of an optimization criteria with respect to an abstract variable can be computed as
+ 
+\subsection{Full sensitivity equation}\label{sec:full_sensitivity_equation}
+After inserting \eqref{eq:lifttoddrag_by_absvar}, \eqref{eq:lifttodrag_by_dfstate} and \eqref{eq:dfstate_by_absvarI} into \eqref{eq:sensitivity_startingpoint}, one can derive the final sensitivity eqautions for the special case of a rigid or non-existing structure as
 \begin{align}\label{eq:full_sa_nostruct}
-\tfrac{\optcrit_j}{\absvar_i}\bigg\rvert_{\fstate_0} &=
--\tfrac{\optcrit_j}{\fstate}\bigg\rvert_{\fstate_0}
-\inv{\left[\pdfrac{\EOSfluid}{\fstate}\bigg\rvert_{\fstate_0}\right]}
+\tfrac{\optcrit_j}{\absvar_i}\bigg\rvert_{\dfstate_0} &=
+-\tfrac{\optcrit_j}{\fstate}\bigg\rvert_{\dfstate_0}
+\inv{\left[\PdresidualBYdfstate\bigg\rvert_{\fstate_0}\right]}
 \left(
-  \pdfrac{\EOSfluid}{\absvar_i}\bigg\rvert_{\fstate_0} +
+  \PdresidualBYabsvarI\bigg\rvert_{\fstate_0} +
   \begin{bmatrix}
-    \alpha\pdfrac{\EOSfluid}{\mms_\Omega}\bigg\rvert_{\fstate_0}~
-    \pdfrac{\EOSfluid}{\mms_\Gamma}\bigg\rvert_{\fstate_0}
+    \alpha\pdfrac{\dresidual}{\dmms_\Omega}\bigg\rvert_{\dfstate_0}~
+    \pdfrac{\dresidual}{\dmms_\Gamma}\bigg\rvert_{\dfstate_0}
   \end{bmatrix}
   \begin{bmatrix}
     \alpha \inv{\fic{\stiffmat}_{\Omega\Omega}} \fic{\stiffmat}_{\Omega\Gamma} \\
     \eye
   \end{bmatrix}
-  \tfrac{\mms_\Gamma}{\absvar_i}
+  \tfrac{\dmms_\Gamma}{\absvar_i}
 \right)\\
 \alpha&=
 \begin{cases}

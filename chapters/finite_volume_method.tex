@@ -156,7 +156,7 @@ The final numerical approximation can therefore be summarized as
 \begin{align}\label{eq:nse_final_discretized}
 \pdfrac{\bar{\dfstate_i}}{t} +
 \sum_{j \in \vertexset(i)} \fluxesnum_{ij}(\dfstate_{ij},\dfstate_{ji},\wnormal_{ij}) -
-\sum_{T_i \in \elementset(i)} \int_{T_i} \difftensor \nabla \dfstate \nabla \phi_i dx =
+\sum_{T_i \in \elementset(i)} \int_{T_j} \difftensor \nabla \dfstate \nabla \phi_j dx =
 \vec{0}
 \end{align}
 where $\vertexset(i)$ is the set of vertices connected to vertex $i$ by an edge, and $\elementset(i)$ is the set of primal elements connected to vertex $i$.
