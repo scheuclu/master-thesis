@@ -7,7 +7,7 @@
 
 For this thesis, we first will focus on an \ac{ALE} formulation, a closer look into this topic in the context of en Embedded formulation will follow.\\
 
-\subsection{Coupled three-field formulation}
+\subsection{Coupled three-field formulation}\label{sec:3_field_formulation}
 In an aeroelastic ALE problem, three solution fields have to be considered. Firstly, the usual fluid problem has to be solved. Over the \ac{FSI} interface, the fluid now interacts with the structure, imposing a Neumann problem on it. Finally, since we are considering \ac{ALE} here, a governing equation for the fluid mesh motion has to be introduced, which closes the system.\\
 Generally speaking, there exist two main approaches for solving this problem. Firstly, one can solve all three problems in one joint system, leading to a so-called monolithic algorithm. The advantage is, that the formulation is consistent and compared to the subsequently introduced staggered algorithm it does not introduce errors in the coupling. However, the solution of the monolithic system is cumbersome, since completely different physics are involved.\\
 In practice, using a so-called "staggered algorithm" has shown to be a more robust choice. In a staggered algorithm, fluid- and structure problem are updated from time step $n$ to $n+1$ one after the other. Therefore, consistency is lost, and (if no correction is applied) accuracy drops to first order. On the other hand each problem by itself can be treated by well established, optimized, existing solvers so the solution procedure is more robust.\\

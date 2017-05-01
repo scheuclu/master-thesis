@@ -8,6 +8,15 @@
 \section{Optimization}\label{sec:optimization}
 
 
+As mentioned in REF, the overall motivation for this thesis is optimization. A typicall optimization process, not restricted to fluid problems, is depicted in Figure~\ref{fig:optimization_blockdiagram}.
+\begin{figure}[h!]
+	\begin{center}
+	%/home/lukas/Desktop/project/independence/project/thesis/fig/tikz/build/optimization_blockdiagram.pdf
+        \includegraphics{\mainpath/fig/tikz/build/optimization_blockdiagram.pdf}
+        \caption[Optimization block-diagram]{Flow chart of an optimization process in the context of flow simulations. If regards the flow-computation block as a black-box to compute gradients of an objective function and the shape-modification block more general as parameter modification, this optimization routine is applicable to all kinds of problems. In our case, we begin with an initial geometry created by a standard mesh-generation software. We also parametrize the initial mesh in terms of design elements in this first step. This is done via SDesign in this thesis. All further modifications to the geometry are obtained via the design element concept. The mesh-movement, steady-state siumulations and \acf{SA} are then performed in AERO-F. For the optimizer itself, python has been chosen in this thesis, more specifically the TODO module. The codes communicate via result-files. These files are used to monitor and investigate the optimization process.}
+		\label{fig:optimization_blockdiagram}
+    \end{center}
+\end{figure}
 
 %\subsection{Basics}\label{sec:basics}
 

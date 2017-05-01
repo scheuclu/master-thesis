@@ -1,0 +1,258 @@
+\documentclass[../main.tex]{subfiles}
+%\usepackage{algorithm}
+%\usepackage{algorithmic}
+
+\everymath{\displaystyle}
+\def\arraystretch{2.0}
+\begin{document}
+\setlength{\delimitershortfall}{0pt}
+
+\section{Appendix}
+
+\subsection{Diffusive tensor $\difftensor$}
+
+The diffusive tensor $\difftensor$ is a fourth order tensor that can be interpreted as a matrix of matrices.
+For ideal gas, it reads,
+
+\def\koo{-\frac{4 \fluidvelx}{3} }
+\def\ktt{ \frac{4}{3} }
+\def\keo{ \fluidvely }
+\def\kee{ 1 }
+\def\kao{ \fluidvelz }
+\def\kaa{ 1 }
+\def\kto{ -\frac{4\fluidvelx}{3} }
+
+\def\kso{ -\Big((1-\frac{\gamma}{Pr})\norm{\fluidvel}^2+\frac{\fluidvelx^2}{3}+\frac{\gamma E}{Pr} \Big) }
+\def\kst{ \fluidvelx(\frac{4}{3}-\frac{\gamma}{Pr}) }
+\def\kse{ \fluidvely(1-\frac{\gamma}{Pr}) }
+\def\ksa{ \fluidvelz(1-\frac{\gamma}{Pr}) }
+\def\kss{ \frac{\gamma}{Pr} }
+\begin{align}\nonumber
+\difftensor_{11}=\frac{\mu}{\dens}
+\begin{bmatrix}
+  0     &    0     &    0     &    0     &    0     \\
+  \kto  &    \ktt  &    0     &    0     &    0     \\
+  \keo  &    0     &    \kee  &    0     &    0     \\
+  \kao  &    0     &    0     &    \kaa  &    0     \\
+  \kso  &    \kst  &    \kse  &    \ksa  &    \kss  \\
+\end{bmatrix}
+\end{align}
+
+
+
+
+
+\begin{minipage}{0.5\textwidth}
+\def\kto{ \frac{2\fluidvely}{3} }
+\def\keo{ -\fluidvelx }
+\def\kso{ -\frac{\fluidvelx\fluidvely}{3} }
+\def\ket{ 1 }
+\def\kst{ \fluidvely }
+\def\kte{ -\frac{2}{3} }
+\def\kse{ -\frac{2\fluidvelx}{3} }
+\begin{align}\nonumber
+\difftensor_{12}=\frac{\mu}{\dens}
+\begin{bmatrix}
+  0     &    0     &    0     &    0     &    0     \\
+  \kto  &    0     &    \kte  &    0     &    0     \\
+  \keo  &    \ket  &    0     &    0     &    0     \\
+  0     &    0     &    0     &    0     &    0     \\
+  \kso  &    \kst  &    \kse  &    0     &    0     \\
+\end{bmatrix}
+\end{align}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\def\kto{ \frac{2\fluidvelz}{3} }
+\def\kao{ -\fluidvelx }
+\def\kso{ -\frac{\fluidvelx\fluidvelz}{3} }
+\def\kao{ -\fluidvelx }
+\def\kat{ 1 }
+\def\kst{ \fluidvelz }
+\def\kta{ -\frac{2}{3} }
+\def\ksa{ -\frac{2\fluidvelx}{3} }
+\begin{align}\nonumber
+\difftensor_{13}=\frac{\mu}{\dens}
+\begin{bmatrix}
+% o          t          e          a          s
+  0     &    0     &    0     &    0     &    0     \\ %o
+  \kto  &    0     &    0     &    \kta  &    0     \\ %t
+  0     &    0     &    0     &    0     &    0     \\ %e
+  \kao  &    \kat  &    0     &    0     &    0     \\ %a
+  \kso  &    \kst  &    0     &    \ksa  &    0     \\ %s
+\end{bmatrix}
+\end{align}
+
+\end{minipage}
+
+
+
+
+
+
+
+
+
+
+\def\kto{ -\fluidvelx }
+\def\keo{ -\frac{4\fluidvely}{3} }
+\def\kao{ -\fluidvelz }
+\def\kso{ -\Big((1-\frac{\gamma}{Pr})\norm{\fluidvel}^2+\frac{\fluidvely^2}{3}+\frac{\gamma E}{Pr} \Big)  }
+\def\ktt{ 1 }
+\def\kst{ \fluidvelx(1-\frac{\gamma}{Pr}) }
+\def\kee{ \frac{4}{3} }
+\def\kse{ \fluidvely(\frac{4}{3}-\frac{\gamma}{Pr}) }
+\def\kaa{ 1 }
+\def\ksa{ \fluidvelz(1-\frac{\gamma}{Pr}) }
+\def\kss{ \frac{\gamma}{Pr} }
+\begin{align}\nonumber
+\difftensor_{22}=\frac{\mu}{\dens}
+\begin{bmatrix}
+% o          t          e          a          s
+  0     &    0     &    0     &    0     &    0     \\ %o
+  \kto  &    \ktt  &    0     &    0     &    0     \\ %t
+  \keo  &    0     &    \kee  &    0     &    0     \\ %e
+  \kao  &    0     &    0     &    \kaa  &    0     \\ %a
+  \kso  &    \kst  &    \kse  &    \ksa  &    \kss  \\ %s
+\end{bmatrix}
+\end{align}
+
+
+
+\begin{minipage}{0.50\textwidth}
+	\def\kto{ -\fluidvely }
+	\def\keo{ \frac{2\fluidvelx}{3} }
+	\def\kso{ -\frac{\fluidvelx\fluidvely}{3} }
+	
+	\def\ket{ -\frac{2}{3} }
+	\def\kst{ -\frac{2\fluidvely}{3} }
+	
+	\def\kte{ 1 }
+	\def\kse{ \fluidvelx }
+	\begin{align}\nonumber
+	\difftensor_{21}=\frac{\mu}{\dens}
+	\begin{bmatrix}
+	% o          t          e          a          s
+	  0     &    0     &    0     &    0     &    0     \\ %o
+	  \kto  &    0     &    \kte  &    0     &    0     \\ %t
+	  \keo  &    \ket  &    0     &    0     &    0     \\ %e
+	  0     &    0     &    0     &    0     &    0     \\ %a
+	  \kso  &    \kst  &    \kse  &    0     &    0     \\ %s
+	\end{bmatrix}
+	\end{align}
+\end{minipage}
+\begin{minipage}{0.50\textwidth}
+	\def\keo{ \frac{2\fluidvelz}{3} }
+	\def\kao{ -\fluidvely }
+	\def\kso{ -\frac{\fluidvely\fluidvelz}{3} }
+	
+	\def\kae{ 1 }
+	\def\kse{ \fluidvelz }
+	
+	\def\kea{ -\frac{2}{3} }
+	\def\ksa{ -\frac{2\fluidvely}{3} }
+	\begin{align}\nonumber
+	\difftensor_{23}=\frac{\mu}{\dens}
+	\begin{bmatrix}
+	% o          t          e          a          s
+	  0     &    0     &    0     &    0     &    0     \\ %o
+	  0     &    0     &    0     &    0     &    0     \\ %t
+	  \keo  &    0     &    0     &    \kea  &    0     \\ %e
+	  \kao  &    0     &    \kae  &    0     &    0     \\ %a
+	  \kso  &    0     &    \kse  &    \ksa  &    0     \\ %s
+	\end{bmatrix}
+	\end{align}
+\end{minipage}
+
+
+
+
+
+
+
+
+
+
+
+\begin{minipage}{0.50\textwidth}
+	\def\kto{ -\fluidvelz }
+	\def\kao{ \frac{2\fluidvelx}{3} }
+	\def\kso{ -\frac{\fluidvelx\fluidvelz}{3} }
+	\def\kat{ -\frac{2}{3} }
+	\def\kst{ -\frac{2\fluidvelz}{3} }
+	\def\kst{ 1 }
+	\def\ksa{ \fluidvelx }
+	\begin{align}\nonumber
+		\difftensor_{31}=\frac{\mu}{\dens}
+		\begin{bmatrix}
+		% o          t          e          a          s
+		  0     &    0     &    0     &    0     &    0     \\ %o
+		  \kto  &    0     &    0     &    \kst  &    0     \\ %t
+		  0     &    0     &    0     &    0     &    0     \\ %e
+		  \kao  &    \kat  &    0     &    0     &    0     \\ %a
+		  \kso  &    \kst  &    0     &    \ksa  &    0     \\ %s
+		\end{bmatrix}
+	\end{align}
+\end{minipage}
+\begin{minipage}{0.50\textwidth}
+	\def\keo{ -\fluidvelz }
+	\def\kao{ \frac{2\fluidvely}{3} }
+	\def\kso{ -\frac{\fluidvely\fluidvelz}{3} }
+	\def\kao{ -\frac{2}{3} }
+	\def\kse{ -\frac{2\fluidvelz}{3} }
+	\def\kea{ 1 }
+	\def\ksa{ \fluidvely }
+	\begin{align}\nonumber
+		\difftensor_{32}=\frac{\mu}{\dens}
+		\begin{bmatrix}
+		% o          t          e          a          s
+		  0     &    0     &    0     &    0     &    0     \\ %o
+		  0     &    0     &    0     &    0     &    0     \\ %t
+		  \keo  &    0     &    0     &    \kea  &    0     \\ %e
+		  \kao  &    0     &    \kao  &    0     &    0     \\ %a
+		  \kso  &    0     &    \kse  &    \ksa  &    0     \\ %s
+		\end{bmatrix}
+	\end{align}
+\end{minipage}
+
+
+
+
+
+
+
+
+\def\kto{ -\fluidvelx }
+\def\keo{ -\fluidvely }
+\def\kao{ -\frac{4\fluidvelz}{3} }
+\def\kso{ -\Big((1-\frac{\gamma}{Pr})\norm{\fluidvel}^2+\frac{\fluidvelz^2}{3}+\frac{\gamma E}{Pr} \Big)  }
+\def\ktt{ 1 }
+\def\kst{ \fluidvelx\left(1-\frac{\gamma}{Pr}\right) }
+\def\kee{ 1 }
+\def\kse{ \fluidvely\left(1-\frac{\gamma}{Pr}\right) }
+\def\kaa{ \frac{4}{3} }
+\def\ksa{ \fluidvelz\left(1-\frac{\gamma}{Pr}\right) }
+\def\kss{ \frac{\gamma}{Pr} }
+\begin{align}
+\difftensor_{33}=\frac{\mu}{\dens}
+\begin{bmatrix}
+% o          t          e          a          s
+  0     &    0     &    0     &    0     &    0     \\ %o
+  \kto  &    \ktt  &    0     &    0     &    0     \\ %t
+  \keo  &    0     &    \kee  &    0     &    0     \\ %e
+  \kao  &    0     &    0     &    \kaa  &    0     \\ %a
+  \kso  &    \kst  &    \kse  &    \ksa  &    \kss  \\ %s
+\end{bmatrix}
+\end{align}
+
+where $Pr$ denotes the Prandtl number defined as $Pr=\frac{\mu C_p}{k}$
+
+
+
+
+
+\end{document}
+
+
+
+
+

@@ -258,4 +258,18 @@ By simple geometrical considerations we can now determine, that the following re
 
 
 
+
+
+\section{The immersed boundary method}\label{sec:immersed_boundaries}
+Traditionally internal fluid boundarys, like physical walls imposed by a structure, are represented by meshing the fluid such that it coincides with the structure surface. This approach, that shall be denoted by "explicit boundary method" here, is intuitive and the imposition of boundary conditions comes naturally. In the case of fluid structure interaction, where we expect the structure to move and deform, ans explicit boundary treatment prohibits the use of an Eulerian formulation, as described in section~REF. Instead every move or shape-change of the structure requires an appropriate update of the fluid mesh. Therfore, \ac{FSI} problems with explicit boundaries are typically solved via an \
+ac{ALE} formulation. Details can be found in section~REF.\\
+However, using an ALE-formulation has some sever disadvantages. First and most importantly for the context of shape-optimization, only minor changes to the topology are admissible. The mesh motion or mesh-update algorithm is only capable of moving the fluid nodes in a spatial manner, the main connectivity of the mesh does not change, however. Therefor, the method can neither cover large distortions, nor is it possible to fundamentally change the structure shape, e.g. removing material in a non-critical region of the structure.\\
+Additionally, creating body-fitted meshed can be cumbersome and time consuming, especially for complex structure geometries.\\
+An elegant solution to this problem is the so-called "immersed boundary method", first described in the context of flow-computations in the human heart in~\cite{Peskin1972}. In an immersed boundary method, the structure surface does not coincide with fluid faces. Therefore, no mesh-movement algorithm is required, and the fluid mesh no longer needs to be specifically designed with a certain structure in mind. In fact, combing this approach with an apdaptive mesh refinement completely eliminated any cost in the fluid mesh generation.\\
+The two different approaches are visualized in Figure~REF.
+Due to the attractiveness of the immersed boundary method in the context of shape optimization, special emphasis has been put on the immersed boundary method in this thesis.
+
+\textbf{TODO figure}
+
+
 \end{document}

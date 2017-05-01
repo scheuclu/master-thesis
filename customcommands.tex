@@ -33,6 +33,7 @@
 \newcommand{\nd}[1]{\bar{#1}} %asdasd
 \newcommand{\reference}[1]{ {#1}_{ref} }
 
+
 \newcommand{\conv}[1]{{#1}^{c}} %convective form of a quantity (quantity in ALE-description}
 
 %%==============================%
@@ -81,6 +82,7 @@
 \newcommand{\fstate}    {\vec{w}}        %Fluid state vector
 \newcommand{\fstatead}{\vec{a}_{\vec{w}}}  %Adjoint fluid state vector
 \newcommand{\fstateprim}{\prim{\fstate}}        %Primitive ffluid state vector
+\newcommand{\dfstateprim}{\prim{\dfstate}}        %Primitive ffluid state vector
 \newcommand{\dfstate}    {\dvec{w}}        %Discrete fsluid state vector
 \newcommand{\dresidual}    {\dvec{R}}        %Discrete fsluid state vector
 \newcommand{\structdisp}{\vec{u}}        %Structure displacement
@@ -102,6 +104,7 @@
 \newcommand{\cellvolmat}{\dmat{A}}        %Diagonal matrix with vell volumes
 
 \newcommand{\specificwork}{\vec{w}}       %specific work
+\newcommand{\aoa}{\alpha_{\infty}}  %angle of attack
 
 
 
@@ -163,8 +166,8 @@
 \newcommand{\jaceigvecs}{\tensor{P}}  %Matrix that contains the eigenvectors of the jacobian matrix of $\fluxmatconv$
 \newcommand{\jaceigvals}{\tensor{\Lambda}}  %Diagonal matrix that contains the eigenvalues of the jacobian matrix of $\fluxmatconv$
 \newcommand{\roeavgfunc}{\tensor{M}}  %Averaging function associated with the Roe flux
-\newcommand{\machnum}{M_a}              %Mach number
-\newcommand{\M}{M_a}              %Mach number
+\newcommand{\machnum}{M}              %Mach number
+\newcommand{\M}{\machnum}              %Mach number
 
 
 
@@ -270,4 +273,6 @@
 %    \end{align}
 %    \endgroup
 %    }
+
+\newcommand\question[1]{\textcolor{red}{\textbf{#1}}}
 

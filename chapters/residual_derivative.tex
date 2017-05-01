@@ -7,13 +7,146 @@
 \begin{document}
 \setlength{\delimitershortfall}{0pt}
 
-\section{Derivative of the fluid residual $\pdfrac{\dresidual}{\dfstate}$}\label{sec:dresidual_derivative}
-This section is denoted to a thorough derivation of the derivative $\pdfrac{\dresidual}{\dfstate}$.
+\section{Derivatives of the fluid residual}\label{sec:dresidual_derivative}
+This section is denoted to a thorough derivation of the partial derivatives $\pdfrac{\dresidual}{\dfstate}$ and $\pdfrac{\dresidual}{\absvar}$ of the fluid residual equation.
+These are the main quantities needed in order to compute the sensitivity of the state vector $\pdfrac{\dfstate}{\absvar}$ as shown in equation~\ref{eq:full_sa_nostruct}.
 We need this derivative in order to solve for $\frac{\dfstate}{\absvar}$ in equation~\eqref{eq:dfstate_by_absvar}.\\
 
-We will split this derivatives into the convective part and the diffusive part according to~\eqref{eq:nse_final_discretized_notationchange}.
 
-\subsection{Derivative of the convective Residual $\dresidual^c$}
+\subsection{Fluid Jacobian $\pdfrac{\dresidual}{\dfstate}$}\label{sec:fluid_jacobian}
+
+
+
+
+
+According to~\eqref{eq:nse_final_discretized_notationchange}, the total residual is comprised of a convective(inviscid) part and a viscous contributions. Thanks to the distributive property of the derivative operator, we can thus compute the derivative of the total residual as the sum of the derivatives of the components. This is particulary important for us, since we used two different discretization routines for the viscous and the inviscid part.\\
+
+
+
+\subsubsection{Derivative of the convective Jacobian $\pdfrac{\dresidual^c}{\dfstate}$}
+
+Also, we will only discuss the special case of intersected elements in the following, since the special case of an non-intersected cell follows trivially from that.\\
+For more details on the evaluation of the inviscid residual the reader is refered to section~\ref{sec:finite_volume_method}, specifically section~\ref{sec:fv_fluid_mechanics} and section~\ref{sec:fiver} for the incorporation of the immersed boundary conditions.
+
+
+For the convective part of the Jacobian, $\dresidual^c$ we can be therefor write
+\begin{align}
+\dresidual^{c,i}_{ij} = \fluxesnum^i_{ij}(\dfstateprim_{ij},\dfstateprim^{*}_{ij},\normal_{ij})
+\end{align}
+
+Since the fluid normal is dependent on the mesh position this can also be written as
+\begin{align}
+\dresidual^{c,i}_{ij} = \fluxesnum^i_{ij}(\dfstateprim_{ij},\dfstateprim^{*}_{ij},\mpos)
+\end{align}
+
+
+If the edge $i-j$ is intersected however, the half-Riemann problem approach as discussed in section~REF is applied.
+Also, the quantity $\dfstate_ij$ on the interface can be reconstructed in several way. In this thesis we applied a \ac{MUSCL} technique. Of course, the reconstruction and limitation has to be taken into account as well.\\
+Putting this all together, one can write
+
+\begin{align}
+    \frac{\partial \dresidual^i_{ij}}{\partial \dfstate_k} = 
+    {\color{red}{\frac{\partial \dresidual^i_{ij}}{\partial \dfstateprim_{ij}^\star}}} \,
+    {\color{blue}{\frac{\partial \dfstateprim_{ij}^\star}{\partial \dfstateprim_k}}} \,
+    \frac{\partial \dfstateprim_k}{\partial \dfstate_k} +
+    {\color{red}{\frac{\partial \dresidual^i_{ij}}{\partial \dfstateprim_{ij}}}} \,
+    {\color{green}{\frac{\partial \dfstateprim_{ij}}{\partial \dfstateprim_k}}} \,
+    \frac{\partial \dfstateprim_k}{\partial \dfstate_k} +
+    \underbrace{\pdfrac{\dresidual^{c,i}_{ij}}{\dmpos}\pdfrac{\dmpos}{\normal_{ij}}}_{=\vec{0}\text{ for embedded}}
+\end{align}
+
+\begin{center}
+	\begin{itemize}
+	  \item {\color{red} {Analytical Jacobian of the (Roe's) centering flux} }
+	  \item {\color{blue} {Analytical derivative of the solution of the 1D half-Riemann problem}}
+	  \item {\color{green} {Analytical derivative of the MUSCL reconstruction and limitation}}
+	\end{itemize}
+\end{center}
+
+where, $\prim{(\sim)}$ denotes primitive quantitives, $\frac{\partial \dfstateprim_k}{\partial \dfstate_k}$ accounts for the conversion between primitive and conservative state vector, $\pdfrac{\dresidual^{c,i}_{ij}}{\fstateprim^{\star}_{ij}}$ is the analytical derivative of the \ac{MUSCL} reconstruction and limitation and $a$ is the analytical Jacobian of the Roe flux. Finally, $\frac{\partial \dfstateprim_{ij}^\star}{\partial \dfstateprim_k}$ accounts for the analytical derivative of the solution of the 1D half-Riemann problem. This also accounts for the only really new derivative to be considered in comparison to the cells far from the immersed boundaries.\\
+The analytic Jacobian of the Roe flux is provided in section~\ref{sec:jacobian_roeflux}, the derivative of the solution of the 1D hgalf-Riemann problem is discussed in section~\textbf{TODO}, the derivative of the MUSCL reconstruction in section~\textbf{TODO} and finally, the derivative of the conversion to primitive variables is discussed in section~\textbf{TODO}.
+
+
+
+
+\subsubsection{Derivative of the viscous Jacobian $\pdfrac{\dresidual^c}{\dfstate}$}\label{sec:jacobian_viscous}
+For the discussion of the viscous Jacobian, we first remind the reader that an \ac{FE} approach is used to evaluate this term, in contrast to the \ac{FV} approach used for the inviscid contribution. For a detailed discussion the reader is referred to section~\ref{sec:mixed_FV_FE_formulation} and the following sections.\\
+As far as the residual evaluation itself goes, we recall that, once the ghost points have been populated(see section~\textbf{TODO}), the residual is evaluated as though it had never been intersected in the first place.
+We can therefore write the viscous residual of an intersected cell as
+
+
+\begin{align}
+    \dresidual^c(\dfstateprim^a,\dfstateprim^g(\dfstateprim^a))=\vec{0}
+\end{align}
+where $\dfstateprim^a$ represents the fluid states of the active node, and $\dfstateprim^g$ are the fluid states of the ghost nodes, which can themselveS be expressed in terms of the active nodes.
+
+
+An thus the derivative becomes:
+\begin{align}
+    \pdfrac{\dresidual^v(\dfstateprim^a,\dfstateprim^g(\dfstateprim^a))}{\dfstateprim}=
+    \underbrace{\pdfrac{\dresidual^v}{\dfstateprim^a}}_{\substack{\text{can be re-used from ALE } \\ \text{after the ghost-point population}}}+
+    \pdfrac{\dresidual^v}{\dfstateprim^g}\cdot
+    \overbrace{\pdfrac{\dfstateprim^g}{\dfstateprim^a}}^{\substack{\text{obtained during the}\\ \text{population process} }}
+\end{align}
+
+ \\
+For the analytic viscous Jacobian contribution we don't have to make a difference between $\pdfrac{\dresidual^v}{\dfstateprim^a}$ and $\pdfrac{\dresidual^v}{\dfstateprim^g}$.\\
+We recall the definition of the viscous residual as
+\begin{align}\label{eq:derivative_viscous_residual}
+\dresidual_i^v=-\sum_{T_i \in \elementset(i)} \int_{T_j} \difftensor \nabla \dfstate \nabla \phi_j dx
+\end{align}
+again, we switch to primitive variables for easier evaluation
+
+\begin{align}\label{eq:derivative_viscous_residual_primitives}
+\dresidual_i^v=-\sum_{T_i \in \elementset(i)} \int_{T_j} \prim{\difftensor} \nabla \prim{\dfstate} \nabla \phi_j dx
+\end{align}
+
+Applying a numerical integration such as gauss rule, this becomes
+\begin{align}\label{eq:aaa}
+\dresidual_i^v=-\sum_{T_i \in \elementset(i)} \sum_{i=1}^{n_g} 
+w_i \prim{\difftensor} \nabla \prim{\dfstate}(\dmpos_i) \nabla \phi_j(\dmpos_i) dx
+\end{align}
+
+Thus, due the constant nature of the diffusive tensor $\difftensor$ the derivative can be written straigforwardly as
+\begin{align}\label{eq:aaa}
+\pdfrac{\dresidual_i^v}{\prim{\dfstate}}=
+-\sum_{T_i \in \elementset(i)} \sum_{i=1}^{n_g} 
+w_i \prim{\difftensor} \nabla \prim{\dfstate}(\dmpos_i) \nabla \phi_j(\dmpos_i) dx
+\end{align}
+
+\question{Do I have to put a partial derivative resulting from the chain rule of x there?}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Analytic Jacobian of the Roe flux}\label{sec:jacobian_roeflux}
+
+
+
+\begin{align}
+\pdfrac{\dresidual_i^c}{\dfstate}=
+\sum_{j \in \vertexset(i)}
+\underbrace{\pdfrac{meas(C_{ij})}{\dfstate} \fluxesnum_{ij}(\dfstate_{ij},\dfstate_{ji},\wnormal_{ij})}_{=\vec{0}\text{ for embedded}} +
+meas(C_{ij}) \pdfrac{\fluxesnum_{ij}(\dfstate_{ij},\dfstate_{ji},\wnormal_{ij})}{\dfstate}
+\end{align}
+where the first term is always zero for embedded simulations.\\
+\question{TODO ask Farhat what to do with the first derivative.}
 
 First, we recall the definition of the numerical flux as
 \begin{align}\label{eq:roe_flux}
@@ -67,14 +200,15 @@ Since an equilibrium point is considered, $\dmms=\vec{0}$ and is neglected in th
 
 In equation~\eqref{eq:convectiveterm_approximation} we have introduced $\fluxesnum$ as the numerical flux function. In this thesis, we consider the popular Roe flux, which is defined as given in equation~\eqref{eq:roe_flux}.
 
-Let us remind, that $\dfstate_i$ is the flux vector at vertex $i$, $\vertexset(i)$ is the set of vertices connected to vertex $i$ by an edge, $C_i$ is the control volume of the dual cell centered at vertex $i$ and $\partial C_{ij}$ is the segment of the boundary that intersects edge $(ij)$ and $\wnormal_{ij}$ is the outward-facing weighted normal to $\partial C_{ij}$
+Let us remind, that $\mathsf{R}_i^c$ is the convective residual at vertex $i$, $\vertexset(i)$ is the set of vertices connected to vertex $i$ by an edge, $C_i$ is the control volume of the dual cell centered at vertex $i$ and $\partial C_{ij}$ is the segment of the boundary that intersects edge $(ij)$ and $\wnormal_{ij}$ is the outward-facing weighted normal to $\partial C_{ij}$.
+See figure~\ref{fig:dualcell_unstructured} for a visualization of the setup.
  \\
 From Equation \eqref{eq:convectiveterm _approximation2} it is obvious that when looking for the derivative $\pdfrac{\fluxmatconv}{\dfstate}$, the derivative of the numerical flux with respect to the fluid state vector $\pdfrac{\fluxesnum}{\dfstate}$ is required.
 
 To make things easier we will in the following derive the primitive version of that quantity $\pdfrac{\prim{\fluxesnum}}{\prim{\dfstate}}$
  \\
  \\
-The primitive version of the numerical Roe flux can be expressed as
+As \cite{Lesoinne2001} demonstrates, primitive version of the numerical Roe flux can be expressed as
 \begin{align}\label{eq:primitive_roe_flux}
 \prim{\fluxesnum}(\prim{\dfstate}_i,\prim{\dfstate}_j,\normal_{ij}) =
 \frac{1}{2} \left(\prim{\fluxesconv}(\prim{\dfstate}_i)\cdot\normal_{ij} +
@@ -84,7 +218,7 @@ The primitive version of the numerical Roe flux can be expressed as
 \end{align}
 
 
-where, for ease of notation we omit the function arguments by simply writing ${\sim)$ as follows
+where, for ease of notation we omit the function arguments by simply writing $(\sim)$ as follows
 \begin{align}\label{eq:split_roeaveragingmatrix}
 \inv{\jaceigvecs}(\sim) &= \inv{\jaceigvecs}\left(\roeavgfunc(\sim),\normal_{ij}\right) \nonumber\\
 \roeavgfunc(\sim)       &= \roeavgfunc\left(\prim{\fstate}_i,\prim{\fstate}_j\right)    \nonumber\\
@@ -142,7 +276,6 @@ A_{51}   &  A_{52}                   &  A_{53}                   &  A_{54}      
 
 
 For this Jacobian, one can now symbolically derive an eigenvalue decomposition, such that
-\textbf{TODO notation}
 \begin{align}
 \fluxjac=\inv{\jaceigvecs}\jaceigvals\jaceigvecs
 \end{align}
@@ -410,11 +543,23 @@ Therefor, the numerical roe flux~\eqref{eq:primitive_roe_flux} can therefore be 
 \Bigg]
 \end{align}
 where the full analytic expression can be obtained by backward substitution of equations~\eqref{eq:split_roeaveragingmatrix} to \eqref{eq:pdfrac_jaceigvalsBYfstate_comp5}.\\
-This derivative, along with the derivative of the diffusive term, which will be derived in Section \textbf{TODO}, will be a key component in the Sensitivity calculations as shown in Section~\ref{sec:SA} and \ref{sec:aeroelastic_sa}. This is due to the fact that will follow the procedere of discretization before derivation as justified in Section~\ref{sec:discretization_vs_differentiation}.
+This derivative, along with the derivative of the viscous term, which will be derived in Section~\ref{sec:derivative_viscous_residual}, will be a key component in the Sensitivity calculations as shown in Section~\ref{sec:SA} and \ref{sec:aeroelastic_sa}. This is due to the fact that will follow the procedere of discretization before derivation as justified in Section~\ref{sec:discretization_vs_differentiation}.
 
 
 
-\subsection{Derivative of the viscous residual $\dresidual^v$}
-Derivative of the convective Residual $\dresidual^c$
+
+
+
+
+\subsection{Derivative with respect to the abstract variable $\pdfrac{\dresidual}{\absvar}$}\label{sec:dresidual_by_absvar}
+Since the fluid Jacobian is also required in every standard fluid solve, the important term, unique to \ac{SA} is the partial derivative of the residual with respect to the design variable $\absvar$.\\
+Similar to the previously discussed fluid Jacobian, the computation of $\pdfrac{\dresidual}{\absvar}$ can be splitted into convective and viscous part.
+We again focus on the special case of an intersected cell in the following two subsections, since the standard case of a standard cell far from the interface follows trivially from that.
+
+\subsubsection{Convective contribution $\pdfrac{\dresidual^c}{\absvar}$}
+in generall, th
+\subsubsection{Viscous contribution $\pdfrac{\dresidual^v}{\absvar}$}
+aaa
+
 
 

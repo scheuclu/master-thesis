@@ -1,0 +1,88 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\def\mainpath{/home/lukas/Desktop/project/independence/project/thesis/}
+\def\tikzpath{\mainpath/fig/tikz}
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{calc}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepgfplotslibrary{groupplots}
+
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\input{\mainpath/customcommands}
+
+\tikzset{>=latex}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+            
+            
+% Define block styles
+\tikzstyle{decision} = [diamond, draw, fill=yellow!80, 
+                        text width=4.5em, text badly centered, node distance=2cm, inner sep=0pt]
+\tikzstyle{block}  = [rectangle, draw, fill=black!20, 
+                     text width=8em, text centered, rounded corners, minimum height=1em]
+\tikzstyle{block1} = [rectangle, draw, fill=blue!30, 
+                     text width=8em, text centered, rounded corners, minimum height=1em]
+\tikzstyle{block3} = [rectangle, draw, fill=red!50, 
+                     text width=8em, text centered, rounded corners, minimum height=1em]
+\tikzstyle{block2} = [rectangle, draw, fill=green!40, 
+                     text width=8em, text centered, rounded corners, minimum height=1em]
+\tikzstyle{block4} = [rectangle, draw, fill=yellow!80, 
+                     text width=8em, text centered, rounded corners, minimum height=1em]
+\tikzstyle{blocke} = [rectangle, draw, fill=yellow!25, 
+                     text width=16em, text centered, rounded corners, minimum height=2em]
+\tikzstyle{line} = [draw, -latex']
+
+
+
+\input{\mainpath/colordefinitions}
+\begin{document}
+
+
+
+\begin{tikzpicture}[node distance = 1.2cm, auto]
+        \node [block]                                      (init) {Initial geometry};
+        \node [block1, below of=init]                      (parameter) {Parameter change};
+        \node [block1, below= 1cm of parameter]                 (modify) {Shape  \mbox{modification}};
+        \node [block2, below= 1cm of modify]                    (mesh) {Mesh procedure};
+        \node [block3, below of=mesh]                      (simulation) {Flow simulation};
+        \node [decision, right of=parameter, node distance=3.5cm] (decide) {Optimum?};
+        \node [block4, right of=mesh, node distance=3.5cm] (optimize) {Gradient based optimization};
+        \node [block3, below of=simulation]                (objective) {Gradient of objective function \& constraints}; 
+        \path [line] (init) -- (parameter);
+        \path [line] (parameter) -- (modify);
+        \path [line] (decide) -- (parameter);        
+        \path [line] (modify) -- (mesh);
+        \path [line] (mesh) -- (simulation);
+        \path [line] (simulation) -- (objective);   
+        \path [line] (objective) -| (optimize);
+        \path [line] (optimize) -- (decide);  
+        
+        \draw[darkgrey,thick,dotted] ($(parameter.north west)+(-0.2,0.15)$)  rectangle ($(parameter.south east)+(0.2,-0.45)$);    %SDesign
+        \draw[darkgrey,thick,dotted] ($(modify.north west)+(-0.2,0.15)$)  rectangle ($(modify.south east)+(0.2,-0.45)$);    %SDesign
+        \draw[darkgrey,thick,dotted] ($(mesh.north west)+(-0.2,0.15)$)    rectangle ($(objective.south east)+(0.2,-0.45)$); %Aero-F   
+        \draw[darkgrey,thick,dotted] ($(decide.north west)+(-1.2,0.6)$)   rectangle ($(optimize.south east)+(0.2,-0.45)$);  %Python
+        
+        \node [darkgrey,anchor=north east] at  ($(parameter.south east)+(0.0,0.0)$)                (aaa) {\texttt{Bash}};
+        \node [darkgrey,anchor=north east] at  ($(optimize.south east)+(0.0,0.0)$)                (aaa) {\texttt{Python}};
+        \node [darkgrey,anchor=north east] at  ($(objective.south east)+(0.0,0.0)$)                (aaa) {\texttt{Aero-F}};
+        \node [darkgrey,anchor=north east] at  ($(modify.south east)+(0.0,0.0)$)                (aaa) {\texttt{SDesign}};
+        
+        
+        %\draw [fill=black]($(parameter.north west)+(-0.2,0.15)$) -- ($(parameter.south west)+(-0.2,-0.15)$) -- ($(decide.south west)+(-0.2,-0.15)$) -- ($(optimize.south west)+(-0.2,-0.15)$) -- ($(optimize.south east)+(0.2,-0.15)$) -- ($(decide.north east)+(0.2,0.15)$) -- cycle;
+
+\end{tikzpicture}
+
+
+
+\end{document}
+
+
