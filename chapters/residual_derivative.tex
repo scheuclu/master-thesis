@@ -89,8 +89,8 @@ An thus the derivative becomes:
     \overbrace{\pdfrac{\dfstateprim^g}{\dfstateprim^a}}^{\substack{\text{obtained during the}\\ \text{population process} }}
 \end{align}
 
- \\
-For the analytic viscous Jacobian contribution we don't have to make a difference between $\pdfrac{\dresidual^v}{\dfstateprim^a}$ and $\pdfrac{\dresidual^v}{\dfstateprim^g}$.\\
+
+For the analytic viscous Jacobian contribution we don't have to make a difference between $\pdfrac{\dresidual^c}{\dfstateprim^a}$ and $\pdfrac{\dresidual^v}{\dfstateprim^g}$.\\
 We recall the definition of the viscous residual as
 \begin{align}\label{eq:derivative_viscous_residual}
 \dresidual_i^v=-\sum_{T_i \in \elementset(i)} \int_{T_j} \difftensor \nabla \dfstate \nabla \phi_j dx
@@ -114,8 +114,6 @@ Thus, due the constant nature of the diffusive tensor $\difftensor$ the derivati
 w_i \prim{\difftensor} \nabla \prim{\dfstate}(\dmpos_i) \nabla \phi_j(\dmpos_i) dx
 \end{align}
 
-\question{Do I have to put a partial derivative resulting from the chain rule of x there?}
-
 
 
 
@@ -137,7 +135,7 @@ w_i \prim{\difftensor} \nabla \prim{\dfstate}(\dmpos_i) \nabla \phi_j(\dmpos_i) 
 
 \subsection{Analytic Jacobian of the Roe flux}\label{sec:jacobian_roeflux}
 
-
+This section provides a detailed step by step derivation of the analytic convective Jacobian. This section is lenghty and not necessarily required for understanding the rest of the thesis. For this reason it has been moved at the end of chapter~\ref{sec:dresidual_derivative}. Nonetheless, in the authors opinion, it provides some crucial insight into the basics of \ac{SA}, and it is certainly of great help and serves as a reference for anyone who wants to implement those derivatives himself.
 
 \begin{align}
 \pdfrac{\dresidual_i^c}{\dfstate}=
@@ -171,7 +169,7 @@ The primitive state vector is also much more appealing when it comes to the impl
  \\
 Next we recall the conservative form of the Euler equations, which was presented in section~\ref{sec:conservative_form_nsg} as
 \begin{align}\label{eq:t1}
-\pdfrac{\fstate}{t}+\nabla\cdot\fluxesconv{\fstate}=\vec{0}
+\pdfrac{\fstate}{t}+\nabla\cdot\fluxesconv(\fstate)=\vec{0}
 \end{align}
 Where the convective flux matrix $\fluxesconv$ is provided in equation \eqref{eq:fluxesconv}, and can be written as
 \begin{align}
@@ -190,7 +188,7 @@ Therefore, applying the Nabla operator in Equation \eqref{eq:t1} gives
 where the matrices $\tensor{A}$,$\tensor{B}$ and $\tensor{C}$ are called the \expression{flux Jacobians}.
 \end{document}
 
-In Section~\ref{sec:SA}, we have derived that for any sensitivity calculation, the derivative of the flux matrix with respect to the fluid state vector $\pdfrac{\fluxmatconv}{\fstate}$ is required.\\
+In Section~\ref{sec:SA}, we have derived that for any sensitivity calculation, the derivative of the flux matrix with respect to the fluid state vector $\pdfrac{\dresidual^c}{\fstate}$ is required.\\
 We have derived in Section~\ref{sec:mixed_FV_FE_formulation} that at an interior vertex point of the fluid mesh, we have
 \begin{align}\label{eq:convectiveterm _approximation2}
 \left[\fluxmatconv(\dfstate,\dmpos,\dmms)\right]_i=
@@ -556,10 +554,53 @@ Since the fluid Jacobian is also required in every standard fluid solve, the imp
 Similar to the previously discussed fluid Jacobian, the computation of $\pdfrac{\dresidual}{\absvar}$ can be splitted into convective and viscous part.
 We again focus on the special case of an intersected cell in the following two subsections, since the standard case of a standard cell far from the interface follows trivially from that.
 
+It shall also be noted that in most cases, the derivative $\pdfrac{\dresidual}{\absvar}$ is non-zero only at a few fluid nodes. For shape-sensitivity, for example, only the nodes at the interface have a non-zero contribution here. Looking at equation \eqref{eq:full_sa_nostruct} one can therefor interpret the solution of the linear system, or the multiplication with the inverse Jacobian, as a propagation operation.\\
 \subsubsection{Convective contribution $\pdfrac{\dresidual^c}{\absvar}$}
-in generall, th
+Generally, one can write the convective fluid residual as 
+\begin{align}\label{eq:convective_residual_fulldependency}
+\dresidual^{c,i}_{ij} = \fluxesnum^i_{ij}(\dfstateprim_{ij},\dfstateprim^{*}_{ij}(\absvar),\normal_{ij})
+\end{align}
+The most important factor here, is of course the dependency of the half Riemann solution on the abstract variable. This dependecy becomes obvious in the case of shape sensitivity, since the intersection point used for the Riemann solution depends upon the interface shape.\\
+The derivative can be obtained straightforwardly as
+\begin{align}
+\dresidual{\dresidual^{c,i}_{ij}}{\absvar}=\pdfrac{\dresidual^{c,i}_{ij}}{\dfstate^{\star}_{ij}}\pdfrac{\dfstate^{\star}_{ij}}{\absvar}
+\end{align}
+here, the analytical derivative of the first term can be taken from section \ref{sec:fluid_jacobian}.
+The second derivative is more cumbersome. The issue is visualized in Figure~\ref{fig:pierce}.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.3\linewidth]{\mainpath/fig/pdf/pierce}
+\caption[aa]{Visualization of the intersection of a fluid mesh edge $(D-E)$ with an element of the embedded surface $(A-B-C)$. For a shape-sensitivity analysis, SDesign returns the derivatives of the embedded surface nodes $A,B,C$ position with respect to the shape parameter. This is done by first computing the intersection point $P$. Together with the element normal $\normal$, the intersection point is used to reconstruct the shape derivatives at nodes $D$ and $E$. \textbf{TODO}}
+\label{fig:pierce}
+\end{figure}
+
+Based on the consideration above, we find the following dependency for the 
+\begin{align}
+\pdfrac{\dfstate^{\star}_{ij}}{\absvar}=\pdfrac{\dfstate^{\star}_{ij}}{\absvar}
+\Big(
+\pdfrac{\dfstate_{i}}{\absvar}\rvert_{i=A,B,C},\xi,\normal
+\Big)
+\end{align}
+
+The derivatives of the geometrical quantities with respect to $\absvar$ are found as
+\begin{align}
+\pdfrac{\xi}{\absvars}&=\pdfrac{\xi}{\mpos}\pdfrac{\mpos}{\absvars} \\
+\pdfrac{\normal_{wall}}{\absvar}&=\pdfrac{\normal_{wall}}{\mpos}\pdfrac{\mpos}{\absvar}
+\end{align}
+
+
 \subsubsection{Viscous contribution $\pdfrac{\dresidual^v}{\absvar}$}
-aaa
+The derivative of the viscous contibution is derived very simmilarly to the viscous Jacobian.
+Looking at equation \textbf{TODO} one can derive
+\begin{align}
+    \pdfrac{\dresidual^v(\absvars,\dfstateprim^a(\absvars),\dfstateprim^g(\dfstateprim^a(\absvars)),\mpos(\absvars))}{\absvars}=
+    &\underbrace{\pdfrac{\dresidual^v}{\dfstateprim^a}\pdfrac{\dfstateprim^a}{\absvars}}_{\substack{\text{can be re-used from ALE } \\ \text{after the ghost-point population}}}+
+    \pdfrac{\dresidual^v}{\dfstateprim^g}\cdot
+    \overbrace{\pdfrac{\dfstateprim^g}{\dfstateprim^a}}^{\substack{\text{obtained during the}\\ \text{population process} }} \pdfrac{\dfstateprim^a}{\absvars} \nonumber \\
+    &+
+    \underbrace{\pdfrac{\dresidual}{\dmpos}\pdfrac{\dmpos}{\absvars}}_{=\vec{0}\text{ for embedded}}
+\end{align}
 
 
 
