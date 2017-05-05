@@ -1,0 +1,45 @@
+under Problem {
+  Type = Steady;
+  Mode = Dimensional;
+  Framework = Embedded;
+}
+
+under Input {
+  GeometryPrefix = "../../../mesh/sower/fluid_sowered";
+  EmbeddedSurface = "../../../mesh/runmesh/embedded_surface.top";
+}
+
+under Output {
+  under Postpro {
+    Prefix = "";
+    Frequency = 0;
+    Density = "results/Density";
+    Velocity = "results/Velocity";
+    Pressure = "results/Pressure";
+    FluidID = "results/FluidID";
+  }
+  under Restart {
+    Prefix = "";
+    Solution = "rst/naca_steady.sol";
+    //RestartData = "./rst/naca_steady.rst";
+    //Position = "./rst/naca_steady.pos";
+    //FilePackage = "./rst/naca_steady.pkg";
+    Frequency = 0;
+  }
+}
+
+sec_referencestate
+
+sec_meshmotion
+
+sec_surfaces
+
+sec_equations
+
+sec_bc
+
+sec_space
+
+sec_time_steady
+
+sec_embedded

@@ -1,0 +1,12 @@
+under Space  {
+  under NavierStokes { 
+    Flux = Roe;
+    Reconstruction = Constant;
+    AdvectiveOperator = FiniteVolume;
+    Limiter = VanAlbada;
+    Gradient = LeastSquares;
+    Dissipation = SecondOrder;
+    Beta = 0.3333333333333333;
+    Gamma = 1.0;
+  }
+}

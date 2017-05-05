@@ -1,0 +1,6 @@
+under EmbeddedFramework {
+    Intersector = PhysBAM;
+    SurrogateSurface = EmbeddedSurface;
+    RiemannNormal = Structure;
+    ViscousInterfaceOrder = FirstOrder;
+}
