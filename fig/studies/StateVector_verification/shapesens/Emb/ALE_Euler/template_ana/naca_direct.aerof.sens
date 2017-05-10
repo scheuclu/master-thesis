@@ -1,0 +1,70 @@
+under Problem {
+  Type = SensitivityAnalysis;
+  //Type = Steady;
+  Mode = Dimensional;
+  Framework = Embedded;
+}
+
+under Input {
+  GeometryPrefix = "../../../mesh/sower/fluid_sowered";
+  EmbeddedSurface = "../../../mesh/runmesh/embedded_surface.top";
+  Solution = "./rst/naca_steady.sol";
+  ShapeDerivative = "./sdesign/naca.der";
+}
+
+under Output {
+  under Postpro {
+    Prefix = "";
+    LiftandDragSensitivity         = "./results/naca_direct_sens.liftdrag";
+    SpatialResidualSensitivity     = "./results/SpatialResidualSensitivity_direct";
+    SpatialResidualNormSensitivity = "./results/SpatialResidualNormSensitivity_direct";
+    StateVectorSensitivity   = "./results/StateVectorSensitivity_direct";
+    DensitySensitivity       = "./results/DensitySensitivity_direct";
+    MachSensitivity          = "./results/MachSensitivity_direct";
+    PressureSensitivity      = "./results/PressureSensitivity_direct";
+    MatchPressureSensitivity = "./results/MatchPressureSensitivity_direct";
+    TemperatureSensitivity   = "./results/TemperatureSensitivity_direct";
+    TotalPressureSensitivity = "./results/TotalPressureSensitivity_direct";
+    NuTildeSensitivity       = "./results/NuTildeSensitivity_direct";
+    //EddyViscositySensitivity = "./results/EddyViscositySensitivity_direct";
+    VelocityNormSensitivity  = "./results/VelocityNormSensitivity_direct";
+    VelocitySensitivity      = "./results/VelocitySensitivity_direct";
+    DisplacementSensitivity  = "./results/MeshdispSensitivity_direct";
+    ForceSensitivity         = "./results/naca_direct_sens.force";
+    Frequency = 0;
+  }
+}
+
+under SensitivityAnalysis {
+  NewEmbDerivs = On;
+  LinSolveRHS = "results/LinSolveRHS_direct";
+  dFdS_final  = "results/dFdS_final_direct";
+  Method = Direct;
+  SensitivityComputation = Analytical;
+  MatrixVectorProduct = FiniteDifference;
+  SensitivityMesh = On;
+  under LinearSolver {
+    Type = Gmres;
+    MaxIts = 500;
+    KrylovVectors = 500;
+    Eps = 1e-8;
+    Output = "results/linearsolver_direct.txt";
+    under Preconditioner { Type = Ras; Fill = 0; }
+  }
+}
+
+/*sec_referencestate*/
+
+sec_meshmotion
+
+sec_surfaces
+
+sec_equations
+
+sec_bc
+
+sec_space
+
+sec_time_sens
+
+sec_embedded

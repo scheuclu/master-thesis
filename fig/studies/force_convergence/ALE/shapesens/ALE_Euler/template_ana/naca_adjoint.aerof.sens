@@ -1,0 +1,70 @@
+under Problem {
+  Type = SensitivityAnalysis;
+  //Type = Steady;
+  Mode = Dimensional;
+}
+
+under Input {
+  Connectivity = "../mesh/mesh_ref.con";
+  Geometry = "../mesh/mesh_ref.msh";
+  Decomposition = "../mesh/mesh_ref.dec";
+  CpuMap = "../mesh/mesh_ref.12cpu";
+  Prefix = "";
+  GeometryPrefix="";
+  ShapeDerivative = "./sdesign/naca_sowered.der";
+  //InitialWallDisplacement="./sdesign/naca_sowered.vmo";
+  Solution = "./rst/naca_steady.sol";
+}
+
+under Output {
+  under Postpro {
+    Prefix = "";
+    LiftandDragSensitivity         = "./results/naca_adjoint_sens.liftdrag";
+    SpatialResidualSensitivity     = "./results/SpatialResidualSensitivity_adjoint";
+    SpatialResidualNormSensitivity = "./results/SpatialResidualNormSensitivity_adjoint";
+    StateVectorSensitivity   = "./results/StateVectorSensitivity_adjoint";
+    DensitySensitivity       = "./results/DensitySensitivity_adjoint";
+    MachSensitivity          = "./results/MachSensitivity_adjoint";
+    PressureSensitivity      = "./results/PressureSensitivity_adjoint";
+    MatchPressureSensitivity = "./results/MatchPressureSensitivity_adjoint";
+    TemperatureSensitivity   = "./results/TemperatureSensitivity_adjoint";
+    TotalPressureSensitivity = "./results/TotalPressureSensitivity_adjoint";
+    NuTildeSensitivity       = "./results/NuTildeSensitivity_adjoint";
+    //EddyViscositySensitivity = "./results/EddyViscositySensitivity_adjoint";
+    VelocityNormSensitivity  = "./results/VelocityNormSensitivity_adjoint";
+    VelocitySensitivity      = "./results/VelocitySensitivity_adjoint";
+    DisplacementSensitivity  = "./results/MeshdispSensitivity_adjoint";
+    ForceSensitivity         = "./results/naca_adjoint_sens.force";
+    Frequency = 0;
+  }
+}
+
+under SensitivityAnalysis {
+  LinSolveRHS = "results/LinSolveRHS_adjoint";
+  dFdS_final  = "results/dFdS_final_adjoint";
+  Method = Adjoint;
+  SensitivityComputation = Analytical;
+  SensitivityMesh = On;
+  under LinearSolver {
+    Type = Gmres;
+    MaxIts = 500;
+    KrylovVectors = 500;
+    Eps = 1e-18;
+    Output = "results/linearsolver_adjoint.txt";
+    under Preconditioner { Type = Ras; Fill = 0; }
+  }
+}
+
+sec_referencestate
+
+sec_meshmotion
+
+sec_surfaces
+
+sec_equations
+
+sec_bc
+
+sec_space
+
+sec_time_sens

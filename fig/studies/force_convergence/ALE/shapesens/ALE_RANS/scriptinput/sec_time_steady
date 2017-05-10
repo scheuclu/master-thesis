@@ -1,0 +1,43 @@
+under Time  {
+  Type = Implicit;
+  MaxIts = 5000;
+  Eps = 1.0e-9;
+  //EpsAbs = 1.e-6;
+  CheckSolution=Off;
+  CheckVelocity=Off;
+  CheckPressure=Off;
+  CheckDensity=Off;
+  under CflLaw {
+    Strategy = Residual;
+    Cfl0 = 2.5;
+    Cfl1 = 2.5;
+    Cfl2 = 4.0;
+    CflMax = 1.0e3;
+    Ser = 0.7;
+    AngleGrowth = 2.0;
+    AngleZero = 0.2;
+    DFTHistory = 8;
+    FrequencyCutoff = 3;
+    DFTGrowth = 1.4;
+  }
+  under Implicit {
+    TurbulenceModelCoupling = Weak;
+    MatrixVectorProduct = Exact;
+    FiniteDifferenceOrder = SecondOrder;
+    under Newton {
+      MaxIts = 10;
+      Eps = 1e-5;
+      under LinearSolver { 
+        under NavierStokes { 
+          Type = Gmres;
+          EpsFormula = Eisenstadt;
+          MaxIts = 500;
+          KrylovVectors = 80;
+          Eps = 1e-3;
+          Output = "results/linearsolver_steady.txt";
+          under Preconditioner { Type = Ras; Fill = 0; }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,179 @@
+under Problem {
+  Type = SensitivityAnalysis;
+  //Type = Steady;
+  Mode = Dimensional;
+  Framework = Embedded;
+}
+
+under Input {
+  GeometryPrefix = "../../../mesh/sower/fluid_sowered";
+  EmbeddedSurface = "../../../mesh/runmesh/embedded_surface.top";
+  Solution = "./rst/naca_steady.sol";
+  ShapeDerivative = "./sdesign/naca.der";
+}
+
+under Output {
+  under Postpro {
+    Prefix = "";
+    LiftandDragSensitivity         = "./results/naca_adjoint_sens.liftdrag";
+    SpatialResidualSensitivity     = "./results/SpatialResidualSensitivity_adjoint";
+    SpatialResidualNormSensitivity = "./results/SpatialResidualNormSensitivity_adjoint";
+    StateVectorSensitivity   = "./results/StateVectorSensitivity_adjoint";
+    DensitySensitivity       = "./results/DensitySensitivity_adjoint";
+    MachSensitivity          = "./results/MachSensitivity_adjoint";
+    PressureSensitivity      = "./results/PressureSensitivity_adjoint";
+    MatchPressureSensitivity = "./results/MatchPressureSensitivity_adjoint";
+    TemperatureSensitivity   = "./results/TemperatureSensitivity_adjoint";
+    TotalPressureSensitivity = "./results/TotalPressureSensitivity_adjoint";
+    NuTildeSensitivity       = "./results/NuTildeSensitivity_adjoint";
+    //EddyViscositySensitivity = "./results/EddyViscositySensitivity_adjoint";
+    VelocityNormSensitivity  = "./results/VelocityNormSensitivity_adjoint";
+    VelocitySensitivity      = "./results/VelocitySensitivity_adjoint";
+    DisplacementSensitivity  = "./results/MeshdispSensitivity_adjoint";
+    ForceSensitivity         = "./results/naca_adjoint_sens.force";
+    Frequency = 0;
+  }
+}
+
+under SensitivityAnalysis {
+  NewEmbDerivs = On;
+  LinSolveRHS = "results/LinSolveRHS_adjoint";
+  dFdS_final  = "results/dFdS_final_adjoint";
+  Method = Adjoint;
+  SensitivityComputation = Analytical;
+  SensitivityMesh = On;
+  under LinearSolver {
+    Type = Gmres;
+    MaxIts = 500;
+    KrylovVectors = 500;
+    Eps = 1e-18;
+    Output = "results/linearsolver_adjoint.txt";
+    under Preconditioner { Type = Ras; Fill = 0; }
+  }
+}
+
+//under ReferenceState {
+//    Density = 0.45;
+//    Mach = 0.5;
+//    Temperature = 223.0;
+//    Length = 1.0;
+//}
+
+
+under MeshMotion {
+  Type = Basic;
+  Element = BallVertexSprings;
+  Mode = Recursive;
+  NumIncrements = 3;
+  under Newton {
+    MaxIts = 3;
+    Eps = 0.01;
+    under LinearSolver {
+      Type = Cg;
+      MaxIts = 5000;
+      KrylovVectors = 100;
+      Eps = 1e-12;
+      under Preconditioner { Type = Jacobi; }
+    }
+  }
+}
+
+under Surfaces {
+  under SurfaceData[8] {
+    Nx = 0.0;
+    Ny = 0.0;
+    Nz = 1.0;
+  }
+}
+
+
+under Equations {
+  Type = NavierStokes;
+  under FluidModel[0] {
+    Fluid = PerfectGas;
+    under GasModel {
+      SpecificHeatRatio = 1.4;
+      IdealGasConstant = 287.1;
+    }
+  }
+  under ThermalConductivityModel {
+    Type = ConstantPrandtl;
+    Prandtl = 0.72;
+  }
+  under ViscosityModel {
+    Type = Constant;
+    DynamicViscosity = 1.7054e-02;
+  }
+  under TurbulenceClosure {
+    Type = None;
+  }
+}
+
+
+under BoundaryConditions {
+  under Inlet {
+    Type    = External;
+    Mach    = 0.3;
+    Density = 0.45;
+    Pressure = 30397.5;
+    Alpha   = 0.0;
+    Beta    = 6.0;
+  }
+}
+
+under Space {
+  under NavierStokes {
+    Flux              = Roe;
+    Reconstruction    = Constant;//Linear
+    AdvectiveOperator = FiniteVolume;
+    Limiter           = VanAlbada;
+    Gradient          = LeastSquares;
+    Beta              = 0.66666666667;
+    Gamma             = 1.0;
+  }
+  under Boundaries {
+    Type = StegerWarming;
+  }
+}
+
+under Time  {
+  Type = Implicit;
+  MaxIts = 1000;
+  Eps = 1.e-7;
+  //EpsAbs = 1.e-6;
+  Cfl0 = 1.0;
+  Cfl1 = 1.0;
+  Cfl2 = 5.0;
+  CflMax = 1.0e3;
+  Ser = 0.7;
+  CheckSolution=Off;
+  CheckVelocity=Off;
+  CheckPressure=Off;
+  CheckDensity=Off;
+  under Implicit {
+    MatrixVectorProduct = FiniteDifference;
+    under Newton {
+      MaxIts = 5;
+      Eps = 1e-5;
+      under LinearSolver {
+        under NavierStokes {
+          Type = Gmres;
+          EpsFormula = Eisenstadt;
+          MaxIts = 500;
+          KrylovVectors = 80;
+          Eps = 1e-3;
+          Output = "results/linearsolver_sens.txt";
+          under Preconditioner { Type = Ras; Fill = 0; }
+        }
+      }
+    }
+  }
+}
+
+under EmbeddedFramework {
+    Intersector = PhysBAM;
+    SurrogateSurface = EmbeddedSurface;
+    RiemannNormal = Structure;
+    ViscousInterfaceOrder = FirstOrder;
+}
+

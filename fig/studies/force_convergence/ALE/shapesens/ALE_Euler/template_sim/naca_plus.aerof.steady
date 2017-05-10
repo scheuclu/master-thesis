@@ -1,0 +1,54 @@
+under Problem {
+  //Type = SteadySensitivityAnalysis;
+  Type = Steady;
+  Mode = Dimensional;
+}
+
+under Input {
+  Connectivity = "../mesh/mesh_ref.con";
+  Geometry = "../mesh/mesh_ref.msh";
+  Decomposition = "../mesh/mesh_ref.dec";
+  CpuMap = "../mesh/mesh_ref.12cpu";
+  Prefix = "";
+  GeometryPrefix="";
+  InitialWallDisplacement="./sdesign/naca_plus_sowered.vmo";
+}
+
+under Output {
+  under Postpro {
+    Prefix = "";
+    LiftandDrag   = "./results/naca_plus_steady.liftdrag";
+    Pressure      = "./results/Pressure_plus";
+    Displacement  = "./results/Meshdisp_plus";
+    Density       = "./results/Density_plus";
+    Displacement  = "./results/Meshdisp_plus";
+    //EddyViscosity = "./results/EddyViscosity_plus";
+    Mach          = "./results/Mach_plus";
+    NuTilde       = "./results/NuTilde_plus";
+    Temperature   = "./results/Temperature_plus";
+    TotalPressure = "./results/TotalPressure_plus";
+    VelocityNorm  = "./results/VelocityNorm_plus";
+    Velocity      = "./results/Velocity_plus";
+    Force         = "./results/naca_plus_steady.force";
+    Frequency = 0;
+  }
+  under Restart {
+    Prefix = "";
+    Frequency = 0;
+    Solution = "./results/StateVector_plus";
+  }
+}
+
+sec_referencestate
+
+sec_meshmotion
+
+sec_surfaces
+
+sec_equations
+
+sec_bc
+
+sec_space
+
+sec_time_steady

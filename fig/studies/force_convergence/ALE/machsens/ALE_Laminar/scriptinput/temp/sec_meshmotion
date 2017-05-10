@@ -1,0 +1,17 @@
+under MeshMotion {
+  Type = Basic;
+  Element = BallVertexSprings;
+  Mode = NonRecursive;
+  NumIncrements = 1;
+  under Newton {
+    MaxIts = 1;
+    Eps = 0.01;
+    under LinearSolver {
+      Type = Cg;
+      MaxIts = 5000;
+      KrylovVectors = 100;
+      Eps = 1e-12;
+      under Preconditioner { Type = Jacobi; }
+    }
+  }
+}

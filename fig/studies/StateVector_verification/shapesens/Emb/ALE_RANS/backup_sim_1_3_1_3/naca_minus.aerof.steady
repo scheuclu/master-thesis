@@ -1,0 +1,177 @@
+under Problem {
+  //Type = SteadySensitivityAnalysis;
+  Type = Steady;
+  Mode = Dimensional;
+  Framework = Embedded;
+}
+
+under Input {
+  GeometryPrefix = "../../../mesh/sower/fluid_sowered";
+  EmbeddedSurface = "./sdesign/embedded_surface_minus.top";
+}
+
+under Output {
+  under Postpro {
+    Prefix = "";
+    LiftandDrag   = "./results/naca_minus_steady.liftdrag";
+    Pressure      = "./results/Pressure_minus";
+    Displacement  = "./results/Meshdisp_minus";
+    Density       = "./results/Density_minus";
+    Displacement  = "./results/Meshdisp_minus";
+    //EddyViscosity = "./results/EddyViscosity_minus";
+    Mach          = "./results/Mach_minus";
+    NuTilde       = "./results/NuTilde_minus";
+    Temperature   = "./results/Temperature_minus";
+    TotalPressure = "./results/TotalPressure_minus";
+    VelocityNorm  = "./results/VelocityNorm_minus";
+    Velocity      = "./results/Velocity_minus";
+    Force         = "./results/naca_minus_steady.force";
+    FluidID       = "./results/FluidID_minus";
+    Frequency = 0;
+  }
+  under Restart {
+    Prefix = "";
+    Frequency = 0;
+    Solution = "./results/StateVector_minus";
+  }
+}
+
+//under ReferenceState {
+//    Density = 0.45;
+//    Mach = 0.5;
+//    Temperature = 223.0;
+//    Length = 1.0;
+//}
+
+
+under MeshMotion {
+  Type = Basic;
+  Element = BallVertexSprings;
+  Mode = Recursive;
+  NumIncrements = 3;
+  under Newton {
+    MaxIts = 3;
+    Eps = 0.01;
+    under LinearSolver {
+      Type = Cg;
+      MaxIts = 5000;
+      KrylovVectors = 100;
+      Eps = 1e-12;
+      under Preconditioner { Type = Jacobi; }
+    }
+  }
+}
+
+under Surfaces {
+  under SurfaceData[8] {
+    Nx = 0.0;
+    Ny = 0.0;
+    Nz = 1.0;
+  }
+}
+
+
+under Equations {
+  Type = NavierStokes;
+  under FluidModel[0] {
+    Fluid = PerfectGas;
+    under GasModel {
+      SpecificHeatRatio = 1.4;
+      IdealGasConstant = 287.1;
+    }
+  }
+  under ThermalConductivityModel {
+    Type = ConstantPrandtl;
+    Prandtl = 0.72;
+  }
+  under ViscosityModel {
+    Type = Constant;
+    DynamicViscosity = 1.7054e-02;
+  }
+  under TurbulenceClosure {
+    Type = TurbulenceModel;
+    under TurbulenceModel {
+      Type = SpalartAllmaras;
+    }
+  }
+}
+
+
+under BoundaryConditions {
+  under Inlet {
+    Type    = External;
+    Mach    = 0.3;
+    Density = 0.45;
+    Pressure = 30397.5;
+    Alpha   = 0.0;
+    Beta    = 6.0;
+  }
+}
+
+under Space {
+  under NavierStokes {
+    Flux              = Roe;
+    Reconstruction    = Constant;//Linear
+    AdvectiveOperator = FiniteVolume;
+    Limiter           = VanAlbada;
+    Gradient          = LeastSquares;
+    Beta              = 0.66666666667;
+    Gamma             = 1.0;
+  }
+  under Boundaries {
+    Type = StegerWarming;
+  }
+}
+
+under Time  {
+  Type = Implicit;
+  MaxIts = 5000;
+  Eps = 1.0e-7;
+  //EpsAbs = 1.e-6;
+  CheckSolution=On;
+  CheckVelocity=On;
+  CheckPressure=On;
+  CheckDensity=On;
+  under CflLaw {
+    Strategy = Residual;
+    Cfl0 = 2.5;
+    Cfl1 = 2.5;
+    Cfl2 = 4.0;
+    CflMax = 1.0e3;
+    Ser = 0.7;
+    AngleGrowth = 2.0;
+    AngleZero = 0.2;
+    DFTHistory = 8;
+    FrequencyCutoff = 3;
+    DFTGrowth = 1.4;
+  }
+  under Implicit {
+    TurbulenceModelCoupling = Weak;
+    MatrixVectorProduct = Approximate;
+    FiniteDifferenceOrder = SecondOrder;
+    under Newton {
+      MaxIts = 10;
+      Eps = 1e-5;
+      under LinearSolver { 
+        under NavierStokes { 
+          Type = Gmres;
+          EpsFormula = Eisenstadt;
+          MaxIts = 500;
+          KrylovVectors = 80;
+          Eps = 1e-3;
+          Output = "results/linearsolver_steady.txt";
+          under Preconditioner { Type = Ras; Fill = 0; }
+        }
+      }
+    }
+  }
+}
+
+
+under EmbeddedFramework {
+    Intersector = PhysBAM;
+    SurrogateSurface = EmbeddedSurface;
+    RiemannNormal = Structure;
+    ViscousInterfaceOrder = SecondOrder;
+}
+

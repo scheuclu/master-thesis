@@ -1,0 +1,54 @@
+under Problem {
+  //Type = SteadySensitivityAnalysis;
+  Type = Steady;
+  Mode = Dimensional;
+  Framework = Embedded;
+}
+
+under Input {
+  GeometryPrefix = "../../../mesh/sower/fluid_sowered";
+  EmbeddedSurface = "./sdesign/embedded_surface_minus.top";
+}
+
+under Output {
+  under Postpro {
+    Prefix = "";
+    LiftandDrag   = "./results/naca_minus_steady.liftdrag";
+    Pressure      = "./results/Pressure_minus";
+    Displacement  = "./results/Meshdisp_minus";
+    Density       = "./results/Density_minus";
+    Displacement  = "./results/Meshdisp_minus";
+    //EddyViscosity = "./results/EddyViscosity_minus";
+    Mach          = "./results/Mach_minus";
+    NuTilde       = "./results/NuTilde_minus";
+    Temperature   = "./results/Temperature_minus";
+    TotalPressure = "./results/TotalPressure_minus";
+    VelocityNorm  = "./results/VelocityNorm_minus";
+    Velocity      = "./results/Velocity_minus";
+    Force         = "./results/naca_minus_steady.force";
+    FluidID       = "./results/FluidID_minus";
+    NuTilde       = "./results/NuTilde_minus";
+    Frequency = 0;
+  }
+  under Restart {
+    Prefix = "";
+    Frequency = 0;
+    Solution = "./results/StateVector_minus";
+  }
+}
+
+sec_referencestate
+
+sec_meshmotion
+
+sec_surfaces
+
+sec_equations
+
+sec_bc
+
+sec_space
+
+sec_time_steady
+
+sec_embedded

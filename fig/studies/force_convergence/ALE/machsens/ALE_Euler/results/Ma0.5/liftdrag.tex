@@ -1,0 +1,95 @@
+% This file was created by matplotlib2tikz v0.6.7.
+\begin{tikzpicture}
+
+\definecolor{color0}{rgb}{0.12156862745098,0.466666666666667,0.705882352941177}
+\definecolor{color1}{rgb}{1,0.498039215686275,0.0549019607843137}
+\definecolor{color2}{rgb}{0.172549019607843,0.627450980392157,0.172549019607843}
+
+\begin{groupplot}[group style={group size=2 by 1}]
+\nextgroupplot[
+title={${\frac{\partial L_x}{\partial Ma}}_{analytic}$ - $\frac{\partial L_x}{\partial Ma}_{FD}$},
+xlabel={step-size},
+xmin=7.07945784384137e-06, xmax=0.0141253754462276,
+ymin=1.49864689230807e-06, ymax=0.00655878274701694,
+xmode=log,
+ymode=log,
+tick align=outside,
+tick pos=left,
+x grid style={lightgray!92.026143790849673!black},
+y grid style={lightgray!92.026143790849673!black}
+]
+\addplot [semithick, color0, mark=*, mark size=3, mark options={solid}]
+table {%
+0.01 0.00251790362000026
+0.003 4.96263800000563e-05
+0.001 1.27767200002182e-05
+0.0003 1.09438800004469e-05
+0.0001 1.30300799998651e-05
+3e-05 1.32667799999098e-05
+1e-05 1.32771799998821e-05
+};
+\addplot [semithick, color1, mark=*, mark size=3, mark options={solid}]
+table {%
+0.01 0.00317460505999989
+0.003 0.000274935560000245
+0.001 2.67209600002261e-05
+0.0003 2.19383999944256e-06
+0.0001 6.65614000006087e-06
+3e-05 9.0134399997055e-06
+1e-05 8.96384000004247e-06
+};
+\addplot [semithick, color2, mark=*, mark size=3, mark options={solid}]
+table {%
+0.01 0.0044804084999992
+0.003 0.000250109499999596
+0.001 0.00179536749999976
+0.0003 4.79485000006719e-05
+0.0001 5.18234999997702e-05
+3e-05 5.22625000005661e-05
+1e-05 5.2385500000085e-05
+};
+\nextgroupplot[
+title={${\frac{\partial L_y}{\partial Ma}}_{analytic}$ - $\frac{\partial L_y}{\partial Ma}_{FD}$},
+xlabel={step-size},
+xmin=7.07945784384137e-06, xmax=0.0141253754462276,
+ymin=1.90810208020418e-05, ymax=0.0166590071958645,
+xmode=log,
+ymode=log,
+tick align=outside,
+tick pos=left,
+x grid style={lightgray!92.026143790849673!black},
+y grid style={lightgray!92.026143790849673!black}
+]
+\addplot [semithick, color0, mark=*, mark size=3, mark options={solid}]
+table {%
+0.01 0.000373287148000001
+0.003 0.000329236038000003
+0.001 2.86964979999693e-05
+0.0003 2.63173180000131e-05
+0.0001 2.60898880000138e-05
+3e-05 2.5958857999997e-05
+1e-05 2.60816179999956e-05
+};
+\addplot [semithick, color1, mark=*, mark size=3, mark options={solid}]
+table {%
+0.01 0.00161353030000555
+0.003 0.00106171430000046
+0.001 0.000979632300001754
+0.0003 0.0009697613000057
+0.0001 0.000967705300006116
+3e-05 0.00096360230000414
+1e-05 0.000964105300006679
+};
+\addplot [semithick, color2, mark=*, mark size=3, mark options={solid}]
+table {%
+0.01 0.000228991000000178
+0.003 0.00418402900000103
+0.001 0.0122451790000042
+0.0003 0.000345249000005765
+0.0001 0.000347458999996775
+3e-05 0.000347688999994489
+1e-05 0.000348579000004179
+};
+\end{groupplot}
+
+\end{tikzpicture}
