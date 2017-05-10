@@ -44,11 +44,12 @@ Additionally, since the optimization will run on lift and drag, we also validate
 \begin{align}
 \tfrac{\optcrit}{\absvar}=\frac{\optcrit(\absvar+\epsilon)-\optcrit(\absvar-\epsilon)}{2 \epsilon}
 \end{align}
+The validation of integrated forces is provided in figures~\ref{TODO}-\ref{TODO} for body-fitted computations and in figures~\ref{TODO}-\ref{TODO} for embedded.
 
 
 
 \section{Verification of mach-sensitivity}
-The verification of $\tfrac{\dfstate}{\machnum_{\infty}}$ for ALE simulations is provided in figure~\ref{fig:verification_dwdma_ale_Euler} for Euler equation, figure~\ref{fig:verification_dwdma_ale_Laminar} for full \ac{NSE} and in figure~\ref{fig:verification_dwdma_ale_RANS} for \ac{NSE} equations with an additional Spallart-Almares turbulence model.
+For the body-fitted case, the verification of $\tfrac{\dfstate}{\machnum_{\infty}}$ for ALE simulations is provided in figure~\ref{fig:verification_dwdma_ale_Euler} for Euler equation, figure~\ref{fig:verification_dwdma_ale_Laminar} for full \ac{NSE} and in figure~\ref{fig:verification_dwdma_ale_RANS} for \ac{NSE} equations with an additional Spallart-Almares turbulence model.
 Additionally, a side by side comparison of the analytic results between all three equation types is also provided in figure~\ref{fig:verification_dwdma_ale_comparison} in order to ensure that the additional viscous and turbulent terms actually account for a visible difference.\\
 For the embedded case, we provide the verification of $\tfrac{\dfstate}{\machnum_{\infty}}$  in figure~\ref{fig:verification_dwdma_emb_Euler} for Euler equation, figure~\ref{fig:verification_dwdma_emb_Laminar} for full \ac{NSE} and in figure~\ref{fig:verification_dwdma_emb_RANS} for \ac{NSE} equations with an additional Spallart-Almares turbulence model.
 Again, a side by side comparison of the analytic results between all three equation types is also provided in figure~\ref{fig:verification_dwdma_emb_comparison} in order to ensure that the additional viscous and turbulent terms actually account for a visible difference.
@@ -106,6 +107,26 @@ Again, a side by side comparison of the analytic results between all three equat
 
 %--------------------------------------------------------------------------------------------
 %\subsubsection{Comparison}
+
+\begin{figure}[t!]
+    \centering
+    \textbf{Comparison of $\tfrac{\dfstate}{\machnum_{\infty}}$ in the body-fitted framework for all 3 equation types}\par\medskip    
+    \foreach \n in {1,2,3,4,5}{
+      \foreach \simtype in {Euler,Laminar,RANS}{
+		    \begin{subfigure}[t]{0.33\textwidth}
+		        \centering
+		        \includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/machsens/ALE/\simtype_component\n_ana}
+		        \caption{$\linepdfrac{\d{w_\n^{\simtype}}}{\machnum_{\infty}}$}
+		    \end{subfigure}%
+		    ~ 
+      }
+      
+    }
+    \caption[Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for all equation types body-fitted]{Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for Euler equations(left column), laminar \ac{NSE} equations (center column) and \ac{NSE} equations with turbulence models (right column) in the body-fitted framework.}
+    \label{fig:verification_dwdma_ale_comparison}
+\end{figure}
+
+
 \begin{figure}[t!]
     \centering
     \textbf{Comparison of $\tfrac{\dfstate}{\machnum_{\infty}}$ in the embedded framework for all 3 equation types}\par\medskip    
@@ -120,7 +141,7 @@ Again, a side by side comparison of the analytic results between all three equat
       }
       
     }
-    \caption[Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for all equation types body-fitted]{Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for Euler equations(left column), laminar \ac{NSE} equations (center column) and \ac{NSE} equations with turbulence models (right column) in the body-fitted framework.}
+    \caption[Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for all equation types embedded]{Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for Euler equations(left column), laminar \ac{NSE} equations (center column) and \ac{NSE} equations with turbulence models (right column) in the embedded framework.}
     \label{fig:verification_dwdma_emb_comparison}
 \end{figure}
 
@@ -190,6 +211,25 @@ Again, a side by side comparison of the analytic results between all three equat
 
 %--------------------------------------------------------------------------------------------
 %\subsubsection{Comparison}
+
+\begin{figure}[t!]
+    \centering
+    \textbf{Comparison of $\tfrac{\dfstate}{\absvar}$ in the body-fitted framework for all 3 equation types}\par\medskip    
+    \foreach \n in {1,2,3,4,5}{
+      \foreach \simtype in {Euler,Laminar,RANS}{
+		    \begin{subfigure}[t]{0.33\textwidth}
+		        \centering
+		        \includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/shapesens/ALE/\simtype_component\n_ana}
+		        \caption{$\linepdfrac{\d{w_\n^{\simtype}}}{\absvar}$}
+		    \end{subfigure}%
+		    ~ 
+      }
+      
+    }
+    \caption[Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for all equation types embedded-fitted]{Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for Euler equations(left column), laminar \ac{NSE} equations (center column) and \ac{NSE} equations with turbulence models (right column) in the body-fitted framework.}
+    \label{fig:verification_dwds_ale_comparison}
+\end{figure}
+
 \begin{figure}[t!]
     \centering
     \textbf{Comparison of $\tfrac{\dfstate}{\absvar}$ in the embedded framework for all 3 equation types}\par\medskip    
@@ -210,6 +250,35 @@ Again, a side by side comparison of the analytic results between all three equat
 
 
 
+\foreach \eqtype in {Euler}{
+	\begin{figure}
+	  \centering
+	  \input{\mainpath/fig/studies/force_convergence/ALE/machsens/ALE_\eqtype/tikzfiles/Ma0.5/liftdrag}
+	  \caption[Validation of the Lift and Drag results for mach-sensitivity: body-fitted \eqtype equations]{The graph shows the relative error between the Lift and Drag mach-sensitivities obtained by \ac{FD} of two steady states, compared to the mach-sensitivity obtained by analytic direct evaluation. Please not that a \ac{FD} Jacobian has been used here, which introduces an approximation error, Furthermore, the finite precision of the obtained steady states is another error source.This explains why the error levels off. For all practical optimization purposes, the obtained accuracy is more than enough.}
+	  \label{aaa}
+	\end{figure}
+}
+
+
+\foreach \eqtype in {Laminar}{
+	\begin{figure}
+	  \centering
+	  \input{\mainpath/fig/studies/force_convergence/ALE/machsens/ALE_\eqtype/tikzfiles/Ma0.5/liftdrag}
+	  \caption[Validation of the Lift and Drag results for mach-sensitivity: body-fitted \eqtype equations]{The graph shows the relative error between the Lift and Drag mach-sensitivities obtained by \ac{FD} of two steady states, compared to the mach-sensitivity obtained by analytic direct evaluation. Please not that a \ac{FD} Jacobian has been used here, which introduces an approximation error, Furthermore, the finite precision of the obtained steady states is another error source.This explains why the error levels off. For all practical optimization purposes, the obtained accuracy is more than enough.}
+	  \label{aaa}
+	\end{figure}
+}
+
+
+\foreach \eqtype in {Euler,Laminar,RANS}{
+	\begin{figure}
+	  \centering
+	  \textbf{Validation of the Lift and Drag results for shape-sensitivity: body-fitted \eqtype equations}\par\medskip  
+	  \input{\mainpath/fig/studies/force_convergence/ALE/shapesens/ALE_\eqtype/tikzfiles/Ma0.3/force.tex}
+	  \caption[Validation of the Lift and Drag results for shape-sensitivity: body-fitted \eqtype equations]{The graph shows the relative error between the Lift and Drag shape-sensitivies obtained by \ac{FD} of two steady states, compared to the sensitivity obtained by analytic direct evaluation. Please not that a \ac{FD} Jacobian has been used here, which introduces an approximation error, Furthermore, the finite precision of the obtained steady states is another error source.This explains why the error levels off. For all practical optimization purposes, the obtained accuracy is more than enough.}
+	  \label{fig:validation_liftdrag_shapesens_bodyfitted_\eqtype}
+	\end{figure}
+}
 
 
 

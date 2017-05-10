@@ -34,6 +34,9 @@
 %\epstopdfsetup{outdir=./}
 %\usepackage[outdir=./]{epstopdf}
 
+%usepackage{silence}
+%\WarningFilter[pdftoc]{hyperref}{Token not allowed in a PDF string}
+
 
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -60,6 +63,7 @@
 %\usepackage{showkeys}
 
 \usepackage{color}
+\usepackage[table]{xcolor}
 \usepackage{soul}
 \definecolor{hlcolorblue}{RGB}{126,215,255}
 \definecolor{hlcolorgreen}{RGB}{126,255,175}
@@ -76,7 +80,7 @@
 \newcommand{\hleorange}[1]{\colorbox{hlcolororange}{$\displaystyle{#1}$}}
 \newcommand{\hleyellow}[1]{\colorbox{hlcoloryellow}{$\displaystyle{#1}$}}
 \newcommand{\hlepurple}[1]{\colorbox{hlcolorpurple}{$\displaystyle{#1}$}}
-\usepackage[table]{xcolor}
+
 
 %\usepackage{cleveref}% to reference multiple equations at once
 \usepackage{hyperref}
@@ -98,6 +102,8 @@
 \usepgfplotslibrary{groupplots}
 
 \hfuzz=50.00pt%maximum amount of box overflow before a warning
+
+
 
 
 
