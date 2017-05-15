@@ -5,28 +5,29 @@
 
 \section{Fluid mechanics}\label{sec:fluid_mechanics}
 \subsection{Eulerian and Lagrangian view}\label{sec:eulerian_lagrangian}
-In time dependent analytical physics there are two basic concepts of how to view a system of interest: the Eulerian and the Lagrangian approach. It shall be stressed here, that Eulerian view and Euler equations are two totally separate things.\\
-One view this issue from different perspectives, but what the difference boils down to is the interpretation of the time derivative. Since we will be using the different derivatives frequently in this thesis, a short introduction shall be provided.
+In time dependent analytical physics there are two basic concepts of how to view a system of interest: the Eulerian and the Lagrangian approach. It shall be stressed here, that Eulerian view and Euler equations are two unrelated concepts..\\
+The issue of Lagrangian versus Eulerian perspective can be explained in many ways, in the end it boils down to the interpretation of the time derivative. Since we will be using the different derivatives frequently in this thesis, a short introduction shall be provided.
 \subsubsection{Material derivative}
-The material derivative of a property, is a derivative(rate of change), that follows a specific particle 'p'. That means that at every time instance the material derivative gives as the current value of the property of a specific particle. Since in general, a particle will move its position in time quite a lot, some mean is required to track the particles motion. The material derivative is also known as the Lagrangian concept, and is commonly used in Solid mechanics, since the motion of the solid particles is typically little, or at least nearly uniform over the body, which makes position tracking easy.
+The material derivative of a property, is a derivative(rate of change), that follows a specific particle 'p'. That means that at every time instance the material derivative gives as the current value of the property of a specific particle. Since in general, a particle will move its position in time quite a lot, some mean is required to track the particles motion. The material derivative is also known as the Lagrangian concept, and is commonly used in solid mechanics, since the motion of the solid particles is typically little, or at least nearly uniform over the body, which makes position tracking easy.
 
 \subsubsection{Eulerian derivative}
-The Eulerian derivative takes a different approach. It refers to a fixed frame of reference in the domain, and gives the rate of change at that specific position. Due to the particle movement, it typically refers to different particles at different times.
+The Eulerian derivative takes a different approach. It refers to a fixed frame of reference in the domain, and regards the rate of change of a quantity of interest at that specific position. Due to the particle movement, it typically refers to different particles at different times.
 \\
 Material and Eulerian derivatives can be linked via the so-called convective rate of change as:
 \begin{align}
 \underbrace{\mfrac{\vec{G}}{t}}_{\text{Lagrangian rate of change}} = \underbrace{\pdfrac{\vec{G}}{t}}_{\text{Eulerian rate of change}} + \underbrace{\fluidvel\cdot\nabla\vec{G}}_{\text{Convective rate of change}}
 \end{align}
 
-In fluid mechanics the Eulerian concept is typically prefered.\\
-However, when looking at fluid-structure interaction problems, the interface is typically moving. To account for that motion in the fluid, one either has to come up with some cell-intersection approach, or the fluid-mesh has to be deformed to.\\
-An appealing and straightforward approach to do so, is the so called Arbitrary Lagrangian Eulerian(\ac{ALE}) approach. As the name suggest, it is a hybrid between Eulerian and Lagrangian point of view. The \ac{ALE} approach allows to utilize the best of both approaches. The mesh can either be fixed, moved with the continuum in an Eulerian manner, or be moved in some arbitrarily specified manner inbetween. The \ac{ALE} method can handle larger distortions than a pure Eulerian would, while still allowing to keep interface continuity between the structure and the fluid, such that no intersection of fluid cells is necessary.\\
-In this thesis, both Eulerian and \ac{ALE} methods will be covered. In general, no recommendation on to prefer one or the other method can be given. Instead, one should always be aware of the pros and cons of either method and choose the appropriate one for a specific problem accordingly.
+In fluid mechanics the Eulerian concept is typically preferred.\\
+However, when looking at fluid-structure interaction problems, the interface is typically moving. To account for that motion in the fluid, one either has to come up with some cell-intersection approach, or the fluid-mesh has to be deformed too.\\
+An appealing and straightforward approach to do so, is the so called \acf{ALE} approach. As the name suggest, it is a hybrid between Eulerian and Lagrangian point of view. The \ac{ALE} approach allows to utilize the best of both approaches. The mesh can either be fixed, moved with the continuum in an Eulerian manner, or be moved in some arbitrarily specified manner in between. The \ac{ALE} method can handle larger distortions than a pure Eulerian would, while still allowing to keep interface continuity between the structure and the fluid, such that no intersection of fluid cells is necessary.\\
+In this thesis, both Eulerian and \ac{ALE} methods will be covered. In general, no recommendation on to prefer one or the other method can be given. Instead, one should always be aware of the pros and cons of either method and choose the appropriate one for a specific problem accordingly.\\
+For a more in depth-analysis, the interested reader is referred to~\cite{LeVeque1992}
 
 
 \subsection{Basic equations of fluid mechanics}\label{sec:fluid_equations_basic}
 
-The physics of fluid motion are governed by the so-called \acf{NSE}. These equations were derived independently of one another by Claude-Louis Navier and George Gabriel Stokes as a generalization of the Euler-equations that now includes viscosity effects.
+The physics of fluid motion are governed by the so-called \acf{NSE}. These equations were derived independently of one another by Claude-Louis Navier and George Gabriel Stokes as a generalization of the Euler-equations by including viscosity effects.
 In general one distinguishes the incompressible and the compressible \ac{NSE}. The validity of their application depends on the problem setup. As a rule of thumb, flows with Mach-numbers lower than $0.3$ can usually be safely approximated by the incompressible \ac{NSE}.\\
 The Navier stokes equation consist of the \acf{NSME}, the \ac{NSCE} and, if the compressible equations are solved, the \ac{NSEE}. In the literature, the term \ac{NSE} is often synonymously used for the \ac{NSCE}, in this thesis however, with \ac{NSE} we will always refer to the full set of equations and will explicitly name the momentum, continuity or energy equation otherwise.
 
@@ -103,9 +104,9 @@ Although the Euler equations can be derived for both incompressible and compress
 Summing up, these equations can be written in convective form as
 \begin{align}
 \begin{cases}
-\pdfrac{\dens}{t}+\fluidvel\cdot\nabla\dens+\rho\nabla\cdot\fluidvel = 0           &\text{ Continuity equation} \\[0.5em]
-\pdfrac{\fluidvel}{t}+\fluidvel\cdot\nabla\fluidvel+\frac{\pres}{\dens} = \vec{g}  &\text{ Momentum equation} \\[0.5em]
-\pdfrac{e}{t}+\fluidvel\cdot\nabla e + \frac{\pres}{\dens}\nabla\cdot\fluidvel = 0 &\text{ Energy equation} \\[0.5em]
+\pdfrac{\dens}{t}+\fluidvel\cdot\nabla\dens+\rho\nabla\cdot\fluidvel = 0           &\text{ Continuity Equation} \\[0.5em]
+\pdfrac{\fluidvel}{t}+\fluidvel\cdot\nabla\fluidvel+\frac{\pres}{\dens} = \vec{g}  &\text{ Momentum Equation} \\[0.5em]
+\pdfrac{e}{t}+\fluidvel\cdot\nabla e + \frac{\pres}{\dens}\nabla\cdot\fluidvel = 0 &\text{ Energy Equation} \\[0.5em]
 \end{cases}
 \end{align}
 
@@ -118,9 +119,9 @@ Summing up, these equations can be written in convective form as
 \subsubsection{Conservative Form}\label{sec:conservative_form_nsg}
 For the purpose of \ac{FV} discretization one usually brings the equations into the so-called conservative form, which can be written generally as
 \begin{align}\label{eq:conservative_form_general}
-\tfrac{\vec{\xi}}{t}+\nabla\cdot f(\vec{\xi}) = \vec{0} \\
+\tfrac{\vec{\xi}}{t}+\nabla\cdot f(\vec{\xi}) = \vec{0}
 \end{align}
-where $\vec{\xi}$ is the conserved qunatity of interest and $f(\vec{\xi})$ is denoted as "flux function".\\
+where $\vec{\xi}$ is the conserved quantity of interest and $f(\vec{\xi})$ is denoted as "flux function".\\
 This equation can then be transformed into an integral form using the divergence theorem
 \begin{align}\label{eq:conservation_form_integral}
 \tfrac{~}{t}\int_{V} \vec{\xi} dV + \int_{\partial V} f(\vec{\xi})\cdot\normal~dS
@@ -283,6 +284,34 @@ The \ac{RANS} equations can then be written as
 \pdfrac{\av{\fstate}}{t} + \nabla\cdot\fluxesconv(\av{\fstate}) +  \nabla\cdot\fluxesdiff(\av{\fstate}) =
 \turbulencesource(\av{\fstate},\turbulenceparam_1,\cdots,\turbulenceparam_m)
 \end{align}
+
+\paragraph{Spalart Allamars turbulence model}
+
+As explained in the previous section, the \ac{RANS} equations necessitate additional modeling to close the system of equations. This is typically performed by applying the Boussinesq assumption and assuming that the fluid stress tensor can be written as
+\begin{align}
+\fluidstress_{ij}&=2 \nut \left( \bar{S}_{ij}-\frac{1}{3} \pdfrac{\bar{v}_k}{x_k} \delta_{ij} \right) - \frac{2}{3}\bar{\dens}k\delta_{ij} \label{eq:rans_turbulent_stress}\\
+&\bar{S}_{ij}=\frac{1}{2}\left( \pdfrac{\bar{v}_i}{x_j}+\pdfrac{\bar{v}_j}{x_i} \right) \\
+&k=\frac{1}{2} \left( \fluc{v_i}\fluc{v_i} \right)
+\end{align}
+
+where $\nut$ denotes the turbulent viscosity and $k$ is the mean turbulent kinetic energy. Both $\nut$ and $k$ need to be modeled, thus an additional two equations are required to close the system. A variety of different turbulence models have been proposed in the literature, this thesis however, focuses on the very particular case of the Spalart-Allmaras model, introduce in \cite{Spalart1994}.\\
+Herein, the last term of equation~\eqref{eq:rans_turbulent_stress} is being neglected, thus a single additional equation is sufficient to close the system.
+Specifically, Spalart-Allmaras introduces the single, scalar, viscosity-like turbulent variable
+\begin{align}
+\nu^{\star}=\frac{\mu_t}{\bar{\dens} f_{v1}}
+\end{align}
+and the corresponding transport equation
+\begin{align}
+\pdfrac{~}{t}\left( \bar{\dens} \nu^{\star}\right) + \pdfrac{~}{x_j}\left( \bar{\dens}\bar{v}_j \nu^{\star} \right) = 
+&\frac{1}{\sigma}\left[ \pdfrac{~}{x_j} \left( \bar{\dens}(\nu+\nu^{\star})\pdfrac{\nu^{\star}}{x_j} \right) + c_{b2} \bar{\dens}(\pdfrac{\nu^{\star}}{x_j}\pdfrac{\nu^{\star}}{x_j})\right]+\nonumber\\
+&c_{b1}(1-f_{t2}) S^{\star} \bar{\dens}\nu^{\star}-\bar{\dens}(c_{w1}f_{w}-\frac{c_{b1}}{\kappa^2} f_{t2})
+\left(\frac{\nu^{\star}}{d}\right)^{2}
+\end{align}
+with
+\begin{align}
+f_{v1}=\frac{\turbulenceparam^3}{\turbulenceparam^3+c_{v1}^3},~~~\turbulenceparam=\frac{\nu^{\star}}{\nu},~~~S^{\star}=\omega+\frac{\nu^{\star}}{k^2d^2}f_{v2}
+\end{align}
+where $\omega$ is the vorticity magnitude and $d$ is the nearest distance to the wall.
 
 
 \end{document}

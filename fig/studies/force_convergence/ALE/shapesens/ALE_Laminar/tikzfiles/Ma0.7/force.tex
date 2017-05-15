@@ -1,0 +1,215 @@
+% This file was created by matplotlib2tikz v0.6.7.
+\begin{tikzpicture}
+
+\definecolor{color1}{rgb}{1,0.498039215686275,0.0549019607843137}
+\definecolor{color2}{rgb}{0.172549019607843,0.627450980392157,0.172549019607843}
+\definecolor{color0}{rgb}{0.12156862745098,0.466666666666667,0.705882352941177}
+
+\begin{groupplot}[group style={vertical sep=3cm, horizontal sep=2cm, group size=2 by 2}]
+\nextgroupplot[
+title={$\left( \frac{L_x}{s_1}_{analytic}-\frac{L_x}{s_1}_{FD}\right) \Big/ \frac{L_x}{s_1}_{FD}$},
+xlabel={$\epsilon$},
+xmin=7.35642958425655e-08, xmax=6.30944665049639e-05,
+ymin=2.9137671528721e-09, ymax=1.37048177503462e-05,
+xmode=log,
+ymode=log,
+tick align=outside,
+tick pos=left,
+x grid style={lightgray!92.026143790849673!black},
+y grid style={lightgray!92.026143790849673!black},
+legend style={at={(0.97,0.03)}, anchor=south east, draw=white!80.0!black},
+legend entries={{$\alpha_{\infty}=0.0$},{$\alpha_{\infty}=3.0$},{$\alpha_{\infty}=6.0$}},
+legend cell align={left}
+]
+\addplot [semithick, color0, mark=*, mark size=3, mark options={solid}]
+table {%
+4.6415e-05 9.3313645089889e-06
+2.1544e-05 6.15767876403894e-06
+1e-05 9.33672720090172e-08
+4.6415e-06 9.25665922130207e-08
+2.1544e-06 8.1196939860431e-08
+1e-06 8.0316192241113e-08
+4.641588e-07 1.60864568512421e-07
+2.1544e-07 1.59743617126776e-07
+1e-07 4.30933731689408e-07
+};
+\addplot [semithick, color1, mark=*, mark size=3, mark options={solid}]
+table {%
+4.6415e-05 1.16700057504864e-06
+2.1544e-05 1.17274687618611e-06
+1e-05 1.1762585048392e-06
+4.6415e-06 1.17601907559999e-06
+2.1544e-06 1.16556399981889e-06
+1e-06 1.16037636679366e-06
+4.641588e-07 1.24856613430202e-06
+2.1544e-07 1.26197417275667e-06
+1e-07 1.46309479201359e-06
+};
+\addplot [semithick, color2, mark=*, mark size=3, mark options={solid}]
+table {%
+4.6415e-05 8.60061057521606e-08
+2.1544e-05 8.1161038165556e-08
+1e-05 7.99313256802103e-08
+4.6415e-06 8.00297026966245e-08
+2.1544e-06 8.25383163902064e-08
+1e-06 8.33007380444943e-08
+4.641588e-07 5.84359488770636e-08
+2.1544e-07 7.08560464880674e-08
+1e-07 4.27940069842839e-09
+};
+\nextgroupplot[
+title={$\left( \frac{L_y}{s_1}_{analytic}-\frac{L_y}{s_1}_{FD}\right) \Big/ \frac{L_y}{s_1}_{FD}$},
+xlabel={$\epsilon$},
+xmin=7.35642958425655e-08, xmax=6.30944665049639e-05,
+ymin=1.32103558005813e-05, ymax=3.72123117961339e-05,
+xmode=log,
+ymode=log,
+tick align=outside,
+tick pos=left,
+x grid style={lightgray!92.026143790849673!black},
+y grid style={lightgray!92.026143790849673!black},
+legend style={at={(0.97,0.03)}, anchor=south east, draw=white!80.0!black},
+legend entries={{$\alpha_{\infty}=0.0$},{$\alpha_{\infty}=3.0$},{$\alpha_{\infty}=6.0$}},
+legend cell align={left}
+]
+\addplot [semithick, color0, mark=*, mark size=3, mark options={solid}]
+table {%
+4.6415e-05 1.79529587908272e-05
+2.1544e-05 2.26705717503818e-05
+1e-05 3.18615675357012e-05
+4.6415e-06 3.16918060573143e-05
+2.1544e-06 3.17258006038583e-05
+1e-06 3.16757067142134e-05
+4.641588e-07 3.18003815624987e-05
+2.1544e-07 3.0755699834451e-05
+1e-07 3.55011534044548e-05
+};
+\addplot [semithick, color1, mark=*, mark size=3, mark options={solid}]
+table {%
+4.6415e-05 1.75045434863674e-05
+2.1544e-05 1.74715929001189e-05
+1e-05 1.75118127381874e-05
+4.6415e-06 1.73941338777258e-05
+2.1544e-06 1.74404910700065e-05
+1e-06 1.74649021706488e-05
+4.641588e-07 1.75775629995411e-05
+2.1544e-07 1.67405306220215e-05
+1e-07 1.93415043786994e-05
+};
+\addplot [semithick, color2, mark=*, mark size=3, mark options={solid}]
+table {%
+4.6415e-05 1.41560275825925e-05
+2.1544e-05 1.41398197201728e-05
+1e-05 1.41631141374677e-05
+4.6415e-06 1.41085266192663e-05
+2.1544e-06 1.41432577515371e-05
+1e-06 1.41289443149415e-05
+4.641588e-07 1.41838124910427e-05
+2.1544e-07 1.38470959911802e-05
+1e-07 1.51958577801338e-05
+};
+\nextgroupplot[
+title={$\left( \frac{L_x}{s_4}_{analytic}-\frac{L_x}{s_4}_{FD}\right) \Big/ \frac{L_x}{s_4}_{FD}$},
+xlabel={$\epsilon$},
+xmin=7.35642958425655e-08, xmax=6.30944665049639e-05,
+ymin=2.35739657866323e-07, ymax=5.5861267176075e-07,
+xmode=log,
+ymode=log,
+tick align=outside,
+tick pos=left,
+x grid style={lightgray!92.026143790849673!black},
+y grid style={lightgray!92.026143790849673!black},
+legend style={at={(0.97,0.03)}, anchor=south east, draw=white!80.0!black},
+legend entries={{$\alpha_{\infty}=0.0$},{$\alpha_{\infty}=3.0$},{$\alpha_{\infty}=6.0$}},
+legend cell align={left}
+]
+\addplot [semithick, color0, mark=*, mark size=3, mark options={solid}]
+table {%
+4.6415e-05 5.37130679533585e-07
+2.1544e-05 3.47554306339753e-07
+1e-05 3.48934716561553e-07
+4.6415e-06 3.48671781258675e-07
+2.1544e-06 3.5005219148356e-07
+1e-06 3.49066184213044e-07
+4.641588e-07 3.4630536377253e-07
+2.1544e-07 3.52484342930404e-07
+1e-07 3.73847835034642e-07
+};
+\addplot [semithick, color1, mark=*, mark size=3, mark options={solid}]
+table {%
+4.6415e-05 2.6688070545819e-07
+2.1544e-05 2.68727532922126e-07
+1e-05 2.69248433024742e-07
+4.6415e-06 2.68869596586422e-07
+2.1544e-06 2.69721978573045e-07
+1e-06 2.69343142134367e-07
+4.641588e-07 2.66691287239892e-07
+2.1544e-07 2.70479651283026e-07
+1e-07 2.87006389878916e-07
+};
+\addplot [semithick, color2, mark=*, mark size=3, mark options={solid}]
+table {%
+4.6415e-05 2.48373500347176e-07
+2.1544e-05 2.47047013638231e-07
+1e-05 2.4689962635725e-07
+4.6415e-06 2.46420617268915e-07
+2.1544e-06 2.4689962635725e-07
+1e-06 2.46568004680661e-07
+4.641588e-07 2.4516782440173e-07
+2.1544e-07 2.45573139652216e-07
+1e-07 2.59943411299373e-07
+};
+\nextgroupplot[
+title={$\left( \frac{L_y}{s_4}_{analytic}-\frac{L_y}{s_4}_{FD}\right) \Big/ \frac{L_y}{s_4}_{FD}$},
+xlabel={$\epsilon$},
+xmin=7.35642958425655e-08, xmax=6.30944665049639e-05,
+ymin=1.65961786600194e-07, ymax=4.30945939185762e-07,
+xmode=log,
+ymode=log,
+tick align=outside,
+tick pos=left,
+x grid style={lightgray!92.026143790849673!black},
+y grid style={lightgray!92.026143790849673!black},
+legend style={at={(0.97,0.03)}, anchor=south east, draw=white!80.0!black},
+legend entries={{$\alpha_{\infty}=0.0$},{$\alpha_{\infty}=3.0$},{$\alpha_{\infty}=6.0$}},
+legend cell align={left}
+]
+\addplot [semithick, color0, mark=*, mark size=3, mark options={solid}]
+table {%
+4.6415e-05 1.84252914609715e-07
+2.1544e-05 1.75941559340132e-07
+1e-05 1.75246312895939e-07
+4.6415e-06 1.75214710760366e-07
+2.1544e-06 1.74709077130386e-07
+1e-06 1.7499349599105e-07
+4.641588e-07 1.73950626416919e-07
+2.1544e-07 1.73318584246393e-07
+1e-07 1.74519464317183e-07
+};
+\addplot [semithick, color1, mark=*, mark size=3, mark options={solid}]
+table {%
+4.6415e-05 2.05421842759966e-07
+2.1544e-05 2.01837156674095e-07
+1e-05 2.00997500566821e-07
+4.6415e-06 2.00932911579067e-07
+2.1544e-06 2.00448494538321e-07
+1e-06 2.00609966823993e-07
+4.641588e-07 1.99479660458238e-07
+2.1544e-07 1.99189010381438e-07
+1e-07 1.9967342723739e-07
+};
+\addplot [semithick, color2, mark=*, mark size=3, mark options={solid}]
+table {%
+4.6415e-05 4.12653716889889e-07
+2.1544e-05 4.07991807008396e-07
+1e-05 4.06902893672953e-07
+4.6415e-06 4.0680080816877e-07
+2.1544e-06 4.06256351502049e-07
+1e-06 4.06494551269488e-07
+4.641588e-07 4.05439666503079e-07
+2.1544e-07 4.04997295535064e-07
+1e-07 4.064264941378e-07
+};
+\end{groupplot}
+
+\end{tikzpicture}

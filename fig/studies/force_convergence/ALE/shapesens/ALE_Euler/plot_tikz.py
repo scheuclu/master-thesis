@@ -1,20 +1,24 @@
 #!/usr/bin/python3
 
 import os as os
-import matplotlib.pyplot as plt
-from matplotlib import rc
-from matplotlib2tikz import save as tikz_save
-import numpy as np
+#import matplotlib.pyplot as plt
+#import numpy as np
 import sys
 import time
 
-rc('text', usetex=True)
+#rc('text', usetex=True)
 
 sys.path.append("../")
 
 from functionlib  import extractLifts, doFD, writeCSVana
 from functionlib2 import MainText, ReadInfo, ReadInputFiles
-from plotlib_tikz      import plotLifts, plotIterations, getCSVdata, setup_plots
+from plotlib_tikz import plotLifts, plotIterations, getCSVdata, setup_plots
+
+
+import matplotlib.pyplot as plt
+from matplotlib import rc
+plt.rc('text', usetex=True)
+from matplotlib2tikz import save as tikz_save
 
 os.system("rm -rf ./results/Ma*/*")
 
@@ -99,17 +103,18 @@ for type in ['force','liftdrag']:
                                     # fancybox=True, shadow=True, ncol=5)
             # plt.legend(loc=9, bbox_to_anchor=(0.5, -0.1), ncol=NUMANGLES)
 
+            
             tikz_save(tikzfile)
             command="sed -i 's/group size/vertical sep=3cm, horizontal sep=2cm, group size/g' "+tikzfile
             os.system(command)
-            command = "sed -i 'begin{tikzpicture}/begin{tikzpicture}[scale=0.75]/g' "+tikzfile
-            os.system(command)
+            ###command = "sed -i 'begin\{tikzpicture\}/begin\{tikzpicture\:wq}[scale=0.75]/g' "+tikzfile
+            ###os.system(command)
 
             # sed -i 's/;/ /g' yourBigFile.txt
 
-            plt.show()
-            plt.close("all")
-            sys.exit(-1)
+            #plt.show()
+            #plt.close("all")
+            #sys.exit(-1)
             # vertical sep=3cm, horizontal sep=2cm, group size
 
 

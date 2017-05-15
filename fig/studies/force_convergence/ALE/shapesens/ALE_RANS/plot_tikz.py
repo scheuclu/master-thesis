@@ -1,20 +1,24 @@
 #!/usr/bin/python3
 
 import os as os
-import matplotlib.pyplot as plt
-from matplotlib import rc
-from matplotlib2tikz import save as tikz_save
-import numpy as np
+#import matplotlib.pyplot as plt
+#import numpy as np
 import sys
 import time
 
-rc('text', usetex=True)
+#rc('text', usetex=True)
 
 sys.path.append("../")
 
 from functionlib  import extractLifts, doFD, writeCSVana
 from functionlib2 import MainText, ReadInfo, ReadInputFiles
-from plotlib_tikz      import plotLifts, plotIterations, getCSVdata, setup_plots
+from plotlib_tikz import plotLifts, plotIterations, getCSVdata, setup_plots
+
+
+import matplotlib.pyplot as plt
+from matplotlib import rc
+plt.rc('text', usetex=True)
+from matplotlib2tikz import save as tikz_save
 
 os.system("rm -rf ./results/Ma*/*")
 
@@ -61,7 +65,8 @@ for type in ['force','liftdrag']:
                   ydata_adjoint=data_sim['dLx']*0+data_adjoint["dLx"][int(shapevars[shapevarindex-1])-1]
                   label=r"$\alpha_{\infty}="+str(anglevalues[index_angle-1])+"$"
                   plotLifts(axes,xdata,ydata_num,ydata_direct,ydata_adjoint,label)
-                  suptitle=r"$\left( \frac{L_x}{s_1}_{analytic}-\frac{L_x}{s_1}_{FD}\right) \Big/ \frac{L_x}{s_1}_{FD}$"
+                  suptitle=r"$\left( \frac{L_x}{s_<numsvar>}_{analytic}-\frac{L_x}{s_<numsvar>}_{FD}\right) \Big/ \frac{L_x}{s_<numsvar>}_{FD}$"
+                  suptitle=suptitle.replace("<numsvar>",str(shapevars[shapevarindex-1]))
                   multiaxes[shapevarindex-1][0].set_title(suptitle)
                   multiaxes[shapevarindex-1][0].legend(loc=4)
             
@@ -76,7 +81,9 @@ for type in ['force','liftdrag']:
                   ydata_adjoint=data_sim['dLy']*0+data_adjoint["dLy"][int(shapevars[shapevarindex-1])-1]
                   label=r"$\alpha_{\infty}="+str(anglevalues[index_angle-1])+"$"
                   plotLifts(axes,xdata,ydata_num,ydata_direct,ydata_adjoint,label)
-                  suptitle=r"$\left( \frac{L_y}{s_1}_{analytic}-\frac{L_y}{s_1}_{FD}\right) \Big/ \frac{L_y}{s_1}_{FD}$"
+                  suptitle=r"$\left( \frac{L_y}{s_<numsvar>}_{analytic}-\frac{L_y}{s_<numsvar>}_{FD}\right) \Big/ \frac{L_y}{s_<numsvar>}_{FD}$"
+                  suptitle=suptitle.replace("<numsvar>",str(shapevars[shapevarindex-1]))
+                  
                   multiaxes[shapevarindex-1][1].set_title(suptitle)
                   multiaxes[shapevarindex-1][1].legend(loc=4)
 
@@ -96,12 +103,18 @@ for type in ['force','liftdrag']:
                                     # fancybox=True, shadow=True, ncol=5)
             # plt.legend(loc=9, bbox_to_anchor=(0.5, -0.1), ncol=NUMANGLES)
 
+            
             tikz_save(tikzfile)
             command="sed -i 's/group size/vertical sep=3cm, horizontal sep=2cm, group size/g' "+tikzfile
             os.system(command)
+            ###command = "sed -i 'begin\{tikzpicture\}/begin\{tikzpicture\:wq}[scale=0.75]/g' "+tikzfile
+            ###os.system(command)
+
             # sed -i 's/;/ /g' yourBigFile.txt
-            plt.close("all")
-            # sys.exit(-1)
+
+            #plt.show()
+            #plt.close("all")
+            #sys.exit(-1)
             # vertical sep=3cm, horizontal sep=2cm, group size
 
 

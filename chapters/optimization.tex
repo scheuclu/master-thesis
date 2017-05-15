@@ -8,12 +8,12 @@
 \section{Optimization}\label{sec:optimization}
 
 
-As mentioned in REF, the overall motivation for this thesis is optimization. A typicall optimization process, not restricted to fluid problems, is depicted in Figure~\ref{fig:optimization_blockdiagram}.
+As mentioned in the introduction, the overall motivation for this thesis is optimization. A typicall optimization process, not restricted to fluid problems, is depicted in Figure~\ref{fig:optimization_blockdiagram}.
 \begin{figure}[h!]
 	\begin{center}
 	%/home/lukas/Desktop/project/independence/project/thesis/fig/tikz/build/optimization_blockdiagram.pdf
         \includegraphics{\mainpath/fig/tikz/build/optimization_blockdiagram.pdf}
-        \caption[Optimization block-diagram]{Flow chart of an optimization process in the context of flow simulations. If regards the flow-computation block as a black-box to compute gradients of an objective function and the shape-modification block more general as parameter modification, this optimization routine is applicable to all kinds of problems. In our case, we begin with an initial geometry created by a standard mesh-generation software. We also parametrize the initial mesh in terms of design elements in this first step. This is done via SDesign in this thesis. All further modifications to the geometry are obtained via the design element concept. The mesh-movement, steady-state siumulations and \acf{SA} are then performed in AERO-F. For the optimizer itself, python has been chosen in this thesis, more specifically the TODO module. The codes communicate via result-files. These files are used to monitor and investigate the optimization process.}
+        \caption[Optimization block-diagram]{Flow chart of an optimization process in the context of flow simulations. If one regards the flow-computation block as a black-box to compute gradients of an objective function and the shape-modification block more general as parameter modification, this optimization routine is applicable to all kinds of problems. In our case, we begin with an initial geometry created by a standard mesh-generation software. We also parametrize the initial mesh in terms of design elements in this first step. This is done via SDesign\cite{SDesign} in this thesis. All further modifications to the geometry are obtained via the design element concept. The mesh-movement, steady-state siumulations and \acf{SA} are then performed in AERO-F\citep{Aerof}. For the optimizer itself, python has been chosen in this thesis, more specifically the \textbf{TODO} module. The codes communicate via result-files. These files are used to monitor and investigate the optimization process.}
 		\label{fig:optimization_blockdiagram}
     \end{center}
 \end{figure}
@@ -30,7 +30,7 @@ A generic, aeroelastic optimization problem can be written as
 \end{cases} \label{eq:generic_optimization_problem_1}\\
 &\absvars = \{ \absvars \in \mathbb{R}^{n_{\absvars}} | \absvars_L \leq \absvars \leq \absvars_U \}\label{eq:generic_optimization_problem_2}
 \end{align}
-Here,  $\costfunc$ is an arbitrary cost function that should be minimized. Note that a maximization problem can easily be obtained by multiplying the cost function by a factor of $-1$. In aerodynamics, a typical example for a cost function would be the \ac{LDR} ratio of an airfoil. The cost-function is described in terms of so-called \textit{abstract variables}. These can have some physical interpretation, but don't necessarily have to(see Section~\ref{sec:design_model}). Since typically, these optimization problems have no finite solution on an unbounded domain, some restrictions/conditions are introduced. In the airfoil example, we would probably specify a minimum lift that is required to support the configuration. Also a maximum stress for the structure will likely have to be specified. These are classical examples of non-equality constraints, denoted by $\neqctr(\absvars)$ in the above formulation. Constraints can also be formulated in an equality sense, for instance geometrical restrictions due to the turbine suspensions.\\
+Here,  $\costfunc$ is an arbitrary cost function that should be minimized. Note that a maximization problem can easily be obtained by multiplying the cost function by a factor of $-1$. In aerodynamics, a typical example for a cost function would be the \ac{LDR} of an airfoil. The cost-function is described in terms of so-called \textit{abstract variables}. These can have some physical interpretation, but don't necessarily have to(see Section~\ref{sec:design_model}). Since typically, these optimization problems have no finite solution on an unbounded domain, some restrictions/conditions are introduced. In the airfoil example, we would probably specify a minimum lift that is required to support the configuration. Also a maximum stress for the structure will likely have to be specified. These are classical examples of non-equality constraints, denoted by $\neqctr(\absvars)$ in the above formulation. Constraints can also be formulated in an equality sense, for instance geometrical restrictions due to the turbine suspensions.\\
 Furthermore, the abstract optimization variables $\absvars$ themselves are typically restricted by lower($\absvars_L$) and upper($\absvars_U$) bounds.\\
 The combinations of objective function~$\costfunc$ and constraints $\eqctr$ and $\neqctr$ is typically denoted as optimization criteria $\optcrit$.
 \begin{align}\label{eq:optimization_criteria}
@@ -108,8 +108,8 @@ The linear Equations~\eqref{eq:saddlepoint_newtonform} can also be formulated as
 
 
 \begin{align}
-\underset{\absvars}{\text{min }}( \frac{1}{2} \T{\incrabsvars} \it{\PPLagfuncBYabsvars} \incrabsvars + \frac{\partial \it{\costfunc}}{\partial \absvars} ) \label{eq:quadratic_minimization_problem_1}\\
-\it{\PneqctrBYabsvars} \incrabsvars+\it{\neqctr} \geq \vec{0} \label{eq:quadratic_minimization_problem_2}\\
+\underset{\absvars}{\text{min }}( \frac{1}{2} \T{\incrabsvars} \it{\PPLagfuncBYabsvars} \incrabsvars + \frac{\partial \it{\costfunc}}{\partial \absvars} ) \nonumber \label{eq:quadratic_minimization_problem_1}\\
+\it{\PneqctrBYabsvars} \incrabsvars+\it{\neqctr} \geq \vec{0} \label{eq:quadratic_minimization_problem_2}\nonumber\\
 \it{\PeqctrBYabsvars} \incrabsvars+\it{\eqctr} = \vec{0} \label{eq:quadratic_minimization_problem_3}
 \end{align}
 \\
@@ -167,7 +167,7 @@ Here, $\phi_{j}(\xi)$ is a shape function, $\hat{\tensor{X}}_j$ is the vector of
 \mms = \sum_j \phi_{j}(\xi) \hat{\mms}_j \label{eq:mms}
 \end{align}
 
-Just as in Finite Elements, where the shape-functions can not only be used to describe the solution field, but also the body's geometry and material parameters, the design element concept can be applied to prescribe parameter distributions and their variations in the optimization process. A simple sketch of the concept is provided in Figure~\ref{fig:sketch_geometrical_approach}
+Just as in \acf{FE}, where the shape-functions can not only be used to describe the solution field, but also the body's geometry and material parameters, the design element concept can be applied to prescribe parameter distributions and their variations in the optimization process. A simple sketch of the concept is provided in Figure~\ref{fig:sketch_geometrical_approach}
 \\
 Both approaches have pros and cons, that are quickly discussed in \cite{Maute2003}, this thesis utilizes the geometrical approach solemnly.
 
@@ -182,7 +182,7 @@ Both approaches have pros and cons, that are quickly discussed in \cite{Maute200
 \begin{figure}[h!]
 	\begin{center}
         \includegraphics{\mainpath/fig/tikz/build/sdesign_visualization.pdf}
-        \caption[Design element visualization]{Visualization of the design element concept, exemplarily shown on a NACA0012 airfoil. For simplicity, a single design element(cubic in the horizontal direction and linear in the vertical direction) is used. Both the initial configuration(dashed lines) and the deformed configuration(full lines) are plotted. Although only eight design element nodes are provided, the function space of the design element allows for a great variation of the airfoil shape. Also, the size of the parameter space is now independent of the airfoil mesh size. From this perspective, the design element concept can be regarded as an model reduction for the shape variation.}
+        \caption[Design element visualization]{Visualization of the design element concept, exemplarily shown on a NACA0012 airfoil. For simplicity, a single design element(cubic in the horizontal direction and linear in the vertical direction) is used. Both the initial configuration(dashed lines) and the deformed configuration(full lines) are plotted. Although only eight design element nodes are provided, the function space of the design element allows for a great variation of the airfoil shape. Also, the size of the parameter space is now independent of the airfoil mesh size. From this perspective, the design element concept can be regarded as an model reduction for the shape variation. We will use exactly this parametrization of a NACA0012 airfoil here to verify the implemented shape-sensitivities in section~\ref{sec:verification}}
 		\label{designelement_concept_2D}
     \end{center}
 \end{figure}

@@ -232,6 +232,8 @@ at_end_noindent	SA_Thesis/latexindent/latexindent.pl	/^sub at_end_noindent{$/;"	
 at_end_noindent	latexindent/latexindent.pl	/^sub at_end_noindent{$/;"	s
 at_end_of_env_or_eq	SA_Thesis/latexindent/latexindent.pl	/^sub at_end_of_env_or_eq{$/;"	s
 at_end_of_env_or_eq	latexindent/latexindent.pl	/^sub at_end_of_env_or_eq{$/;"	s
+axes	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^            axes     =multiaxes[0]$/;"	v
+axes	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^            axes     =multiaxes[1]$/;"	v
 axes	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^                  axes         =multiaxes[shapevarindex-1][0]$/;"	v
 axes	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^                  axes         =multiaxes[shapevarindex-1][1]$/;"	v
 begin_command_with_alignment	SA_Thesis/latexindent/latexindent.pl	/^sub begin_command_with_alignment{$/;"	s
@@ -268,10 +270,15 @@ end_command_with_alignment	latexindent/latexindent.pl	/^sub end_command_with_ali
 explanation	create_nomencature.py	/^                explanation=commandline.split("%")[1].strip()$/;"	v
 explclean	create_nomencature.py	/^            explclean=temp[0].replace(withexpr,"").strip()$/;"	v
 file	create_nomencature.py	/^file = open('.\/customcommands.tex','r')$/;"	v
+file_sim	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^            file_sim='.\/results\/sim_'+str(index_mach)+'_'+str(index_angle)+'_'+type+'.csv'$/;"	v
 file_sim	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^                  file_sim='.\/results\/sim_'+str(index_mach)+'_'+str(index_angle)+'_'+str(shapevarindex)+'_'+type+'.csv'$/;"	v
+fileadjoint	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^            fileadjoint          = 'anasim_'+str(index_mach)+'_'+str(index_angle)+'_adjoint_'+type+'.csv'$/;"	v
 fileadjoint	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^                  fileadjoint          = 'anasim_'+str(index_mach)+'_'+str(index_angle)+'_adjoint_'+type+'.csv'$/;"	v
+fileadjoint_linsolve	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^            fileadjoint_linsolve = 'anasim_'+str(index_mach)+'_'+str(index_angle)+'_adjoint_linearsolver.csv'$/;"	v
 fileadjoint_linsolve	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^                  fileadjoint_linsolve = 'anasim_'+str(index_mach)+'_'+str(index_angle)+'_'+str(shapevarindex)+'_adjoint_linearsolver.csv'$/;"	v
+filedirect	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^            filedirect           = 'anasim_'+str(index_mach)+'_'+str(index_angle)+'_direct_'+type+'.csv'$/;"	v
 filedirect	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^                  filedirect           = 'anasim_'+str(index_mach)+'_'+str(index_angle)+'_direct_'+type+'.csv'$/;"	v
+filedirect_linsolve	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^            filedirect_linsolve  = 'anasim_'+str(index_mach)+'_'+str(index_angle)+'_direct_linearsolver.csv'$/;"	v
 filedirect_linsolve	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^                  filedirect_linsolve  = 'anasim_'+str(index_mach)+'_'+str(index_angle)+'_'+str(shapevarindex)+'_direct_linearsolver.csv'$/;"	v
 for the toc	SA_Thesis/latexindent/success/testHeadings.tex	/^          	subsection text$/;"	s
 for the toc	SA_Thesis/latexindent/success/testHeadings.tex	/^          	subsection text$/;"	u
@@ -294,6 +301,7 @@ format_block	latexindent/latexindent.pl	/^sub format_block{$/;"	s
 functions	SA_Thesis/latexindent/success/bigTest.tex	/^\\pagestyle{fancy}$/;"	i
 functions	latexindent/success/bigTest.tex	/^\\pagestyle{fancy}$/;"	i
 getCSVdata	fig/studies/force_convergence/ALE/shapesens/plotlib_tikz.py	/^def getCSVdata(file_sim,filedirect,fileadjoint,filedirect_linsolve,fileadjoint_linsolve):$/;"	f
+getLabel	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^def getLabel(dir,type):$/;"	f
 ifnum value  chapter	SA_Thesis/latexindent/success/ifelsefi.tex	/^\\preto\\chapter{%$/;"	c
 ifnum value  chapter	latexindent/success/ifelsefi.tex	/^\\preto\\chapter{%$/;"	c
 increase_indent	SA_Thesis/latexindent/latexindent.pl	/^sub increase_indent{$/;"	s
@@ -310,6 +318,8 @@ indent_if_else_fi	SA_Thesis/latexindent/latexindent.pl	/^sub indent_if_else_fi{$
 indent_if_else_fi	latexindent/latexindent.pl	/^sub indent_if_else_fi{$/;"	s
 indent_item	SA_Thesis/latexindent/latexindent.pl	/^sub indent_item{$/;"	s
 indent_item	latexindent/latexindent.pl	/^sub indent_item{$/;"	s
+label	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^            label=getLabel('x',type)$/;"	v
+label	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^            label=getLabel('y',type)$/;"	v
 lstinline  indentconfig.yaml  and lstinline  .indentconfig.yaml   for user settings 	SA_Thesis/latexindent/documentation/manual.tex	/^\\end{enumerate}$/;"	u
 lstinline  indentconfig.yaml  and lstinline  .indentconfig.yaml   for user settings 	latexindent/documentation/manual.tex	/^\\end{enumerate}$/;"	u
 lstinline  localSettings.yaml 	SA_Thesis/latexindent/documentation/manual.tex	/^\\end{warning}$/;"	u
@@ -346,6 +356,7 @@ symbols	create_nomencature.py	/^symbols={}$/;"	v
 testfile	main.tex	/^\\include{Preface}$/;"	i
 this is the first section	SA_Thesis/thesis/main.tex	/^asdasad$/;"	s
 this is the second section	SA_Thesis/thesis/main.tex	/^asdasdadasd$/;"	s
+tikzfile	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^        tikzfile='.\/tikzfiles\/Ma'+str(machvalues[index_mach-1])+'\/'+type+".tex"$/;"	v
 tikzfile	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^               tikzfile='.\/tikzfiles\/Ma'+str(machvalues[index_mach-1])+'\/'+type+".tex"$/;"	v
 titlepage	main.tex	/^\\pagenumbering{roman}$/;"	i
 toc	SA_Thesis/latexindent/success/testHeadings.tex	/^         part text$/;"	c
@@ -355,10 +366,17 @@ usage	latexindent/latexindent.pl	/^usage: latexindent.pl [options] [file][.tex]$
 what a great subsection	SA_Thesis/thesis/main.tex	/^all god stuff of the first section can be found at \\secref{sec:firstsection}$/;"	u
 withexpr	create_nomencature.py	/^            withexpr=re.search("with{.*}",temp[0]).group(0)$/;"	v
 withexpr	create_nomencature.py	/^            withexpr=withexpr.replace('with{','').replace('}','')$/;"	v
+xdata	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^            xdata    =data_sim['stepsize']$/;"	v
 xdata	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^                  xdata        =data_sim['stepsize']$/;"	v
+ydata_adjoint	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^            ydata_adjoint=data_sim['dLx']*0+data_adjoint["dLx"]$/;"	v
+ydata_adjoint	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^            ydata_adjoint=data_sim['dLy']*0+data_adjoint["dLy"]$/;"	v
 ydata_adjoint	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^                  ydata_adjoint=data_sim['dLx']*0+data_adjoint["dLx"][int(shapevars[shapevarindex-1])-1]$/;"	v
 ydata_adjoint	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^                  ydata_adjoint=data_sim['dLy']*0+data_adjoint["dLy"][int(shapevars[shapevarindex-1])-1]$/;"	v
+ydata_direct	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^            ydata_direct =data_sim['dLx']*0+data_direct["dLx"]$/;"	v
+ydata_direct	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^            ydata_direct =data_sim['dLy']*0+data_direct["dLy"]$/;"	v
 ydata_direct	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^                  ydata_direct =data_sim['dLx']*0+data_direct["dLx"][int(shapevars[shapevarindex-1])-1]$/;"	v
 ydata_direct	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^                  ydata_direct =data_sim['dLy']*0+data_direct["dLy"][int(shapevars[shapevarindex-1])-1]$/;"	v
+ydata_num	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^            ydata_num=data_sim['dLx']$/;"	v
+ydata_num	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^            ydata_num=data_sim['dLy']$/;"	v
 ydata_num	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^                  ydata_num    =data_sim['dLx']$/;"	v
 ydata_num	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^                  ydata_num    =data_sim['dLy']$/;"	v

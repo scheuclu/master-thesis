@@ -4,6 +4,7 @@
 \setlength{\delimitershortfall}{0pt}
 \section{Fluid structure interaction}
 \acf{FSI} describes the aeroelastic response of a mechanical system under fluid load, as well as the interaction between fluid and structure itself. Synonymously the term "Aeroelasticity" is often used.\\
+The ultimate goal of the \acf{SA} derived in this thesis is shape-optimization. For many challenging applications, the interaction of the flow with the structure can not be neglected for the sensitivity computation. Thus, this chapter shall provide a quick overview on the fluid-structure sensitivity analysis.
 
 For this thesis, we first will focus on an \ac{ALE} formulation, a closer look into this topic in the context of en Embedded formulation will follow.\\
 
@@ -41,7 +42,7 @@ In an Arbitrary Lagrangian Eulerian formulation, the fluid mesh deforms with the
 The state equation of the fluid depends on the flow model used, as well as on whether a Eulerian or Lagrangian approach is used. A quick overview is provided in Section~\ref{sec:fluid_equations_basic}.\\
 Please note, that the frame of reference(Eulerian, Lagrangian, Arbitrary Lagrangian Eulerian) has nothing to do with the fluid equation type.
 
-The state equation of the fluid(Equation three in \eqref{eq:3field_basic}) can be expressed as
+The state equation of the fluid~ \eqref{eq:3field_fluid} can be expressed as
 \begin{align}
 \def\arraystretch{1.5}
 \EOSfluid= 
@@ -60,7 +61,8 @@ where
 \conv{\fluxesconv}(\fstate)=\fluxesconv(\fstate)-\dot{\xi}\fstate
 \end{align}
 
-After \ac{FV} discretization of the convective part, and \ac{FE} discretization of the diffusive part, as explained in section \textbf{TODO}, the discrete system can be written as
+After \ac{FV} discretization of the convective part, and \ac{FE} discretization of the diffusive part, as explained in section 
+\ref{sec:fv_fluid_mechanics}, the discrete system can be written as
 
 
 \begin{align}
@@ -74,13 +76,14 @@ After \ac{FV} discretization of the convective part, and \ac{FE} discretization 
 {$\pdfrac{\cellvolmat(\dmpos)\dfstate}{t}+\fluxmatconv(\dmpos,\dmms,\dfstate)+\fluxmatdiff(\dmpos,\dmms,\dfstate)$}
 {$\pdfrac{\cellvolmat(\dmpos)\dfstate}{t}+\fluxmatconv(\dmpos,\dmms,\dfstate)+\fluxmatdiff(\dmpos,\dmms,\dfstate)-\turbmat(\dmpos,\dmms,\dfstate,\turbparamvec)$}
  = \vec{0}
+\label{eq:full_governing_equation}
 \end{align}
 
-Where we remind the reader that, as explained in section \ref{sec:fv_fluid_mechanics}, for a \ac{FV} discretization, the fluid state $\dfstate$ has to be interpreted as average value over the cell. We often take the cell average to be equal to the value at the cell center, a n approximation that is second order accurate.
+Where we remind the reader that, as explained in section \ref{sec:fv_fluid_mechanics}, for a \ac{FV} discretization, the fluid state $\dfstate$ has to be interpreted as average value over the cell. We often take the cell average to be equal to the value at the cell center, an approximation that is second order accurate.
 
 
 In the above equations $\fluxmatconv$ denotes the vector of Roe fluxes resulting from a second-order finite volume discretization of the convective part of the \ac{NSE}, see section \ref{sec:fv_fluid_mechanics}.\\
-Likewise, $\fluxmatdiff$ likewise denotes an approximation of the diffusive part. As explained in section \ref{sec:mixed_FV_FE_formulation} we chose a \ac{FE} approximation over a \ac{FV} one for this term.\\
+Likewise, $\fluxmatdiff$ denotes an approximation of the diffusive part. As explained in section \ref{sec:mixed_FV_FE_formulation} we chose a \ac{FE} approximation over a \ac{FV} one for this term.\\
 $\cellvolmat$ denotes the matrix of cell volumes and $\turbmat$ denotes the matrix resulting from the additional turbulence closures in the \ac{RANS} equations (see Section~\ref{sec:rans}).\\
 The above table also gives a very nice overview over the different equation types and the used simplifications. The Euler equations are obviously obtained by neglecting the diffusive part of the \ac{NSE}. One can also see that the \ac{RANS} equations are more difficult than the \ac{NSE} themselves. However, as explained in \ref{sec:rans}, the advantage is that \ac{RANS} can operate on much coarser meshes that do not have to resolve the small scale turbulence phenomena, which makes them more numerically efficient overall in many applications.
 \\
@@ -92,7 +95,7 @@ The three-field coupled system of equations \eqref{eq:3field_structure}-\eqref{e
 \begin{figure}[h!]
 	\begin{center}
         \includegraphics{\mainpath/fig/tikz/build/staggered_algorithm.pdf}
-        \caption[Staggered algorithm scheme]{Scheme for the staggered algorithm. Th picture depicts the sequential structure($\structdisp$) and fluid($\fstate$) solves. First, the structure is updated to a new time step. With this information, a corresponding fluid solution is obtained. After the fluid is progressed in time, the structure solutions is being corrected with that information. A detailed description of all steps follows below.}
+        \caption[Staggered algorithm scheme]{Scheme for the staggered algorithm. The picture depicts the sequential structure($\structdisp$) and fluid($\fstate$) solves. First, the structure is updated to a new time step. With this information, a corresponding fluid solution is obtained. After the fluid is progressed in time, the structure solutions is being corrected with that information. A detailed description of all steps follows below.}
 		\label{fig:staggered_algorithm}
     \end{center}
 \end{figure}
@@ -137,10 +140,10 @@ Here, the subscript $\Gamma$ denotes the fluid grid points at the FSI interface 
 \its{\mms}_{\Gamma}&=\ifaceprojStoF \its{\structdisp}\label{eq:mms_update_1}\\
 \fic{\stiffmat}_{\Omega\Omega} \its{\mms}_\Omega &= -\fic{\stiffmat}_{\Omega\Gamma} \its{\mms} \label{eq:mms_update_2}
 \end{align}
-It shall be noted that an exact solution of the preceding equation is not required. In fact it is an arbitrarily chosen auxiliary pseudo-problem anyway. Therefor, a valid update of the mesh motion, that does not produce crossovers is enough. Such an update can be obtained at low cost by allying a few \ac{PCG} iterations to Equation~\eqref{eq:mms_update_2}.
+It shall be noted that an exact solution of the preceding equation is not required. In fact it is an arbitrarily chosen auxiliary pseudo-problem anyway. Therefor, a valid update of the mesh motion, that does not produce crossovers is enough. Such an update can be obtained at low cost by apllying a few \ac{PCG} iterations to Equation~\eqref{eq:mms_update_2}.
 
 \paragraph{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt} {4}}} Update fluid state vector}
-After the mesh has been deformed, the fluid state~$\dfstate$ vector can be updated by allying a singe Newton Rhapsodon iteration to equation TODO, which leads to.
+After the mesh has been deformed, the fluid state~$\dfstate$ vector can be updated by apllying a singe Newton Rhapsodon iteration to equation~\eqref{eq:full_governing_equation}, which leads to.
 \begin{align}
 \def\arraystretch{1.5}
 \tablesix
@@ -157,7 +160,7 @@ After the mesh has been deformed, the fluid state~$\dfstate$ vector can be updat
 
 \paragraph{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt} {5}}} Determining structural responses}
 
-Once the new fluid-state vector has been determined, the pressure $\itss{\pres}$ can be recovered. The pressure on the fluid interface side, than mifht need to be transfered to the structure via a transfer matrix $\dmat{T}_u$ to account for potentially non-matching fluid-structure interfaces.
+Once the new fluid-state vector has been determined, the pressure $\itss{\pres}$ can be recovered. The pressure on the fluid interface side, than might need to be transfered to the structure via a transfer matrix $\dmat{T}_u$ to account for potentially non-matching fluid-structure interfaces.
 
 
 

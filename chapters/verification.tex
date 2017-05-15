@@ -9,21 +9,21 @@
 \setlength{\delimitershortfall}{0pt}
 
 \section{Verification}\label{sec:verification}
-After chapter~\ref{sec:fluid_mechanics} described the basic equation of fluid mechanics, discretization of this equations with \ac{FV} and \ac{FE} schemes in section~\ref{sec:finite_volume_method}, and an introduction to \ac{SA}, the expressions for the actual derivatives have been derived in section~\ref{sec:SA}. This has been done for both the body-fitted and the embedded~\ref{sec:fiver} framework of AERO-F.\\
-This section is denoted to a thorough validation of the obtained derivatives. As described in REF, AERO-F handles both sensitivities with respect to far-field variables(e.g. angle of attack) as well as shape sensitivities. Both types require to be handled fundamentally differently. While the first type leads to derivatives mainly in the far field boundary conditions, the latter one interferes with the wall treatment. More importantly, as shown in section TODO, in the embedded case, doing shape sensitivities leads to addtitional derivatives with regards to the intersector.\\
+After chapter~\ref{sec:fluid_mechanics} described the basic equation of fluid mechanics, discretization of this equations with \ac{FV} and \ac{FE} schemes in section~\ref{sec:finite_volume_method}, and an introduction to \ac{SA}, the expressions for the actual derivatives have been derived in section~\ref{sec:SA}. This has been done for both the body-fitted and the embedded~\ref{sec:embedded_boundary_method} framework of AERO-F.\\
+This section is denoted to a thorough validation of the obtained derivatives. As described in \ref{sec:SA}, AERO-F handles both sensitivities with respect to far-field variables(e.g. angle of attack) as well as shape sensitivities. Both types require to be handled fundamentally different. While the first type leads to derivatives mainly in the far field boundary conditions, the latter one interferes with the wall treatment. More importantly, as shown in sections~\ref{sec:fluid_jacobian} and \ref{sec:dresidual_by_absvar}, in the embedded case, doing shape sensitivities leads to additional derivatives with regards to the intersector.\\
 For all those reasons, the verification provided in this chapter deals with both $\machnum_{\infty}$-sensitivity as well as shape-sensitivity. More over we will provide plots for both the body-fitted and the embedded case.
 
 \subsection{Verification approach}\label{sec:verification_approach}
-The question of how to verify the obtained sensitivities is cumbersome anything but straightforward.\\
-To begin with, what quantity can we verify anyway?\\
-If we have a look at equation \textbf{TODO}, one can see, that there are to main derivatives: $\pdfrac{\dresidual}{\dfstate}$ and $\pdfrac{\dresidual}{\dfstate}$.\\
-The basic idea that we exploit for verification is to compute a reference solution for the Sensitivities by a \ac{FD} of two steady-state simulation. The advantage is, that the sensitivity-module does not have to be used at all to obtain those references, thus it is ensured that potential bugs are not carried over.\\
+The question of how to verify the obtained sensitivities is anything but straightforward.\\
+The first question is: What can be verified anyway?\\
+If we have a look at equation \eqref{eq:full_sa_nostruct}, one can see, that there are to main derivatives: $\pdfrac{\dresidual}{\dfstate}$ and $\pdfrac{\dresidual}{\absvar}$. The derivative with respect to the mesh position $\pdfrac{\dresidual}{\dmpos}$ is not validated here, since it is obtained from SDESIGN and taken for granted.\\
+The basic idea that we exploit for verification is to compute a reference solution for the sensitivities by a \ac{FD} of two steady-state simulation. The advantage is, that the sensitivity-module does not have to be used at all to obtain those references, thus it is ensured that potential bugs are not carried over.\\
 However, for both of the above quantities, computing a finite difference solution is cumbersome. For the Jacobian $\pdfrac{\dresidual}{\dfstate}$ a simple forward difference would look as follows:
 \begin{align}
-\pdfrac{\dresidual_i}{\dfstate_j}\bigg\rvert_{\fstate_0}=\frac{\dresidual_i(\dfstate_o)+\epsilon\vec{e}_j)-\dresidual_i(\dfstate_o)-\epsilon\vec{e}_j)}{2\epsilon}
+\pdfrac{\dresidual_i}{\dfstate_j}\bigg\rvert_{\fstate_0}=\frac{\dresidual_i(\dfstate_0+\epsilon\vec{e}_j)-\dresidual_i(\dfstate_0-\epsilon\vec{e}_j)}{2\epsilon}
 \end{align}
-which would entail an $\order(N)$ number of residual evaluations.\\
-As far as $\pdfrac{\dresidual}{\dfstate}$ goes, a \ac{FD} verification would be feasible:
+which would entail an $\order{N}$ number of residual evaluations.\\
+As far as $\pdfrac{\dresidual}{\absvar}$ goes, a \ac{FD} verification would be feasible:
 \begin{align}
 \pdfrac{\dresidual_i}{\machnum_{\infty}}&=\frac{\dresidual(\dfstate_i^{+})-\dresidual(\dfstate_i^{-})}{2\epsilon} \nonumber \\
 \dfstate_i^{\pm} &=
@@ -32,25 +32,26 @@ As far as $\pdfrac{\dresidual}{\dfstate}$ goes, a \ac{FD} verification would be 
 \dfstate_i\big\rvert_{\fstate_i(\machnum_i=\machnum_0+\epsilon)}\text{   for boundary nodes}
 \end{cases}
 \end{align}
-which could be done cheaply, and is in fact done in AERO-F if the parameter \texttt{SensitivityAnalysis.SensitivityComputation} is set to \texttt{FiniteDifference} however, it requires the fluid-state to be updated according to the mach-number change at the fluid boundary and thus introduced the potential for new bugs.\\
-Instead, the first quantity to be validated in this thesis is the solution of the linear system described in equation \textbf{REF}, $\pdfrac{\dfstate}{\absvar}$.\\
-this can be done easily by performing a simple \ac{FD} difference on the solution of two steady-state simulations;
+which could be done cheaply, and is in fact done in AERO-F if the parameter \texttt{SensitivityAnalysis.SensitivityComputation} is set to \texttt{FiniteDifference} however, it requires the fluid-state to be updated according to the Mach-number change at the fluid boundary and thus introduced the potential for new bugs.\\
+Instead, the first quantity to be validated in this thesis is the solution of the linear system described in equation \eqref{eq:full_sa_nostruct}: $\pdfrac{\dfstate}{\absvar}$.\\
+this can be done easily by performing a simple \ac{FD} on the solution of two steady-state simulations;
 \begin{align}
 \tfrac{\dfstate}{\absvar}=\frac{\dfstate(\absvar+\epsilon)-\dfstate(\absvar-\epsilon)}{2 \epsilon}
 \end{align}
-which involves no extra coding and can be done with a standard steady state solver.\\
+which involves no extra coding and can be done with a standard steady state solver.
+The validation of $\tfrac{\dfstate}{\absvar}$ is provided in figures [\ref{fig:verification_dwdma_ale_Euler},\ref{fig:verification_dwdma_ale_Laminar},\ref{fig:verification_dwdma_ale_RANS}] for the body fitted framework and figures~[\ref{fig:verification_dwdma_emb_Euler},\ref{fig:verification_dwdma_emb_Laminar},\ref{fig:verification_dwdma_emb_RANS}] for the embedded.
 
 Additionally, since the optimization will run on lift and drag, we also validate them with steady state results.
 \begin{align}
 \tfrac{\optcrit}{\absvar}=\frac{\optcrit(\absvar+\epsilon)-\optcrit(\absvar-\epsilon)}{2 \epsilon}
 \end{align}
-The validation of integrated forces is provided in figures~\ref{TODO}-\ref{TODO} for body-fitted computations and in figures~\ref{TODO}-\ref{TODO} for embedded.
+The validation of integrated forces is provided in figures~[\ref{fig:dLdMa_Euler_ale},\ref{fig:dLdMa_Laminar_ale},\ref{fig:dLdMa_RANS_ale}] for body-fitted computations and in figures~[\ref{fig:dLdMa_Euler_emb},\ref{fig:dLdMa_Laminar_emb},\ref{fig:dLdMa_RANS_emb}] for embedded.
 
 
 
-\section{Verification of mach-sensitivity}
-For the body-fitted case, the verification of $\tfrac{\dfstate}{\machnum_{\infty}}$ for ALE simulations is provided in figure~\ref{fig:verification_dwdma_ale_Euler} for Euler equation, figure~\ref{fig:verification_dwdma_ale_Laminar} for full \ac{NSE} and in figure~\ref{fig:verification_dwdma_ale_RANS} for \ac{NSE} equations with an additional Spallart-Almares turbulence model.
-Additionally, a side by side comparison of the analytic results between all three equation types is also provided in figure~\ref{fig:verification_dwdma_ale_comparison} in order to ensure that the additional viscous and turbulent terms actually account for a visible difference.\\
+\subsection{Verification of Mach-sensitivity}
+For the body-fitted case, the verification of $\tfrac{\dfstate}{\machnum_{\infty}}$ is provided in figure~\ref{fig:verification_dwdma_ale_Euler} for Euler equations, figure~\ref{fig:verification_dwdma_ale_Laminar} for full \ac{NSE} and in figure~\ref{fig:verification_dwdma_ale_RANS} for \ac{NSE} with an additional Spallart-Almares turbulence model.
+Additionally, a side by side comparison of the analytic results between all three equation types is also provided in figure~\ref{fig:verification_dwdma_ale_comparison} in order to ensure, that the additional viscous and turbulent terms actually account for a visible difference.\\
 For the embedded case, we provide the verification of $\tfrac{\dfstate}{\machnum_{\infty}}$  in figure~\ref{fig:verification_dwdma_emb_Euler} for Euler equation, figure~\ref{fig:verification_dwdma_emb_Laminar} for full \ac{NSE} and in figure~\ref{fig:verification_dwdma_emb_RANS} for \ac{NSE} equations with an additional Spallart-Almares turbulence model.
 Again, a side by side comparison of the analytic results between all three equation types is also provided in figure~\ref{fig:verification_dwdma_emb_comparison} in order to ensure that the additional viscous and turbulent terms actually account for a visible difference.
 
@@ -62,7 +63,7 @@ Again, a side by side comparison of the analytic results between all three equat
 	\begin{figure}[t!]
 	    \centering
 	    \textbf{Verification $\tfrac{\dfstate}{\machnum_{\infty}}$ for {\vertype} equations and a body-fitted framework}\par\medskip    
-	    \foreach \n in {1,2,3,4,5}{
+	    \foreach \n in {1,2,3,5}{
 	      \foreach \type in {FD,ana}{
 			    \begin{subfigure}[t]{0.5\textwidth}
 			        \centering
@@ -87,7 +88,7 @@ Again, a side by side comparison of the analytic results between all three equat
 	\begin{figure}[t!]
 	    \centering
 	    \textbf{Verification $\tfrac{\dfstate}{\machnum_{\infty}}$ for {\vertype} equations and a embedded framework}\par\medskip    
-	    \foreach \n in {1,2,3,4,5}{
+	    \foreach \n in {1,2,3,5}{
 	      \foreach \type in {FD,ana}{
 			    \begin{subfigure}[t]{0.5\textwidth}
 			        \centering
@@ -105,17 +106,20 @@ Again, a side by side comparison of the analytic results between all three equat
 }
 
 
+
+
+
 %--------------------------------------------------------------------------------------------
 %\subsubsection{Comparison}
 
 \begin{figure}[t!]
     \centering
     \textbf{Comparison of $\tfrac{\dfstate}{\machnum_{\infty}}$ in the body-fitted framework for all 3 equation types}\par\medskip    
-    \foreach \n in {1,2,3,4,5}{
+    \foreach \n in {1,2,3,5}{
       \foreach \simtype in {Euler,Laminar,RANS}{
 		    \begin{subfigure}[t]{0.33\textwidth}
 		        \centering
-		        \includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/machsens/ALE/\simtype_component\n_ana}
+		        \includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/machsens/ALE/comparison_\simtype_component\n_ana}
 		        \caption{$\linepdfrac{\d{w_\n^{\simtype}}}{\machnum_{\infty}}$}
 		    \end{subfigure}%
 		    ~ 
@@ -130,11 +134,11 @@ Again, a side by side comparison of the analytic results between all three equat
 \begin{figure}[t!]
     \centering
     \textbf{Comparison of $\tfrac{\dfstate}{\machnum_{\infty}}$ in the embedded framework for all 3 equation types}\par\medskip    
-    \foreach \n in {1,2,3,4,5}{
+    \foreach \n in {1,2,3,5}{
       \foreach \simtype in {Euler,Laminar,RANS}{
 		    \begin{subfigure}[t]{0.33\textwidth}
 		        \centering
-		        \includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/machsens/Emb/\simtype_component\n_ana}
+		        \includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/machsens/Emb/comparison_\simtype_component\n_ana}
 		        \caption{$\linepdfrac{\d{w_\n^{\simtype}}}{\machnum_{\infty}}$}
 		    \end{subfigure}%
 		    ~ 
@@ -147,11 +151,13 @@ Again, a side by side comparison of the analytic results between all three equat
 
 
 
+\FloatBarrier
+
 %--------------------------------------------------------------------------------------------
 %--------------------------------------------------------------------------------------------
 
 
-\section{Verification shape sensitivity}
+\subsection{Verification shape sensitivity}
 The verification of $\tfrac{\dfstate}{\absvar}$ for ALE simulations is provided in figure~\ref{fig:verification_dwds_ale_Euler} for Euler equation, figure~\ref{fig:verification_dwds_ale_Laminar} for full \ac{NSE} and in figure~\ref{fig:verification_dwds_ale_RANS} for \ac{NSE} equations with an additional Spallart-Almares turbulence model.
 Additionally, a side by side comparison of the analytic results between all three equation types is also provided in figure~\ref{fig:verification_dwds_ale_comparison} in order to ensure that the additional viscous and turbulent terms actually account for a visible difference.
 \\
@@ -164,7 +170,7 @@ Again, a side by side comparison of the analytic results between all three equat
 	\begin{figure}[t!]
 	    \centering
 	    \textbf{Verification $\tfrac{\dfstate}{\absvar}$ for {\vertype} equations and a body-fitted framework}\par\medskip    
-	    \foreach \n in {1,2,3,4,5}{
+	    \foreach \n in {1,2,3,5}{
 	      \foreach \type in {FD,ana}{
 			    \begin{subfigure}[t]{0.5\textwidth}
 			        \centering
@@ -190,7 +196,7 @@ Again, a side by side comparison of the analytic results between all three equat
 	\begin{figure}[t!]
 	    \centering
 	    \textbf{Verification $\tfrac{\dfstate}{\absvar}$ for {\vertype} equations and a embedded framework}\par\medskip    
-	    \foreach \n in {1,2,3,4,5}{
+	    \foreach \n in {1,2,3,5}{
 	      \foreach \type in {FD,ana}{
 			    \begin{subfigure}[t]{0.5\textwidth}
 			        \centering
@@ -215,7 +221,7 @@ Again, a side by side comparison of the analytic results between all three equat
 \begin{figure}[t!]
     \centering
     \textbf{Comparison of $\tfrac{\dfstate}{\absvar}$ in the body-fitted framework for all 3 equation types}\par\medskip    
-    \foreach \n in {1,2,3,4,5}{
+    \foreach \n in {1,2,3,5}{
       \foreach \simtype in {Euler,Laminar,RANS}{
 		    \begin{subfigure}[t]{0.33\textwidth}
 		        \centering
@@ -233,7 +239,7 @@ Again, a side by side comparison of the analytic results between all three equat
 \begin{figure}[t!]
     \centering
     \textbf{Comparison of $\tfrac{\dfstate}{\absvar}$ in the embedded framework for all 3 equation types}\par\medskip    
-    \foreach \n in {1,2,3,4,5}{
+    \foreach \n in {1,2,3,5}{
       \foreach \simtype in {Euler,Laminar,RANS}{
 		    \begin{subfigure}[t]{0.33\textwidth}
 		        \centering
@@ -250,35 +256,6 @@ Again, a side by side comparison of the analytic results between all three equat
 
 
 
-\foreach \eqtype in {Euler}{
-	\begin{figure}
-	  \centering
-	  \input{\mainpath/fig/studies/force_convergence/ALE/machsens/ALE_\eqtype/tikzfiles/Ma0.5/liftdrag}
-	  \caption[Validation of the Lift and Drag results for mach-sensitivity: body-fitted \eqtype equations]{The graph shows the relative error between the Lift and Drag mach-sensitivities obtained by \ac{FD} of two steady states, compared to the mach-sensitivity obtained by analytic direct evaluation. Please not that a \ac{FD} Jacobian has been used here, which introduces an approximation error, Furthermore, the finite precision of the obtained steady states is another error source.This explains why the error levels off. For all practical optimization purposes, the obtained accuracy is more than enough.}
-	  \label{aaa}
-	\end{figure}
-}
-
-
-\foreach \eqtype in {Laminar}{
-	\begin{figure}
-	  \centering
-	  \input{\mainpath/fig/studies/force_convergence/ALE/machsens/ALE_\eqtype/tikzfiles/Ma0.5/liftdrag}
-	  \caption[Validation of the Lift and Drag results for mach-sensitivity: body-fitted \eqtype equations]{The graph shows the relative error between the Lift and Drag mach-sensitivities obtained by \ac{FD} of two steady states, compared to the mach-sensitivity obtained by analytic direct evaluation. Please not that a \ac{FD} Jacobian has been used here, which introduces an approximation error, Furthermore, the finite precision of the obtained steady states is another error source.This explains why the error levels off. For all practical optimization purposes, the obtained accuracy is more than enough.}
-	  \label{aaa}
-	\end{figure}
-}
-
-
-\foreach \eqtype in {Euler,Laminar,RANS}{
-	\begin{figure}
-	  \centering
-	  \textbf{Validation of the Lift and Drag results for shape-sensitivity: body-fitted \eqtype equations}\par\medskip  
-	  \input{\mainpath/fig/studies/force_convergence/ALE/shapesens/ALE_\eqtype/tikzfiles/Ma0.3/force.tex}
-	  \caption[Validation of the Lift and Drag results for shape-sensitivity: body-fitted \eqtype equations]{The graph shows the relative error between the Lift and Drag shape-sensitivies obtained by \ac{FD} of two steady states, compared to the sensitivity obtained by analytic direct evaluation. Please not that a \ac{FD} Jacobian has been used here, which introduces an approximation error, Furthermore, the finite precision of the obtained steady states is another error source.This explains why the error levels off. For all practical optimization purposes, the obtained accuracy is more than enough.}
-	  \label{fig:validation_liftdrag_shapesens_bodyfitted_\eqtype}
-	\end{figure}
-}
 
 
 

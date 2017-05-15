@@ -9,7 +9,7 @@ import time
 sys.path.append("../")
 from functionlib  import extractLifts, doFD, writeCSVana
 from functionlib2 import MainText, ReadInfo, ReadInputFiles
-from plotlib_tikz import plotLifts, plotIterations, getCSVdata, setup_plots, save_plot
+from plotlib_tikz import plotLifts, plotIterations, getCSVdata, setup_plots
 
 import matplotlib.pyplot as plt
 from matplotlib import rc
