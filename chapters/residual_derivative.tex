@@ -46,20 +46,20 @@ Putting all this together, one can write
 
 \begin{align}
     \frac{\partial \dresidual^{c,i}_{ij}}{\partial \dfstate_k} = 
-    {\color{red}{\frac{\partial \dresidual^{c,i}_{ij}}{\partial \dfstateprim_{ij}^\star}}} \,
-    {\color{blue}{\frac{\partial \dfstateprim_{ij}^\star}{\partial \dfstateprim_k}}} \,
+    {\color{primary_0}{\frac{\partial \dresidual^{c,i}_{ij}}{\partial \dfstateprim_{ij}^\star}}} \,
+    {\color{neutral_1}{\frac{\partial \dfstateprim_{ij}^\star}{\partial \dfstateprim_k}}} \,
     \frac{\partial \dfstateprim_k}{\partial \dfstate_k} +
-    {\color{red}{\frac{\partial \dresidual^{c,i}_{ij}}{\partial \dfstateprim_{ij}}}} \,
-    {\color{green}{\frac{\partial \dfstateprim_{ij}}{\partial \dfstateprim_k}}} \,
+    {\color{primary_0}{\frac{\partial \dresidual^{c,i}_{ij}}{\partial \dfstateprim_{ij}}}} \,
+    {\color{neutral_2}{\frac{\partial \dfstateprim_{ij}}{\partial \dfstateprim_k}}} \,
     \frac{\partial \dfstateprim_k}{\partial \dfstate_k} +
     \underbrace{\pdfrac{\dresidual^{c,i}_{ij}}{\dmpos}\pdfrac{\dmpos}{\normal_{ij}}}_{=\vec{0}\text{ for embedded}}
 \end{align}
 
 \begin{center}
 	\begin{itemize}
-	  \item {\color{red} {Analytical Jacobian of the (Roe's) centering flux} }
-	  \item {\color{blue} {Analytical derivative of the solution of the 1D half-Riemann problem}}
-	  \item {\color{green} {Analytical derivative of the MUSCL reconstruction and limitation}}
+	  \item {\color{primary_0} {Analytical Jacobian of the (Roe's) centering flux} }
+	  \item {\color{neutral_1} {Analytical derivative of the solution of the 1D half-Riemann problem}}
+	  \item {\color{neutral_2} {Analytical derivative of the MUSCL reconstruction and limitation}}
 	\end{itemize}
 \end{center}
 
@@ -71,7 +71,7 @@ The analytic Jacobian of the Roe flux is provided in section~\ref{sec:jacobian_r
 
 \subsubsection{Derivative of the viscous Jacobian $\pdfrac{\dresidual^c}{\dfstate}$}\label{sec:jacobian_viscous}
 For the discussion of the viscous Jacobian, we first remind the reader that an \ac{FE} approach is used to evaluate this term, in contrast to the \ac{FV} approach used for the inviscid contribution. For a detailed discussion the reader is referred to section~\ref{sec:mixed_FV_FE_formulation} and the following sections.\\
-As far as the residual evaluation itself goes, we recall that, once the ghost points have been populated(see section~\ref{sec:ghost_node_reconstruction}}), the viscous residual is evaluated as though the cell had never been intersected in the first place.
+As far as the residual evaluation itself goes, we recall that, once the ghost points have been populated(see section~\ref{sec:ghost_node_reconstruction}), the viscous residual is evaluated as though the cell had never been intersected in the first place.
 We can therefore write the viscous residual of an intersected cell as
 
 

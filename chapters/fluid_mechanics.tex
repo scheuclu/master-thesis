@@ -226,7 +226,7 @@ For the relation between Temperature and heat flux an assumption has to be made.
 \heatflux=-\thermcond\nabla\temp
 \end{align}
 
-\subsubsection{Euler equations}
+\subsubsection{Conservative form of the Euler equations}
 The euler equations are a simplified form of the Navier-Stokes Equations~\eqref{eq:nsg_incompressible}\eqref{eq:nsg_compressible}, where the viscous effects are neglected by setting $\fluxesdiff=\vec{0}$.
 \begin{align}\label{eq:euler}
 \pdfrac{\fstate}{t} + \nabla \cdot \fluxesconv(\fstate) = \vec{0}
@@ -239,7 +239,7 @@ where $L$ describes a characteristic length.
 
 A high Reynolds number thus indicates that the flow is dominated by inertial forces, thus the Euler Equations should give satisfying results. However, an Euler flow lacks the ability to represent stick wall boundary conditions, thus it is unable to represent boundary layers.
 
-\subsubsection{Equations of State}
+\subsubsection{Equations of state}
 Looking at the above Equations, one might notice that the number of unknowns is greater than the number of equations. Particularly, the pressure only appears in Equation~\eqref{eq:fluxesconv} and is not linked to the other formulas. This problem is solved by introducing an \acf{EOS} that relates pressure, internal energy and density. The \ac{EOS} depends on the fluid model, some well-known ones are: \ac{PG}, \ac{SG}, \ac{JWL}.\\
 For the simplest one, PG, the \ac{EOS} can be written as
 \begin{align}\label{eq:eos_pg}
@@ -247,7 +247,7 @@ For the simplest one, PG, the \ac{EOS} can be written as
 \end{align}
 
 
-\subsubsection{\acl{RANS} Equations}\label{sec:rans}
+\subsubsection{\acf{RANS} Equations}\label{sec:rans}
 The \acf{RANS} Equations are time-averaged equations of motion for the fluid.
 \begin{align}\label{eq:rans_averaging}
 \fstate \rightarrow \av{\fstate} = \lim_{\temp \to \infty} \frac{1}{T} \int_{t^0}^{t^0+T} \fstate dt

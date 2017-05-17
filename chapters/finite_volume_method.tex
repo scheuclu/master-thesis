@@ -6,7 +6,7 @@
 \setlength{\delimitershortfall}{0pt}
 
 \section{Numerical solution}\label{sec:finite_volume_method}
-\subsection{General}
+\subsection{Basic \acf{FV} formulation}
 Like \ac{FD} or \acf{FE}, the \acf{FV} method is a mean of solving a \ac{PDE} by transforming it into a discrete algebraic form. In the field of fluid mechanics, the finite volume method is the most popular approach. Other than \ac{FD} or \ac{FE}, the \ac{FV} is conservative by construction. In contrast to \ac{FD} it can easily be implemented for unstructured grids. Compared to the \ac{FE} method, where boundary conditions come naturally from the formulation, this causes some difficulties in \ac{FV}.\\
 It shall also be mentioned that the introduction of stabilization schemes(like streamline upwinding), is much easier in an \ac{FV} formulation.
 Overall, for \ac{CFD}, \ac{FV} has so far shown to be the best compromise between accuracy, stability and efficiency.
@@ -127,7 +127,7 @@ As can be seen from Figure \ref{fig:dualcell_unstructured}, the dual cells thems
 
 \begin{figure}[h]
   \centering
-  \scalebox{.75}{\input{\mainpath/fig/pdf/FV_discretization_tetrahedra.pdf_tex}}
+  \scalebox{.65}{\input{\mainpath/fig/pdf/FV_discretization_tetrahedra.pdf_tex}}
   \caption[\ac{FV} semi-discretization of an unstructured mesh]{\ac{FV} semi-discretization of an unstructured mesh. Vertex $i$ is the center of dual cell $C_i$. The primal element is drawn in thick black lines, the dual cell in dashed lines. The boundary of the dual cell is denoted as $\pd C_{ij}$}
   \label{fig:dualcell_unstructured}
 \end{figure}
@@ -164,7 +164,7 @@ where $\vertexset(i)$ is the set of vertices connected to vertex $i$ by an edge,
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \cleardoublepage
-\subsection{Derivation of the mixed \ac{FV}-\ac{FE} formulation}\label{sec:viscous_term_treatment}
+\subsubsection{Derivation of the mixed \ac{FV}-\ac{FE} formulation}\label{sec:viscous_term_treatment}
 The equivalence of the finite volume representation of the viscous term, with the finite element-like representation provided in Equation \eqref{eq_mixed_FV_FE} might not be obvious to the reader. This section is therefore denoted to a \ac{FE} discretization of the governing equations, that can then be reformulated such that the mixed \ac{FV}-\ac{FE} formulation is obtained.\\
 First, we start with the full \ac{NSE} in conservative form, as provided in Equation~\eqref{eq:nsg_conservative_form}. Next, a test function is defined. We chose the function $({\chi_i})_{i\in \primmesh}$ where $\primmesh$ represents the primal mesh, as step functions over the dual cells of $\dualmesh$.
 A multiplication with the test-functions and subsequent integration thus gives the following weak form
@@ -261,7 +261,7 @@ By simple geometrical considerations we can now determine, that the following re
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%TODO put this into a new file
 
-\section{The immersed boundary method}\label{sec:immersed_boundaries}
+\subsection{The immersed boundary method}\label{sec:immersed_boundaries}
 Traditionally internal fluid boundaries, like physical walls imposed by a structure, are represented by meshing the fluid such that it coincides with the structure surface. This approach, that shall be denoted by "explicit boundary method" here, is intuitive and the imposition of boundary conditions comes naturally.
 However, in the case of fluid structure interaction, where we expect the structure to move and deform, an explicit boundary treatment, as described above, prohibits the use of an Eulerian formulation, as described in section~\ref{sec:eulerian_lagrangian}. Instead every move or shape-change of the structure requires an appropriate update of the fluid mesh. Therefore, \ac{FSI} problems with explicit boundaries are typically solved via an \
 \ac{ALE} formulation. Details can be found in section~\ref{sec:eulerian_lagrangian}.\\
@@ -285,7 +285,7 @@ Due to the attractiveness of the immersed boundary method in the context of shap
 			        \includegraphics[width=\linewidth]{\mainpath/fig/geo/embedded.png}
 			        \caption{immersed wall boundary}
 			    \end{subfigure}%
-\caption[Visualization of immersed boundary method versus embedded boundary method]{NACA 0012 profile meshed with a classical wall boundary on the left versus an immersed boundary on the right. This geometry is relatively simple, for more complex examples, however, not requiring a conforming fluid grid on the interface can be a huge advantage.}
+\caption[Body-fitted vs. immersed wall boundary]{NACA 0012 profile meshed with a classical wall boundary on the left versus an immersed boundary on the right. This geometry is relatively simple, for more complex examples, however, not requiring a conforming fluid grid on the interface can be a huge advantage.}
 \label{fig:ale_vs_embedded}
 \end{figure}
 

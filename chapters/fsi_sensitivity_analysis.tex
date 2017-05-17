@@ -58,7 +58,7 @@
 \def\PfstateBYabsvarI    {\pdfrac{\fstate}     {\absvar_i}}
 
 \section{Aero-elastic \acl{SA}}\label{sec:aeroelastic_sa}
-The previous chapter dealt with the \ac{SA} of a pure fluid problem. Boundary, or respectively mesh-movement in general, was only induced due to shape variation via design variables itself. However, one can easily decieve a system, where the fluid interacts with an elastic structure. This would introduce an additional dependency of the structure shape, and thus fluid-structure interface, on the fluid solution. Also, a fully coupled system introduces a direct connection between the stress resultants in the structure with the fluid solutions.\
+The previous chapter dealt with the \ac{SA} of a pure fluid problem. Boundary, or respectively mesh-movement in general, was only induced due to shape variation via design variables itself. However, one can easily decieve a system, where the fluid interacts with an elastic structure. This introduces an additional dependency of the structure shape, and thus fluid-structure interface, on the fluid solution. Also, a fully coupled system shows a direct connection between the stress resultants in the structure with the fluid solutions.\
 This chapter therfore investigates the \ac{SA} of such a coupled system of equations. Considerations are build upon the derivations in chapter~\ref{sec:SA} and the coupled three-field \ac{FSI} formulation described in chapter~\ref{sec:3_field_formulation}.\\
 The \ac{SA} approach applied in this thesis is based on the work of~\cite{Sobieszczanski1990}, for deriving the \ac{GSE} of coupled systems. As introduced by the authors of\cite{Maute2001}, we utilize the three-field formulation of \cite{Farhat1995}.
 
@@ -68,9 +68,9 @@ The \ac{SA} approach applied in this thesis is based on the work of~\cite{Sobies
 The derivative of the optimization criterion~$\optcrit_j$, as introduced in Equation~\eqref{eq:optimization_criteria}, with respect to the optimization variable $\absvar_i$ gives:
 \begin{align}
 \DoptcritJBYabsvarI &=  \PoptcritJBYabsvarI    +
-\PoptcritJBYstructdisp \hleblue{\DstructdispBYabsvarI}  +
-\PoptcritJBYmms        \hleblue{\DmmsBYabsvarI}  +
-\PoptcritJBYfstate     \hleblue{\DfstateBYabsvarI}
+\PoptcritJBYstructdisp \hle{neutral_0}{\DstructdispBYabsvarI}  +
+\PoptcritJBYmms        \hle{neutral_0}{\DmmsBYabsvarI}  +
+\PoptcritJBYfstate     \hle{neutral_0}{\DfstateBYabsvarI}
 \\
 &=
 \PoptcritJBYabsvarI+
@@ -126,7 +126,7 @@ To obtain them, the governing equations \eqref{eq:3field_basic}\textbf{TODO writ
   \PEOSmeshBYstructdisp   & \PEOSmeshBYmms   & \PEOSmeshBYfstate   \\[0.5em]
   \PEOSfluidBYstructdisp  & \PEOSfluidBYmms  & \PEOSfluidBYfstate
   \end{bmatrix}}_{\tensor{A}}
-    \hleblue{\begin{bmatrix}
+    \hle{neutral_0}{\begin{bmatrix}
     \PstructdispBYabsvarI \\
     \PmmsBYabsvarI        \\
     \PfstateBYabsvarI     \\

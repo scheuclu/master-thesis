@@ -84,12 +84,23 @@
 \newcommand{\hlepurple}[1]{\colorbox{hlcolorpurple}{$\displaystyle{#1}$}}
 
 
+\DeclareRobustCommand{\hlt}[2]{{\sethlcolor{#1}\hl{#2}}}
+\newcommand{\hle}[2]{\colorbox{#1}{$\displaystyle{#2}$}}
+
+
+\definecolor{primary_0}{RGB}{140,21,21}
+\definecolor{neutral_1}{RGB}{179,153,93}
+
 %\usepackage{cleveref}% to reference multiple equations at once
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
-    linkcolor=blue,
+    linkcolor=primary_0,
+    citecolor=neutral_1,
     urlcolor=red,
+    pdfauthor={Lukas Scheucher},
+    pdfcreator={Lukas Scheucher},   % creator of the document
+    pdfproducer={Lukas Scheucher}, % producer of the document
     linktoc=all
 }
 

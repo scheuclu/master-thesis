@@ -64,7 +64,7 @@
 As explained in section \ref{sec:optimization}, optimization is based on the calculations of gradients, also denoted as sensitivities.
 The derivation and implementation of these gradients constituted the lion-share of this thesis. We will therefore denote this section to the general derivation of fluid-sensitivity equations, before a detailed look into the most important terms within these equations is provided in section~\ref{sec:dresidual_derivative}.
 
-\subsection{Connection between discretization and differentiation}\label{sec:discretization_vs_differentiation}
+\subsection{General concepts}
 When it comes to calculating the gradients of a solution of a \ac{PDE}, there are two fundamentally different approaches one could take.\\
 Firstly, one could think of first deriving the continuous equations and then applying the discretization scheme on them. On the other hand its equally legitimate to first apply the discretization and compute the gradients of this approximated solution. This thesis focuses on the latter for very particular reasons, see figure~\ref{fig:discretization_differentiation_sequence}.
 If one would take the first approach, getting a steady state solution for the subsequent \acf{SA} would entail the solution of the derived system of equations. This can not be done with standard CFD software. In addition to the \ac{SA} routines, one would therefor have to implement an additional steady equation solver. This is not only uneconomical, it increases the risk of creating implementation bugs and also defeats the purpose of decades of research in stable and efficient \ac{NSE} solvers.
@@ -98,20 +98,20 @@ As mentioned in Section~\ref{sec:optimization}, we typically deal with an optimi
 \DoptcritJBYabsvarI\bigg\rvert_{\fstate_0}=
 \underbrace{\PoptcritJBYabsvarI\bigg\rvert_{\fstate_0}}_{
                                                         \substack{
-                                                                 \text{\hltblue{directy derived from}} \\
-                                                                 \text{\hltblue{the definition of} $\optcrit$}
+                                                                 \text{\hlt{bright_1}{directy derived from}} \\
+                                                                 \text{\hlt{bright_1}{the definition of} $\optcrit$}
                                                                  } 
                                                         }  +
 \underbrace{\PoptcritJBYfstate\bigg\rvert_{\fstate_0}}_ {
                                                         \substack{
-                                                                 \text{\hltgreen{derived analytically or~~}}\\
-                                                                 \text{\hltgreen{by} \ac{FD}}
+                                                                 \text{\hlt{deep_1}{derived analytically or~~}}\\
+                                                                 \text{\hlt{deep_1}{by} \ac{FD}}
                                                                  }
                                                         }
 \underbrace{\DfstateBYabsvarI\bigg\rvert_{\fstate_0}}_  {
                                                         \substack{
-                                                                 \text{\hltyellow{derived from dynamic}}\\
-                                                                 \text{\hltyellow{fluid equilibrium}}
+                                                                 \text{\hlt{neutral_1}{derived from dynamic}}\\
+                                                                 \text{\hlt{neutral_1}{fluid equilibrium}}
                                                                  }
                                                         }
 \end{align}
@@ -129,7 +129,7 @@ where $\cvec{e}_D$ is the unit vector pointing in the direction of the free stre
 We therefor note, that $\pdfrac{\lift}{\absvar_i}$ and $\pdfrac{\drag}{\absvar_i}$ are zero for $\absvar_{i}=\machnum_{\infty}$ and $\absvar_{i}=\aoa$ and non-zero if $\absvar_{i}$ is a shape parameter.\\
 Also, having determined the derivatives $\pdfrac{\lift}{\absvar_i}$ and $\pdfrac{\drag}{\absvar_i}$, the derivative of the Lift-Drag ratio follows simply as
 \begin{align}\label{eq:lifttoddrag_by_absvar}
-\hleblue{-\pdfrac{(\frac{\lift}{\drag})}{\absvar_i}\rvert_{\fstate_0}}=
+\hle{bright_1}{-\pdfrac{(\frac{\lift}{\drag})}{\absvar_i}\rvert_{\fstate_0}}=
 -\frac{\drag\rvert_{\fstate_0} \pdfrac{\lift}{\absvar_i}\rvert_{\fstate_0} - \lift\rvert_{\fstate_0} \pdfrac{\drag}{\absvar_i}\rvert_{\fstate_0} }{{\drag\rvert_{\fstate_0}}^2}
 \end{align}
 
@@ -155,7 +155,7 @@ where $\sum_{\Gamma_{FS}}$ is the set of surface elements on the fluid-structure
 
 Finally, the derivative of the lift-to-drag ratio can be obtained analogously to equation~\eqref{eq:lifttoddrag_by_absvar} as
 \begin{align}\label{eq:lifttodrag_by_dfstate}
-\hlegreen{\pdfrac{(\frac{\mathsf{L}}{\mathsf{D}})}{\dfstate}\rvert_{\fstate_0}}=
+\hle{deep_1}{\pdfrac{(\frac{\mathsf{L}}{\mathsf{D}})}{\dfstate}\rvert_{\fstate_0}}=
 \frac{\mathsf{D}_0 \pdfrac{\mathsf{L}}{\dfstate}\rvert_{\fstate_0} - \mathsf{L}_0 \pdfrac{\drag}{\dfstate}\rvert_{\dfstate_0} }{{\mathsf{D}_0}^2}
 \end{align}
 
@@ -221,7 +221,7 @@ The total derivative of the residual with respect to the design variable can thu
 
 Therefore the total derivative of the fluid state with respect to the shape variable, needed in equation \eqref{eq:sensitivity_startingpoint}, can be obtained by solving
 \begin{align}\label{eq:dfstate_by_absvarI}
-\PdresidualBYdfstate    \hleyellow{\DdfstateBYabsvarI}=
+\PdresidualBYdfstate    \hle{neutral_1}{\DdfstateBYabsvarI}=
 -\DdresidualBYabsvarI 
 -\PdresidualBYdmms       \DdmmsBYabsvarI
 \end{align}

@@ -31,7 +31,7 @@ Finally, in an \ac{FSI} simulation we are typically interested in integral quant
 \begin{figure}[h!]
 	\begin{center}
         \includegraphics[scale=0.75]{\mainpath/fig/tikz/build/fiver_surrogate_interface.pdf}
-        \caption[FIVER setup]{Sketch of an embedded simulation setup. The primal grid is intersected by a material interface. In \ac{FIVER}, the material interface is replaced by a surrogate interface that is created by connecting the dual-grid interfaces closest to the embedded surface. By connecting the intersection points of the embedded surface with the primal grid, we can also create a so-called, reconstructed surface that is particularly useful for the calculation of forces on the surface.}
+        \caption[Immersed boundary method via \ac{FIVER}: setup]{Sketch of an embedded simulation setup. The primal grid is intersected by a material interface. In \ac{FIVER}, the material interface is replaced by a surrogate interface that is created by connecting the dual-grid interfaces closest to the embedded surface. By connecting the intersection points of the embedded surface with the primal grid, we can also create a so-called, reconstructed surface that is particularly useful for the calculation of forces on the surface.}
 		\label{fig:FIVER_intersection}
     \end{center}
 \end{figure}
@@ -97,7 +97,7 @@ The original \ac{FIVER} method was developed in \cite{Farhat2008}. As depicted i
 \begin{figure}[h!]
 	\begin{center}
         \includegraphics[width=0.5\textwidth]{\mainpath/fig/pdf/riemann}
-        \caption[Riemann Sketch]{Solution of the 1D half Riemann problem around edge $i-j$ described in equation \eqref{eq:half_riemann_problem}. The obtained fluid state at the interface is then used to evaluate the flux function, see equation~\eqref{}}
+        \caption[Riemann Sketch]{Solution of the 1D half Riemann problem around edge $i-j$ described in equation \eqref{eq:half_riemann_problem}. The obtained fluid state at the interface is then used to evaluate the flux function, see equation~[\eqref{eq:half_riemann_problem_original}\eqref{eq:flux_with_reconstructed_value_fiver1}]}
 		\label{fig:riemann_sketch}
     \end{center}
 \end{figure}
@@ -183,7 +183,7 @@ Most importantly, the question becomes whether to evaluate the pressure integral
 
 
 
-\subsection{Level-set method}\label{sec:interface_tracking}
+\subsection{The level-set method}\label{sec:interface_tracking}
 
 The issue of interface tracking is extensively discussed in \cite{Wang2012} and \cite{Fedkiw2003}.\\
 
