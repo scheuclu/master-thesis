@@ -5,107 +5,126 @@
 % OPERATORS
 % Representation of scalars, tensors and other quantities
 %==============================%
-\newcommand{\s}[1]{#1}                             %Scalar quantity with{a}
-\renewcommand{\v}[1]{\boldsymbol{#1}}              %Vector quantity with{a}
-\newcommand{\m}[1]{\boldsymbol{#1}}                %Matrix quantity with{A}
-\renewcommand{\c}[1]{\mathnormal{#1}}              %continous quantity with{A,a}
-\renewcommand{\d}[1]{\mathrm{#1}}                  %discrete quantity  with{A,a}
-\renewcommand{\it}[1]{{#1}^{(k)}}                  %Iteration index in the optimization loop            with{a}
-\newcommand{\ito}[1]{{#1}^{(k)}}                   %Iteration index in the optimization loop            with{a}
-\newcommand{\its}[1]{{#1}^{(n)}}                   %Iteration index in thestaggered algorithm           with{a}
-\newcommand{\fic}[1]{\bar{#1}}                     %Fictious entity                                     with{A}
-\newcommand{\order}[1]{\mathcal{O}(#1)}            %Order of magnitude                                  with{A}
+\newcommand{\s}[1]{#1}                             %Scalar quantity                                     with{q}
+\renewcommand{\v}[1]{\boldsymbol{#1}}              %Vector quantity                                     with{q} 
+\newcommand{\m}[1]{\boldsymbol{#1}}                %Matrix quantity                                     with{Q}
+\newcommand{\tensor}[1]{\mathcal{\boldsymbol{#1}}} %Tensor quantity                                     with{Q}
+\newcommand{\abs}[1]{\lvert#1\rvert}               %Norm of a vector                                    with{q}
+\renewcommand{\c}[1]{\mathnormal{#1}}              %Continous quantity                                  with{Q,q}
+\renewcommand{\d}[1]{\mathrm{#1}}                  %Discrete quantity                                   with{Q,q}
+\renewcommand{\it}[1]{{#1}^{(k)}}                  %Iteration index in the optimization loop            with{q}
+\newcommand{\its}[1]{{#1}^{(n)}}                   %Iteration index in the staggered algorithm           with{q}
+\newcommand{\fic}[1]{\bar{#1}}                     %Fictious entity                                     with{Q}
+\newcommand{\order}[1]{\mathcal{O}(#1)}            %Order of magnitude                                  with{n}
 
 
-\newcommand{\itn}[1]{{#1}^{(0)}}                   %Iteration index 0                                   with{A}
-\newcommand{\itss}[1]{{#1}^{(n+1)}}                %Iteration index in thestaggered algorithm           with{A}
-\newcommand{\pd}{\mathrm{\partial}}                %TODO check whether I need the partial or not        with{A}
-\renewcommand{\vec}[1]{\boldsymbol{#1}}            %Vector                                                                       with{A}
-\newcommand{\abs}[1]{\lvert#1\rvert}               %Norm of a vector                                                             with{A}
-\newcommand{\expression}[1]{\textit{#1}}           %To mark a new term beein introduced
-\newcommand{\prim}[1]{\tilde{#1}}                  %To mark a variabla as being expressen in primitive variables
-\newcommand{\dvec}[1]{\boldsymbol{ \mathsf{#1} } } %discrete vector represenation of a scalar field     with{A}
-\newcommand{\dmat}[1]{\boldsymbol{\mathsf{#1}}}    %discrete vector represenation of a tensor field     with{A}
+\newcommand{\ito}[1]{{#1}^{(k)}}                   %Iteration index in the optimization loop            with{q}
 
-\newcommand{\cvec}[1]{\c{\v{#1}}}    %discrete vector represenation of a scalar field     with{A}
-\newcommand{\cmat}[1]{\c{\m{#1}}}    %discrete vector represenation of a tensor field     with{A}
 
-\newcommand{\nd}[1]{\bar{#1}} %asdasd
-\newcommand{\reference}[1]{ {#1}_{ref} }
 
-\newcommand{\nut}{\mu_{t}} %asdasd
 
-\newcommand{\conv}[1]{{#1}^{c}} %convective form of a quantity (quantity in ALE-description}
+
+
+%these are operators that should not be in the list of symbols-------------------------------------------------
+\newcommand{\itn}[1]{{#1}^{(0)}}                %Iteration index 0                                          with{q}
+\newcommand{\itss}[1]{{#1}^{(n+1)}}             %Iteration index in thestaggered algorithm                  with{q}
+\newcommand{\expression}[1]{\textit{#1}}        %To mark a new term beein introduced                        with{q}
+\newcommand{\dvec}[1]{\boldsymbol{\mathsf{#1}}} %Discrete vector represenation of a scalar field            with{q}
+\newcommand{\dmat}[1]{\boldsymbol{\mathsf{#1}}} %Discrete vector represenation of a tensor field            with{q}
+\newcommand{\cvec}[1]{\c{\v{#1}}}        %Discrete vector represenation of a scalar field                   with{q}
+\newcommand{\cmat}[1]{\c{\m{#1}}}        %Discrete vector represenation of a tensor field                   with{q}
+\newcommand{\nd}[1]{\bar{#1}}            %Non-dimensionalization                                            with{q}
+\newcommand{\reference}[1]{ {#1}_{ref} } %Variable at reference state                                       with{q}          
+\newcommand{\conv}[1]{{#1}^{c}}          %Convective form of a quantity (quantity in ALE-description}       with{q}
+\newcommand{\stdy}[1]{{#1}^{0}}          %Value at steady state                                             with{q}
+\newcommand{\scalar}[1]{\s #1}           %Scalar quantity                                                   with{q}
+\newcommand{\linepdfrac}[2]{\pd #1 / \pd #2} %Partial derivative of one argument with respect to the other  with{q1&q2}
+\newcommand{\dyadic}{\otimes}            %Symbol for dyadic product                                         with{q}
+
+
+
+
+
+
+
+%these are symbols that should not be in the list of symbols--------------------------------------------------
+\newcommand{\pd}{\mathrm{\partial}}                %TODO check whether I need the partial or not
+\newcommand{\0}{\textcolor{lightgrey}{0}}
+\renewcommand{\vec}[1]{\boldsymbol{#1}}            %Vector    
+\newcommand{\REF}{\textbf{REF}}      %a
+\newcommand{\fot}{\frac{1}{2}}       %One half
+
+
+
+  
 
 %%==============================%
 % OPERATORS
 % Algebraic operations
 %==============================%
-\newcommand{\T}[1]{{#1}^{T}}                      %Transpose of a tensor                with{A}
-\newcommand{\inv}[1]{ {#1}^{-1}}                  %Inverse of a tensor                  with{A}
-\newcommand{\av}[1]{\bar{#1}}                     %Average component of a quantity      with{a}
-\newcommand{\fluc}[1]{{#1}'}                      %Fluctuating component of a qunatity  with{a}
-\newcommand{\norm}[1]{\left\lVert#1\right\rVert}  %Norm of a quatntity                  with{a}
+\newcommand{\T}[1]{{#1}^{T}}                      %Transpose of a tensor                with{Q}
+\newcommand{\inv}[1]{ {#1}^{-1}}                  %Inverse of a tensor                  with{Q}
+\newcommand{\av}[1]{\bar{#1}}                     %Average component of a quantity      with{q}
+\newcommand{\fluc}[1]{{#1}'}                      %Fluctuating component of a quantity  with{q}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}  %Norm of a quantity                  with{q}
+\newcommand{\prim}[1]{\tilde{#1}}                 %Quantity being expressed in primitive variables with{q}
 
 
 %%==============================%
 % OPERATORS
 % Analytic operations
 %==============================%
-\newcommand{\dderivtime}[1]{\ddot{#1}}                        %Second time derivative at a fixed refrence position                   with{A}
-\newcommand{\derivtime}[1]{\dot{#1}}                          %First time derivative at a fixed reference position                   with{A}
-\newcommand{\pdfrac}[2]{\frac{\pd #1}{\pd #2}}                %partial derivative of one argument with respect to the other          with{A&B}
-\newcommand{\ppdfrac}[2]{\frac{\pd^{2} #1}{\pd {#2}^{2}}}     %Second partial derivative of one argument with respect to the other   with{A&B}
-\newcommand{\mfrac}[2]{\frac{D #1}{D #2}}                     %Material time derivative                                              with{A&B}
-\renewcommand{\tfrac}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}} %First total derivative of one argument with respect to the other      with{A&B}
-
-\newcommand{\linepdfrac}[2]{\pd #1 / \pd #2}                %partial derivative of one argument with respect to the other          with{A&B}
+\newcommand{\derivtime}[1]{\dot{#1}}                          %First time derivative at a fixed reference position                   with{q}
+\newcommand{\dderivtime}[1]{\ddot{#1}}                        %Second time derivative at a fixed refrence position                   with{q}
+\newcommand{\pdfrac}[2]{\frac{\pd #1}{\pd #2}}                %Partial derivative of one argument with respect to the other          with{q_1&q_2}
+\newcommand{\ppdfrac}[2]{\frac{\pd^{2} #1}{\pd {#2}^{2}}}     %Second partial derivative of one argument with respect to the other   with{q_1&q_2}
+\newcommand{\mfrac}[2]{\frac{D #1}{D #2}}                     %Material time derivative                                              with{q_1&q_2}
 
 
-\newcommand{\stdy}[1]{{#1}^{0}}                  %Value at steady state
-\newcommand{\0}{\textcolor{lightgrey}{0}}
-\newcommand{\tensor}[1]{\mathcal{\boldsymbol{#1}}} %Vector quantity with{a}
-\newcommand{\scalar}[1]{\s #1}                        %Scalar quantity with{a}
+\renewcommand{\tfrac}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}} %First total derivative of one argument with respect to the other      with{q1&q2}
+
 
 
 %==============================
 % SYMBOLS
-% 3-field formulations
+% Numerical formulation
 %==============================
-\newcommand{\EOSstruct}{\mathcal{S}_{gov}}     %State equation of the structure
-\newcommand{\EOSmesh}  {\mathcal{D}_{gov}}     %State equation of the mesh
-\newcommand{\EOSfluid} {\mathcal{F}_{gov}}     %State equation of the fluid
-\newcommand{\mpos}       {\vec{x}}        %Fluid mesh motion
-\newcommand{\dmpos}       {\dvec{x}}        %Fluid mesh motion
-\newcommand{\mms}       {\dot{\vec{x}}}        %Fluid mesh motion
-\newcommand{\dmms}       {\dot{\dvec{x}}}        %Fluid mesh motion
-\newcommand{\mmsad}       {\vec{a}_{\vec{x}}}        %Adjoint fluid mesh motion
-\newcommand{\fstate}    {\vec{w}}        %Fluid state vector
+\newcommand{\EOSstruct}{\mathcal{S}_{gov}} %State equation of the structure
+\newcommand{\EOSmesh}{\mathcal{D}_{gov}}   %State equation of the mesh motion
+\newcommand{\EOSfluid}{\mathcal{F}_{gov}}  %State equation of the fluid
+\newcommand{\mpos}{\vec{x}}                %Fluid mesh position
+\newcommand{\mms}{\dot{\vec{x}}}           %Fluid mesh motion
+\newcommand{\mmsad}{\vec{a}_{\vec{x}}}     %Adjoint fluid mesh motion
+\newcommand{\fstate}{\vec{w}}              %Fluid state vector
 \newcommand{\fstatead}{\vec{a}_{\vec{w}}}  %Adjoint fluid state vector
-\newcommand{\fstateprim}{\prim{\fstate}}        %Primitive ffluid state vector
-\newcommand{\dfstateprim}{\prim{\dfstate}}        %Primitive ffluid state vector
-\newcommand{\dfstate}    {\dvec{w}}        %Discrete fsluid state vector
-\newcommand{\dresidual}    {\dvec{R}}        %Discrete fsluid state vector
+\newcommand{\fstateprim}{\prim{\fstate}}   %Primitive fluid state vector
+\newcommand{\dfstateprim}{\prim{\dfstate}} %Primitive fluid state vector
+\newcommand{\dfstate}{\dvec{w}}          %Discrete fluid state vector
+\newcommand{\dresidual}{\dvec{R}}        %Discrete fluid residual
 \newcommand{\structdisp}{\vec{u}}        %Structure displacement
-\newcommand{\structdispad}{\vec{a}_{\vec{u}}}        %Adjoint structure displacement
-\newcommand{\load}{\vec{P} }          %Fluid load TODO
+\newcommand{\structdispad}{\vec{a}_{\vec{u}}} %Adjoint structure displacement
 \newcommand{\fload}{\vec{P}_F}           %Fluid load
 \newcommand{\sload}{\vec{P}_T}           %Structure load
-\newcommand{\jactwo}{\tensor{H}_2}       %Second order Jacobian
-\newcommand{\jacale}{\tensor{J}}       %Second order Jacobian
+\newcommand{\jactwo}{\tensor{H}_2}       %Second order Jacobian of the flux
+\newcommand{\jacale}{\tensor{J}}         %Jacobian of the mesh motion
 \newcommand{\ifaceprojFtoS}{\dmat{T}_p}  %Interface projection matrix from fluid to structure mesh
 \newcommand{\ifaceprojStoF}{\dmat{T}_u}  %Interface projection matrix from structure to fluid mesh
-\newcommand{\fstaterans}{\fstate_{RANS}}   %Augumentes fluid state vector in the \ac{RANS} formulation
-\newcommand{\turbulenceparam}{\chi}        %Additional fluid state variable introduced by the turbulence model
-\newcommand{\turbparamvec}{\dvec{\chi}}        %Additional fluid state variable introduced by the turbulence model
+\newcommand{\fstaterans}{\fstate_{RANS}} %Augumented fluid state vector in the RANS formulation
+\newcommand{\turbparamvec}{\dvec{\chi}}  %Additional fluid state variables introduced by the turbulence model
 \newcommand{\turbulencesource}{\mathsf{S}} %Source term in the \ac{RANS} equations
-\newcommand{\fluxmatconv}{\dresidual^{c}}       %Convective part of the flux matrix
-\newcommand{\fluxmatdiff}{\dmat{G}}       %diffusive part of the flux matrix
-\newcommand{\turbmat}{\dmat{S}}           %Turbulence term
-\newcommand{\cellvolmat}{\dmat{A}}        %Diagonal matrix with vell volumes
+\newcommand{\fluxmatconv}{\dresidual^{c}}%Convective part of the flux matrix
+\newcommand{\fluxmatdiff}{\dmat{G}}      %Diffusive part of the flux matrix
+\newcommand{\cellvolmat}{\dmat{A}}       %Diagonal matrix with vell volumes
+\newcommand{\specificwork}{\vec{w}}      %Specific work
 
-\newcommand{\specificwork}{\vec{w}}       %specific work
-\newcommand{\aoa}{\alpha_{\infty}}  %angle of attack
+
+
+
+\newcommand{\dmpos}{\dvec{x}}              %Fluid mesh motion
+\newcommand{\dmms}{\dot{\dvec{x}}}         %Fluid mesh motion
+\newcommand{\load}{\vec{P} }             %Fluid load TODO
+\newcommand{\turbulenceparam}{\chi}      %Additional fluid state variable introduced by the turbulence model
+\newcommand{\turbmat}{\dmat{S}}          %Turbulence term
 
 
 
@@ -118,7 +137,7 @@
 \newcommand{\numeqctr}{n_{\vec{h}}}     %Number of equality constraints
 \newcommand{\neqctr}{\vec{g}}           %Non-equality constraints
 \newcommand{\numneqctr}{n_{\vec{g}}}    %Number of non-equality constraints
-\newcommand{\absvar}{s}                 %Abstract optimazation variable
+\newcommand{\absvar}{s}                 %Abstract optimization variable
 \newcommand{\absvars}{\vec{s}}          %Vector of abstract optimization variables
 \newcommand{\optcrit}{q}                %Optimization criterium
 \newcommand{\optcrits}{\vec{\optcrit}}  %Vector of optimization criteria
@@ -130,6 +149,7 @@
 \newcommand{\tolsa}{\epsilon^{SA}}      %Specified tolerance in the Sensitivity analysis
 \newcommand{\lift}{L}                   %Lift of an airfoil
 \newcommand{\drag}{D}                   %Drag of an airfoil
+\newcommand{\aoa}{\alpha_{\infty}}      %Angle of attack
 
 
 %==============================%
@@ -138,61 +158,70 @@
 %==============================%
 \newcommand{\fluxesconv}{\mathcal{F}} %Convective fluxes
 \newcommand{\fluxesdiff}{\mathcal{G}} %Diffusive fluxes
+\newcommand{\fluxesnum}{\boldsymbol{\mathsf{{\phi}}}} %Numerical flux
+\newcommand{\roeavgmat}{\tensor{A}_{\text{Roe}}}      %Averaging matrix of the Roe flux
 \newcommand{\dens}{\rho}              %Density
-\newcommand{\pres}{p}                 %Pressure
-\newcommand{\dpres}{\mathsf{p}}                 %Pressure
-\newcommand{\totpres}{p_{tot}}                 %Pressure
+\newcommand{\pres}{p}                 %Static pressure
+\newcommand{\totpres}{p_{tot}}        %Total pressure
 \newcommand{\fluidvel}{\vec{v}}       %Fluid velocity vector
-\newcommand{\fluidvelcomp}{v}         %Fluid velocity vector
-\newcommand{\fluidvelx}{{v_1}}          %Fluid velocity in x-direction
-\newcommand{\fluidvely}{{v_2}}          %Fluid velocity in y-direction
-\newcommand{\fluidvelz}{{v_3}}          %Fluid velocity in z-direction
+\newcommand{\fluidvelx}{{v_1}}        %Fluid velocity in x-direction
+\newcommand{\fluidvely}{{v_2}}        %Fluid velocity in y-direction
+\newcommand{\fluidvelz}{{v_3}}        %Fluid velocity in z-direction
 \newcommand{\energytot}{E}            %Total energies
 \newcommand{\energyint}{e}            %Internal energy
 \newcommand{\eye}{\dmat{I}}           %Identity matrix
-\newcommand{\fluidstrain}{\tensor{\epsilon}}    %Deviatoric fluid stress tensor
-\newcommand{\fluidstress}{\tensor{\tau}}    %Deviatoric fluid stress tensor
-\newcommand{\fluidstresscomp}{\tau}   %Deviatoric fluid stress tensor
+\newcommand{\fluidstrain}{\tensor{\epsilon}}  %Deviatoric fluid strain tensor
+\newcommand{\fluidstress}{\tensor{\tau}}      %Deviatoric fluid stress tensor
 \newcommand{\thermcond}{k}            %Thermal conductivity of the fluid
 \newcommand{\temp}{T}                 %Fluid temperature
-\newcommand{\heatfluxcomp}{q}         %Heat flux comopnenent
 \newcommand{\heatflux}{\vec{\heatfluxcomp}} %Heat flux vector
 \newcommand{\viscosdyn}{\mu}          %Dynamic viscosity
 \newcommand{\viscoskin}{\nu}          %Kinematic viscosity
-\newcommand{\reynolds}{R_{e}}            %Reynolds number
+\newcommand{\reynolds}{R_{e}}         %Reynolds number
 \newcommand{\specheatratio}{\gamma}   %Specific heat ratio
-\newcommand{\shr}{\gamma}   %Specific heat ratio
-\newcommand{\jac}{\mathcal{H}}        %Jacoian matrix
+\newcommand{\jac}{\mathcal{H}}        %Jacobian matrix
 \newcommand{\fluxjac}{\mathcal{A}}    %Flux Jacobian
 \newcommand{\jaceigvecs}{\tensor{P}}  %Matrix that contains the eigenvectors of the jacobian matrix of $\fluxmatconv$
 \newcommand{\jaceigvals}{\tensor{\Lambda}}  %Diagonal matrix that contains the eigenvalues of the jacobian matrix of $\fluxmatconv$
 \newcommand{\roeavgfunc}{\tensor{M}}  %Averaging function associated with the Roe flux
 \newcommand{\machnum}{M}              %Mach number
-\newcommand{\M}{\machnum}              %Mach number
+\newcommand{\nut}{\mu_{t}}            %Turbulent eddy viscosity
+\newcommand{\difftensor}{\mathbb{K}}  %Diffussive tensor
+\newcommand{\sspeed}{c}               %Speed of sound
+
+
+\newcommand{\dpres}{\mathsf{p}}       %Pressure
+\newcommand{\fluidvelcomp}{v}         %Fluid velocity vector
+\newcommand{\fluidstresscomp}{\tau}   %Deviatoric fluid stress tensor
+\newcommand{\heatfluxcomp}{q}         %Heat flux comopnenent
+\newcommand{\shr}{\gamma}             %Specific heat ratio
+\newcommand{\M}{\machnum}             %Mach number
 
 
 
-\newcommand{\dualcell}{\mathcal{C}}
-\newcommand{\difftensor}{\mathbb{K}}
-\newcommand{\primmesh}{\mathcal{P}_{h}}
-\newcommand{\dualmesh}{\mathcal{D}_{h}}
-\newcommand{\normal}{\vec{n}}        %Symbol for dyadic product
+%==============================%
+% SYMBOLS
+% Discretization
+%==============================%
+\newcommand{\dualcell}{\mathcal{C}}     %Dual cell
+\newcommand{\primmesh}{\mathcal{P}_{h}} %Primal mesh
+\newcommand{\dualmesh}{\mathcal{D}_{h}} %Dual mesh
+\newcommand{\normal}{\vec{n}}           %Normal vector
 \newcommand{\wnormal}{\vec{\nu}}        %Weighted normal
-\newcommand{\normalx}{n_1}        %Symbol for dyadic product
-\newcommand{\normaly}{n_2}        %Symbol for dyadic product
-\newcommand{\normalz}{n_3}        %Symbol for dyadic product
-\newcommand{\testfunc}{\phi}         %Variational test function
-\newcommand{\vertex}{\boldsymbol{X}}  %Mesh vertex
-\newcommand{\vertexset}{\mathsf{\kappa}} %Set of vertices
+\newcommand{\normalx}{n_1}              %x-component of the cell normal
+\newcommand{\normaly}{n_2}              %y-component of the cell normal
+\newcommand{\normalz}{n_3}              %z-component of the cell normal
+\newcommand{\vertex}{\boldsymbol{X}}    %Mesh vertex
+\newcommand{\vertexset}{\mathsf{\kappa}}%Set of vertices
 \newcommand{\elementset}{\mathsf{\lambda}} %Set of elements related to vertex i
-\newcommand{\fluxesnum}{\boldsymbol{\mathsf{{\phi}}}} %numerical flux
-\newcommand{\roeavgmat}{\tensor{A}_{\text{Roe}}}  %Averaging matrix of the Roe flux
-\newcommand{\eigval}{\lambda}         %Eigen value
-\newcommand{\sspeed}{c} %Speed of sound
 
-\newcommand{\dyadic}{\otimes}        %Symbol for dyadic product
-\newcommand{\fot}{\frac{1}{2}}
-\newcommand{\REF}{\textbf{REF}}
+
+
+\newcommand{\testfunc}{\phi}         %Variational test function
+\newcommand{\eigval}{\lambda}         %Eigen value
+
+
+
 %%%==============================%
 %%% SYMBOLS
 %%% Fluid Analysis
@@ -216,10 +245,6 @@
 \newcommand{\ifacedispvec}{\dvec{\ifacedisp}}  %Interface displacement 
 
 
-%==========================================
-% SYMBOLS
-% Fluid Structure Interaction
-%==========================================
 \newcommand{\strucstateq}{\mathcal{P}}         %State equation of the structure
 \newcommand{\fluidstateq}{\mathcal{F}}         %State equation of the fluid
 \newcommand{\mmsstateeq}{\mathcal{D}}          %State equation of the mesh motion

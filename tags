@@ -222,6 +222,7 @@ WARNING	latexindent/latexindent.pl	/^WARNING:  $indentconfig$/;"	l
 WARNING	latexindent/latexindent.pl	/^WARNING: \\t line count of original file and indented file does$/;"	l
 WARNING	latexindent/latexindent.pl	/^WARNING:$/;"	l
 abbrevations	create_nomencature.py	/^abbrevations={}$/;"	v
+abbrevations	create_nomencature2.py	/^abbrevations={}$/;"	v
 acronyms	main.tex	/^\\include{testfile}%Nomenclature$/;"	i
 after changing the fonts with	SA_Thesis/thesis/struktex/struktex-test-3.tex	/^}$/;"	P
 at_beg_noindent	SA_Thesis/latexindent/latexindent.pl	/^sub at_beg_noindent{$/;"	s
@@ -254,13 +255,21 @@ check_for_else	SA_Thesis/latexindent/latexindent.pl	/^sub check_for_else{$/;"	s
 check_for_else	latexindent/latexindent.pl	/^sub check_for_else{$/;"	s
 command	create_nomencature.py	/^            command=symbols[descr][expl].split("{")[1].split("}")[0]$/;"	v
 command	create_nomencature.py	/^            command=temp[1].split("{")[1].split("}")[0]$/;"	v
+command	create_nomencature2.py	/^            command=command.split("{")[1].split("}")[0]$/;"	v
+command	create_nomencature2.py	/^            command=temp[1]$/;"	v
+command	create_nomencature2.py	/^            command=temp[1].split("{")[1].split("}")[0]$/;"	v
 commandline	create_nomencature.py	/^                commandline=content.pop(0)$/;"	v
 commandline	create_nomencature.py	/^            commandline=content.pop(0)$/;"	v
+commandline	create_nomencature2.py	/^                commandline=content.pop(0)$/;"	v
+commandline	create_nomencature2.py	/^            commandline=content.pop(0)$/;"	v
 content	create_nomencature.py	/^content=file.read().splitlines()$/;"	v
+content	create_nomencature2.py	/^content=file.read().splitlines()$/;"	v
 curline	create_nomencature.py	/^    curline=content.pop(0) #get a line$/;"	v
+curline	create_nomencature2.py	/^    curline=content.pop(0) #get a line$/;"	v
 decrease_indent	SA_Thesis/latexindent/latexindent.pl	/^sub decrease_indent{$/;"	s
 decrease_indent	latexindent/latexindent.pl	/^sub decrease_indent{$/;"	s
 description	create_nomencature.py	/^            description=content.pop(0)[2:].strip()$/;"	v
+description	create_nomencature2.py	/^            description=content.pop(0)[2:].strip()$/;"	v
 end_command_or_key_unmatched_braces	SA_Thesis/latexindent/latexindent.pl	/^sub end_command_or_key_unmatched_braces{$/;"	s
 end_command_or_key_unmatched_braces	latexindent/latexindent.pl	/^sub end_command_or_key_unmatched_braces{$/;"	s
 end_command_or_key_unmatched_brackets	SA_Thesis/latexindent/latexindent.pl	/^sub end_command_or_key_unmatched_brackets{$/;"	s
@@ -268,8 +277,11 @@ end_command_or_key_unmatched_brackets	latexindent/latexindent.pl	/^sub end_comma
 end_command_with_alignment	SA_Thesis/latexindent/latexindent.pl	/^sub end_command_with_alignment{$/;"	s
 end_command_with_alignment	latexindent/latexindent.pl	/^sub end_command_with_alignment{$/;"	s
 explanation	create_nomencature.py	/^                explanation=commandline.split("%")[1].strip()$/;"	v
+explanation	create_nomencature2.py	/^                explanation=commandline.split("%")[1].strip()$/;"	v
 explclean	create_nomencature.py	/^            explclean=temp[0].replace(withexpr,"").strip()$/;"	v
+explclean	create_nomencature2.py	/^            explclean=temp[0].replace(withexpr,"").strip()$/;"	v
 file	create_nomencature.py	/^file = open('.\/customcommands.tex','r')$/;"	v
+file	create_nomencature2.py	/^file = open('.\/customcommands.tex','r')$/;"	v
 file_sim	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^            file_sim='.\/results\/sim_'+str(index_mach)+'_'+str(index_angle)+'_'+type+'.csv'$/;"	v
 file_sim	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^                  file_sim='.\/results\/sim_'+str(index_mach)+'_'+str(index_angle)+'_'+str(shapevarindex)+'_'+type+'.csv'$/;"	v
 fileadjoint	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^            fileadjoint          = 'anasim_'+str(index_mach)+'_'+str(index_angle)+'_adjoint_'+type+'.csv'$/;"	v
@@ -325,8 +337,12 @@ lstinline  indentconfig.yaml  and lstinline  .indentconfig.yaml   for user setti
 lstinline  localSettings.yaml 	SA_Thesis/latexindent/documentation/manual.tex	/^\\end{warning}$/;"	u
 lstinline  localSettings.yaml 	latexindent/documentation/manual.tex	/^\\end{warning}$/;"	u
 macro	create_nomencature.py	/^                macro=commandline.split("%")[0].strip()$/;"	v
+macro	create_nomencature2.py	/^                macro=commandline.split("%")[0].strip()$/;"	v
+name	create_nomencature2.py	/^            name=temp[0]$/;"	v
 numarg	create_nomencature.py	/^            numarg=int(temp[1].split("{")[1].split("}")[1][1])$/;"	v
+numarg	create_nomencature2.py	/^            numarg=int(temp[1].split("{")[1].split("}")[1][1])$/;"	v
 operators	create_nomencature.py	/^operators={}$/;"	v
+operators	create_nomencature2.py	/^operators={}$/;"	v
 paragraph	SA_Thesis/latexindent/success/testHeadings.tex	/^           	subsubsection text$/;"	P
 paragraph	latexindent/success/testHeadings.tex	/^           	subsubsection text$/;"	P
 part	SA_Thesis/latexindent/success/testHeadings.tex	/^          chapter text$/;"	p
@@ -353,6 +369,7 @@ suptitle	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^  
 suptitle	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^                  suptitle=r"$\\left( \\frac{L_y}{s_<numsvar>}_{analytic}-\\frac{L_y}{s_<numsvar>}_{FD}\\right) \\Big\/ \\frac{L_y}{s_<numsvar>}_{FD}$"$/;"	v
 suptitle	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^                  suptitle=suptitle.replace("<numsvar>",str(shapevars[shapevarindex-1]))$/;"	v
 symbols	create_nomencature.py	/^symbols={}$/;"	v
+symbols	create_nomencature2.py	/^symbols={}$/;"	v
 testfile	main.tex	/^\\include{Preface}$/;"	i
 this is the first section	SA_Thesis/thesis/main.tex	/^asdasad$/;"	s
 this is the second section	SA_Thesis/thesis/main.tex	/^asdasdadasd$/;"	s
@@ -366,6 +383,8 @@ usage	latexindent/latexindent.pl	/^usage: latexindent.pl [options] [file][.tex]$
 what a great subsection	SA_Thesis/thesis/main.tex	/^all god stuff of the first section can be found at \\secref{sec:firstsection}$/;"	u
 withexpr	create_nomencature.py	/^            withexpr=re.search("with{.*}",temp[0]).group(0)$/;"	v
 withexpr	create_nomencature.py	/^            withexpr=withexpr.replace('with{','').replace('}','')$/;"	v
+withexpr	create_nomencature2.py	/^            withexpr=re.search("with{.*}",temp[0]).group(0)$/;"	v
+withexpr	create_nomencature2.py	/^            withexpr=withexpr.replace('with{','').replace('}','')$/;"	v
 xdata	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^            xdata    =data_sim['stepsize']$/;"	v
 xdata	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^                  xdata        =data_sim['stepsize']$/;"	v
 ydata_adjoint	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^            ydata_adjoint=data_sim['dLx']*0+data_adjoint["dLx"]$/;"	v

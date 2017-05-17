@@ -49,6 +49,12 @@ pages = {1--25},
 title = {{Arbitrary Lagrangian – Eulerian Methods}},
 year = {1999}
 }
+@misc{SDesign,
+address = {Stanford},
+author = {{Farhat Research Group}},
+publisher = {Farhat Research Group},
+title = {{SDesign: A mesh parametrization Software}}
+}
 @article{Farhat1998,
 abstract = {Dynamic fluid grids are commonly used for the solution of flow problems with moving boundaries. They are often represented by a network of fictitious lineal springs that can become unreliable when the fluid mesh undergoes large displacements and/or deformations. In this paper, we propose to control the arbitrary motion of two-dimensional dynamic unstructured fluid grids with additional torsional springs. We show that such springs can be designed to prohibit the interpenetration of neighboring triangles, and therefore to provide the method of spring analogy with the robustness needed for enlarging its range of applications. We illustrate our new dynamic mesh motion algorithm with several examples that highlight its advantages in terms of robustness, quality, and performance.},
 author = {Farhat, C. and Degand, C. and Koobus, B. and Lesoinne, M.},
@@ -189,16 +195,33 @@ title = {{Progress toward using sensitivity derivatives in a high-fidelity aeroe
 url = {http://dx.doi.org/10.2514/6.1998-4763},
 year = {1998}
 }
-@misc{Aeros,
+@misc{Aerof,
+address = {Stanford},
 author = {Group, Farhat Research},
 publisher = {Farhat Research Group},
-title = {{Aero-S}},
+title = {{Aero-F: A multi purpose flow solver.}},
+url = {https://bitbucket.org/frg/aero-f}
+}
+@misc{Aeros,
+address = {Stanford},
+author = {Group, Farhat Research},
+publisher = {Farhat Research Group},
+title = {{Aero-S: A multi purpose structure solver.}},
 url = {https://bitbucket.org/frg/aero-s}
 }
-@misc{Aerof,
-author = {Group, Farhat Research},
-title = {{Aero-F}},
-url = {https://bitbucket.org/frg/aero-f}
+@article{Ham2009,
+author = {Ham, Frank E},
+doi = {10.1016/j.jcp.2009.05.036},
+file = {:home/lukas/Desktop/project/independence/project/papers/FIVER/WangIccarino2009.pdf:pdf},
+issn = {0021-9991},
+journal = {Journal of Computational Physics},
+number = {18},
+pages = {6753--6772},
+publisher = {Elsevier Inc.},
+title = {{Prediction of wall-pressure fluctuation in turbulent flows with an immersed boundary method}},
+url = {http://dx.doi.org/10.1016/j.jcp.2009.05.036},
+volume = {228},
+year = {2009}
 }
 @article{Hou2000,
 author = {Hou, Gene J and Satyanarayana, Arunkumar},
@@ -249,10 +272,14 @@ year = {2012}
 }
 @article{Lesoinne2001,
 author = {Lesoinne, Michel and Sarkis, Marcus and Hetmaniuk, Ulrich and Farhat, Charbel},
+doi = {10.1016/S0045-7825(00)00385-6},
 file = {:home/lukas/Desktop/project/independence/project/papers/paper.pdf:pdf},
+journal = {Computer Methods in Applied Mechanics and Engineering},
 keywords = {aeroelasticity,eigen analysis,fluid,second-order jacobian,structure interaction},
-pages = {1--38},
-title = {{A linearized method for the frequency analysis of three-dimensional ¯ uid / structure interaction problems in all ¯ ow regimes}},
+number = {24},
+pages = {3121--3146},
+title = {{A linearized method for the frequency analysis of three-dimensional fluid/structure interaction problems in all flow regimes}},
+url = {http://www.sciencedirect.com/science/article/pii/S0045782500003856},
 volume = {190},
 year = {2001}
 }
@@ -282,18 +309,38 @@ doi = {10.1007/978-3-0348-8629-1},
 file = {:home/lukas/Desktop/project/independence/project/papers/books/NUmericalMethodsForConservationLaws{\_}LeVeque.pdf:pdf},
 isbn = {978-3-7643-2723-1},
 issn = {03784754},
-number = {2},
 pages = {180},
+publisher = {Birkh{\"{a}}user Basel},
 title = {{Numerical Methods for Conservation Laws}},
 url = {http://link.springer.com/book/10.1007/978-3-0348-8629-1{\%}5Cnhttp://link.springer.com/10.1007/978-3-0348-8629-1},
 volume = {33},
 year = {1992}
 }
-@article{Main2014,
+@article{Fedkiw2003,
+author = {Losasso, Frank and Fedkiw, R.},
+file = {:home/lukas/Desktop/project/independence/project/papers/fedkiw{\_}levelset.pdf:pdf},
+keywords = {adaptive mesh refinement,level set,octree data structure,particles,physics-based animation,smoke,water},
+pages = {457--462},
+title = {{Simulating Water and Smoke with an Octree Data Structure}},
+year = {2003}
+}
+@phdthesis{Main2014,
 abstract = {This thesis describes an embedded boundary framework for multi-phase flow and fluid-structure interaction. This is based on the FIVER method, first introduced in (Farhat, 2008). This framework is capable of handling complex, evolving material interfaces, including structural fracture. This thesis makes a variety of contributions. Among the major contributions are an implicit time stepping method for embedded boundaries with highly nonlinear physical phenomena, which is shown to be up to 40x faster than the corresponding explicit time stepping scheme. Also, a multigrid method for the FIVER embedded boundary method is presented, which enables the solution of steady flow problems nearly 12x faster than a standard Newton-Krylov time stepping scheme. Then a second order extension of FIVER is introduced for multi-fluid and fluid-structure interaction problems. Finally, the stability and accuracy properties of this extension are analyzed.},
 author = {Main, Alexander},
 file = {:home/lukas/Desktop/project/independence/project/papers/thesis-Alex{\_}Main{\_}augmented.pdf:pdf},
-title = {{Algorithmic Problems in Social and Geometric Influence a Dissertation Submitted To the Institute for Computational and Mathematical Engineering and the Committee on Graduate Studies of Stanford University in Partial Fulfillment of the Requirements for the}},
+school = {Stanford University},
+title = {{Implicit and higer-order discretization methods for compressible multi-phase fluid and fluid-structure problems}},
+type = {PhD Thesis},
+year = {2014}
+}
+@article{Main2014a,
+abstract = {A family of compressible multi-phase fluid and fluid-structure interaction problems for which implicit schemes are preferable over explicit counterparts is identified. Using as a backdrop a finite volume method based on exact two-phase Riemann problems that has proven to be robust for multi-phase flows with strong contact discontinuities and highly nonlinear fluid-structure interaction problems, an implicit computational framework for the solution of such problems is presented. General issues that arise in the context of second- and higher-order time-discretizations of multi-material problems by multi-step schemes are highlighted, and solutions to these issues are presented in the form of redesigned implicit time-integrators. The proposed implicit computational framework is illustrated with the solution of an air-water shock tube problem, a realistic compressible multi-phase fluid problem, and a highly nonlinear fluid-structure interaction problem associated with the underwater implosion of a cylindrical shell. In all cases, the accuracy and robustness of the proposed implicit computational framework are demonstrated, and its superior computational performance is highlighted.},
+author = {Main, Alexander and Farhat, Charbel},
+journal = {Journal of Computational Physics},
+number = {C},
+pages = {613--633},
+title = {{A second-order time-accurate implicit finite volume method with exact two-phase Riemann problems for compressible multi-phase fluid and fluid-structure problems}},
+volume = {258},
 year = {2014}
 }
 @inproceedings{Maute2000,
@@ -431,6 +478,7 @@ address = {Berkeley},
 author = {Sethian, J. A.},
 file = {:home/lukas/Desktop/project/independence/project/papers/books/hold{\_}sethian{\_}book.ps:ps},
 isbn = {ISBN-13: 9780521645577},
+publisher = {Cambridge University Press},
 title = {{Level Set Methods and Fast Marching Methods}},
 year = {1999}
 }
@@ -451,7 +499,7 @@ year = {1990}
 }
 @article{Spalart1994,
 abstract = {A transport equation for the turbulent viscosity is assembled, using empiricism and arguments of dimensional analysis, Galilean invariance, and selective dependence on the molecular viscosity. It has similarities with the models of Nee and Kovaszany, Secundov et al., and Baldwin and Barth. The equation includes a non-viscous destruction term that depends on the distance of the wall.},
-author = {Spalart, P R and Allmaras, S R},
+author = {Spalart, P. R. and Allmaras, S. R.},
 doi = {10.2514/6.1992-439},
 file = {:home/lukas/Desktop/project/independence/project/papers/turbulencemodeling/Spalart{\_}Allmaras{\_}1994.pdf:pdf},
 isbn = {0034-1223},
@@ -487,6 +535,14 @@ pages = {101--136},
 title = {{Towards the ultimate conservative difference scheme. V. A second-order sequel to Godunov's method}},
 volume = {32},
 year = {1979}
+}
+@phdthesis{Wang2011a,
+author = {Wang, Guanyuan},
+file = {:home/lukas/Desktop/project/independence/project/papers/FIVER/Kevin{\_}Thesis{\_}Final-augmented.pdf:pdf},
+number = {December},
+school = {Stanford University},
+title = {{A computational framework based on an embedded boundary method for nonlinear multi-phase fluid-structure interactions}},
+year = {2011}
 }
 @article{Wang2012,
 abstract = {We present an overview of how the arterial fluid mechanics problems can be modeled with the stabilized space–time fluid–structure interaction (SSTFSI) technique developed by the Team for Advanced Flow Simulation and Modeling (TAFSM). The SSTFSI technique includes the enhancements introduced recently by the TAFSM to increase the scope, accuracy, robustness and efficiency of this class of techniques. The SSTFSI technique is supplemented with a number of special techniques developed for arterial fluid mechanics modeling. These include a recipe for pre-FSI computations that improve the convergence of the FSI computations, using an estimated zero-pressure arterial geometry, and the sequentially coupled arterial FSI (SCAFSI) technique. The recipe for pre-FSI computations is based on the assumption that the arterial deformation during a cardiac cycle is driven mostly by the blood pressure. The SCAFSI technique, which was introduced as an approximate FSI approach in arterial fluid mechanics, is also based on that assumption. The need for an estimated zero-pressure arterial geometry is based on recognizing that the patient-specific image-based geometries correspond to time-averaged blood pressure values. In our arterial fluid mechanics modeling the arterial walls can be represented with the membrane or continuum elements, both of which are geometrically nonlinear, and the continuum element is made of hyperelastic (Fung) material. Test computations are presented for cerebral and abdominal aortic aneurysms, where the arterial geometries used in the computations are close approximations to the patient-specific image-based data.},
@@ -539,4 +595,22 @@ number = {August},
 school = {Stanford University},
 title = {{Matthew Joseph Zahr August 2016}},
 year = {2016}
+}
+@article{Zeng2012,
+author = {Zeng, Xianyi and Farhat, Charbel},
+doi = {10.1016/j.jcp.2011.12.027},
+file = {:home/lukas/Desktop/project/independence/project/papers/FIVER/ZengFarhat2012.pdf:pdf},
+issn = {0021-9991},
+journal = {Journal of Computational Physics},
+number = {7},
+pages = {2892--2923},
+publisher = {Elsevier Inc.},
+title = {{A systematic approach for constructing higher-order immersed boundary and ghost fluid methods for fluid – structure interaction problems}},
+url = {http://dx.doi.org/10.1016/j.jcp.2011.12.027},
+volume = {231},
+year = {2012}
+}
+@book{,
+isbn = {978-0750627672},
+title = {{No Title}}
 }

@@ -13,7 +13,7 @@ As mentioned in the introduction, the overall motivation for this thesis is opti
 	\begin{center}
 	%/home/lukas/Desktop/project/independence/project/thesis/fig/tikz/build/optimization_blockdiagram.pdf
         \includegraphics{\mainpath/fig/tikz/build/optimization_blockdiagram.pdf}
-        \caption[Optimization block-diagram]{Flow chart of an optimization process in the context of flow simulations. If one regards the flow-computation block as a black-box to compute gradients of an objective function and the shape-modification block more general as parameter modification, this optimization routine is applicable to all kinds of problems. In our case, we begin with an initial geometry created by a standard mesh-generation software. We also parametrize the initial mesh in terms of design elements in this first step. This is done via SDesign\cite{SDesign} in this thesis. All further modifications to the geometry are obtained via the design element concept. The mesh-movement, steady-state siumulations and \acf{SA} are then performed in AERO-F\citep{Aerof}. For the optimizer itself, python has been chosen in this thesis, more specifically the \textbf{TODO} module. The codes communicate via result-files. These files are used to monitor and investigate the optimization process.}
+        \caption[Optimization block-diagram]{Flow chart of an optimization process in the context of flow simulations. If one regards the flow-computation block as a black-box to compute gradients of an objective function and the shape-modification block more general as parameter modification, this optimization routine is applicable to all kinds of problems. In our case, we begin with an initial geometry created by a standard mesh-generation software. We also parametrize the initial mesh in terms of design elements in this first step. This is done via SDesign\cite{SDesign} in this thesis. All further modifications to the geometry are obtained via the design element concept. The mesh-movement, steady-state siumulations and \acf{SA} are then performed in AERO-F\cite{Aerof}. For the optimizer itself, python has been chosen in this thesis, more specifically the \textbf{TODO} module. The codes communicate via result-files. These files are used to monitor and investigate the optimization process.}
 		\label{fig:optimization_blockdiagram}
     \end{center}
 \end{figure}
@@ -108,8 +108,8 @@ The linear Equations~\eqref{eq:saddlepoint_newtonform} can also be formulated as
 
 
 \begin{align}
-\underset{\absvars}{\text{min }}( \frac{1}{2} \T{\incrabsvars} \it{\PPLagfuncBYabsvars} \incrabsvars + \frac{\partial \it{\costfunc}}{\partial \absvars} ) \nonumber \label{eq:quadratic_minimization_problem_1}\\
-\it{\PneqctrBYabsvars} \incrabsvars+\it{\neqctr} \geq \vec{0} \label{eq:quadratic_minimization_problem_2}\nonumber\\
+\underset{\absvars}{\text{min }}( \frac{1}{2} \T{\incrabsvars} \it{\PPLagfuncBYabsvars} \incrabsvars + \frac{\partial \it{\costfunc}}{\partial \absvars} ) \nonumber \\
+\it{\PneqctrBYabsvars} \incrabsvars+\it{\neqctr} \geq \vec{0} \nonumber\\
 \it{\PeqctrBYabsvars} \incrabsvars+\it{\eqctr} = \vec{0} \label{eq:quadratic_minimization_problem_3}
 \end{align}
 \\

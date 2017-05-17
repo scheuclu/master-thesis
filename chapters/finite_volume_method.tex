@@ -21,7 +21,7 @@ After subdividing the domain into finite volumes, also called cells, one can wri
 \begin{align}
 \int_{V_i} \tfrac{\vec{\xi}}{t} dV_i + \int_{V_i} \nabla\cdot f(\vec{\xi}) dV_i
 \end{align}
-It shall be stressed again that reformulating the equations in integral form has already changed the space of admissible solutions. Particlularly, the integral form is capable of capturing discontinuities, like shocks whereas the derivative term would be undefined  at a shock in equation \eqref{eq:general_conservative_form}.
+It shall be stressed again that reformulating the equations in integral form has already changed the space of admissible solutions. Particularly, the integral form is capable of capturing discontinuities, like shocks whereas the derivative term would be undefined  at a shock in equation \eqref{eq:general_conservative_form}.
 
 After applying the divergence theorem to the second term this gives:
 \begin{align}
@@ -128,7 +128,7 @@ As can be seen from Figure \ref{fig:dualcell_unstructured}, the dual cells thems
 \begin{figure}[h]
   \centering
   \scalebox{.75}{\input{\mainpath/fig/pdf/FV_discretization_tetrahedra.pdf_tex}}
-  \caption{\ac{FV} semi-discretization of an unstructured mesh. Vertex $i$ is the center of dual cell $C_i$. The primal element is drawn in thick black lines, the dual cell in dashed lines. The boundary of the dual cell is denoted as $\pd C_{ij}$}
+  \caption[\ac{FV} semi-discretization of an unstructured mesh]{\ac{FV} semi-discretization of an unstructured mesh. Vertex $i$ is the center of dual cell $C_i$. The primal element is drawn in thick black lines, the dual cell in dashed lines. The boundary of the dual cell is denoted as $\pd C_{ij}$}
   \label{fig:dualcell_unstructured}
 \end{figure}
 
@@ -216,7 +216,7 @@ This section is dedicated to the derivation of a particular link between the sha
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.75]{\mainpath/fig/tikz/build/P1_shapefunction_normal.pdf}
-\caption{One Triangle $T$ out of the set of triangles $\sum_T$, that are connected to vertex $i$. $C$ denotes the dual cell related to vertex $i$.}
+\caption[Geometric considerations on a primitive cell]{One Triangle $T$ out of the set of triangles $\sum_T$, that are connected to vertex $i$. $C$ denotes the dual cell related to vertex $i$.}
 \label{fig:p1_linear_shape_function}
 \end{figure}
 
@@ -259,17 +259,17 @@ By simple geometrical considerations we can now determine, that the following re
 
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%TODO put this into a new file
 
 \section{The immersed boundary method}\label{sec:immersed_boundaries}
-Traditionally internal fluid boundarys, like physical walls imposed by a structure, are represented by meshing the fluid such that it coincides with the structure surface. This approach, that shall be denoted by "explicit boundary method" here, is intuitive and the imposition of boundary conditions comes naturally.
-However, in the case of fluid structure interaction, where we expect the structure to move and deform, an explicit boundary treatment, as described above, prohibits the use of an Eulerian formulation, as described in section~\ref{sec:eulerian_lagrangian}. Instead every move or shape-change of the structure requires an appropriate update of the fluid mesh. Therfore, \ac{FSI} problems with explicit boundaries are typically solved via an \
+Traditionally internal fluid boundaries, like physical walls imposed by a structure, are represented by meshing the fluid such that it coincides with the structure surface. This approach, that shall be denoted by "explicit boundary method" here, is intuitive and the imposition of boundary conditions comes naturally.
+However, in the case of fluid structure interaction, where we expect the structure to move and deform, an explicit boundary treatment, as described above, prohibits the use of an Eulerian formulation, as described in section~\ref{sec:eulerian_lagrangian}. Instead every move or shape-change of the structure requires an appropriate update of the fluid mesh. Therefore, \ac{FSI} problems with explicit boundaries are typically solved via an \
 \ac{ALE} formulation. Details can be found in section~\ref{sec:eulerian_lagrangian}.\\
   \\
 However, using an \ac{ALE}-formulation has some severe disadvantages. First and most importantly for the context of shape-optimization, only minor changes to the topology are admissible. The mesh-motion or mesh-update algorithm is only capable of moving the fluid nodes in a spatial manner, the main connectivity of the mesh does not change, however. Therefor, the method can neither cover large distortions, nor is it possible to fundamentally change the structure shape, e.g. removing material in a non-critical region of the structure.\\
 Additionally, creating body-fitted meshed can be cumbersome and time consuming, especially for complex structure geometries.\\
-An elegant solution to this problem is the so-called "immersed boundary method", first described in the context of flow-computations in the human heart in~\cite{Peskin1972}. In an immersed boundary method, the structure surface does not coincide with fluid faces. Therefore, no mesh-movement algorithm is required, and the fluid mesh no longer needs to be specifically designed with a certain structure in mind. In fact, combing this approach with an apdaptive mesh refinement completely eliminates the cost in fluid mesh generation.\\
-The two different approaches are visualized in Figure~\textbf{fig:ale_vs_embedded}.
+An elegant solution to this problem is the so-called "immersed boundary method", first described in the context of flow-computations in the human heart in~\cite{Peskin1972}. In an immersed boundary method, the structure surface does not coincide with fluid faces. Therefore, no mesh-movement algorithm is required, and the fluid mesh no longer needs to be specifically designed with a certain structure in mind. In fact, combing this approach with an adaptive mesh refinement completely eliminates the cost in fluid mesh generation.\\
+The two different approaches are visualized in Figure~\ref{fig:ale_vs_embedded}.
 Due to the attractiveness of the immersed boundary method in the context of shape optimization, special emphasis has been put on the immersed boundary method in this thesis.
 
 

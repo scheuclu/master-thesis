@@ -9,8 +9,8 @@
 
 \section{Derivatives of the fluid residual}\label{sec:dresidual_derivative}
 This section is denoted to a thorough derivation of the partial derivatives $\pdfrac{\dresidual}{\dfstate}$ and $\pdfrac{\dresidual}{\absvar}$ of the fluid residual equation.
-These are the main quantities needed in order to compute the sensitivity of the state vector $\pdfrac{\dfstate}{\absvar}$ as shown in equation~\ref{eq:full_sa_nostruct}.
-We need this derivative in order to solve for $\frac{\dfstate}{\absvar}$ in equation~\eqref{eq:dfstate_by_absvar}.\\
+These are the main quantities needed in order to compute the sensitivity of the state vector $\tfrac{\dfstate}{\absvar}$ as shown in equation~\eqref{eq:full_sa_nostruct}.
+We need this derivative in order to solve for $\tfrac{\optcrit_{j}}{\absvar_{i}}$.\\
 
 
 \subsection{Fluid Jacobian $\pdfrac{\dresidual}{\dfstate}$}\label{sec:fluid_jacobian}
@@ -19,14 +19,14 @@ We need this derivative in order to solve for $\frac{\dfstate}{\absvar}$ in equa
 
 
 
-According to~\eqref{eq:nse_final_discretized_notationchange}, the total residual is comprised of a convective(inviscid) part and a viscous contributions. Thanks to the distributive property of the derivative operator, we can thus compute the derivative of the total residual as the sum of the derivatives of the components. This is particulary important for us, since we used two different discretization routines for the viscous and the inviscid part.\\
+As described in~\eqref{eq:nse_final_discretized_notationchange}, the total residual is comprised of a convective(inviscid) part and a viscous contributions. Thanks to the distributive property of the derivative operator, we can thus compute the derivative of the total residual as the sum of the derivatives of the components. This is particulary important for us, since we used two different discretization routines for the viscous and the inviscid part.\\
 
 
 
 \subsubsection{Derivative of the convective Jacobian $\pdfrac{\dresidual^c}{\dfstate}$}
 
 Also, we will only discuss the special case of intersected elements in the following, since the special case of an non-intersected cell follows trivially from that.\\
-For more details on the evaluation of the inviscid residual the reader is refered to section~\ref{sec:finite_volume_method}, specifically section~\ref{sec:fv_fluid_mechanics} and section~\ref{sec:fiver} for the incorporation of the immersed boundary conditions.
+For more details on the evaluation of the inviscid residual the reader is referred to section~\ref{sec:finite_volume_method}, specifically section~\ref{sec:mixed_FV_FE_formulation} and section~\ref{sec:fiver} for the incorporation of the immersed boundary conditions.
 
 
 For the convective part of the Jacobian, $\dresidual^c$ we can be therefor write
@@ -40,16 +40,16 @@ Since the fluid normal is dependent on the mesh position this can also be writte
 \end{align}
 
 
-If the edge $i-j$ is intersected however, the half-Riemann problem approach as discussed in section~REF is applied.
-Also, the quantity $\dfstate_ij$ on the interface can be reconstructed in several way. In this thesis we applied a \ac{MUSCL} technique. Of course, the reconstruction and limitation has to be taken into account as well.\\
-Putting this all together, one can write
+If the edge $i-j$ is intersected however, the half-Riemann problem approach as discussed in section~\ref{sec:half_riemann_problem} is applied.
+Also, the quantity $\dfstate_{ij}$ on the interface can be reconstructed in several ways. In this thesis we applied a \ac{MUSCL} technique. Of course, the reconstruction and limitation has to be taken into account as well.\\
+Putting all this together, one can write
 
 \begin{align}
-    \frac{\partial \dresidual^i_{ij}}{\partial \dfstate_k} = 
-    {\color{red}{\frac{\partial \dresidual^i_{ij}}{\partial \dfstateprim_{ij}^\star}}} \,
+    \frac{\partial \dresidual^{c,i}_{ij}}{\partial \dfstate_k} = 
+    {\color{red}{\frac{\partial \dresidual^{c,i}_{ij}}{\partial \dfstateprim_{ij}^\star}}} \,
     {\color{blue}{\frac{\partial \dfstateprim_{ij}^\star}{\partial \dfstateprim_k}}} \,
     \frac{\partial \dfstateprim_k}{\partial \dfstate_k} +
-    {\color{red}{\frac{\partial \dresidual^i_{ij}}{\partial \dfstateprim_{ij}}}} \,
+    {\color{red}{\frac{\partial \dresidual^{c,i}_{ij}}{\partial \dfstateprim_{ij}}}} \,
     {\color{green}{\frac{\partial \dfstateprim_{ij}}{\partial \dfstateprim_k}}} \,
     \frac{\partial \dfstateprim_k}{\partial \dfstate_k} +
     \underbrace{\pdfrac{\dresidual^{c,i}_{ij}}{\dmpos}\pdfrac{\dmpos}{\normal_{ij}}}_{=\vec{0}\text{ for embedded}}
@@ -64,24 +64,24 @@ Putting this all together, one can write
 \end{center}
 
 where, $\prim{(\sim)}$ denotes primitive quantitives, $\frac{\partial \dfstateprim_k}{\partial \dfstate_k}$ accounts for the conversion between primitive and conservative state vector, $\pdfrac{\dresidual^{c,i}_{ij}}{\fstateprim^{\star}_{ij}}$ is the analytical derivative of the \ac{MUSCL} reconstruction and limitation and $a$ is the analytical Jacobian of the Roe flux. Finally, $\frac{\partial \dfstateprim_{ij}^\star}{\partial \dfstateprim_k}$ accounts for the analytical derivative of the solution of the 1D half-Riemann problem. This also accounts for the only really new derivative to be considered in comparison to the cells far from the immersed boundaries.\\
-The analytic Jacobian of the Roe flux is provided in section~\ref{sec:jacobian_roeflux}, the derivative of the solution of the 1D hgalf-Riemann problem is discussed in section~\textbf{TODO}, the derivative of the MUSCL reconstruction in section~\textbf{TODO} and finally, the derivative of the conversion to primitive variables is discussed in section~\textbf{TODO}.
+The analytic Jacobian of the Roe flux is provided in section~\ref{sec:jacobian_roeflux}, the derivative of the solution of the 1D half-Riemann problem is discussed in section~\ref{sec:fiver-1}, the derivative of the MUSCL reconstruction in section~\textbf{TODO} and finally, the derivative of the conversion to primitive variables is discussed in section~\textbf{TODO}.
 
 
 
 
 \subsubsection{Derivative of the viscous Jacobian $\pdfrac{\dresidual^c}{\dfstate}$}\label{sec:jacobian_viscous}
 For the discussion of the viscous Jacobian, we first remind the reader that an \ac{FE} approach is used to evaluate this term, in contrast to the \ac{FV} approach used for the inviscid contribution. For a detailed discussion the reader is referred to section~\ref{sec:mixed_FV_FE_formulation} and the following sections.\\
-As far as the residual evaluation itself goes, we recall that, once the ghost points have been populated(see section~\textbf{TODO}), the residual is evaluated as though it had never been intersected in the first place.
+As far as the residual evaluation itself goes, we recall that, once the ghost points have been populated(see section~\ref{sec:ghost_node_reconstruction}}), the viscous residual is evaluated as though the cell had never been intersected in the first place.
 We can therefore write the viscous residual of an intersected cell as
 
 
 \begin{align}
     \dresidual^c(\dfstateprim^a,\dfstateprim^g(\dfstateprim^a))=\vec{0}
 \end{align}
-where $\dfstateprim^a$ represents the fluid states of the active node, and $\dfstateprim^g$ are the fluid states of the ghost nodes, which can themselveS be expressed in terms of the active nodes.
+where $\dfstateprim^a$ represents the fluid states of the active node, and $\dfstateprim^g$ are the fluid states of the ghost nodes, which can themselves be expressed in terms of the active nodes.
 
 
-An thus the derivative becomes:
+Thus the derivative becomes:
 \begin{align}
     \pdfrac{\dresidual^v(\dfstateprim^a,\dfstateprim^g(\dfstateprim^a))}{\dfstateprim}=
     \underbrace{\pdfrac{\dresidual^v}{\dfstateprim^a}}_{\substack{\text{can be re-used from ALE } \\ \text{after the ghost-point population}}}+
@@ -102,13 +102,13 @@ again, we switch to primitive variables for easier evaluation
 \end{align}
 
 Applying a numerical integration such as gauss rule, this becomes
-\begin{align}\label{eq:aaa}
+\begin{align}\label{eq:aaa1}
 \dresidual_i^v=-\sum_{T_i \in \elementset(i)} \sum_{i=1}^{n_g} 
 w_i \prim{\difftensor} \nabla \prim{\dfstate}(\dmpos_i) \nabla \phi_j(\dmpos_i) dx
 \end{align}
 
-Thus, due the constant nature of the diffusive tensor $\difftensor$ the derivative can be written straigforwardly as
-\begin{align}\label{eq:aaa}
+Thus, due the constant nature of the diffusive tensor $\difftensor$ the derivative can be written straightforwardly as
+\begin{align}\label{eq:aaa2}
 \pdfrac{\dresidual_i^v}{\prim{\dfstate}}=
 -\sum_{T_i \in \elementset(i)} \sum_{i=1}^{n_g} 
 w_i \prim{\difftensor} \nabla \prim{\dfstate}(\dmpos_i) \nabla \phi_j(\dmpos_i) dx
@@ -135,8 +135,9 @@ w_i \prim{\difftensor} \nabla \prim{\dfstate}(\dmpos_i) \nabla \phi_j(\dmpos_i) 
 
 \subsection{Analytic Jacobian of the Roe flux}\label{sec:jacobian_roeflux}
 
-This section provides a detailed step by step derivation of the analytic convective Jacobian. This section is lenghty and not necessarily required for understanding the rest of the thesis. For this reason it has been moved at the end of chapter~\ref{sec:dresidual_derivative}. Nonetheless, in the authors opinion, it provides some crucial insight into the basics of \ac{SA}, and it is certainly of great help and serves as a reference for anyone who wants to implement those derivatives himself.
+This section provides a detailed step by step derivation of the analytic convective Jacobian. This section is lengthy and not necessarily required for understanding the rest of the thesis. For this reason it has been moved at the end of this chapter. Nonetheless, in the authors opinion, it provides some crucial insight into the basics of \ac{SA}, and it is certainly of great help and serves as a reference for anyone who wants to implement those derivatives himself.\\
 
+We start by expanding the derivative to
 \begin{align}
 \pdfrac{\dresidual_i^c}{\dfstate}=
 \sum_{j \in \vertexset(i)}
@@ -146,7 +147,7 @@ meas(C_{ij}) \pdfrac{\fluxesnum_{ij}(\dfstate_{ij},\dfstate_{ji},\wnormal_{ij})}
 where the first term is always zero for embedded simulations.\\
 \question{TODO ask Farhat what to do with the first derivative.}
 
-First, we recall the definition of the numerical flux as
+Next, we recall the definition of the numerical flux as
 \begin{align}\label{eq:roe_flux}
 \fluxesnum(\dfstate_i,\dfstate_j,\normal_{ij}) =
 \frac{1}{2}\left[\fluxesconv(\dfstate_i)\cdot\normal_{ij} +
@@ -177,7 +178,7 @@ Where the convective flux matrix $\fluxesconv$ is provided in equation \eqref{eq
                       \fluxesconv_x(\fstate)&\fluxesconv_x(\fstate)&\fluxesconv_x(\fstate)
                       \end{pmatrix}
 \end{align}
-Therefore, applying the Nabla operator in Equation \eqref{eq:t1} gives
+Therefore, applying the Nabla operator in equation \eqref{eq:t1} gives
 \begin{align}\label{eq:euler_coinservative_splitted}
 \pdfrac{\fstate}{t}+
 \underbrace{\pdfrac{\fluxesconv_x(\fstate)}{\fstate}}_{\tensor{A}} \pdfrac{\fstate}{x} +
@@ -571,7 +572,7 @@ The second derivative is more cumbersome. The issue is visualized in Figure~\ref
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=0.3\linewidth]{\mainpath/fig/pdf/pierce}
-\caption[aa]{Visualization of the intersection of a fluid mesh edge $(D-E)$ with an element of the embedded surface $(A-B-C)$. For a shape-sensitivity analysis, SDesign returns the derivatives of the embedded surface nodes $A,B,C$ position with respect to the shape parameter. This is done by first computing the intersection point $P$. Together with the element normal $\normal$, the intersection point is used to reconstruct the shape derivatives at nodes $D$ and $E$. \textbf{TODO}}
+\caption[Visualization of a face intersection in 3D]{Visualization of the intersection of a fluid mesh edge $(D-E)$ with an element of the embedded surface $(A-B-C)$. For a shape-sensitivity analysis, SDesign returns the derivatives of the embedded surface nodes $A,B,C$ position with respect to the shape parameter. This is done by first computing the intersection point $P$. Together with the element normal $\normal$, the intersection point is used to reconstruct the shape derivatives at nodes $D$ and $E$. \textbf{TODO}}
 \label{fig:pierce}
 \end{figure}
 

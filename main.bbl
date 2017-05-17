@@ -19,6 +19,12 @@ C.~Farhat, C.~Degand, B.~Koobus, and M.~Lesoinne.
 \newblock {\em Computer Methods in Applied Mechanics and Engineering},
   163(1-4):231--245, 1998.
 
+\bibitem{Farhat2014}
+Charbel Farhat and Vinod~K. Lakshminarayan.
+\newblock {An ALE formulation of embedded boundary methods for tracking
+  boundary layers in turbulent fluid-structure interaction problems}.
+\newblock {\em Journal of Computational Physics}, 263:53--70, 2014.
+
 \bibitem{Farhat1995}
 Charbel Farhat, Michel Lesoinne, and Nathan Maman.
 \newblock {Mixed explicit/implicit time integration of coupled aeroelastic
@@ -27,32 +33,53 @@ Charbel Farhat, Michel Lesoinne, and Nathan Maman.
 \newblock {\em International Journal for Numerical Methods in Fluids},
   21(10):807--835, 1995.
 
+\bibitem{Farhat2008}
+Charbel Farhat, Arthur Rallu, and Sriram Shankaran.
+\newblock {A higher-order generalized ghost fluid method for the poor for the
+  three-dimensional two-phase flow computation of underwater implosions}.
+\newblock {\em Journal of Computational Physics}, 227(16):7674--7700, 2008.
+
+\bibitem{SDesign}
+{Farhat Research Group}.
+\newblock {SDesign: A mesh parametrization Software}.
+
 \bibitem{Aerof}
 Farhat~Research Group.
-\newblock {Aero-F}.
+\newblock {Aero-F: A multi purpose flow solver.}
 
 \bibitem{Aeros}
 Farhat~Research Group.
-\newblock {Aero-S}.
+\newblock {Aero-S: A multi purpose structure solver.}
 
 \bibitem{Lesoinne2001}
 Michel Lesoinne, Marcus Sarkis, Ulrich Hetmaniuk, and Charbel Farhat.
 \newblock {A linearized method for the frequency analysis of three-dimensional
-  ¯ uid / structure interaction problems in all ¯ ow regimes}.
-\newblock 190:1--38, 2001.
+  fluid/structure interaction problems in all flow regimes}.
+\newblock {\em Computer Methods in Applied Mechanics and Engineering},
+  190(24):3121--3146, 2001.
 
 \bibitem{LeVeque1992}
 Randall~J. LeVeque.
 \newblock {\em {Numerical Methods for Conservation Laws}}, volume~33.
-\newblock 1992.
+\newblock Birkh{\"{a}}user Basel, 1992.
+
+\bibitem{Fedkiw2003}
+Frank Losasso and R.~Fedkiw.
+\newblock {Simulating Water and Smoke with an Octree Data Structure}.
+\newblock pages 457--462, 2003.
 
 \bibitem{Main2014}
 Alexander Main.
-\newblock {Algorithmic Problems in Social and Geometric Influence a
-  Dissertation Submitted To the Institute for Computational and Mathematical
-  Engineering and the Committee on Graduate Studies of Stanford University in
-  Partial Fulfillment of the Requirements for the}.
-\newblock 2014.
+\newblock {\em {Implicit and higer-order discretization methods for
+  compressible multi-phase fluid and fluid-structure problems}}.
+\newblock Phd thesis, Stanford University, 2014.
+
+\bibitem{Main2014a}
+Alexander Main and Charbel Farhat.
+\newblock {A second-order time-accurate implicit finite volume method with
+  exact two-phase Riemann problems for compressible multi-phase fluid and
+  fluid-structure problems}.
+\newblock {\em Journal of Computational Physics}, 258(C):613--633, 2014.
 
 \bibitem{Maute2001}
 K.~Maute, M.~Nikbay, and C.~Farhat.
@@ -95,7 +122,7 @@ K.~Schittkowski, C.~Zillober, and R.~Zotemantel.
 \bibitem{Sethian1999}
 J.~A. Sethian.
 \newblock {\em {Level Set Methods and Fast Marching Methods}}.
-\newblock Berkeley, 1999.
+\newblock Cambridge University Press, Berkeley, 1999.
 
 \bibitem{Sobieszczanski1990}
 Jaroslaw Sobieszczanski-Sobieski.
@@ -103,7 +130,7 @@ Jaroslaw Sobieszczanski-Sobieski.
 \newblock {\em AIAA Journal}, 28(1):153--160, 1990.
 
 \bibitem{Spalart1994}
-P~R Spalart and S~R Allmaras.
+P.~R. Spalart and S.~R. Allmaras.
 \newblock {A one-equation turbulence model for aerodynamic flows}.
 \newblock {\em La Recherche Aerospatiale}, 1(1):5--21, 1994.
 
@@ -112,5 +139,25 @@ Bram van Leer.
 \newblock {Towards the ultimate conservative difference scheme. V. A
   second-order sequel to Godunov's method}.
 \newblock {\em Journal of Computational Physics}, 32(1):101--136, 1979.
+
+\bibitem{Wang2011a}
+Guanyuan Wang.
+\newblock {\em {A computational framework based on an embedded boundary method
+  for nonlinear multi-phase fluid-structure interactions}}.
+\newblock PhD thesis, Stanford University, 2011.
+
+\bibitem{Wang2012}
+K.~Wang, J.~Gr{\'{e}}tarsson, A.~Main, and C.~Farhat.
+\newblock {Computational algorithms for tracking dynamic fluid-structure
+  interfaces in embedded boundary methods}.
+\newblock {\em International Journal for Numerical Methods in Fluids},
+  70(4):515--535, oct 2012.
+
+\bibitem{Wang2011}
+K.~Wang, A.~Rallu, J.-F. Gerbeau, and C.~Farhat.
+\newblock {Algorithms for interface treatment and load computation in embedded
+  boundary methods for fluid and fluid-structure interaction problems}.
+\newblock {\em International Journal for Numerical Methods in Fluids},
+  67(9):1175--1206, nov 2011.
 
 \end{thebibliography}
