@@ -43,6 +43,12 @@ Charbel Farhat, Arthur Rallu, and Sriram Shankaran.
 {Farhat Research Group}.
 \newblock {SDesign: A mesh parametrization Software}.
 
+\bibitem{Godunov1959}
+S.~K. Godunov.
+\newblock {A finite difference method for the computation of discontinuous
+  solutions of the equations of fluid dynamics}.
+\newblock {\em Matematicheskii Sbornik}, 47:357--393, 1959.
+
 \bibitem{Aerof}
 Farhat~Research Group.
 \newblock {Aero-F: A multi purpose flow solver.}
@@ -50,6 +56,11 @@ Farhat~Research Group.
 \bibitem{Aeros}
 Farhat~Research Group.
 \newblock {Aero-S: A multi purpose structure solver.}
+
+\bibitem{Harten1983}
+Ami Harten.
+\newblock {High Resolution Schemes for Hyperbolic Conservation Laws}.
+\newblock {\em ournal of Computational Physics}, 135:260--278, 1983.
 
 \bibitem{Lesoinne2001}
 Michel Lesoinne, Marcus Sarkis, Ulrich Hetmaniuk, and Charbel Farhat.
@@ -133,6 +144,12 @@ Jaroslaw Sobieszczanski-Sobieski.
 P.~R. Spalart and S.~R. Allmaras.
 \newblock {A one-equation turbulence model for aerodynamic flows}.
 \newblock {\em La Recherche Aerospatiale}, 1(1):5--21, 1994.
+
+\bibitem{VanAlbada1982}
+G.~D. van Albada, B.~van Leer, and W.~W. Roberts.
+\newblock {A Comparative Study of Computational Methods in Cosmic Gas
+  Dynamics}.
+\newblock {\em Astronomy and Astrophysics}, 108:76--84, 1982.
 
 \bibitem{VanLeer1979}
 Bram van Leer.

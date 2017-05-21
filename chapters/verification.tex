@@ -67,7 +67,9 @@ Again, a side by side comparison of the analytic results between all three equat
 	      \foreach \type in {FD,ana}{
 			    \begin{subfigure}[t]{0.5\textwidth}
 			        \centering
-			        \includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/machsens/ALE/\vertype_component\n_\type}
+			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
+              \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
+			        \fbox{\includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/machsens/ALE/\vertype_component\n_\type}}
 			        \caption{$\linepdfrac{\d{w}_\n^{\type}}{\machnum_{\infty}}$}
 			    \end{subfigure}%
 			    ~ 
@@ -92,7 +94,9 @@ Again, a side by side comparison of the analytic results between all three equat
 	      \foreach \type in {FD,ana}{
 			    \begin{subfigure}[t]{0.5\textwidth}
 			        \centering
-			        \includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/machsens/Emb/\vertype_component\n_\type}
+			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
+              \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
+			        \fbox{\includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/machsens/Emb/\vertype_component\n_\type}}
 			        \caption{$\linepdfrac{\d{w}_\n^{\type}}{\machnum_{\infty}}$}
 			    \end{subfigure}%
 			    ~ 
@@ -119,7 +123,9 @@ Again, a side by side comparison of the analytic results between all three equat
       \foreach \simtype in {Euler,Laminar,RANS}{
 		    \begin{subfigure}[t]{0.33\textwidth}
 		        \centering
-		        \includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/machsens/ALE/comparison_\simtype_component\n_ana}
+			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
+              \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
+		        \fbox{\includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/machsens/ALE/comparison_\simtype_component\n_ana}}
 		        \caption{$\linepdfrac{\d{w_\n^{\simtype}}}{\machnum_{\infty}}$}
 		    \end{subfigure}%
 		    ~ 
@@ -138,7 +144,9 @@ Again, a side by side comparison of the analytic results between all three equat
       \foreach \simtype in {Euler,Laminar,RANS}{
 		    \begin{subfigure}[t]{0.33\textwidth}
 		        \centering
-		        \includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/machsens/Emb/comparison_\simtype_component\n_ana}
+			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
+              \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
+		        \fbox{\includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/machsens/Emb/comparison_\simtype_component\n_ana}}
 		        \caption{$\linepdfrac{\d{w_\n^{\simtype}}}{\machnum_{\infty}}$}
 		    \end{subfigure}%
 		    ~ 
@@ -174,7 +182,9 @@ Again, a side by side comparison of the analytic results between all three equat
 	      \foreach \type in {FD,ana}{
 			    \begin{subfigure}[t]{0.5\textwidth}
 			        \centering
-			        \includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/shapesens/ALE/\vertype_component\n_\type}
+			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
+              \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
+			        \fbox{\includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/shapesens/ALE/\vertype_component\n_\type}}
 			        \caption{$\linepdfrac{\d{w}_\n^{\type}}{\absvar}$}
 			    \end{subfigure}%
 			    ~ 
@@ -200,7 +210,9 @@ Again, a side by side comparison of the analytic results between all three equat
 	      \foreach \type in {FD,ana}{
 			    \begin{subfigure}[t]{0.5\textwidth}
 			        \centering
-			        \includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/shapesens/Emb/\vertype_component\n_\type}
+			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
+              \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
+			        \fbox{\includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/shapesens/Emb/\vertype_component\n_\type}}
 			        \caption{$\linepdfrac{\d{w}_\n^{\type}}{\absvar}$}
 			    \end{subfigure}%
 			    ~ 
@@ -225,7 +237,9 @@ Again, a side by side comparison of the analytic results between all three equat
       \foreach \simtype in {Euler,Laminar,RANS}{
 		    \begin{subfigure}[t]{0.33\textwidth}
 		        \centering
-		        \includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/shapesens/ALE/\simtype_component\n_ana}
+			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
+              \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
+		        \fbox{\includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/shapesens/ALE/\simtype_component\n_ana}}
 		        \caption{$\linepdfrac{\d{w_\n^{\simtype}}}{\absvar}$}
 		    \end{subfigure}%
 		    ~ 
@@ -243,7 +257,9 @@ Again, a side by side comparison of the analytic results between all three equat
       \foreach \simtype in {Euler,Laminar,RANS}{
 		    \begin{subfigure}[t]{0.33\textwidth}
 		        \centering
-		        \includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/shapesens/Emb/\simtype_component\n_ana}
+			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
+              \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
+		        \fbox{\includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/shapesens/Emb/\simtype_component\n_ana}}s
 		        \caption{$\linepdfrac{\d{w_\n^{\simtype}}}{\absvar}$}
 		    \end{subfigure}%
 		    ~ 

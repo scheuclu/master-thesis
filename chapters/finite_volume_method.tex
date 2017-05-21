@@ -6,7 +6,7 @@
 \setlength{\delimitershortfall}{0pt}
 
 \section{Numerical solution}\label{sec:finite_volume_method}
-\subsection{Basic \acf{FV} formulation}
+\subsection{Basic \acf{FV} formulation}\label{sec:basic_fv}
 Like \ac{FD} or \acf{FE}, the \acf{FV} method is a mean of solving a \ac{PDE} by transforming it into a discrete algebraic form. In the field of fluid mechanics, the finite volume method is the most popular approach. Other than \ac{FD} or \ac{FE}, the \ac{FV} is conservative by construction. In contrast to \ac{FD} it can easily be implemented for unstructured grids. Compared to the \ac{FE} method, where boundary conditions come naturally from the formulation, this causes some difficulties in \ac{FV}.\\
 It shall also be mentioned that the introduction of stabilization schemes(like streamline upwinding), is much easier in an \ac{FV} formulation.
 Overall, for \ac{CFD}, \ac{FV} has so far shown to be the best compromise between accuracy, stability and efficiency.
@@ -256,6 +256,72 @@ By simple geometrical considerations we can now determine, that the following re
 \int_{\Gamma_C \cap T} const.~\vec{n}_c &= \frac{1}{2}\int_{\Gamma_T} const.~\vec{n}_T \\
                                         &= \frac{\vec{\vec{\nu}_i^T}}{2}
 \end{align}
+
+
+
+\subsection{Second Order \ac{FV} methods}\label{sec:fv_ordertwo}
+
+The \ac{FV} scheme, we have so far introduced in sections~\ref{sec:basic_fv},\ref{sec:fv_fluid_mechanics} and \ref{sec:mixed_FV_FE_formulation} is first order accurate. This chapter is dedicated to introducing the second order scheme, used in AEROF.\\
+However, Godunov's theorem \cite{Godunov1959} states that only first-order accurate schemes can have the property of not generating new extrema(spurious oscillations)\cite{Godunov1959}. To address this problem, the concept of a flux limiter will be quickly introduced.
+
+
+
+\subsubsection{Linear reconstruction}\label{sec:linear_reconstruction}
+In a classic FV scheme, a constant approximation, that represents the temporal average(see equation \eqref{eq:final_fv_general}) is used in each cell. The constant approximations inside the cell makes the scheme first order. What is more, it is not able to handle schocks or discontinuities; they tend to become smeared when evolved in time.\\
+To address this issue, a linear reconstruction is being introduced:
+
+\begin{align}\label{eq:linear_reconstruction}
+\fstate(\mpos)=\fstate_i+\nabla\fstate_i (\mpos-\mpos_i)
+\end{align}
+where $\nabla\fstate_i$ is being reconstructed from the neighboring fluid state values, e.g. by a simple average:
+\begin{align}\label{eq:gradient_average}
+\nabla\fstate_i=\frac{1}{N} \sum_{j\in\kappa(i)} \frac{\fstate_j-\fstate_i}{\mpos_j-\mpos_i}
+\end{align}
+where $\kappa(i)$ is the set of all vertices connected to vertice $i$ by an edge. Alternative methods like a least-square solver are also being used.\\
+
+
+
+\subsubsection{The concept of \acf{TVD}}\label{sec:TVD}
+For further considerations the property of \acf{TVD} shall be introduced here. In numerical methods, this is a property of a discretization used to solve hyperbolic \ac{PDE}. The concept of \ac{TVD} was introduced by Harten\cite{Harten1983}.
+For a simple 1D case, the total variation of a solution is given as
+\begin{align}
+TV=\int\abs{\pdfrac{u}{x}} dx
+\end{align}
+or in the discrete case
+\begin{align}
+TV=\sum_i \abs{u_{i+1}-u_i}
+\end{align}
+We call a numerical method to be \ac{TVD} if
+\begin{align}
+TC(u^{n+1})\leq TV(u^n)
+\end{align}
+Harten proved the that a monotone scheme is \ac{TVD} and that a \ac{TVD} scheme is monotonicity preserving. In \ac{CFD} \ac{TVD} schemes enable stable predictions of schocks on relatively coarse grids without spurious oscillations. Due to Godunov's theorem, this is crucial for second-order schemes.\\
+
+
+Linear reconstruction,as introduced in equation \eqref{eq:linear_reconstruction},leads to schemes that are not \ac{TVD}. Particularly, it has been shown that they tend to introduce spurious oscillations where shocks or discontinuities are present. This issue is being addressed in the following subsection.
+
+
+
+\subsubsection{\acf{MUSCL}}\label{sec:muscl}
+\acf{MUSCL} schemes are based on the idea of using piecewise linear approximations on each cell. To counter the stability issues associated with this approach, the introduce so-called slope-limited left and right fluid states.\\
+Instead of a pure constant or pure linear reconstruction, the following convex linear combination is considered:
+\begin{align}
+\fstate_{i+\frac{1}{2}}^{n+} = \bar{\fstate}_i^n +\frac{1}{2}\phi_i^{n+}(\bar{\fstate}_i^n-\bar{\fstate}_{i-1}^n)
+\end{align}
+
+
+where the superscript $n+$ refers to time $t^n$ and the leftward bias, and the parameter $\phi$ is called \textit{slope limiter}. The slope limiter enforces a first-order accurate reconstruction near shocks($\phi=0$) and a second-order accurate reconstructions in the smooth regions of the flow($\phi=1.0$).\\
+Many flux limiters have been proposed in the literature, and they continue to be an on-going field of research. Typically they operate on the ratio of successive gradients on the solution mesh, i.e.
+\begin{align}
+r_i=\frac{\fstate_i-\fstate_{i-1}}{\fstate_{i+1}-\fstate_i}
+\end{align}
+In this thesis, we restrict ourselves to the flux limiter of Van Albada\cite{VanAlbada1982} expressed as
+\begin{align}\label{eq:vanalbada}
+\phi(r)=\frac{r^2-2}{r^2+1};~~~\underset{r\rightarrow\infty}{lim} \phi(r)=0
+\end{align}
+It has been shown that this limiter makes a second-order, linear reconstruction scheme \ac{TVD}.
+
+
 
 
 
