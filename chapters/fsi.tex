@@ -2,17 +2,17 @@
 %\usepackage{import}
 \begin{document}
 \setlength{\delimitershortfall}{0pt}
-\section{Fluid structure interaction}
-\secttoc
-\sectlof
-\sectlot
+\chapter{Fluid structure interaction}
+\minitoc
+%\sectlof
+%\sectlot
 
 \acf{FSI} describes the aeroelastic response of a mechanical system under fluid load, as well as the interaction between fluid and structure itself. Synonymously the term "Aeroelasticity" is often used.\\
 The ultimate goal of the \acf{SA} derived in this thesis is shape-optimization. For many challenging applications, the interaction of the flow with the structure can not be neglected for the sensitivity computation. Thus, this chapter shall provide a quick overview on the fluid-structure sensitivity analysis.
 
 For this thesis, we first will focus on an \ac{ALE} formulation, a closer look into this topic in the context of en Embedded formulation will follow.\\
 
-\subsection{Coupled three-field formulation}\label{sec:3_field_formulation}
+\section{Coupled three-field formulation}\label{sec:3_field_formulation}
 In an aeroelastic ALE problem, three solution fields have to be considered. Firstly, the usual fluid problem has to be solved. Over the \ac{FSI} interface, the fluid now interacts with the structure, imposing a Neumann problem on it. Finally, since we are considering \ac{ALE} here, a governing equation for the fluid mesh motion has to be introduced, which closes the system.\\
 Generally speaking, there exist two main approaches for solving this problem. Firstly, one can solve all three problems in one joint system, leading to a so-called monolithic algorithm. The advantage is, that the formulation is consistent and compared to the subsequently introduced staggered algorithm it does not introduce errors in the coupling. However, the solution of the monolithic system is cumbersome, since completely different physics are involved.\\
 In practice, using a so-called "staggered algorithm" has shown to be a more robust choice. In a staggered algorithm, fluid- and structure problem are updated from time step $n$ to $n+1$ one after the other. Therefore, consistency is lost, and (if no correction is applied) accuracy drops to first order. On the other hand each problem by itself can be treated by well established, optimized, existing solvers so the solution procedure is more robust.\\
@@ -64,7 +64,7 @@ where
 \conv{\fluxesconv}(\fstate)=\fluxesconv(\fstate)-\dot{\xi}\fstate
 \end{align}
 
-After \ac{FV} discretization of the convective part, and \ac{FE} discretization of the diffusive part, as explained in section 
+After \ac{FV} discretization of the convective part, and \ac{FE} discretization of the diffusive part, as explained in chapter 
 \ref{sec:fv_fluid_mechanics}, the discrete system can be written as
 
 
@@ -82,15 +82,15 @@ After \ac{FV} discretization of the convective part, and \ac{FE} discretization 
 \label{eq:full_governing_equation}
 \end{align}
 
-Where we remind the reader that, as explained in section \ref{sec:fv_fluid_mechanics}, for a \ac{FV} discretization, the fluid state $\dfstate$ has to be interpreted as average value over the cell. We often take the cell average to be equal to the value at the cell center, an approximation that is second order accurate.
+Where we remind the reader that, as explained in chapter \ref{sec:fv_fluid_mechanics}, for a \ac{FV} discretization, the fluid state $\dfstate$ has to be interpreted as average value over the cell. We often take the cell average to be equal to the value at the cell center, an approximation that is second order accurate.
 
 
-In the above equations $\fluxmatconv$ denotes the vector of Roe fluxes resulting from a second-order finite volume discretization of the convective part of the \ac{NSE}, see section \ref{sec:fv_fluid_mechanics}.\\
-Likewise, $\fluxmatdiff$ denotes an approximation of the diffusive part. As explained in section \ref{sec:mixed_FV_FE_formulation} we chose a \ac{FE} approximation over a \ac{FV} one for this term.\\
+In the above equations $\fluxmatconv$ denotes the vector of Roe fluxes resulting from a second-order finite volume discretization of the convective part of the \ac{NSE}, see chapter \ref{sec:fv_fluid_mechanics}.\\
+Likewise, $\fluxmatdiff$ denotes an approximation of the diffusive part. As explained in chapter \ref{sec:mixed_FV_FE_formulation} we chose a \ac{FE} approximation over a \ac{FV} one for this term.\\
 $\cellvolmat$ denotes the matrix of cell volumes and $\turbmat$ denotes the matrix resulting from the additional turbulence closures in the \ac{RANS} equations (see Section~\ref{sec:rans}).\\
 The above table also gives a very nice overview over the different equation types and the used simplifications. The Euler equations are obviously obtained by neglecting the diffusive part of the \ac{NSE}. One can also see that the \ac{RANS} equations are more difficult than the \ac{NSE} themselves. However, as explained in \ref{sec:rans}, the advantage is that \ac{RANS} can operate on much coarser meshes that do not have to resolve the small scale turbulence phenomena, which makes them more numerically efficient overall in many applications.
 \\
-%TODO label section
+%TODO label chapter
 \subsubsection{Staggered algorithm}\label{sec:staggered_algorithm}
 The three-field coupled system of equations \eqref{eq:3field_structure}-\eqref{eq:3field_fluid}, can be solved very efficiently with an iterative staggered procedure, such as the one proposed by by \cite{Farhat1995}. This work utilizes the second-order staggered algorithm described in Figure~\ref{fig:staggered_algorithm}.
 

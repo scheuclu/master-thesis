@@ -3,18 +3,19 @@
 \begin{document}
 \setlength{\delimitershortfall}{0pt}
 
-\section{Fluid mechanics}\label{sec:fluid_mechanics}
-\secttoc
-\sectlof
-\sectlot
+\chapter{Fluid mechanics}\label{sec:fluid_mechanics}
+\minitoc
+%\secttoc
+%\sectlof
+%\sectlot
 
-\subsection{Eulerian and Lagrangian view}\label{sec:eulerian_lagrangian}
+\section{Eulerian and Lagrangian view}\label{sec:eulerian_lagrangian}
 In time dependent analytical physics there are two basic concepts of how to view a system of interest: the Eulerian and the Lagrangian approach. It shall be stressed here, that Eulerian view and Euler equations are two unrelated concepts..\\
 The issue of Lagrangian versus Eulerian perspective can be explained in many ways, in the end it boils down to the interpretation of the time derivative. Since we will be using the different derivatives frequently in this thesis, a short introduction shall be provided.
-\subsubsection{Material derivative}
+\subsection{Material derivative}
 The material derivative of a property, is a derivative(rate of change), that follows a specific particle 'p'. That means that at every time instance the material derivative gives as the current value of the property of a specific particle. Since in general, a particle will move its position in time quite a lot, some mean is required to track the particles motion. The material derivative is also known as the Lagrangian concept, and is commonly used in solid mechanics, since the motion of the solid particles is typically little, or at least nearly uniform over the body, which makes position tracking easy.
 
-\subsubsection{Eulerian derivative}
+\subsection{Eulerian derivative}
 The Eulerian derivative takes a different approach. It refers to a fixed frame of reference in the domain, and regards the rate of change of a quantity of interest at that specific position. Due to the particle movement, it typically refers to different particles at different times.
 \\
 Material and Eulerian derivatives can be linked via the so-called convective rate of change as:
@@ -23,19 +24,19 @@ Material and Eulerian derivatives can be linked via the so-called convective rat
 \end{align}
 
 In fluid mechanics the Eulerian concept is typically preferred.\\
-However, when looking at fluid-structure interaction problems, the interface is typically moving. To account for that motion in the fluid, one either has to come up with some cell-intersection approach, or the fluid-mesh has to be deformed too.\\
-An appealing and straightforward approach to do so, is the so called \acf{ALE} approach. As the name suggest, it is a hybrid between Eulerian and Lagrangian point of view. The \ac{ALE} approach allows to utilize the best of both approaches. The mesh can either be fixed, moved with the continuum in an Eulerian manner, or be moved in some arbitrarily specified manner in between. The \ac{ALE} method can handle larger distortions than a pure Eulerian would, while still allowing to keep interface continuity between the structure and the fluid, such that no intersection of fluid cells is necessary.\\
+However, when looking at fluid-structure interaction problems, the interface is typically moving. To account for that motion in the fluid, one either has to come up with some cell-interchapter approach, or the fluid-mesh has to be deformed too.\\
+An appealing and straightforward approach to do so, is the so called \acf{ALE} approach. As the name suggest, it is a hybrid between Eulerian and Lagrangian point of view. The \ac{ALE} approach allows to utilize the best of both approaches. The mesh can either be fixed, moved with the continuum in an Eulerian manner, or be moved in some arbitrarily specified manner in between. The \ac{ALE} method can handle larger distortions than a pure Eulerian would, while still allowing to keep interface continuity between the structure and the fluid, such that no interchapter of fluid cells is necessary.\\
 In this thesis, both Eulerian and \ac{ALE} methods will be covered. In general, no recommendation on to prefer one or the other method can be given. Instead, one should always be aware of the pros and cons of either method and choose the appropriate one for a specific problem accordingly.\\
 For a more in depth-analysis, the interested reader is referred to~\cite{LeVeque1992}
 
 
-\subsection{Basic equations of fluid mechanics}\label{sec:fluid_equations_basic}
+\section{Basic equations of fluid mechanics}\label{sec:fluid_equations_basic}
 
 The physics of fluid motion are governed by the so-called \acf{NSE}. These equations were derived independently of one another by Claude-Louis Navier and George Gabriel Stokes as a generalization of the Euler-equations by including viscosity effects.
 In general one distinguishes the incompressible and the compressible \ac{NSE}. The validity of their application depends on the problem setup. As a rule of thumb, flows with Mach-numbers lower than $0.3$ can usually be safely approximated by the incompressible \ac{NSE}.\\
 The Navier stokes equation consist of the \acf{NSME}, the \ac{NSCE} and, if the compressible equations are solved, the \ac{NSEE}. In the literature, the term \ac{NSE} is often synonymously used for the \ac{NSCE}, in this thesis however, with \ac{NSE} we will always refer to the full set of equations and will explicitly name the momentum, continuity or energy equation otherwise.
 
-\subsubsection{Incompressible \acl{NSE}}
+\subsection{Incompressible \acl{NSE}}
 The incompressible \ac{NSE} are derived by putting a few assumptions on the Cauchy stress tensor:
 \begin{itemize}
 \item Galilean invariance of the fluid stress tensor
@@ -70,7 +71,7 @@ And the incompressible \ac{NSCE} can be written as
 It shall be noted, that in the incompressible \ac{NSE}, the pressure can only be solved up to a certain constant. The pressure at a certain point therefore has to be fixed, or the system will be singular.
 
 
-\subsubsection{Compressible \acl{NSE}}\label{sec:nsg_compressible}
+\subsection{Compressible \acl{NSE}}\label{sec:nsg_compressible}
 Compared to the incompressible \ac{NSE}, the compressible \ac{NSE} introduce one additional unknown, since the density can now vary. To close the system, one additional equation is required: the energy equation.\\
 The compressible \ac{NSE} are derived by making the following assumptions:
 \begin{itemize}
@@ -102,7 +103,7 @@ And finally the \ac{NSEE} writes
 where $s$ is the entropy per unit mass, $Q$ is the heat transferred, and $T$ is the temperature.
 
 
-\subsubsection{Euler equations}\label{sec:euler_convective}
+\subsection{Euler equations}\label{sec:euler_convective}
 The Euler equations can be regarded as a special case of the Navies stokes equations where the diffusive(viscous) contributions are neglected. Dimension analysis \cite{Doering1995} reveals that this is usually justified for high Mach numbers and distant from walls. In fact, boundary Layer theory suggests that a lot of problems can be well approximated by solving the full, diffusive equations only near the wall boundary and using the Euler equations everywhere else.
 Although the Euler equations can be derived for both incompressible and compressible flows, the statement above suggests that only the compressible ones give actual, physically correct results. We therefore restrict our considerations to the compressible Euler equations.\\
 Summing up, these equations can be written in convective form as
@@ -120,7 +121,7 @@ Summing up, these equations can be written in convective form as
 
 
 
-\subsubsection{Conservative Form}\label{sec:conservative_form_nsg}
+\subsection{Conservative Form}\label{sec:conservative_form_nsg}
 For the purpose of \ac{FV} discretization one usually brings the equations into the so-called conservative form, which can be written generally as
 \begin{align}\label{eq:conservative_form_general}
 \tfrac{\vec{\xi}}{t}+\nabla\cdot f(\vec{\xi}) = \vec{0}
@@ -230,7 +231,7 @@ For the relation between Temperature and heat flux an assumption has to be made.
 \heatflux=-\thermcond\nabla\temp
 \end{align}
 
-\subsubsection{Conservative form of the Euler equations}
+\subsection{Conservative form of the Euler equations}
 The euler equations are a simplified form of the Navier-Stokes Equations~\eqref{eq:nsg_incompressible}\eqref{eq:nsg_compressible}, where the viscous effects are neglected by setting $\fluxesdiff=\vec{0}$.
 \begin{align}\label{eq:euler}
 \pdfrac{\fstate}{t} + \nabla \cdot \fluxesconv(\fstate) = \vec{0}
@@ -243,7 +244,7 @@ where $L$ describes a characteristic length.
 
 A high Reynolds number thus indicates that the flow is dominated by inertial forces, thus the Euler Equations should give satisfying results. However, an Euler flow lacks the ability to represent stick wall boundary conditions, thus it is unable to represent boundary layers.
 
-\subsubsection{Equations of state}
+\subsection{Equations of state}
 Looking at the above Equations, one might notice that the number of unknowns is greater than the number of equations. Particularly, the pressure only appears in Equation~\eqref{eq:fluxesconv} and is not linked to the other formulas. This problem is solved by introducing an \acf{EOS} that relates pressure, internal energy and density. The \ac{EOS} depends on the fluid model, some well-known ones are: \ac{PG}, \ac{SG}, \ac{JWL}.\\
 For the simplest one, PG, the \ac{EOS} can be written as
 \begin{align}\label{eq:eos_pg}
@@ -251,7 +252,7 @@ For the simplest one, PG, the \ac{EOS} can be written as
 \end{align}
 
 
-\subsubsection{\acf{RANS} Equations}\label{sec:rans}
+\subsection{\acf{RANS} Equations}\label{sec:rans}
 The \acf{RANS} Equations are time-averaged equations of motion for the fluid.
 \begin{align}\label{eq:rans_averaging}
 \fstate \rightarrow \av{\fstate} = \lim_{\temp \to \infty} \frac{1}{T} \int_{t^0}^{t^0+T} \fstate dt
@@ -291,7 +292,7 @@ The \ac{RANS} equations can then be written as
 
 \paragraph{Spalart Allamars turbulence model}
 
-As explained in the previous section, the \ac{RANS} equations necessitate additional modeling to close the system of equations. This is typically performed by applying the Boussinesq assumption and assuming that the fluid stress tensor can be written as
+As explained in the previous chapter, the \ac{RANS} equations necessitate additional modeling to close the system of equations. This is typically performed by applying the Boussinesq assumption and assuming that the fluid stress tensor can be written as
 \begin{align}
 \fluidstress_{ij}&=2 \nut \left( \bar{S}_{ij}-\frac{1}{3} \pdfrac{\bar{v}_k}{x_k} \delta_{ij} \right) - \frac{2}{3}\bar{\dens}k\delta_{ij} \label{eq:rans_turbulent_stress}\\
 &\bar{S}_{ij}=\frac{1}{2}\left( \pdfrac{\bar{v}_i}{x_j}+\pdfrac{\bar{v}_j}{x_i} \right) \\

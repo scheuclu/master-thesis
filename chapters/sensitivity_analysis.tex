@@ -60,8 +60,8 @@
 
 
 
-\section{Fluid \acf{SA}}\label{sec:SA}
-As explained in section \ref{sec:optimization}, optimization is based on the calculations of gradients, also denoted as \acf{SA}.
+\chapter{Fluid \acf{SA}}\label{sec:SA}
+As explained in chapter \ref{sec:optimization}, optimization is based on the calculations of gradients, also denoted as \acf{SA}.
 
 \subsection{Connection between discretization and differentiation}\label{sec:discretization_vs_differentiation}
 When it comes to calculating the gradients of a solution of a PDE, there are two fundamentally different approaches one could take.\\
@@ -114,7 +114,7 @@ As mentioned in Section~\ref{sec:optimization}, we typically deal with an optimi
                                                         }
 \end{align}
 \subsubsection{Calculation of $\PoptcritJBYabsvarI\bigg\rvert_{\fstate_0}$}
-In this thesis, we restrict ourselves to Lift($L$), Drag($D$) and combinations of  these quantities( e.g. Lift-Drag ration $\frac{L}{D}$ ) as optimization criteria $\optcrit$. As abstract variables we only consider the free stream mach-number $\machnum_{\infty}$, the free-stream angle of attack $\aoa$ and an airfoil shape parameter as explained in section \ref{sec:design_model}.
+In this thesis, we restrict ourselves to Lift($L$), Drag($D$) and combinations of  these quantities( e.g. Lift-Drag ration $\frac{L}{D}$ ) as optimization criteria $\optcrit$. As abstract variables we only consider the free stream mach-number $\machnum_{\infty}$, the free-stream angle of attack $\aoa$ and an airfoil shape parameter as explained in chapter \ref{sec:design_model}.
 The formula for the lift over an airfoil can be written as
 
 
@@ -270,7 +270,7 @@ After inserting \eqref{eq:lifttoddrag_by_absvar}, \eqref{eq:lifttodrag_by_dfstat
 \pagebreak
 
 
-\section{Aero-elastic \acl{SA}}\label{sec:aeroelastic_sa}
+\chapter{Aero-elastic \acl{SA}}\label{sec:aeroelastic_sa}
 The previous chapter dealt with the \ac{SA} of a pure fluid problem. Boundary, or respectively mesh-movement in general, was only induced due to shape variation via design variables itself. However, one can easily decieve a system, where the fluid interacts with an elastic structure. This would introduce an additional dependency of the structure shape, and thus fluid-structure interface, on the fluid solution. Also, a fully coupled system introduces a direct connection between the stress resultants in the structure with the fluid solutions.\
 This chapter therfore investigates the \ac{SA} of such a coupled system of equations. Considerations are build upon the derivations in chapter~\ref{sec:SA} and the coupled three-field \ac{FSI} formulation described in chapter~\ref{sec:3_field_formulation}.\\
 The \ac{SA} approach applied in this thesis is based on the work of~\cite{Sobieszczanski1990}, for deriving the \ac{GSE} of coupled systems. As introduced by the authors of\cite{Maute2001}, we utilize the three-field formulation of \cite{Farhat1995}.

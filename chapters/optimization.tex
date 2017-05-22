@@ -5,10 +5,10 @@
 \def\arraystretch{2.0}
 \begin{document}
 \setlength{\delimitershortfall}{0pt}
-\section{Optimization}\label{sec:optimization}
-\secttoc
-\sectlof
-\sectlot
+\chapter{Optimization}\label{sec:optimization}
+\minitoc
+%\sectlof
+%\sectlot
 
 
 As mentioned in the introduction, the overall motivation for this thesis is optimization. A typicall optimization process, not restricted to fluid problems, is depicted in Figure~\ref{fig:optimization_blockdiagram}.
@@ -21,7 +21,7 @@ As mentioned in the introduction, the overall motivation for this thesis is opti
     \end{center}
 \end{figure}
 
-%\subsection{Basics}\label{sec:basics}
+%\section{Basics}\label{sec:basics}
 
 A generic, aeroelastic optimization problem can be written as
 \begin{align}
@@ -53,7 +53,7 @@ The optimization model describes the solution of the generic optimization proble
 The design model links abstract optimization variables~$\absvars$ to actual shapes, structures, geometries or aerodynamics design parameters. For this purpose SDESIGN, a programm specifically written for \ac{SA} purpose in the \ac{FRG}, has been used during this thesis. Its basic concepts an ideas are described in \cite{Maute2003}.\\
 Finally, the analysis model provides concepts of evaluation the optimization criteria. Typically, the optimization criteria depend on $\structdisp$ and $\fstate$ which is why a coupled system of equations has to be solved in every design optimization process. The Sensitivity Analysis (SA) is also part of this model. Aeroelastic analysis and Sensitivity analysis are discussed in Section~\ref{sec:aeroelastic_sa}.
 
-\subsection{Optimization Model}\label{sec:optimization_model}
+\section{Optimization Model}\label{sec:optimization_model}
 Optimization problems are typically solved by gradient-based methods. The methods are divided into
 \begin{itemize}
 \item Primal
@@ -141,7 +141,7 @@ By construction, the constraints are satisfied only when the optimum point is re
 
 
 %
-\subsection{Design Model}\label{sec:design_model}
+\section{Design Model}\label{sec:design_model}
 The design model represent the essential link between the described optimization model and the analysis model. Generally speaking, it relates physical design parameters to abstract ones.
 \begin{align}
 \physvars=\physvars(\absvars),~~~\physvars \in \mathbb{R}^{n_{\physvars}} \label{eq:physvarsTOabsvars}
@@ -185,13 +185,13 @@ Both approaches have pros and cons, that are quickly discussed in \cite{Maute200
 \begin{figure}[h!]
 	\begin{center}
         \includegraphics{\mainpath/fig/tikz/build/sdesign_visualization.pdf}
-        \caption[Design element visualization]{Visualization of the design element concept, exemplarily shown on a NACA0012 airfoil. For simplicity, a single design element(cubic in the horizontal direction and linear in the vertical direction) is used. Both the initial configuration(dashed lines) and the deformed configuration(full lines) are plotted. Although only eight design element nodes are provided, the function space of the design element allows for a great variation of the airfoil shape. Also, the size of the parameter space is now independent of the airfoil mesh size. From this perspective, the design element concept can be regarded as an model reduction for the shape variation. We will use exactly this parametrization of a NACA0012 airfoil here to verify the implemented shape-sensitivities in section~\ref{sec:verification}}
+        \caption[Design element visualization]{Visualization of the design element concept, exemplarily shown on a NACA0012 airfoil. For simplicity, a single design element(cubic in the horizontal direction and linear in the vertical direction) is used. Both the initial configuration(dashed lines) and the deformed configuration(full lines) are plotted. Although only eight design element nodes are provided, the function space of the design element allows for a great variation of the airfoil shape. Also, the size of the parameter space is now independent of the airfoil mesh size. From this perspective, the design element concept can be regarded as an model reduction for the shape variation. We will use exactly this parametrization of a NACA0012 airfoil here to verify the implemented shape-sensitivities in chapter~\ref{sec:verification}}
 		\label{designelement_concept_2D}
     \end{center}
 \end{figure}
 
 %TODO talk about SDESIGN
-\subsection{Analysis Model}\label{sec:analysis_model}
+\section{Analysis Model}\label{sec:analysis_model}
 In the analysis model, the optimization criteria $\optcrit$ are determined for a given set of optimization variables $\absvar$. Since the optimization algorithm chosen in this thesis is based on gradients, the gradients of the optimization criteria with respect to the abstract variables are determined in this step.
 %A main focus on this thesis has been the appropriate evaluation of these derivatives, we therfore denote the subsequent chapter~\ref{sec:SA} to the issue.
 

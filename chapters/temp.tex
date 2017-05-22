@@ -7,8 +7,8 @@
 \begin{document}
 \setlength{\delimitershortfall}{0pt}
 
-\section{Derivative of the fluid residual $\pdfrac{\dresidual}{\dfstate}$}\label{sec:dresidual_derivative}
-This section is denoted to a thorough derivation of the derivative $\pdfrac{\dresidual}{\dfstate}$.
+\chapter{Derivative of the fluid residual $\pdfrac{\dresidual}{\dfstate}$}\label{sec:dresidual_derivative}
+This chapter is denoted to a thorough derivation of the derivative $\pdfrac{\dresidual}{\dfstate}$.
 We need this derivative in order to solve for $\frac{\dfstate}{\absvar}$ in equation~\eqref{eq:dfstate_by_absvar}.\\
 
 We will split this derivatives into the convective part and the diffusive part according to~\eqref{eq:nse_final_discretized_notationchange}.
@@ -36,7 +36,7 @@ Similar to the \ac{MUSCL} procedure we transform the fluid state vector to primi
 Of course, this transformation involves the \ac{EOS} of the fluid. We will use $\prim{(\cdot)}$ from now on top mark any quantity as based on/formulated in primitive variables.\\
 The primitive state vector is also much more appealing when it comes to the implementation of boundary conditions, since the solution variables are separated there.
  \\
-Next we recall the conservative form of the Euler equations, which was presented in section~\ref{sec:conservative_form_nsg} as
+Next we recall the conservative form of the Euler equations, which was presented in chapter~\ref{sec:conservative_form_nsg} as
 \begin{align}\label{eq:t1}
 \pdfrac{\fstate}{t}+\nabla\cdot\fluxesconv{\fstate}=\vec{0}
 \end{align}

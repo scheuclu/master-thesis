@@ -57,10 +57,10 @@
 \def\PmmsBYabsvarI       {\pdfrac{\mms}        {\absvar_i}}
 \def\PfstateBYabsvarI    {\pdfrac{\fstate}     {\absvar_i}}
 
-\section{Aero-elastic \acl{SA}}\label{sec:aeroelastic_sa}
-\secttoc
-\sectlof
-\sectlot
+\chapter{Aero-elastic \acl{SA}}\label{sec:aeroelastic_sa}
+\minitoc
+%\sectlof
+%\sectlot
 
 The previous chapter dealt with the \ac{SA} of a pure fluid problem. Boundary, or respectively mesh-movement in general, was only introduces due to shape variation via design variables itself. However, one can easily decieve a system, where the fluid interacts with an elastic structure. This introduces an additional dependency of the structure shape, and thus fluid-structure interface, on the fluid solution. Also, a fully coupled system shows a direct connection between the stress resultants in the structure with the fluid solution.\
 This chapter therfore investigates the \ac{SA} of such a coupled system of equations. Considerations are build upon the derivations in chapter~\ref{sec:SA} and the coupled three-field \ac{FSI} formulation described in chapter~\ref{sec:3_field_formulation}.\\
@@ -155,7 +155,7 @@ Combining the previous two equations, it follows that the total derivative of th
 \end{align}
 Where $n_{eq}$ is the total number of equations(e.g. five fluid state equations for the compressible \ac{NSE} in 3D, three equations of the mesh motions and another three equations for the structure motion), $n_{q}$ is the number of optimization criteria and $n_s$ is the number of abstract variables.
 
-\subsection{Direct vs. adjoint approach}
+\section{Direct vs. adjoint approach}
 Looking at the above equation ~\ref{eq:totderiv_optcritBYabsvar} one can identify a matrix-matrix-matrix product. Matrix-matrix products are not commutative, one can, however, perform the following transformation
 \begin{align}\label{eq:adjoint_concept}
 \dmat{A}\dmat{B}\dmat{C}                    &= \dmat{A}(\dmat{B}\dmat{C}) \nonumber\\
@@ -230,7 +230,7 @@ Here the total complexity can be approximated as $\order{n_{eq}^2n_{\optcrits}+n
 If one or the other approach is to be preferred depends on the optimization setup, particularly the number of optimization criteria and the number of optimization variables. Looking at the orders above, one can conclude that if the number of abstract parameters $n_{\absvars}$ is smaller than the number of optimization criteria, the direct approach is more efficient, otherwise the adjoint approach is to be preferred. Additionally one can argue, that the relevant term in the orders above is the one with $n_{eq}^2$  since it dominates the sum. Therefore, depending on whether $n_s$ or $n_q$ is bigger, the direct or the adjoint method is to be preferred.
 
 
-\subsubsection{Direct \acl{SA} for the Euler equations}\label{sec:direct_sa}
+\subsection{Direct \acl{SA} for the Euler equations}\label{sec:direct_sa}
 
 
 The $\dmat{A}$ matrix for the direct approach in ALE formulation can be written as
@@ -347,7 +347,7 @@ Finally, the convergence of the staggered algorithm can be monitored via
 \end{align}
 
 
-\subsubsection{Adjoint \acl{SA} for the Euler equations}\label{sec:adjoint_sa}
+\subsection{Adjoint \acl{SA} for the Euler equations}\label{sec:adjoint_sa}
 The adjoint SA follows the same scheme as the direct one
 
 

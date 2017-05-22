@@ -8,16 +8,16 @@
 \begin{document}
 \setlength{\delimitershortfall}{0pt}
 
-\section{Verification}\label{sec:verification}
-\secttoc
-\sectlof
-\sectlot
+\chapter{Verification}\label{sec:verification}
+\minitoc
+%\sectlof
+%\sectlot
 
-After chapter~\ref{sec:fluid_mechanics} described the basic equation of fluid mechanics, discretization of this equations with \ac{FV} and \ac{FE} schemes in section~\ref{sec:finite_volume_method}, and an introduction to \ac{SA}, the expressions for the actual derivatives have been derived in section~\ref{sec:SA}. This has been done for both the body-fitted and the embedded~\ref{sec:embedded_boundary_method} framework of AERO-F.\\
-This section is denoted to a thorough validation of the obtained derivatives. As described in \ref{sec:SA}, AERO-F handles both sensitivities with respect to far-field variables(e.g. angle of attack) as well as shape sensitivities. Both types require to be handled fundamentally different. While the first type leads to derivatives mainly in the far field boundary conditions, the latter one interferes with the wall treatment. More importantly, as shown in sections~\ref{sec:fluid_jacobian} and \ref{sec:dresidual_by_absvar}, in the embedded case, doing shape sensitivities leads to additional derivatives with regards to the intersector.\\
+After chapter~\ref{sec:fluid_mechanics} described the basic equation of fluid mechanics, discretization of this equations with \ac{FV} and \ac{FE} schemes in chapter~\ref{sec:finite_volume_method}, and an introduction to \ac{SA}, the expressions for the actual derivatives have been derived in chapter~\ref{sec:SA}. This has been done for both the body-fitted and the embedded~\ref{sec:embedded_boundary_method} framework of AERO-F.\\
+This chapter is denoted to a thorough validation of the obtained derivatives. As described in \ref{sec:SA}, AERO-F handles both sensitivities with respect to far-field variables(e.g. angle of attack) as well as shape sensitivities. Both types require to be handled fundamentally different. While the first type leads to derivatives mainly in the far field boundary conditions, the latter one interferes with the wall treatment. More importantly, as shown in chapters~\ref{sec:fluid_jacobian} and \ref{sec:dresidual_by_absvar}, in the embedded case, doing shape sensitivities leads to additional derivatives with regards to the intersector.\\
 For all those reasons, the verification provided in this chapter deals with both $\machnum_{\infty}$-sensitivity as well as shape-sensitivity. More over we will provide plots for both the body-fitted and the embedded case.
 
-\subsection{Approach}\label{sec:verification_approach}
+\section{Approach}\label{sec:verification_approach}
 The question of how to verify the obtained sensitivities is anything but straightforward.\\
 The first question is: What can be verified anyway?\\
 If we have a look at equation \eqref{eq:full_sa_nostruct}, one can see, that there are to main derivatives: $\pdfrac{\dresidual}{\dfstate}$ and $\pdfrac{\dresidual}{\absvar}$. The derivative with respect to the mesh position $\pdfrac{\dresidual}{\dmpos}$ is not validated here, since it is obtained from SDESIGN and taken for granted.\\
@@ -53,7 +53,7 @@ The validation of integrated forces is provided in figures~[\ref{fig:dLdMa_Euler
 
 
 
-\subsection{Mach-sensitivity}
+\section{Mach-sensitivity}
 For the body-fitted case, the verification of $\tfrac{\dfstate}{\machnum_{\infty}}$ is provided in figure~\ref{fig:verification_dwdma_ale_Euler} for Euler equations, figure~\ref{fig:verification_dwdma_ale_Laminar} for full \ac{NSE} and in figure~\ref{fig:verification_dwdma_ale_RANS} for \ac{NSE} with an additional Spallart-Almares turbulence model.
 Additionally, a side by side comparison of the analytic results between all three equation types is also provided in figure~\ref{fig:verification_dwdma_ale_comparison} in order to ensure, that the additional viscous and turbulent terms actually account for a visible difference.\\
 For the embedded case, we provide the verification of $\tfrac{\dfstate}{\machnum_{\infty}}$  in figure~\ref{fig:verification_dwdma_emb_Euler} for Euler equation, figure~\ref{fig:verification_dwdma_emb_Laminar} for full \ac{NSE} and in figure~\ref{fig:verification_dwdma_emb_RANS} for \ac{NSE} equations with an additional Spallart-Almares turbulence model.
@@ -61,9 +61,9 @@ Again, a side by side comparison of the analytic results between all three equat
 
 
 %--------------------------------------------------------------------------------------------
-%\subsection{Body-fitted}
+%\section{Body-fitted}
 \foreach \vertype in {Euler,Laminar,RANS}{
-	%\subsubsection{Verification $\tfrac{\dfstate}{\machnum_{\infty}}$ for \vertype equations and a body-fitted framework}
+	%\subsection{Verification $\tfrac{\dfstate}{\machnum_{\infty}}$ for \vertype equations and a body-fitted framework}
 	\begin{figure}[t!]
 	    \centering
 	    \textbf{Verification $\tfrac{\dfstate}{\machnum_{\infty}}$ for {\vertype} equations and a body-fitted framework}\par\medskip    
@@ -80,7 +80,7 @@ Again, a side by side comparison of the analytic results between all three equat
 	      }
 	      
 	    }
-	    \caption[Verification $\tfrac{\dfstate}{\machnum_{\infty}}$ {\vertype} equations body-fitted]{Verification of $\tfrac{\dfstate}{\machnum_{\infty}}$ for {\vertype} equations in the body-fitted framework. The \ac{FD} reference solution as described in section~\ref{sec:verification_approach} is provided in the left column, the newly implemented analytic derivatives are visualized in the right column. \ac{FD} and analytic solution are plotted using the same color-scheme.}
+	    \caption[Verification $\tfrac{\dfstate}{\machnum_{\infty}}$ {\vertype} equations body-fitted]{Verification of $\tfrac{\dfstate}{\machnum_{\infty}}$ for {\vertype} equations in the body-fitted framework. The \ac{FD} reference solution as described in chapter~\ref{sec:verification_approach} is provided in the left column, the newly implemented analytic derivatives are visualized in the right column. \ac{FD} and analytic solution are plotted using the same color-scheme.}
 	    \label{fig:verification_dwdma_ale_\vertype}
 	    
 	    
@@ -88,9 +88,9 @@ Again, a side by side comparison of the analytic results between all three equat
 }
 
 %--------------------------------------------------------------------------------------------
-%\subsection{Embedded}
+%\section{Embedded}
 \foreach \vertype in {Euler,Laminar,RANS}{
-	%\subsubsection{Verification of the \vertype derivatives}
+	%\subsection{Verification of the \vertype derivatives}
 	\begin{figure}[t!]
 	    \centering
 	    \textbf{Verification of $\tfrac{\dfstate}{\machnum_{\infty}}$ for {\vertype} equations and a embedded framework}\par\medskip    
@@ -107,7 +107,7 @@ Again, a side by side comparison of the analytic results between all three equat
 	      }
 	      
 	    }
-	    \caption[Verification of $\tfrac{\dfstate}{\machnum_{\infty}}$ for {\vertype} equations, embedded]{Verification of $\tfrac{\dfstate}{\machnum_{\infty}}$ for {\vertype} equations in the embedded framework. The \ac{FD} reference solution as described in section~\ref{sec:verification_approach} is provided in the left column, the newly implemented analytic derivatives are visualized in the right column. \ac{FD} and analytic solution are plotted using the same color-scheme.}
+	    \caption[Verification of $\tfrac{\dfstate}{\machnum_{\infty}}$ for {\vertype} equations, embedded]{Verification of $\tfrac{\dfstate}{\machnum_{\infty}}$ for {\vertype} equations in the embedded framework. The \ac{FD} reference solution as described in chapter~\ref{sec:verification_approach} is provided in the left column, the newly implemented analytic derivatives are visualized in the right column. \ac{FD} and analytic solution are plotted using the same color-scheme.}
 	    \label{fig:verification_dwdma_emb_\vertype}
 	    
 	\end{figure}
@@ -118,7 +118,7 @@ Again, a side by side comparison of the analytic results between all three equat
 
 
 %--------------------------------------------------------------------------------------------
-%\subsubsection{Comparison}
+%\subsection{Comparison}
 
 \begin{figure}[t!]
     \centering
@@ -169,16 +169,16 @@ Again, a side by side comparison of the analytic results between all three equat
 %--------------------------------------------------------------------------------------------
 
 
-\subsection{Shape-sensitivity}
+\section{Shape-sensitivity}
 The verification of $\tfrac{\dfstate}{\absvar}$ for ALE simulations is provided in figure~\ref{fig:verification_dwds_ale_Euler} for Euler equation, figure~\ref{fig:verification_dwds_ale_Laminar} for full \ac{NSE} and in figure~\ref{fig:verification_dwds_ale_RANS} for \ac{NSE} equations with an additional Spallart-Almares turbulence model.
 Additionally, a side by side comparison of the analytic results between all three equation types is also provided in figure~\ref{fig:verification_dwds_ale_comparison} in order to ensure that the additional viscous and turbulent terms actually account for a visible difference.
 \\
 For the embedded case, we provide the verification of $\tfrac{\dfstate}{\absvar}$  in figure~\ref{fig:verification_dwds_emb_Euler} for Euler equation, figure~\ref{fig:verification_dwds_emb_Laminar} for full \ac{NSE} and in figure~\ref{fig:verification_dwds_emb_RANS} for \ac{NSE} equations with an additional Spallart-Almares turbulence model.
 Again, a side by side comparison of the analytic results between all three equation types is also provided in figure~\ref{fig:verification_dwds_emb_comparison} in order to ensure that the additional viscous and turbulent terms actually account for a visible difference.
 %--------------------------------------------------------------------------------------------
-%\subsection{Body-fitted}
+%\section{Body-fitted}
 \foreach \vertype in {Euler,Laminar,RANS}{
-	%\subsubsection{Verification of the \vertype derivatives}
+	%\subsection{Verification of the \vertype derivatives}
 	\begin{figure}[t!]
 	    \centering
 	    \textbf{Verification $\tfrac{\dfstate}{\absvar}$ for {\vertype} equations and a body-fitted framework}\par\medskip    
@@ -196,17 +196,17 @@ Again, a side by side comparison of the analytic results between all three equat
 	      
 	    }
 	    \caption[Verification of $\tfrac{\dfstate}{\absvar}$ {\vertype} for equations, body-fitted]{Verification of $\tfrac{\dfstate}{\absvar}$ for {\vertype} equations in the body-fitted framework.
-	    The \ac{FD} reference solution as described in section~\ref{sec:verification_approach} is provided in the left column, the newly implemented analytic derivatives are visualized in the right column. \ac{FD} and analytic solution are plotted using the same color-scheme.}
+	    The \ac{FD} reference solution as described in chapter~\ref{sec:verification_approach} is provided in the left column, the newly implemented analytic derivatives are visualized in the right column. \ac{FD} and analytic solution are plotted using the same color-scheme.}
 	    \label{fig:verification_dwds_ale_\vertype}
 	    
 	\end{figure}
 }
 
 %--------------------------------------------------------------------------------------------
-%\subsection{Embededd}
+%\section{Embededd}
 
 \foreach \vertype in {Euler,Laminar,RANS}{
-	%\subsubsection{Verification of the \vertype derivatives}
+	%\subsection{Verification of the \vertype derivatives}
 	\begin{figure}[t!]
 	    \centering
 	    \textbf{Verification $\tfrac{\dfstate}{\absvar}$ for {\vertype} equations and a embedded framework}\par\medskip    
@@ -224,7 +224,7 @@ Again, a side by side comparison of the analytic results between all three equat
 	      
 	    }
 	    \caption[Verification $\tfrac{\dfstate}{\absvar}$ {\vertype} equations embedded]{Verification of $\tfrac{\dfstate}{\absvar}$ for {\vertype} equations in the embedded framework.
-	    The \ac{FD} reference solution as described in section~\ref{sec:verification_approach} is provided in the left column, the newly implemented analytic derivatives are visualized in the right column. \ac{FD} and analytic solution are plotted using the same color-scheme.}
+	    The \ac{FD} reference solution as described in chapter~\ref{sec:verification_approach} is provided in the left column, the newly implemented analytic derivatives are visualized in the right column. \ac{FD} and analytic solution are plotted using the same color-scheme.}
 	    \label{fig:verification_dwds_emb_\vertype}
 	    
 	\end{figure}
@@ -232,7 +232,7 @@ Again, a side by side comparison of the analytic results between all three equat
 
 
 %--------------------------------------------------------------------------------------------
-%\subsubsection{Comparison}
+%\subsection{Comparison}
 
 \begin{figure}[t!]
     \centering

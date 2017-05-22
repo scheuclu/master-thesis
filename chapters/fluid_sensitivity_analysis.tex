@@ -60,15 +60,15 @@
 
 
 
-\section{Fluid \acf{SA}}\label{sec:SA}
-\secttoc
-\sectlof
-\sectlot
+\chapter{Fluid \acf{SA}}\label{sec:SA}
+\minitoc
+%\sectlof
+%\sectlot
 
-As explained in section \ref{sec:optimization}, optimization is based on the calculations of gradients, also denoted as sensitivities.
-The derivation and implementation of these gradients constituted the lion-share of this thesis. We will therefore denote this section to the general derivation of fluid-sensitivity equations, before a detailed look into the most important terms within these equations is provided in section~\ref{sec:dresidual_derivative}.
+As explained in chapter \ref{sec:optimization}, optimization is based on the calculations of gradients, also denoted as sensitivities.
+The derivation and implementation of these gradients constituted the lion-share of this thesis. We will therefore denote this chapter to the general derivation of fluid-sensitivity equations, before a detailed look into the most important terms within these equations is provided in chapter~\ref{sec:dresidual_derivative}.
 
-\subsection{General concepts}
+\section{General concepts}
 When it comes to calculating the gradients of a solution of a \ac{PDE}, there are two fundamentally different approaches one could take.\\
 Firstly, one could think of first deriving the continuous equations and then applying the discretization scheme on them. On the other hand its equally legitimate to first apply the discretization and compute the gradients of this approximated solution. This thesis focuses on the latter for very particular reasons, see figure~\ref{fig:discretization_differentiation_sequence}.
 If one would take the first approach, getting a steady state solution for the subsequent \acf{SA} would entail the solution of the derived system of equations. This can not be done with standard CFD software. In addition to the \ac{SA} routines, one would therefor have to implement an additional steady equation solver. This is not only uneconomical, it increases the risk of creating implementation bugs and also defeats the purpose of decades of research in stable and efficient \ac{NSE} solvers.
@@ -86,7 +86,7 @@ If one would take the first approach, getting a steady state solution for the su
 
 
 
-\subsection{Sensitivity derivation}\label{sec:sensitivity_derivation}
+\section{Sensitivity derivation}\label{sec:sensitivity_derivation}
 When it comes to \ac{SA} within the context of \ac{CFD}, one also has to distinguish between \ac{SA} of the non-coupled fluid problem and the \ac{SA} in the fully coupled aeroelastic case. The latter case is much more involved, since it requires additional terms from the Structure and mesh motion equations as well as for the coupling itself. In the following we will therefore begin with the \ac{SA} of a regular fluid problem. A generalization to a coupled FSI problem will follow.
  \\
 
@@ -119,8 +119,8 @@ As mentioned in Section~\ref{sec:optimization}, we typically deal with an optimi
                                                                  }
                                                         }
 \end{align}
-\subsubsection{Calculation of $\PoptcritJBYabsvarI\bigg\rvert_{\fstate_0}$}
-For the optimization criterion, we restrict ourselves to Lift($L$), Drag($D$) and combinations of  these quantities( e.g. Lift-Drag ration $\frac{L}{D}$ ). As abstract variables we only consider the free stream mach-number $\machnum_{\infty}$, the free-stream angle of attack $\aoa$ and an airfoil shape parameter as explained in section \ref{sec:design_model}.
+\subsection{Calculation of $\PoptcritJBYabsvarI\bigg\rvert_{\fstate_0}$}
+For the optimization criterion, we restrict ourselves to Lift($L$), Drag($D$) and combinations of  these quantities( e.g. Lift-Drag ration $\frac{L}{D}$ ). As abstract variables we only consider the free stream mach-number $\machnum_{\infty}$, the free-stream angle of attack $\aoa$ and an airfoil shape parameter as explained in chapter \ref{sec:design_model}.
 The formula for the lift over an airfoil can be written as
 
 
@@ -138,7 +138,7 @@ Also, having determined the derivatives $\pdfrac{\lift}{\absvar_i}$ and $\pdfrac
 \end{align}
 
 
-\subsubsection{Calculation of $\PoptcritJBYfstate\bigg\rvert_{\fstate_0}$}
+\subsection{Calculation of $\PoptcritJBYfstate\bigg\rvert_{\fstate_0}$}
 The derivative of the optimization criteria with respect to the fluid state vector can again be splitted into Lift and Drag part.
 For an aeroelastic simulation, the biggest difficulty here is the dependence of the fluid state by the fluid-structure interface itself.
 We are therefore faced with a derivative of an integral quantity, where the integration area itself is dependent on the quantity of interest.\\
@@ -164,7 +164,7 @@ Finally, the derivative of the lift-to-drag ratio can be obtained analogously to
 \end{align}
 
 
-\subsubsection{Calculation of $\DfstateBYabsvarI\bigg\rvert_{\fstate_0}$}
+\subsection{Calculation of $\DfstateBYabsvarI\bigg\rvert_{\fstate_0}$}
 
 Also, we keep in mind, that the state equation of the fluid can be expressed as
 \begin{align}
@@ -248,7 +248,7 @@ In general, the mesh-motion algorithm should be chosen consistently with the one
 For the later introduced Embedded framework, $\tfrac{\mpos_\Gamma}{\absvar_i}$ is the sensitivity of the embedded discrete surface.
  \\
  
-\subsection{Full sensitivity equation}\label{sec:full_sensitivity_equation}
+\section{Full sensitivity equation}\label{sec:full_sensitivity_equation}
 After inserting \eqref{eq:lifttoddrag_by_absvar}, \eqref{eq:lifttodrag_by_dfstate} and \eqref{eq:dfstate_by_absvarI} into \eqref{eq:sensitivity_startingpoint}, one can derive the final sensitivity equations for the special case of a rigid or non-existing structure as
 \begin{align}\label{eq:full_sa_nostruct}
 \tfrac{\optcrit_j}{\absvar_i}\bigg\rvert_{\dfstate_0} &=
