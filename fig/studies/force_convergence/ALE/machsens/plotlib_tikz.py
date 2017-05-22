@@ -3,18 +3,18 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def plotLifts(axes,xdata,ydata_num,ydata_direct,ydata_adjoint,label1):
+def plotLifts(axes,xdata,ydata_num,ydata_direct,ydata_adjoint,style,label1):
     plt.rc('text', usetex=True)
 
     #colors=['r']
-    styles=['-o']
+    styles=['-o','-2','-s']
     haligns=['center']
     poss=[np.average(xdata),np.min(xdata),np.max(xdata)]
     ydatas=[np.absolute((ydata_num-ydata_direct),ydata_num)]
 
     for s,halign,pos,ydata in zip(styles,haligns,poss,ydatas):
 
-        axes.loglog(xdata, ydata,s, label=label1)
+        axes.loglog(xdata, ydata,style, label=label1)
         #avg=np.average(ydata)
         #axes.text(pos,np.max(ydata)*1.01,l+"\navg;: "+"{:.2E}".format(avg),
         #          color=c,horizontalalignment=halign)

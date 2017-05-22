@@ -6,6 +6,9 @@
 \begin{document}
 \setlength{\delimitershortfall}{0pt}
 \section{Optimization}\label{sec:optimization}
+\secttoc
+\sectlof
+\sectlot
 
 
 As mentioned in the introduction, the overall motivation for this thesis is optimization. A typicall optimization process, not restricted to fluid problems, is depicted in Figure~\ref{fig:optimization_blockdiagram}.
@@ -13,7 +16,7 @@ As mentioned in the introduction, the overall motivation for this thesis is opti
 	\begin{center}
 	%/home/lukas/Desktop/project/independence/project/thesis/fig/tikz/build/optimization_blockdiagram.pdf
         \includegraphics{\mainpath/fig/tikz/build/optimization_blockdiagram.pdf}
-        \caption[Optimization scheme: block-diagram]{Flow chart of an optimization process in the context of flow simulations. If one regards the flow-computation block as a black-box to compute gradients of an objective function and the shape-modification block more general as parameter modification, this optimization routine is applicable to all kinds of problems. In our case, we begin with an initial geometry created by a standard mesh-generation software. We also parametrize the initial mesh in terms of design elements in this first step. This is done via SDesign\cite{SDesign} in this thesis. All further modifications to the geometry are obtained via the design element concept. The mesh-movement, steady-state siumulations and \acf{SA} are then performed in AERO-F\cite{Aerof}. For the optimizer itself, python has been chosen in this thesis, more specifically the \textbf{TODO} module. The codes communicate via result-files. These files are used to monitor and investigate the optimization process.}
+        \caption[Optimization scheme: block-diagram]{Flow chart of an optimization process in the context of flow simulations. If one regards the flow-computation block as a black-box to compute gradients of an objective function and the shape-modification block more general as parameter modification, this optimization routine is applicable to all kinds of problems. In our case, we begin with an initial geometry created by a standard mesh-generation software. We also parametrize the initial mesh in terms of design elements in this first step. This is done via SDesign\cite{SDesign} in this thesis. All further modifications to the geometry are obtained via the design element concept. The mesh-movement, steady-state siumulations and \acf{SA} are then performed in AERO-F\cite{Aerof}. For the optimizer itself, python has been chosen in this thesis, more specifically the \texttt{pyOpts} module. The codes communicate via result-files. These files are used to monitor and investigate the optimization process.}
 		\label{fig:optimization_blockdiagram}
     \end{center}
 \end{figure}
@@ -162,7 +165,7 @@ The geometrical approach describes the geometry of the structure or the fluid bo
 \begin{align}
 \tensor{X}=\sum_{j} \phi_{j}(\xi) \hat{\tensor{X}}_j \label{eq:geometrical_approach}
 \end{align}
-Here, $\phi_{j}(\xi)$ is a shape function, $\hat{\tensor{X}}_j$ is the vector of control nodes and $\xi$ represents the reference coordinate. In the design element concept, the variation of the control nodes of the design element is used to vary the shape of the body. The variation of the control nodes position denoted as "mesh-motion" is given as $\mms=\Delta \hat{\tensor{X}} $
+Here, $\phi_{j}(\xi)$ is a shape function, $\hat{\tensor{X}}_j$ is the vector of control nodes and $\xi$ represents the reference coordinate. In the design element concept, the variation of the control nodes of the design element is used to vary the shape of the body. The variation of the control nodes position denoted as "mesh-motion" is given as $\mpos=\Delta \hat{\tensor{X}} $
 \begin{align}
 \mms = \sum_j \phi_{j}(\xi) \hat{\mms}_j \label{eq:mms}
 \end{align}
@@ -173,7 +176,7 @@ Both approaches have pros and cons, that are quickly discussed in \cite{Maute200
 
 \begin{figure}[h!]
 	\begin{center}
-        \includegraphics[width=1.0\textwidth]{\mainpath/fig/pdf/sdesign.pdf}
+        \includegraphics[width=0.8\textwidth]{\mainpath/fig/png/sdesign.png}
         \caption[Design-model: geometric approach]{Geometrical approach for the design model as explained in Section~\ref{sec:design_model}. A NACA type airfoil is considered here as an example. The airfoil is embedded in a bounding box defined by eight so-called control nodes. The position of these control nodes can be varied, which alternates the shape of the airfoil according to some interpolation functions defined on the nodes. The 24 displacement unknowns are denoted as "abstract shape parameters". Abstract shape variables can be arbitrarily defined. As an example, a rotation axis is defined through the wing.}
 		\label{fig:sketch_geometrical_approach}
     \end{center}
@@ -189,6 +192,7 @@ Both approaches have pros and cons, that are quickly discussed in \cite{Maute200
 
 %TODO talk about SDESIGN
 \subsection{Analysis Model}\label{sec:analysis_model}
-In the analysis model, the optimization criteria $\optcrit$ are determined for a given set of obtimization variables $\absvar$. Since the optimization algorithm choses in this thesis is based on gradients, the gradients of the optimization criteria with respect to the abstract variables are determined in this step. A main focus on this thesis has been the appropriate evaluation of these derivatives, we therfore denote the subsequent chapter~\ref{sec:SA} to the issue.
+In the analysis model, the optimization criteria $\optcrit$ are determined for a given set of optimization variables $\absvar$. Since the optimization algorithm chosen in this thesis is based on gradients, the gradients of the optimization criteria with respect to the abstract variables are determined in this step.
+%A main focus on this thesis has been the appropriate evaluation of these derivatives, we therfore denote the subsequent chapter~\ref{sec:SA} to the issue.
 
 \end{document}

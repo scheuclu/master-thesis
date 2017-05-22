@@ -9,6 +9,10 @@
 \setlength{\delimitershortfall}{0pt}
 
 \section{Verification}\label{sec:verification}
+\secttoc
+\sectlof
+\sectlot
+
 After chapter~\ref{sec:fluid_mechanics} described the basic equation of fluid mechanics, discretization of this equations with \ac{FV} and \ac{FE} schemes in section~\ref{sec:finite_volume_method}, and an introduction to \ac{SA}, the expressions for the actual derivatives have been derived in section~\ref{sec:SA}. This has been done for both the body-fitted and the embedded~\ref{sec:embedded_boundary_method} framework of AERO-F.\\
 This section is denoted to a thorough validation of the obtained derivatives. As described in \ref{sec:SA}, AERO-F handles both sensitivities with respect to far-field variables(e.g. angle of attack) as well as shape sensitivities. Both types require to be handled fundamentally different. While the first type leads to derivatives mainly in the far field boundary conditions, the latter one interferes with the wall treatment. More importantly, as shown in sections~\ref{sec:fluid_jacobian} and \ref{sec:dresidual_by_absvar}, in the embedded case, doing shape sensitivities leads to additional derivatives with regards to the intersector.\\
 For all those reasons, the verification provided in this chapter deals with both $\machnum_{\infty}$-sensitivity as well as shape-sensitivity. More over we will provide plots for both the body-fitted and the embedded case.
@@ -65,7 +69,7 @@ Again, a side by side comparison of the analytic results between all three equat
 	    \textbf{Verification $\tfrac{\dfstate}{\machnum_{\infty}}$ for {\vertype} equations and a body-fitted framework}\par\medskip    
 	    \foreach \n in {1,2,3,5}{
 	      \foreach \type in {FD,ana}{
-			    \begin{subfigure}[t]{0.5\textwidth}
+			    \begin{subfigure}[t]{0.4\textwidth}
 			        \centering
 			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
               \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
@@ -92,7 +96,7 @@ Again, a side by side comparison of the analytic results between all three equat
 	    \textbf{Verification of $\tfrac{\dfstate}{\machnum_{\infty}}$ for {\vertype} equations and a embedded framework}\par\medskip    
 	    \foreach \n in {1,2,3,5}{
 	      \foreach \type in {FD,ana}{
-			    \begin{subfigure}[t]{0.5\textwidth}
+			    \begin{subfigure}[t]{0.4\textwidth}
 			        \centering
 			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
               \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
@@ -180,7 +184,7 @@ Again, a side by side comparison of the analytic results between all three equat
 	    \textbf{Verification $\tfrac{\dfstate}{\absvar}$ for {\vertype} equations and a body-fitted framework}\par\medskip    
 	    \foreach \n in {1,2,3,5}{
 	      \foreach \type in {FD,ana}{
-			    \begin{subfigure}[t]{0.5\textwidth}
+			    \begin{subfigure}[t]{0.4\textwidth}
 			        \centering
 			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
               \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
@@ -208,7 +212,7 @@ Again, a side by side comparison of the analytic results between all three equat
 	    \textbf{Verification $\tfrac{\dfstate}{\absvar}$ for {\vertype} equations and a embedded framework}\par\medskip    
 	    \foreach \n in {1,2,3,5}{
 	      \foreach \type in {FD,ana}{
-			    \begin{subfigure}[t]{0.5\textwidth}
+			    \begin{subfigure}[t]{0.4\textwidth}
 			        \centering
 			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
               \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt

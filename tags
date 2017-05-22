@@ -239,6 +239,10 @@ axes	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^      
 axes	fig/studies/force_convergence/ALE/shapesens/ALE_Euler/plot_tikz.py	/^                  axes         =multiaxes[shapevarindex-1][1]$/;"	v
 begin_command_with_alignment	SA_Thesis/latexindent/latexindent.pl	/^sub begin_command_with_alignment{$/;"	s
 begin_command_with_alignment	latexindent/latexindent.pl	/^sub begin_command_with_alignment{$/;"	s
+c1	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^c1=(140\/255,21\/255,21\/255,1.0)$/;"	v
+c2	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^c2=(77\/255,79\/255,83\/255,1.0)$/;"	v
+c3	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^c3=(179\/255,153\/255,93\/255,1.0)$/;"	v
+c4	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^c4=(182\/255,177\/255,169\/255,1.0)$/;"	v
 cha_fe-formulation	SA_Thesis/thesis/thesis.tex	/^\\include{cha_introduction}$/;"	i
 cha_feti-formulation	SA_Thesis/thesis/thesis.tex	/^\\include{cha_fe-formulation}$/;"	i
 cha_feti-solvers	SA_Thesis/thesis/thesis.tex	/^\\include{cha_iterative_solvers}$/;"	i
@@ -312,6 +316,7 @@ format_block	SA_Thesis/latexindent/latexindent.pl	/^sub format_block{$/;"	s
 format_block	latexindent/latexindent.pl	/^sub format_block{$/;"	s
 functions	SA_Thesis/latexindent/success/bigTest.tex	/^\\pagestyle{fancy}$/;"	i
 functions	latexindent/success/bigTest.tex	/^\\pagestyle{fancy}$/;"	i
+getCSVdata	fig/studies/force_convergence/ALE/machsens/plotlib_tikz.py	/^def getCSVdata(file_sim,filedirect,fileadjoint,filedirect_linsolve,fileadjoint_linsolve):$/;"	f
 getCSVdata	fig/studies/force_convergence/ALE/shapesens/plotlib_tikz.py	/^def getCSVdata(file_sim,filedirect,fileadjoint,filedirect_linsolve,fileadjoint_linsolve):$/;"	f
 getLabel	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^def getLabel(dir,type):$/;"	f
 ifnum value  chapter	SA_Thesis/latexindent/success/ifelsefi.tex	/^\\preto\\chapter{%$/;"	c
@@ -338,6 +343,7 @@ lstinline  localSettings.yaml 	SA_Thesis/latexindent/documentation/manual.tex	/^
 lstinline  localSettings.yaml 	latexindent/documentation/manual.tex	/^\\end{warning}$/;"	u
 macro	create_nomencature.py	/^                macro=commandline.split("%")[0].strip()$/;"	v
 macro	create_nomencature2.py	/^                macro=commandline.split("%")[0].strip()$/;"	v
+markerlist	fig/studies/force_convergence/ALE/machsens/ALE_Euler/plot_tikz.py	/^markerlist=['-o','-o','-o','-o']$/;"	v
 name	create_nomencature2.py	/^            name=temp[0]$/;"	v
 numarg	create_nomencature.py	/^            numarg=int(temp[1].split("{")[1].split("}")[1][1])$/;"	v
 numarg	create_nomencature2.py	/^            numarg=int(temp[1].split("{")[1].split("}")[1][1])$/;"	v
@@ -349,13 +355,16 @@ part	SA_Thesis/latexindent/success/testHeadings.tex	/^          chapter text$/;"
 part	SA_Thesis/latexindent/success/testHeadings.tex	/^% arara: indent: {onlyDefault: no, overwrite: true, trace: on, silent: yes, localSettings: true}$/;"	p
 part	latexindent/success/testHeadings.tex	/^          chapter text$/;"	p
 part	latexindent/success/testHeadings.tex	/^% arara: indent: {onlyDefault: no, overwrite: true, trace: on, silent: yes, localSettings: true}$/;"	p
+plotIterations	fig/studies/force_convergence/ALE/machsens/plotlib_tikz.py	/^def plotIterations(axes,iter_direct,res_direct,iter_adjoint,res_adjoint):$/;"	f
 plotIterations	fig/studies/force_convergence/ALE/shapesens/plotlib_tikz.py	/^def plotIterations(axes,iter_direct,res_direct,iter_adjoint,res_adjoint):$/;"	f
+plotLifts	fig/studies/force_convergence/ALE/machsens/plotlib_tikz.py	/^def plotLifts(axes,xdata,ydata_num,ydata_direct,ydata_adjoint,style,label1):$/;"	f
 plotLifts	fig/studies/force_convergence/ALE/shapesens/plotlib_tikz.py	/^def plotLifts(axes,xdata,ydata_num,ydata_direct,ydata_adjoint,label1):$/;"	f
 print_aligned_block	SA_Thesis/latexindent/latexindent.pl	/^sub print_aligned_block{$/;"	s
 print_aligned_block	latexindent/latexindent.pl	/^sub print_aligned_block{$/;"	s
 projected preconditioned conjugate gradient	SA_Thesis/thesis/cha_adaptive_mpcg.tex	/^The idea is simple. One assumes that the bad condition number of the matrix is caused by just a little fraction of the full eigenvalue spectrum. One therefor tries to identify these "bad" eigenmodes and create a so called "auxiliary coarse space(deflation space)" with those modes. The problem is then solved directly within this small subspace, before the iterative scheme continues in the remaining space, orthorgonal to the deflation space. If the deflation space is chosen right, the convergence properties are greatly improved.\\\\$/;"	u
 projected preconditioned conjugate gradient	SA_Thesis/thesis/cha_iterative-solvers.tex	/^The idea is simple. One assumes that the bad condition number of the matrix is caused by just a little fraction of the full eigenvalue spectrum. One therefor tries to identify these "bad" eigenmodes and create a so called "auxiliary coarse space(deflation space)" with those modes. The problem is then solved directly within this small subspace, before the iterative scheme continues in the remaining space, orthorgonal to the deflation space. If the deflation space is chosen right, the convergence properties are greatly improved.\\\\$/;"	u
 save_plot	fig/studies/force_convergence/ALE/shapesens/plotlib_tikz.py	/^def save_plot(plotfile):$/;"	f
+setup_plots	fig/studies/force_convergence/ALE/machsens/plotlib_tikz.py	/^def setup_plots(plottitle,size_x,size_y):$/;"	f
 setup_plots	fig/studies/force_convergence/ALE/shapesens/plotlib_tikz.py	/^def setup_plots(plottitle,num_shapevars,size_x,size_y):$/;"	f
 somethingelse	SA_Thesis/latexindent/success/testHeadings.tex	/^           			subparagraph text$/;"	c
 somethingelse	latexindent/success/testHeadings.tex	/^           			subparagraph text$/;"	c

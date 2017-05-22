@@ -36,7 +36,7 @@
   }%
   \providecommand\rotatebox[2]{#2}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{1408.4328125bp}%
+    \setlength{\unitlength}{1344.11855469bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -48,79 +48,36 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.42398774)%
+  \begin{picture}(1,0.41798634)%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{sdesign.pdf}}%
-    \put(0.23304323,0.44996911){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δx7\\ }}}%
-    \put(0.14671942,0.45167157){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δy7\\ }}}%
-    \put(0.16950825,0.48882329){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δz7\\ }}}%
+    \put(0.42763702,0.08603458){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δx1\\ }}}%
+    \put(0.32147763,0.07983606){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δy1\\ }}}%
+    \put(0.35130567,0.14005192){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δz1\\ }}}%
+    \put(0.09251679,0.33921797){\color[rgb]{0.70196078,0.6,0.36470588}\makebox(0,0)[lb]{\smash{Δα\\ }}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{sdesign.pdf}}%
-    \put(-0.05743322,0.31114954){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δx8\\ }}}%
-    \put(-0.15137493,0.31454487){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δy8\\ }}}%
-    \put(-0.12731646,0.35211981){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δz8\\ }}}%
+    \put(0.57375784,0.21730299){\color[rgb]{0.54901961,0.08235294,0.08235294}\makebox(0,0)[lb]{\smash{A}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{sdesign.pdf}}%
-    \put(0.59088904,0.44201029){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δx3\\ }}}%
-    \put(0.49965677,0.44226779){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δy3\\ }}}%
-    \put(0.52564358,0.48150553){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δz3\\ }}}%
+    \put(0.84058174,0.23036371){\color[rgb]{0.70196078,0.6,0.36470588}\makebox(0,0)[lb]{\smash{Δα\\ }}}%
     \put(0,0){\includegraphics[width=\unitlength,page=4]{sdesign.pdf}}%
-    \put(0.58350841,-0.08920007){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δx2\\ }}}%
-    \put(0.50903471,-0.08834407){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δy2\\ }}}%
-    \put(0.52843779,-0.04611372){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δz2\\ }}}%
+    \put(0.7322709,0.32383449){\color[rgb]{0.54901961,0.08235294,0.08235294}\makebox(0,0)[lb]{\smash{A}}}%
+    \put(0.88766344,0.22736823){\color[rgb]{0.70196078,0.6,0.36470588}\makebox(0,0)[lb]{\smash{α4\\ }}}%
+    \put(0.74309293,0.23047254){\color[rgb]{0.70196078,0.6,0.36470588}\makebox(0,0)[lb]{\smash{α2\\ }}}%
+    \put(0.74176248,0.17858678){\color[rgb]{0.70196078,0.6,0.36470588}\makebox(0,0)[lb]{\smash{α1\\ }}}%
+    \put(0.88721996,0.17947374){\color[rgb]{0.70196078,0.6,0.36470588}\makebox(0,0)[lb]{\smash{α3\\ }}}%
+    \put(0.81153455,0.18224747){\color[rgb]{0.70196078,0.6,0.36470588}\makebox(0,0)[lb]{\smash{D\\ }}}%
+    \put(0.31687563,0.03560605){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{axis of rotation}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=5]{sdesign.pdf}}%
-    \put(0.45377326,0.08210591){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δx1\\ }}}%
-    \put(0.3524615,0.07619044){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δy1\\ }}}%
-    \put(0.38092749,0.13365662){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δz1\\ }}}%
+    \put(0.05966432,0.03528768){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{control nodes}}}%
+    \put(0.80329524,0.03471142){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{abstract shape\\ parameters}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=6]{sdesign.pdf}}%
-    \put(-0.08554387,0.20571583){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δx5\\ }}}%
-    \put(-0.18033203,0.20826472){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δy5\\ }}}%
-    \put(-0.15458066,0.25049505){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δz5\\ }}}%
+    \put(0.64863955,0.03581116){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δxi,Δyi,Δzi ...\\ }}}%
+    \put(0.16373312,0.40063063){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{7\\ }}}%
     \put(0,0){\includegraphics[width=\unitlength,page=7]{sdesign.pdf}}%
-    \put(0.44855893,0.43873208){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δx4\\ }}}%
-    \put(0.36001998,0.44078512){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δy4\\ }}}%
-    \put(0.38510902,0.48451176){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δz4\\ }}}%
-    \put(0.13395586,0.32372801){\color[rgb]{0.70196078,0.6,0.36470588}\makebox(0,0)[lb]{\smash{Δα\\ }}}%
+    \put(0.01196078,0.33916911){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{8\\ }}}%
+    \put(-0.0018367,0.21248311){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{5\\ }}}%
+    \put(0.5406553,0.13722411){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{2\\ }}}%
+    \put(0.38449283,0.2275349){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{4\\ }}}%
+    \put(0.53501084,0.28209768){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{3\\ }}}%
     \put(0,0){\includegraphics[width=\unitlength,page=8]{sdesign.pdf}}%
-    \put(0.59322167,0.20738013){\color[rgb]{0.54901961,0.08235294,0.08235294}\makebox(0,0)[lb]{\smash{A}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=9]{sdesign.pdf}}%
-    \put(0.69211979,0.48116334){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δz4\\ }}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=10]{sdesign.pdf}}%
-    \put(0.68122441,0.42870422){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δy4\\ }}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=11]{sdesign.pdf}}%
-    \put(0.69148496,-0.0328113){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δz1\\ }}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=12]{sdesign.pdf}}%
-    \put(0.68058959,-0.08527042){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δy1\\ }}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=13]{sdesign.pdf}}%
-    \put(0.93684904,-0.09852613){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δz2\\ }}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=14]{sdesign.pdf}}%
-    \put(0.92595373,-0.15098526){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δy2\\ }}}%
-    \put(0.8478614,0.21984444){\color[rgb]{0.70196078,0.6,0.36470588}\makebox(0,0)[lb]{\smash{Δα\\ }}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=15]{sdesign.pdf}}%
-    \put(0.74449643,0.309047){\color[rgb]{0.54901961,0.08235294,0.08235294}\makebox(0,0)[lb]{\smash{A}}}%
-    \put(0.89279318,0.21698575){\color[rgb]{0.70196078,0.6,0.36470588}\makebox(0,0)[lb]{\smash{α4\\ }}}%
-    \put(0.75482429,0.21994831){\color[rgb]{0.70196078,0.6,0.36470588}\makebox(0,0)[lb]{\smash{α2\\ }}}%
-    \put(0.75355459,0.17043184){\color[rgb]{0.70196078,0.6,0.36470588}\makebox(0,0)[lb]{\smash{α1\\ }}}%
-    \put(0.89236995,0.1712783){\color[rgb]{0.70196078,0.6,0.36470588}\makebox(0,0)[lb]{\smash{α3\\ }}}%
-    \put(0.82014061,0.17392537){\color[rgb]{0.70196078,0.6,0.36470588}\makebox(0,0)[lb]{\smash{D\\ }}}%
-    \put(0.34806964,0.03398014){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{axis of rotation}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=16]{sdesign.pdf}}%
-    \put(0.10260356,0.03367631){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{control nodes}}}%
-    \put(0.81227754,0.03312636){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{abstract shape\\ parameters}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=17]{sdesign.pdf}}%
-    \put(0.93627619,0.49118256){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δz3\\ }}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=18]{sdesign.pdf}}%
-    \put(0.92538088,0.43872344){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δy3\\ }}}%
-    \put(0.664684,0.03417588){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δxi,Δyi,Δzi ...\\ }}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=19]{sdesign.pdf}}%
-    \put(0.20192019,0.38233635){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{7\\ }}}%
-    \put(0.14671942,0.52828213){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δy7\\ }}}%
-    \put(0.16950825,0.56543385){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Δz7\\ }}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=20]{sdesign.pdf}}%
-    \put(0.31601856,0.493779){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{s}}}%
-    \put(0.05707834,0.32368138){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{8\\ }}}%
-    \put(0.0439109,0.20278034){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{5\\ }}}%
-    \put(0.42456965,-0.0731374){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{1\\ }}}%
-    \put(0.56163071,0.13095794){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{2\\ }}}%
-    \put(0.4125992,0.21714481){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{4\\ }}}%
-    \put(0.556244,0.26921605){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{3\\ }}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=21]{sdesign.pdf}}%
   \end{picture}%
 \endgroup%

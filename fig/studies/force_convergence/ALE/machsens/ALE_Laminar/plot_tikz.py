@@ -15,7 +15,14 @@ import matplotlib.pyplot as plt
 from matplotlib import rc
 rc('text', usetex=True)
 
+from cycler import cycler
 
+
+c1=(140/255,21/255,21/255,1.0)
+c2=(77/255,79/255,83/255,1.0)
+c3=(179/255,153/255,93/255,1.0)
+c4=(182/255,177/255,169/255,1.0)
+markerlist=['-o','-o','-o','-o']
 
 def getLabel(dir,type):
     path=os.path.dirname(os.path.abspath(__file__))
@@ -51,8 +58,10 @@ for type in ['liftdrag', 'force']:
         #readmefile=open('./tikzfiles/Ma'+str(machvalues[index_mach-1])+'/README.md','a+')
         tikzfile='./tikzfiles/Ma'+str(machvalues[index_mach-1])+'/'+type+".tex"
         f, multiaxes = setup_plots('sometitle',3.5,2)
+        multiaxes[0].set_prop_cycle(cycler('color', [c1,c2,c3,c4]))
+        multiaxes[1].set_prop_cycle(cycler('color', [c1,c2,c3,c4])+cycler( 'marker',markerlist))
         #plt.tight_layout()
-        for index_angle in range(1,NUMANGLES+1):
+        for index_angle,style in zip(range(1,NUMANGLES+1),markerlist):
             print("Writing file"+tikzfile)
 
             #create filenames of analytic simulations resuts from the manual on
@@ -83,7 +92,7 @@ for type in ['liftdrag', 'force']:
             # label=r"$\frac{\partial L_x}{\partial \alpha}$"
             label=getLabel('x',type)
             multiaxes[0].set_title(label)
-            plotLifts(axes,xdata,ydata_num,ydata_direct,ydata_adjoint,r'$\alpha_o$='+str(anglevalues[index_angle-1]))
+            plotLifts(axes,xdata,ydata_num,ydata_direct,ydata_adjoint,style,r'$\alpha_o$='+str(anglevalues[index_angle-1]))
             multiaxes[0].legend(loc=2)
 
 
@@ -98,7 +107,7 @@ for type in ['liftdrag', 'force']:
             # label=r"$\frac{\partial L_y}{\partial \alpha}$"
             label=getLabel('y',type)
             multiaxes[1].set_title(label)
-            plotLifts(axes,xdata,ydata_num,ydata_direct,ydata_adjoint,r'$\alpha_o$='+str(anglevalues[index_angle-1]))
+            plotLifts(axes,xdata,ydata_num,ydata_direct,ydata_adjoint,'-o',r'$\alpha_o$='+str(anglevalues[index_angle-1]))
             multiaxes[1].legend(loc=2)
             
             #readmefile.write('#'+type+' tikzfiles for  Ma: '+machvalues[index_mach-1]+' angle: '+anglevalues[index_angle-1]+'\n')

@@ -58,7 +58,11 @@
 \def\PfstateBYabsvarI    {\pdfrac{\fstate}     {\absvar_i}}
 
 \section{Aero-elastic \acl{SA}}\label{sec:aeroelastic_sa}
-The previous chapter dealt with the \ac{SA} of a pure fluid problem. Boundary, or respectively mesh-movement in general, was only induced due to shape variation via design variables itself. However, one can easily decieve a system, where the fluid interacts with an elastic structure. This introduces an additional dependency of the structure shape, and thus fluid-structure interface, on the fluid solution. Also, a fully coupled system shows a direct connection between the stress resultants in the structure with the fluid solutions.\
+\secttoc
+\sectlof
+\sectlot
+
+The previous chapter dealt with the \ac{SA} of a pure fluid problem. Boundary, or respectively mesh-movement in general, was only introduces due to shape variation via design variables itself. However, one can easily decieve a system, where the fluid interacts with an elastic structure. This introduces an additional dependency of the structure shape, and thus fluid-structure interface, on the fluid solution. Also, a fully coupled system shows a direct connection between the stress resultants in the structure with the fluid solution.\
 This chapter therfore investigates the \ac{SA} of such a coupled system of equations. Considerations are build upon the derivations in chapter~\ref{sec:SA} and the coupled three-field \ac{FSI} formulation described in chapter~\ref{sec:3_field_formulation}.\\
 The \ac{SA} approach applied in this thesis is based on the work of~\cite{Sobieszczanski1990}, for deriving the \ac{GSE} of coupled systems. As introduced by the authors of\cite{Maute2001}, we utilize the three-field formulation of \cite{Farhat1995}.
 
@@ -88,7 +92,7 @@ The derivative of the optimization criterion~$\optcrit_j$, as introduced in Equa
 \end{align}
 where the partial derivatives$,\PoptcritJBYstructdisp,\PoptcritJBYmms\text{ and } \PoptcritJBYfstate$ can be directly evaluated within the discretized structure and fluid model through the relation between structural, aerodynamic design and abstract optimization parameters defied in the design model~\ref{sec:design_model}.\\
 The cumbersome part are the derivatives $\DstructdispBYabsvarI,\DmmsBYabsvarI\text{~and~}\DfstateBYabsvarI$
-To obtain them, the governing equations \eqref{eq:3field_basic}\textbf{TODO write down governing equations} have to be derived:
+To obtain them, the governing equations \eqref{eq:3field_structure}\eqref{eq:3field_mesh}\eqref{eq:3field_fluid} have to be derived:
 
 
 
@@ -132,7 +136,7 @@ To obtain them, the governing equations \eqref{eq:3field_basic}\textbf{TODO writ
     \PfstateBYabsvarI     \\
     \end{bmatrix}} = \vec{0}
 \end{align}
-In this equations $\textstyle{\PEOSstructBYabsvarI}$ and $\textstyle \PEOSfluidBYabsvarI$ can be again directly evaluated using the relation specified in the design model. The matrix of first derivatives~$\tensor{A}$ is from now on denoted as the "Jacobian of the optimization problem".
+In this equations $\textstyle{\PEOSstructBYabsvarI}$ and $\textstyle \PEOSfluidBYabsvarI$ can be again directly evaluated using the relation specified in the design model. The matrix of first derivatives~$\tensor{A}$ is from now on denoted as the \textit{Jacobian of the optimization problem}.
 \\
 Combining the previous two equations, it follows that the total derivative of the optimization criterion with respect to the abstract variables can be expressed as:
 \begin{align}\label{eq:totderiv_optcritBYabsvar}
@@ -149,13 +153,19 @@ Combining the previous two equations, it follows that the total derivative of th
   \PEOSfluidBYabsvarI
   \end{bmatrix}}_{n_{eq}\times n_{\absvars}}
 \end{align}
-Where $n_{eq}$ is the total number of equations(e.g. five fluid state equations for the compressible NSG in 3D, three equations of the mesh motions and another three equations for the structure motion), $n_{q}$ is the number of optimization criteria and $n_s$ is the number of abstract variables.
+Where $n_{eq}$ is the total number of equations(e.g. five fluid state equations for the compressible \ac{NSE} in 3D, three equations of the mesh motions and another three equations for the structure motion), $n_{q}$ is the number of optimization criteria and $n_s$ is the number of abstract variables.
 
 \subsection{Direct vs. adjoint approach}
-Equation~\ref{eq:totderiv_optcritBYabsvar} suggests, that there are two alternatives to compute vector-matrix-vector product above.\\
+Looking at the above equation ~\ref{eq:totderiv_optcritBYabsvar} one can identify a matrix-matrix-matrix product. Matrix-matrix products are not commutative, one can, however, perform the following transformation
+\begin{align}\label{eq:adjoint_concept}
+\dmat{A}\dmat{B}\dmat{C}                    &= \dmat{A}(\dmat{B}\dmat{C}) \nonumber\\
+\left[ \dmat{A}(\dmat{B}\dmat{C}) \right]^T &= (\dmat{B}\dmat{C})^T\dmat{A}^T=\dmat{C}^T\dmat{B}^T\dmat{A}^T=\dmat{C}^T(\dmat{A}\dmat{B})^T \nonumber\\
+\rightarrow \dmat{A}\dmat{B}\dmat{C}        &= \left[\dmat{C}^T(\dmat{A}\dmat{B})\right]^T
+\end{align}
+Depending on the sizes of the involved matrices one or the other form might be advantaagous. Specifically, the straight forward way of computing the triple product is known as the \textit{direct approach} and the transposed matrix way is called the \textit{adjoint approach}.
 
 \paragraph{Direct approach}
-Firstly, one could first compute the derivatives of the aeroelastic response for each abstract variable and perform the matrix product with $\tensor{A}$:
+In the direct approach, one first computes the derivatives of the aeroelastic response for each abstract variable and then performs the matrix product with $\tensor{A}$ in equation \eqref{eq:totderiv_optcritBYabsvar}:
 
 \begin{align}\label{eq:direct_approach}
 \begin{bmatrix}
@@ -183,12 +193,12 @@ Firstly, one could first compute the derivatives of the aeroelastic response for
   \DfstateBYabsvarI \\[0.5em]
   \end{bmatrix}
 \end{align}
-Where the total complexity can be approximated as $\order{n_{eq}^2n_{\absvars}+n_{\optcrits}n_{eq}n_{\absvars}}$
+By standard algebra theory, the total complexity of this computation can be approximated as $\order{n_{eq}^2n_{\absvars}+n_{\optcrits}n_{eq}n_{\absvars}}$
 
 
 
 \paragraph{Adjoint approach}
-Secondly, one could also first compute the derivatives of the optimization criteria and multiply with the Jacobian before substituting this into Equation~\eqref{eq:totderiv_optcritBYabsvar}:
+In the adjoint approach on first computes the derivatives of the optimization criteria and then multiplies with the Jacobian before substituting this into Equation~\eqref{eq:totderiv_optcritBYabsvar}:
 \begin{align}\label{eq:firststep_adjoint}
 \begin{bmatrix}
 \adjoints_{\structdisp} \\
@@ -214,16 +224,16 @@ Secondly, one could also first compute the derivatives of the optimization crite
   \PEOSfluidBYabsvarI
   \end{bmatrix}
 \end{align}
-Where the total complexity can be approximated as $\order{n_{eq}^2n_{\optcrits}+n_{\optcrits}n_{eq}n_{\absvars}}$\\
+Here the total complexity can be approximated as $\order{n_{eq}^2n_{\optcrits}+n_{\optcrits}n_{eq}n_{\absvars}}$\\
 
 
-If one or the other approach is to be preferred depends in on the optimization setup, particularly the number of optimization criteria and the number of optimization variables. Looking at the orders above, one can conclude that if the number of abstract parameters $n_{\absvars}$ is smaller than the number of optimization criteria, the direct approach is more efficient, otherwise the adjoint approach is to be preferred. Additionally the on can argue, that the relevant term in the orders above is the one with $n_{eq}^2$  since it dominates the sum. Therefore, depending on whether $n_s$ or $n_q$ is bigger, the direct or the adjoint method is to be preferred.
+If one or the other approach is to be preferred depends on the optimization setup, particularly the number of optimization criteria and the number of optimization variables. Looking at the orders above, one can conclude that if the number of abstract parameters $n_{\absvars}$ is smaller than the number of optimization criteria, the direct approach is more efficient, otherwise the adjoint approach is to be preferred. Additionally one can argue, that the relevant term in the orders above is the one with $n_{eq}^2$  since it dominates the sum. Therefore, depending on whether $n_s$ or $n_q$ is bigger, the direct or the adjoint method is to be preferred.
 
 
 \subsubsection{Direct \acl{SA} for the Euler equations}\label{sec:direct_sa}
 
 
-The A matrix for the direct approach in ALE formulation looks like
+The $\dmat{A}$ matrix for the direct approach in ALE formulation can be written as
 \def\AoneoneALE{\stiffmat}
 \def\AonetwoALE{\pdfrac{\sload}{\mms}}
 \def\AonethreeALE{\pdfrac{\sload}{\fstate}}
@@ -261,10 +271,10 @@ Where, $\AthreethreeALE$ is the Jacobian of the second order row flux. It shall 
 Furthermore, \cite{Piperno2000} considered replacing the two mesh motion related matrices $\AonetwoALE$ and $\AthreetwoALE$ by a transpirational boundary condition. The consequences of this approach are also investigated in \cite{Maute2001} and \cite{Maute2003}.\\
 This thesis, however, does not use any of this simplifications.
 ~\\
-The derivation of the sensitivities, can be achieved in a staggered scheme, very similar to the one, described in \ref{sec:3field}\textbf{TODO}. It consists of five steps.
+The derivation of the sensitivities, can be achieved in a staggered scheme, very similar to the one, described in \ref{sec:3_field_formulation}. It consists of five steps.
 
 \paragraph{1) Update the structural displacement sensitivity to a new time step}
-BY differentiating equations~\eqref{eq:3field_structure} and \eqref{eq:eos_struct} and applying an under relaxation, we can obtain
+By differentiating equations~\eqref{eq:3field_structure} and \eqref{eq:eos_struct} and applying an under relaxation, we can obtain
 \begin{align}\label{eq:underrelax_structdisp}
 \tfrac{\its{\structdisp}}{\absvar_i} =
 (1-\theta)
@@ -275,7 +285,7 @@ BY differentiating equations~\eqref{eq:3field_structure} and \eqref{eq:eos_struc
 where $\fic{\structdisp}$ is obtained from:
 \begin{align}\label{eq:fictious_structdisp}
 \stiffmat \tfrac{\fic{\structdisp}}{\absvar_i} =
-\pdfrac{TODO}{\absvar_i} + \pdfrac{\its{\ifaceprojStoF}}{\absvar_i} -
+\pdfrac{\sload}{\absvar_i} + \pdfrac{\its{\ifaceprojStoF}}{\absvar_i} -
 \pdfrac{\stiffmat}{\absvar_i} \structdisp
 \end{align}
 
@@ -287,7 +297,7 @@ where $\fic{\structdisp}$ is obtained from:
 \end{equation}
 
 
-\paragraph{3) Compute derivative of fluid mesh motion}
+\paragraph{3) Compute derivative of the fluid mesh motion}
 The fluid mesh motion is computed by solving the pseudo Dirichlet problem as described in~\cite{Farhat1995}. By design, the fictions stiffness matrix $\fic{\stiffmat}$ does not depend on the abstract optimization variables $\absvars$
 \begin{align}\label{eq:mms_domain}
 \fic{\stiffmat}_{\Omega \Omega}  \tfrac{\its{\mms}_{\Omega}}{\absvar_i} =
@@ -321,12 +331,12 @@ and compute project it onto the structure via
 \end{align}
 ~\\
 ~\\
-The convergence of the staggered algorithm can be monitored via
+Finally, the convergence of the staggered algorithm can be monitored via
 \begin{align}
 \begin{split}
-  \norm{ \stiffmat \tfrac{ \itss{\fic{\structdisp}} }{\absvar_i}  -  \pdfrac{TODO}{\absvar_i} - \pdfrac{\itss{\sload}}{\absvar_i}  +  \pdfrac{\stiffmat}{\absvar_i}}_{2} &
+  \norm{ \stiffmat \tfrac{ \itss{\fic{\structdisp}} }{\absvar_i}  -  \pdfrac{\sload}{\absvar_i} - \pdfrac{\itss{\sload}}{\absvar_i}  +  \pdfrac{\stiffmat}{\absvar_i}}_{2} &
   \leq \\
-  \tolsa \norm{ \stiffmat \tfrac{ \itn{\fic{\structdisp}}  }{\absvar_i}  -  \pdfrac{TODO}{\absvar_i} - \pdfrac{\itn{\sload}}{\absvar_i}  +  \pdfrac{\stiffmat}{\absvar_i}}_{2} &
+  \tolsa \norm{ \stiffmat \tfrac{ \itn{\fic{\structdisp}}  }{\absvar_i}  -  \pdfrac{\sload}{\absvar_i} - \pdfrac{\itn{\sload}}{\absvar_i}  +  \pdfrac{\stiffmat}{\absvar_i}}_{2} &
 \end{split} &
 \\
 \begin{split}
@@ -378,7 +388,7 @@ Equation \eqref{eq:firststep_adjoint} can be written as:
     \PoptcritJBYfstate     \\
     \end{bmatrix}
 \end{align}
-\textbf{TODO} check if the index j is really required here!
+\textbf{TODO check if the index j is really required here!}
 A stated earlier, the matrices $\pdfrac{\optcrits}{\mms}$ and $\pdfrac{\optcrits}{\fstate}$ can be computed analytically. As for $\AthreethreeALE$, we follow the methodology outlined in \cite{Lesoinne2001} for evaluating ans storing it efficiently as the product of flux operators. Again the staggered procedure for solving the adjoint state problem shares the same computational kernels with the partitioned aeroelastic scheme described in~\cite{Farhat1995}\\
 
 \paragraph{1) Update the adjoint structure displacement to the new time step}
@@ -388,12 +398,12 @@ A stated earlier, the matrices $\pdfrac{\optcrits}{\mms}$ and $\pdfrac{\optcrits
 where $\itss{\fic{\structdispad}}$ is obtained from
 \begin{align}
 \stiffmat \itss{\fic{\structdispad}} = \PoptcritsBYstructdisp - \stiffmat_{\Omega\Gamma} \ifaceprojStoF \its{{\mmsad}_{\Omega}} + \ifaceprojStoF \its{{\mmsad}_{\Gamma}}
-\end{align}\textbf{TODO derive this equation}
+\end{align}
 
 \paragraph{2) Compute the adjoint fluid state by solving}
 \begin{align}
 \T{\jactwo} \itss{\fstatead} = \pdfrac{\mms}{\fstate}+ \pdfrac{\sload}{\T{\fstate}} \itss{\structdispad}
-\end{align}\textbf{TODO derive this equation}
+\end{align}
 Again, $\pdfrac{\optcrits}{\fstate}$ is computed analytically from the relations defined in the design and aeroelastic model.
 
 
@@ -404,11 +414,11 @@ Again, $\pdfrac{\optcrits}{\fstate}$ is computed analytically from the relations
 \pdfrac{\optcrits}{\mms_\Omega} -
 \pdfrac{\sload}{\mms_\Omega} \itss{\structdispad} -
 \pdfrac{\T{\dmat{F}_1}}{\mms_\Omega} \itss{\mmsad}\text{ in }\Omega
-\end{align}\textbf{TODO check equations}
+\end{align}
 And the adjoint mesh motion on the interface is computed as $\itss{{\mmsad}_{\Gamma}}$
 \begin{align}
 \itss{{\mmsad}_{\Gamma}} =
-\pdfrac{\optcrits}{\mms_{Gamma}} +
+\pdfrac{\optcrits}{\mms_{\Gamma}} +
 \pdfrac{\sload}{\mms_\Gamma} \itss{\structdispad}    -
 \T{\pdfrac{\dmat{F}_2}{\mms)_\Gamma}}\text{ on }\Gamma
 \end{align}

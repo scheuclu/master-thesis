@@ -8,6 +8,10 @@
 \setlength{\delimitershortfall}{0pt}
 
 \section{Derivatives of the fluid residual}\label{sec:dresidual_derivative}
+\secttoc
+\sectlof
+\sectlot
+
 This section is denoted to a thorough derivation of the partial derivatives $\pdfrac{\dresidual}{\dfstate}$ and $\pdfrac{\dresidual}{\absvar}$ of the fluid residual equation.
 These are the main quantities needed in order to compute the sensitivity of the state vector $\tfrac{\dfstate}{\absvar}$ as shown in equation~\eqref{eq:full_sa_nostruct}.
 We need this derivative in order to solve for $\tfrac{\optcrit_{j}}{\absvar_{i}}$.\\
@@ -19,17 +23,17 @@ We need this derivative in order to solve for $\tfrac{\optcrit_{j}}{\absvar_{i}}
 
 
 
-As described in~\eqref{eq:nse_final_discretized_notationchange}, the total residual is comprised of a convective(inviscid) part and a viscous contributions. Thanks to the distributive property of the derivative operator, we can thus compute the derivative of the total residual as the sum of the derivatives of the components. This is particulary important for us, since we used two different discretization routines for the viscous and the inviscid part.\\
+As described in~equation \eqref{eq:nse_final_discretized_notationchange}, the total residual is comprised of a convective(inviscid) part and a diffusive(viscous) contribution. Thanks to the distributive property of the derivative operator, we can thus compute the derivative of the total residual as the sum of the derivatives of the components. This is particulary important for us, since we used two different discretization routines for the viscous and the inviscid part(see section \ref{sec:mixed_FV_FE_formulation}).\\
 
 
 
 \subsubsection{Derivative of the convective Jacobian $\pdfrac{\dresidual^c}{\dfstate}$}
 
-Also, we will only discuss the special case of intersected elements in the following, since the special case of an non-intersected cell follows trivially from that.\\
-For more details on the evaluation of the inviscid residual the reader is referred to section~\ref{sec:finite_volume_method}, specifically section~\ref{sec:mixed_FV_FE_formulation} and section~\ref{sec:fiver} for the incorporation of the immersed boundary conditions.
+Also, we will only discuss the special case of intersected elements in the following, since the case of an non-intersected cell follows trivially from that.\\
+For more details on the evaluation of the inviscid residual the reader is referred to section~\ref{sec:finite_volume_method}, specifically section~\ref{sec:mixed_FV_FE_formulation} and section~\ref{sec:embedded_boundary_method} for the incorporation of the immersed boundary conditions.
 
 
-For the convective part of the Jacobian, $\dresidual^c$ we can be therefor write
+For the convective part of the Jacobian $\dresidual^c$ we can be therefor write
 \begin{align}
 \dresidual^{c,i}_{ij} = \fluxesnum^i_{ij}(\dfstateprim_{ij},\dfstateprim^{*}_{ij},\normal_{ij})
 \end{align}
@@ -40,7 +44,7 @@ Since the fluid normal is dependent on the mesh position this can also be writte
 \end{align}
 
 
-If the edge $i-j$ is intersected however, the half-Riemann problem approach as discussed in section~\ref{sec:half_riemann_problem} is applied.
+If the edge $i-j$ is intersected however, the half-Riemann problem approach as discussed in sections~\ref{sec:fiver_inviscid_term} and \ref{sec:fiver_viscous_term} is applied.
 Also, the quantity $\dfstate_{ij}$ on the interface can be reconstructed in several ways. In this thesis we applied a \ac{MUSCL} technique. Of course, the reconstruction and limitation has to be taken into account as well.\\
 Putting all this together, one can write
 
@@ -82,7 +86,7 @@ where $\dfstateprim^a$ represents the fluid states of the active node, and $\dfs
 
 
 Thus the derivative becomes:
-\begin{align}
+\begin{align}\label{eq:jacobian_viscous}
     \pdfrac{\dresidual^v(\dfstateprim^a,\dfstateprim^g(\dfstateprim^a))}{\dfstateprim}=
     \underbrace{\pdfrac{\dresidual^v}{\dfstateprim^a}}_{\substack{\text{can be re-used from ALE } \\ \text{after the ghost-point population}}}+
     \pdfrac{\dresidual^v}{\dfstateprim^g}\cdot
@@ -165,7 +169,7 @@ Similar to the \ac{MUSCL} procedure we transform the fluid state vector to primi
                \dens \\ \fluidvel \\ \pres
                \end{pmatrix}
 \end{align}
-Of course, this transformation involves the \ac{EOS} of the fluid. We will use $\prim{(\cdot)}$ from now on top mark any quantity as based on/formulated in primitive variables.\\
+Of course, this transformation involves the \ac{EOS} of the fluid. We will use $\prim{(\cdot)}$ from now on to mark any quantity as based on/formulated in primitive variables.\\
 The primitive state vector is also much more appealing when it comes to the implementation of boundary conditions, since the solution variables are separated there.
  \\
 Next we recall the conservative form of the Euler equations, which was presented in section~\ref{sec:conservative_form_nsg} as
@@ -199,12 +203,12 @@ Since an equilibrium point is considered, $\dmms=\vec{0}$ and is neglected in th
 
 In equation~\eqref{eq:convectiveterm_approximation} we have introduced $\fluxesnum$ as the numerical flux function. In this thesis, we consider the popular Roe flux, which is defined as given in equation~\eqref{eq:roe_flux}.
 
-Let us remind, that $\mathsf{R}_i^c$ is the convective residual at vertex $i$, $\vertexset(i)$ is the set of vertices connected to vertex $i$ by an edge, $C_i$ is the control volume of the dual cell centered at vertex $i$ and $\partial C_{ij}$ is the segment of the boundary that intersects edge $(ij)$ and $\wnormal_{ij}$ is the outward-facing weighted normal to $\partial C_{ij}$.
+Let us remind, that $\mathsf{R}_i^c$ is the convective residual at vertex $i$, $\vertexset(i)$ is the set of vertices connected to vertex $i$ by an edge, $C_i$ is the control volume of the dual cell centered at vertex $i$ and $\partial C_{ij}$ is the segment of the boundary that intersects edge $(i-j)$ and $\wnormal_{ij}$ is the outward-facing weighted normal to $\partial C_{ij}$.
 See figure~\ref{fig:dualcell_unstructured} for a visualization of the setup.
  \\
-From Equation \eqref{eq:convectiveterm _approximation2} it is obvious that when looking for the derivative $\pdfrac{\fluxmatconv}{\dfstate}$, the derivative of the numerical flux with respect to the fluid state vector $\pdfrac{\fluxesnum}{\dfstate}$ is required.
+From Equation \eqref{eq:convectiveterm _approximation2} it is obvious that, when looking for the derivative $\pdfrac{\fluxmatconv}{\dfstate}$, the derivative of the numerical flux with respect to the fluid state vector $\pdfrac{\fluxesnum}{\dfstate}$ is required.
 
-To make things easier we will in the following derive the primitive version of that quantity $\pdfrac{\prim{\fluxesnum}}{\prim{\dfstate}}$
+To make things easier we will in the following derive the primitive version of that quantity: $\pdfrac{\prim{\fluxesnum}}{\prim{\dfstate}}$
  \\
  \\
 As \cite{Lesoinne2001} demonstrates, primitive version of the numerical Roe flux can be expressed as
@@ -228,7 +232,7 @@ where, for ease of notation we omit the function arguments by simply writing $(\
 
 \def\enthalp{\mathsf{H}}
 Here, $\roeavgfunc(\prim{\fstate}_i,\prim{\fstate}_j)$  is the averaging function associated with the roe flux. It can be written as
-\begin{align}
+\begin{align}\small
 \roeavgfunc(\prim{\fstate}_i,\prim{\fstate}_j)=
 \frac{1}{\sqrt{\rho_i}+\sqrt{\rho_j}}
 \left(
@@ -256,7 +260,7 @@ The Jacobi matrix in primitive form can be written as
 \def\jftt{\dens\vn v_2+\dens H n_2}
 \def\jff{\dens\vn v_3+\dens H n_3}
 \def\jfff{\dens\vn\frac{\gamma}{\dens(\gamma-1)}}
-\begin{align}
+\begin{align}\small
 \prim{\fluxjac}&=\pdfrac{(\prim{\fluxesconv}\cdot\normal)}{\prim{\fstate}} \\
 &=
 \begin{bmatrix}
@@ -287,7 +291,7 @@ The total specific enthalpy for a perfect gas is given as
 \enthalp=\frac{\specheatratio\pres}{\dens(\specheatratio-1)}+\frac{1}{2}\T{\fluidvel}\fluidvel
 \end{align}
 where we note the following derivatives
-\begin{align}
+\begin{align}\small
 \pdfrac{\enthalp}{\dens}=-\frac{\specheatratio\pres}{\dens^2(\specheatratio-1)}~~~~~~
 \pdfrac{\enthalp}{\fluidvelcomp_i}=\fluidvelcomp_i~~~~~~
 \pdfrac{\enthalp}{\pres}=\frac{\specheatratio}{\dens(\specheatratio-1)}
@@ -303,9 +307,9 @@ Therefore, the derivative of the averaging function with respect to the primitiv
 \def\Mwonefive{\frac{\T{\fluidvel}\fluidvel}{2}-\frac{\specheatratio\pres}{\dens(\specheatratio-1)}-\frac{\sqdi\enthalp_i+\sqdj\enthalp_j}{\sqdi+\sqdj}  }
 
 
-\begingroup\makeatletter\def\f@size{8}\check@mathfonts
-\def\maketag@@@#1{\hbox{\m@th\large\normalfont#1}}%
-\begin{align}
+%\begingroup\makeatletter\def\f@size{8}\check@mathfonts
+%\def\maketag@@@#1{\hbox{\m@th\normalfont#1}}%
+\begin{align}\small
 \pdfrac{\roeavgfunc(\sim)}{\dens_i}&=
 \frac{1}{2\sqrt{\dens_i}(\sqrt{\dens_i}+\sqrt{\dens_j})}
 \left(
@@ -332,15 +336,15 @@ Therefore, the derivative of the averaging function with respect to the primitiv
   \Mwonefour  &  0                    &  0                    &  2\dens_i             & 0                                        \\
   \Mwonefive  &  2\dens_i\fluidvelx_i &  2\dens_i\fluidvelx_i &  2\dens_i\fluidvelx_i & \frac{2\specheatratio}{\specheatratio-1} \\
 \end{bmatrix}                                                                                                                      
-\end{align}\endgroup
+\end{align}%\endgroup
 
 
 The matrix $\jaceigvecs$ can be written as
 \def\gmo{\specheatratio-1}
 \def\tone{\normal-\frac{(\gmo)\T{\fluidvel}\fluidvel }{2 c^2}\normal+\normal\times\fluidvel}
-\begingroup\makeatletter\def\f@size{8}\check@mathfonts
-\def\maketag@@@#1{\hbox{\m@th\large\normalfont#1}}%
-\begin{align}
+%\begingroup\makeatletter\def\f@size{8}\check@mathfonts
+%\def\maketag@@@#1{\hbox{\m@th\large\normalfont#1}}%
+\begin{align}\small
 \jaceigvecs=
 \begin{bmatrix}
 \left(\tone\right)\cdot\vec{e}_1 &  \normalx(\gmo)\frac{\fluidvelx}{c^2} &  \normalx(\gmo)\frac{\fluidvely}{c^2}+\normalz &  \normalx(\gmo)\frac{\fluidvelz}{c^2}-\normaly  &  -\normalx\frac{\gmo}{c^2} \\
@@ -349,7 +353,7 @@ The matrix $\jaceigvecs$ can be written as
 (\gmo)\frac{\T{\fluidvel}\fluidvel}{c^2}-c\fluidvel\cdot\normal & -(\gmo)\fluidvelx+c\normalx & -(\gmo)\fluidvely+c\normaly & -(\gmo)\fluidvelz+c\normalz & \gmo \\
 (\gmo)\frac{\T{\fluidvel}\fluidvel}{c^2}-c\fluidvel\cdot\normal & -(\gmo)\fluidvelx-c\normalx & -(\gmo)\fluidvely-c\normaly & -(\gmo)\fluidvelz-c\normalz & \gmo \\
 \end{bmatrix}
-\end{align}\endgroup
+\end{align}%\endgroup
 
 
 
@@ -371,7 +375,7 @@ diag(\left[\fluidvel\cdot\normal,\fluidvel\cdot\normal,\fluidvel\cdot\normal,\fl
 \right]
 \end{align}
 
-\begin{align}\label{eq:pdfrac_jaceigvecsBYfstate_comp1}
+\begin{align}\label{eq:pdfrac_jaceigvecsBYfstate_comp1}\small
 \pdfrac{r_1}{\fstateprim}(\fstateprim,\normal)=
 \begin{bmatrix}
 0    &  0                    &  0                           &  0                           &  0 \\
@@ -383,7 +387,7 @@ diag(\left[\fluidvel\cdot\normal,\fluidvel\cdot\normal,\fluidvel\cdot\normal,\fl
 \end{align}
 
 
-\begin{align}\label{eq:pdfrac_jaceigvecsBYfstate_comp2}
+\begin{align}\label{eq:pdfrac_jaceigvecsBYfstate_comp2}\small
 \pdfrac{r_2}{\fstateprim}(\fstateprim,\normal)=
 \begin{bmatrix}
 0    &  0                             &  0                  &  0                           &  0 \\
@@ -395,7 +399,7 @@ diag(\left[\fluidvel\cdot\normal,\fluidvel\cdot\normal,\fluidvel\cdot\normal,\fl
 \end{align}
 
 
-\begin{align}\label{eq:pdfrac_jaceigvecsBYfstate_comp3}
+\begin{align}\label{eq:pdfrac_jaceigvecsBYfstate_comp3}\small
 \pdfrac{r_3}{\fstateprim}(\fstateprim,\normal)=
 \begin{bmatrix}
 0    &  0                             &  0                           &  0                  &  0 \\
@@ -408,7 +412,7 @@ diag(\left[\fluidvel\cdot\normal,\fluidvel\cdot\normal,\fluidvel\cdot\normal,\fl
 
 
 
-\begin{align}\label{eq:pdfrac_jaceigvecsBYfstate_comp4}
+\begin{align}\label{eq:pdfrac_jaceigvecsBYfstate_comp4}\small
 \pdfrac{r_4}{\fstateprim}(\fstateprim,\normal)=
 \begin{bmatrix}
 \frac{1}{2\specheatratio\pres}                            &  0                   &  0                   &  0              & -\frac{\dens}{2\gamma\pres^2}                             \\
@@ -419,7 +423,7 @@ diag(\left[\fluidvel\cdot\normal,\fluidvel\cdot\normal,\fluidvel\cdot\normal,\fl
 \end{bmatrix}
 \end{align}
 
-\begin{align}\label{eq:pdfrac_jaceigvecsBYfstate_comp5}
+\begin{align}\label{eq:pdfrac_jaceigvecsBYfstate_comp5}\small
 \pdfrac{r_5}{\fstateprim}(\fstateprim,\normal)=
 \begin{bmatrix}
 \frac{1}{2\specheatratio\pres}                            &  0                   &  0                   &  0              & -\frac{\dens}{2\gamma\pres^2}                             \\
@@ -459,7 +463,7 @@ Due to its shape, the derivation of $\jaceigvals$ can be simplified to a differe
 \end{bmatrix}
 \end{align}
 
-\begin{align}\label{eq:pdfrac_jaceigvalsBYfstate_comp1}
+\begin{align}\label{eq:pdfrac_jaceigvalsBYfstate_comp1}\small
 \pdfrac{l_1}{\fstateprim}(\fstateprim,\normal)=
 \begin{bmatrix}
 -\frac{\normalx(\gmo)\norm{\fluidvel}^2}{2\dens\sspeed^2} & -\frac{\normalx(\gmo)\fluidvelx}{\sspeed^2}        & -\frac{\normalx(\gmo)\fluidvely}{\sspeed^2}-\normalz & -\frac{\normalx(\gmo)\fluidvelz}{\sspeed^2}+\normaly & \frac{\normalx(\gmo)\norm{\fluidvel}^2}{2\dens\sspeed^2} \\
@@ -470,7 +474,7 @@ Due to its shape, the derivation of $\jaceigvals$ can be simplified to a differe
 \end{bmatrix}
 \end{align}
 
-\begin{align}\label{eq:pdfrac_jaceigvalsBYfstate_comp2}
+\begin{align}\label{eq:pdfrac_jaceigvalsBYfstate_comp2}\small
 \pdfrac{l_2}{\fstateprim}(\fstateprim,\normal)=
 \begin{bmatrix}
 -\frac{\normaly(\gmo)\norm{\fluidvel}^2}{2\dens\sspeed^2} & -\frac{\normaly(\gmo)\fluidvelx}{\sspeed^2}+\normalz        & -\frac{\normaly(\gmo)\fluidvely}{\sspeed^2} & -\frac{\normaly(\gmo)\fluidvelz}{\sspeed^2}-\normalx & \frac{\normaly(\gmo)\norm{\fluidvel}^2}{2\dens\sspeed^2} \\
@@ -481,7 +485,7 @@ Due to its shape, the derivation of $\jaceigvals$ can be simplified to a differe
 \end{bmatrix}
 \end{align}
 
-\begin{align}\label{eq:pdfrac_jaceigvalsBYfstate_comp3}
+\begin{align}\label{eq:pdfrac_jaceigvalsBYfstate_comp3}\small
 \pdfrac{l_3}{\fstateprim}(\fstateprim,\normal)=
 \begin{bmatrix}
 -\frac{\normalz(\gmo)\norm{\fluidvel}^2}{2\dens\sspeed^2} & -\frac{\normalz(\gmo)\fluidvelx}{\sspeed^2}-\normaly        & -\frac{\normalz(\gmo)\fluidvely}{\sspeed^2}+\normalx & -\frac{\normalz(\gmo)\fluidvelz}{\sspeed^2} & \frac{\normalz(\gmo)\norm{\fluidvel}^2}{2\dens\sspeed^2} \\
@@ -492,7 +496,7 @@ Due to its shape, the derivation of $\jaceigvals$ can be simplified to a differe
 \end{bmatrix}
 \end{align}
 
-\begin{align}\label{eq:pdfrac_jaceigvalsBYfstate_comp4}
+\begin{align}\label{eq:pdfrac_jaceigvalsBYfstate_comp4}\small
 \pdfrac{l_4}{\fstateprim}(\fstateprim,\normal)=
 \begin{bmatrix}
 \frac{\sspeed}{2\dens}\fluidvel\cdot\normal & (\gmo)\fluidvelx-\sspeed\normalx & (\gmo)\fluidvely-\sspeed\normaly & (\gmo)\fluidvelz-\sspeed\normalz & -\frac{\sspeed}{2\pres}\fluidvel\cdot\normal \\
@@ -504,7 +508,7 @@ Due to its shape, the derivation of $\jaceigvals$ can be simplified to a differe
 \end{align}
 
 
-\begin{align}\label{eq:pdfrac_jaceigvalsBYfstate_comp5}
+\begin{align}\label{eq:pdfrac_jaceigvalsBYfstate_comp5}\small
 \pdfrac{l_5}{\fstateprim}(\fstateprim,\normal)=
 \begin{bmatrix}
 \frac{\sspeed}{2\dens}\fluidvel\cdot\normal & (\gmo)\fluidvelx-\sspeed\normalx & (\gmo)\fluidvely-\sspeed\normaly & (\gmo)\fluidvelz-\sspeed\normalz & -\frac{\sspeed}{2\pres}\fluidvel\cdot\normal \\
@@ -528,21 +532,21 @@ Therefor, the numerical roe flux~\eqref{eq:primitive_roe_flux} can therefore be 
 \def\pdjaceigvecsBYw{\pdfrac{\jaceigvecs}{\prim{\fstate}}(\sim)}
 \begin{align}
 \pdfrac{\prim{\fluxesnum}}{\prim{\fstate_i}}&=
-\frac{1}{2}\fluxjac(\prim{\fstate}_i,\prim{\fstate}_j)\\
+\frac{1}{2}\fluxjac(\prim{\fstate}_i,\prim{\fstate}_j)\nonumber\\
 &-\frac{1}{2}\Bigg[
   \Big( \pdinvjaceigvecsBYw \pdroeavgBYw \Big)
   \jaceigvalssim \jaceigvecssim \wdiff
-  \\ &~~+
+  \nonumber\\ &~~+
   \invjaceigvecssim \Big( \pdabsjaceigvalsBYw \pdroeavgBYw \Big)
   \jaceigvecssim \wdiff  
-  \\ &~~+
+  \nonumber\\ &~~+
   \invjaceigvecssim \jaceigvalssim \Big( \pdjaceigvecsBYw\pdroeavgBYw \Big) \wdiff
-  \\ &~~-
+  \nonumber\\ &~~-
   \invjaceigvecssim \jaceigvalssim \jaceigvecssim
 \Bigg]
 \end{align}
 where the full analytic expression can be obtained by backward substitution of equations~\eqref{eq:split_roeaveragingmatrix} to \eqref{eq:pdfrac_jaceigvalsBYfstate_comp5}.\\
-This derivative, along with the derivative of the viscous term, which will be derived in Section~\ref{sec:derivative_viscous_residual}, will be a key component in the Sensitivity calculations as shown in Section~\ref{sec:SA} and \ref{sec:aeroelastic_sa}. This is due to the fact that will follow the procedere of discretization before derivation as justified in Section~\ref{sec:discretization_vs_differentiation}.
+This derivative, along with the derivative of the viscous term, which will be derived in sections~\ref{sec:jacobian_viscous} and \ref{sec:dRdS_viscous}, will be a key component in the Sensitivity calculations as shown in Section~\ref{sec:SA} and \ref{sec:aeroelastic_sa}. This is due to the fact that will follow the procedere of discretization before derivation as justified in Section~\ref{sec:sensitivity_derivation}.
 
 
 
@@ -555,24 +559,24 @@ Since the fluid Jacobian is also required in every standard fluid solve, the imp
 Similar to the previously discussed fluid Jacobian, the computation of $\pdfrac{\dresidual}{\absvar}$ can be splitted into convective and viscous part.
 We again focus on the special case of an intersected cell in the following two subsections, since the standard case of a standard cell far from the interface follows trivially from that.
 
-It shall also be noted that in most cases, the derivative $\pdfrac{\dresidual}{\absvar}$ is non-zero only at a few fluid nodes. For shape-sensitivity, for example, only the nodes at the interface have a non-zero contribution here. Looking at equation \eqref{eq:full_sa_nostruct} one can therefor interpret the solution of the linear system, or the multiplication with the inverse Jacobian, as a propagation operation.\\
+It shall also be noted that in most cases, the derivative $\pdfrac{\dresidual}{\absvar}$ is non-zero only at a few fluid nodes. For shape-sensitivity, for example, only the nodes at the interface have a non-zero contribution. Looking at equation \eqref{eq:full_sa_nostruct} one can therefor interpret the solution of the linear system, or the multiplication with the inverse Jacobian, as a propagation operation.\\
 \subsubsection{Convective contribution $\pdfrac{\dresidual^c}{\absvar}$}
 Generally, one can write the convective fluid residual as 
 \begin{align}\label{eq:convective_residual_fulldependency}
 \dresidual^{c,i}_{ij} = \fluxesnum^i_{ij}(\dfstateprim_{ij},\dfstateprim^{*}_{ij}(\absvar),\normal_{ij})
 \end{align}
-The most important factor here, is of course the dependency of the half Riemann solution on the abstract variable. This dependecy becomes obvious in the case of shape sensitivity, since the intersection point used for the Riemann solution depends upon the interface shape.\\
+The most important factor here is of course the dependency of the half Riemann solution on the abstract variable. This dependecy becomes obvious in the case of shape sensitivity, since the intersection point used for the Riemann solution depends upon the interface shape.\\
 The derivative can be obtained straightforwardly as
 \begin{align}
-\dresidual{\dresidual^{c,i}_{ij}}{\absvar}=\pdfrac{\dresidual^{c,i}_{ij}}{\dfstate^{\star}_{ij}}\pdfrac{\dfstate^{\star}_{ij}}{\absvar}
+\pdfrac{\dresidual^{c,i}_{ij}}{\absvar}=\pdfrac{\dresidual^{c,i}_{ij}}{\dfstate^{\star}_{ij}}\pdfrac{\dfstate^{\star}_{ij}}{\absvar}
 \end{align}
 here, the analytical derivative of the first term can be taken from section \ref{sec:fluid_jacobian}.
 The second derivative is more cumbersome. The issue is visualized in Figure~\ref{fig:pierce}.
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=0.3\linewidth]{\mainpath/fig/pdf/pierce}
-\caption[Visualization of a face intersection in 3D]{Visualization of the intersection of a fluid mesh edge $(D-E)$ with an element of the embedded surface $(A-B-C)$. For a shape-sensitivity analysis, SDesign returns the derivatives of the embedded surface nodes $A,B,C$ position with respect to the shape parameter. This is done by first computing the intersection point $P$. Together with the element normal $\normal$, the intersection point is used to reconstruct the shape derivatives at nodes $D$ and $E$. \textbf{TODO}}
+\includegraphics[width=0.3\linewidth]{\mainpath/fig/png/pierce.png}
+\caption[Visualization of a face intersection in 3D]{Visualization of the intersection of a fluid mesh edge $(D-E)$ with an element of the embedded surface $(A-B-C)$. For a shape-sensitivity analysis, SDesign returns the derivatives of the embedded surface nodes $A,B,C$ position with respect to the shape parameter. This is done by first computing the intersection point $P$. Together with the element normal $\normal$, the intersection point is used to reconstruct the shape derivatives at nodes $D$ and $E$.}
 \label{fig:pierce}
 \end{figure}
 
@@ -591,9 +595,9 @@ The derivatives of the geometrical quantities with respect to $\absvar$ are foun
 \end{align}
 
 
-\subsubsection{Viscous contribution $\pdfrac{\dresidual^v}{\absvar}$}
+\subsubsection{Viscous contribution $\pdfrac{\dresidual^v}{\absvar}$}\label{sec:dRdS_viscous}
 The derivative of the viscous contibution is derived very simmilarly to the viscous Jacobian.
-Looking at equation \textbf{TODO} one can derive
+Looking at equation \eqref{eq:jacobian_viscous} one can derive
 \begin{align}
     \pdfrac{\dresidual^v(\absvars,\dfstateprim^a(\absvars),\dfstateprim^g(\dfstateprim^a(\absvars)),\mpos(\absvars))}{\absvars}=
     &\underbrace{\pdfrac{\dresidual^v}{\dfstateprim^a}\pdfrac{\dfstateprim^a}{\absvars}}_{\substack{\text{can be re-used from ALE } \\ \text{after the ghost-point population}}}+

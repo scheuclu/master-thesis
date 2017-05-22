@@ -6,6 +6,10 @@
 
 \setlength{\delimitershortfall}{0pt}
 \section{The Embedded Boundary Method - FIVER}\label{sec:embedded_boundary_method}
+\secttoc
+\sectlof
+\sectlot
+
 
 It was already outlined in Section \ref{sec:fluid_mechanics}, that using an Eulerian approach int the context of an aeroelastic simulation leads to a so-called embedded formulation, where the interface of the structure mesh no longer coincides with the fluid mesh. This was appealing, since it allowed for the usage of fixed meshes and an Eulerian formulation, on the other hand as  explained in Section \ref{sec:fiver_setup}, an error of the order $\order{\frac{h}{2}}$ is introduced. A possible solution to recover second order convergence rate is quickly described in section~\ref{sec:fiver-2}.\\
 For the solution of multi-material flows with immersed boundaries, the \acf{FIVER} has been developed in the \acf{FRG}. The basic concepts of \ac{FIVER} have first been described in~\cite{Farhat2008} in the context of two-phase compressible flows and underwater implosions. It has then be extended to fluid-structure interaction in \cite{Wang2011a}. Finally, an approach to restore a second order global rate of convergence has been presented in \cite{Main2014}.\\
@@ -96,8 +100,8 @@ The original \ac{FIVER} method was developed in \cite{Farhat2008}. As depicted i
 
 \begin{figure}[h!]
 	\begin{center}
-        \includegraphics[width=0.5\textwidth]{\mainpath/fig/pdf/riemann}
-        \caption[Riemann Sketch]{Solution of the 1D half Riemann problem around edge $i-j$ described in equation \eqref{eq:half_riemann_problem}. The obtained fluid state at the interface is then used to evaluate the flux function, see equation~[\eqref{eq:half_riemann_problem_original}\eqref{eq:flux_with_reconstructed_value_fiver1}]}
+        \includegraphics[width=0.5\textwidth]{\mainpath/fig/png/riemann}
+        \caption[Riemann Sketch]{Solution of the 1D half Riemann problem around edge $i-j$ described in equation \eqref{eq:half_riemann_problem}. The obtained fluid state at the interface is then used to evaluate the flux function, see equations~[=\eqref{eq:half_riemann_problem_original} and \eqref{eq:flux_with_reconstructed_value_fiver1}}
 		\label{fig:riemann_sketch}
     \end{center}
 \end{figure}

@@ -3,6 +3,10 @@
 \begin{document}
 \setlength{\delimitershortfall}{0pt}
 \section{Fluid structure interaction}
+\secttoc
+\sectlof
+\sectlot
+
 \acf{FSI} describes the aeroelastic response of a mechanical system under fluid load, as well as the interaction between fluid and structure itself. Synonymously the term "Aeroelasticity" is often used.\\
 The ultimate goal of the \acf{SA} derived in this thesis is shape-optimization. For many challenging applications, the interaction of the flow with the structure can not be neglected for the sensitivity computation. Thus, this chapter shall provide a quick overview on the fluid-structure sensitivity analysis.
 
@@ -18,8 +22,7 @@ The three-field formulation of \ac{ALE} aeroelasticity can be written as:
 \begin{align}
 &\text{governing equation of structure:}  &\EOSstruct (\absvars,\structdisp,\mms,\fstate) = \vec{0} \label{eq:3field_structure}\\
 &\text{governing equation of meshmotion:} &\EOSmesh   (\absvars,\structdisp,\mms)         = \vec{0} \label{eq:3field_mesh}\\
-&\text{governing equation of the fluid:}  &\EOSfluid  (\absvars,\mms,\fstate)             = \vec{0}
-\label{eq:3field_fluid}\\
+&\text{governing equation of the fluid:}  &\EOSfluid  (\absvars,\mms,\fstate)             = \vec{0} \label{eq:3field_fluid}
 \end{align}
 
 \paragraph{Governing equation of the structure:}
@@ -155,7 +158,6 @@ After the mesh has been deformed, the fluid state~$\dfstate$ vector can be updat
 {$<\text{term above}>-\pdfrac{\turbmat}{\fstate} (\itss{\dmpos},\itss{\dmms},\itss{\fstate}-\its{\fstate},\turbparamvec)$}
 =0
 \end{align}
-\textbf{is this correct? What do I do with the turbulence parameter?}
 
 
 \paragraph{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt} {5}}} Determining structural responses}

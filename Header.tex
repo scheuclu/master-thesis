@@ -84,6 +84,12 @@
 \newcommand{\hlepurple}[1]{\colorbox{hlcolorpurple}{$\displaystyle{#1}$}}
 
 
+\def\maathunderline#1#2{\color{#1}\underline{{\color{black}#2}}\color{black}}
+
+\newsavebox\MBox
+\newcommand\mathunderline[2][red]{{\sbox\MBox{$#2$}%
+  \rlap{\usebox\MBox}\color{#1}\rule[-1.2\dp\MBox]{\wd\MBox}{2.0pt}}}
+
 \DeclareRobustCommand{\hlt}[2]{{\sethlcolor{#1}\hl{#2}}}
 \newcommand{\hle}[2]{\colorbox{#1}{$\displaystyle{#2}$}}
 
@@ -121,6 +127,7 @@
 \hfuzz=50.00pt%maximum amount of box overflow before a warning
 
 
+\usepackage{minitoc}
 
 
 
