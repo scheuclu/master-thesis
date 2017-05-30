@@ -1,0 +1,115 @@
+\begin{frame}
+
+\begin{itemize}
+\item Validating the fluid Jacobian via Finite Difference
+\begin{align*}
+\pdfrac{\dresidual}{\dfstate}\bigg\rvert_{\fstate_0}\dvec{u}=\frac{\dresidual_i(\dfstate_0+\epsilon\dvec{u})-\dresidual_i(\dfstate_0-\epsilon\dvec{u})}{2\epsilon}
+\end{align*}
+\item Validate the fluid solution via the finite difference of two steady state simulations
+\begin{align*}
+\tfrac{\dfstate(\absvar)}{\absvar}\rvert_{\fstate_0}=\frac{\dfstate(\absvar+\epsilon)-\dfstate(\absvar-\epsilon)}{2 \epsilon}
+\end{align*}
+\item Validating both Body-fitted and Embedded formulation
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------------------------
+
+
+\begin{frame}
+%\centering
+Simple NACA0012 profile
+
+\begin{itemize}
+\item $\alpha=0.0^{\circ}, 3.0, 6.0, 9.0$
+\item $\machnum=0.1,~0.3,~0.7,~0.9$
+\item Stiffened Gas
+\end{itemize}
+\begin{figure}
+\includegraphics[scale=1.0]{\thesispath/fig/pdf/verificationsetup.pdf}
+\end{figure}
+
+\end{frame}
+
+%------------------------------------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Shape-modification via design variables}
+\begin{figure}
+\includegraphics[scale=0.65]{\thesispath/fig/tikz/build/sdesign_visualization.pdf}
+\end{figure}
+\end{frame}
+
+%------------------------------------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Verification of $\pdfrac{\dfstate}{\absvar}$ }
+\framesubtitle{Body-Fitted}
+	\begin{figure}[t!]
+	    %\centering
+	    \textbf{Verification $\tfrac{\dfstate}{\machnum_{\infty}}$ for RANS equations and a body-fitted framework}\par\medskip
+	    \begin{overprint}
+	       \foreach \n in {1,2,3,5,6}{
+	       				 \only<\n>{\fbox{\includegraphics[width=5cm]{\thesispath/fig/studies/StateVector_verification/machsens/ALE/RANS_component\n_FD}}~
+				            \fbox{\includegraphics[width=5cm]{\thesispath/fig/studies/StateVector_verification/machsens/ALE/RANS_component\n_ana}}
+				            \caption[Verification $\tfrac{\dfstate}{\machnum_{\infty}}$] {$\tfrac{\dfstate_\n}{\machnum_{\infty}}$: FD-sensitivity on the left, analytic sensitivity}  
+				            }
+	       }
+	    \end{overprint}
+	\end{figure}
+\end{frame}
+
+%------------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Verification of $\pdfrac{\dfstate}{\absvar}$ }
+\framesubtitle{Embedded}
+	\begin{figure}[t!]
+	    %\centering
+	    \textbf{Verification $\tfrac{\dfstate}{\machnum_{\infty}}$ for RANS equations and a embedded framework}\par\medskip
+	    \begin{overprint}
+	       \foreach \n in {1,2,3,5,6}{
+	       				 \only<\n>{\fbox{\includegraphics[width=5cm]{\thesispath/fig/studies/StateVector_verification/machsens/Emb/RANS_component\n_FD}}~
+				            \fbox{\includegraphics[width=5cm]{\thesispath/fig/studies/StateVector_verification/machsens/Emb/RANS_component\n_ana}}
+				            \caption[Verification $\tfrac{\dfstate}{\machnum_{\infty}}$] {$\tfrac{\dfstate_\n}{\machnum_{\infty}}$: FD-sensitivity on the left, analytic sensitivity}  
+				            }
+	       }
+	    \end{overprint}
+	\end{figure}
+\end{frame}
+
+%------------------------------------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Convergence of force-sensitivties}
+
+\begin{figure}
+  \begin{overprint}
+    \only<1>{\scalebox{.6}{
+      \input{\thesispath/fig/studies/force_convergence/ALE/machsens/ALE_Euler/tikzfiles/Ma0.5/force}}
+      \caption{Convergence of the analytic results for Euler-equations}
+    }
+    \only<2>{\scalebox{.6}{
+      \input{\thesispath/fig/studies/force_convergence/ALE/machsens/ALE_Laminar/tikzfiles/Ma0.5/force}}
+      \caption{Convergence of the analytic results for Laminar-equations}
+    }
+    \only<3->{\scalebox{.6}{
+      \input{\thesispath/fig/studies/force_convergence/ALE/machsens/ALE_RANS/tikzfiles/Ma0.5/force}}
+      \caption{Convergence of the analytic results for RANS-equations}
+    }
+  	\end{overprint}
+\end{figure} 
+%		\begin{figure}
+%		\textbf{Lift and Drag sensitivity: body-fitted \eqtype ~equations}
+%		  \centering
+%		  \scalebox{.75}{\input{\thesispath/fig/studies/force_convergence/ALE/machsens/ALE_\eqtype/tikzfiles/Ma0.5/force}}
+%		  \caption[aaa]{bla bla bla}
+%		  \label{fig:dLdMa_\eqtype_ale}
+%		\end{figure}
+
+	
+
+\end{frame}

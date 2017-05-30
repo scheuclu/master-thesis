@@ -1,0 +1,675 @@
+\documentclass[10pt, mathserif]{beamer}
+
+\usetheme{CambridgeUS}
+\setbeamertemplate{navigation symbols}{}
+\useoutertheme[subsection=false]{miniframes}
+
+\setbeamercolor{block body}{bg=yellow!23}
+\setbeamercolor{block title}{bg=purple!100!black!140, fg=white}
+\setbeamercolor{footline}{fg=gray!100}
+\setbeamercolor{item}{fg=purple!100!black!150,bg=purple!100!black!150}
+\setbeamercolor*{title}{fg=purple!100!black!150,bg=lightgray!50}
+\setbeamercolor*{author}{fg=blue}
+\setbeamercolor*{author in head/foot}{fg=blue,bg=gray!15}
+\setbeamercolor*{author in head/foot}{fg=black,bg=gray!15}
+\setbeamercolor*{date in head/foot}{fg=black,bg=gray!25}
+\setbeamercolor*{frametitle}{fg=purple!100!black!150, bg=gray!15}
+\setbeamerfont{footl}{size=\tiny}
+\usefonttheme[onlylarge]{structuresmallcapsserif}
+\setbeamerfont{frametitle}{size=\normalsize}
+
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=1.6ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont*{footl}\insertshortauthor~~(\insertshortinstitute)
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.6\paperwidth,ht=1.6ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont*{footl}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}
+  \vskip0pt%
+}
+
+\usepackage{amsmath, amstext, amssymb, latexsym, psfrag, soul, cancel, relsize}
+\usepackage{graphicx, color, colortbl, epsfig, subfigure, booktabs}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[percent]{overpic}
+
+% Define block styles
+\tikzstyle{decision} = [diamond, draw, fill=yellow!80, 
+                        text width=4.5em, text badly centered, node distance=2cm, inner sep=0pt]
+\tikzstyle{block}  = [rectangle, draw, fill=black!20, 
+                     text width=8em, text centered, rounded corners, minimum height=1em]
+\tikzstyle{block1} = [rectangle, draw, fill=blue!30, 
+                     text width=8em, text centered, rounded corners, minimum height=1em]
+\tikzstyle{block3} = [rectangle, draw, fill=red!50, 
+                     text width=8em, text centered, rounded corners, minimum height=1em]
+\tikzstyle{block2} = [rectangle, draw, fill=green!40, 
+                     text width=8em, text centered, rounded corners, minimum height=1em]
+\tikzstyle{block4} = [rectangle, draw, fill=yellow!80, 
+                     text width=8em, text centered, rounded corners, minimum height=1em]
+\tikzstyle{blocke} = [rectangle, draw, fill=yellow!25, 
+                     text width=16em, text centered, rounded corners, minimum height=2em]
+\tikzstyle{line} = [draw, -latex']
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Rbb}{\ensuremath{\mathbb{R} }}
+\newcommand\mubold{{\ensuremath{\boldsymbol{\mu}}}}
+\newcommand{\Jcal}{\ensuremath{\mathcal{J}}}
+\newcommand{\func}[3]{\ensuremath{#1 : #2 \rightarrow #3}}
+\newcommand{\Dcal}{\ensuremath{\mathcal{D}}}
+\newcommand{\Fcal}{\ensuremath{\mathcal{J}}}
+
+\newcommand\cbold{\ensuremath{\mathbf{c}}}
+\newcommand{\pder}[2]{\ensuremath{\dfrac{\partial #1}{\partial #2}}} %1st partial derivative
+\newcommand{\oder}[2]{\ensuremath{\dfrac{\mathrm{d} #1}{\mathrm{d} #2}}} %1st ordinary derivative
+
+\newcommand\Rbold{\ensuremath{\mathbf{R}}}
+\newcommand\ubold{\ensuremath{\mathbf{u}}}
+\newcommand\wbold{\ensuremath{\mathbf{w}}}
+\newcommand\Fbold{\ensuremath{\mathbf{F}}}
+\newcommand\fbold{\ensuremath{\mathbf{f}}}
+\newcommand\xbold{\ensuremath{\mathbf{x}}}
+\newcommand\nbold{\ensuremath{\mathbf{n}}}
+\newcommand\C{\mathcal{C}}
+\newcommand\dC{\partial\mathcal{C}}
+\newcommand\n{\boldsymbol{n}}
+\newcommand\K{\mathcal{K}}
+
+\newcommand{\Et}{E^t}
+\newcommand{\IdxM} {\mathbb{I}}
+\newcommand{\vel}{\boldsymbol{v}}
+\newcommand{\mm}{\boldsymbol{m}}
+\newcommand{\dsddt}[1] {\dfrac{\partial{#1}}{\partial{t}}}
+\newcommand{\Div}[1] { \boldsymbol{\nabla} \!\dotprod #1 }
+\newcommand{\vzero}{\boldsymbol{0}}
+\newcommand{\wall}{\mathrm{wall}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[]{\large{Gradient based aerodynamic shape optimization using the FIVER embedded boundary method}}
+\author[De Santis, Zahr \& Farhat]{D. De Santis, M.~J. Zahr and C. Farhat}
+\institute[Stanford]{Stanford University}
+\date[SciTech 2016]{SciTech 2016 4-8 January 2016, San Diego, California}
+\newcommand{\backupbegin}{
+   \newcounter{finalframe}
+   \setcounter{finalframe}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \setcounter{framenumber}{\value{finalframe}}
+}
+
+\begin{document}
+
+%------------------------------------------------------------------------------
+
+\begin{frame}
+   \titlepage
+   \begin{figure}[!ht]
+   \centering
+    \includegraphics[width=0.35\linewidth]{Fig/logo_stanford}
+   \end{figure}
+\end{frame}
+
+%------------------------------------------------------------------------------
+\section{Introduction}
+
+\begin{frame}
+  \frametitle{Use of CFD in optimal design}
+  \begin{itemize}
+    \item Requirements on CFD
+      \begin{itemize}
+      \item Complex flows (transonic, turbulent \dots) and high Reynolds numbers
+      \item Well-resolved boundary layers and flow features
+      \item Steady/unsteady flows
+      \item Numerical accuracy, solver robustness and short turn-around time
+      \item Moderate to highly complex geometries
+      \end{itemize}
+    \item Requirements on design and optimization 
+      \begin{itemize}
+      \item Automatic framework
+      \item Efficient optimization algorithms
+      \item Large number of design variables
+      \item Multi-point design and multi-disciplinary design optimization
+      \item Geometrical/engineering constraints 
+      \end{itemize}
+   \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Aerodynamic shape optimization}
+  
+  \begin{columns}
+    \begin{column}{0.55\textwidth}
+      \begin{tikzpicture}[node distance = 1.2cm, auto]
+        \node [block] (init) {Initial geometry};
+        \node [block1, below of=init] (parameter) {Parameter change};
+        \node [block1, below of=parameter] (modify) {Shape  \mbox{modification}};
+        \node [block2, below of=modify] (mesh) {Mesh procedure};
+        \node [block3, below of=mesh] (simulation) {Flow simulation};
+        \node [decision, right of=parameter, node distance=3.5cm] (decide) {Optimum?};
+        \node [block4, right of=mesh, node distance=3.5cm] (optimize) {Gradient based optimization};
+        \node [block3, below of=simulation] (objective) {Objective function \& constraints}; 
+        \path [line] (init) -- (parameter);
+        \path [line] (parameter) -- (modify);
+        \path [line] (decide) -- (parameter);        
+        \path [line] (modify) -- (mesh);
+        \path [line] (mesh) -- (simulation);
+        \path [line] (simulation) -- (objective);   
+        \path [line] (objective) -| (optimize);
+        \path [line] (optimize) -- (decide);  
+      \end{tikzpicture}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \begin{block}{Gradient based optimization}
+       \begin{itemize}
+       \item Requires objective function and constraints
+       \item Gradient of objective function and constraints
+       \end{itemize}
+       \end{block}
+      \begin{block}{How to compute the gradient}
+       \begin{itemize}
+       \item Finite difference
+       \item Direct approach
+       \item Adjoint approach
+       \end{itemize}
+       \end{block}
+    \end{column}      
+  \end{columns}
+
+\end{frame}
+
+%%%%%%%%%
+
+\begin{frame}
+  \frametitle{CFD solver I: classical body fitted approach}
+  \vspace{-2mm}
+  \begin{block}{Body fitted CFD approach}
+    \begin{itemize}
+    \item Changes of the surface geometry require volume re-meshing or mesh deformation (ALE) \\[-1mm]
+    \item Re-meshing can be expensive and not fully automated  \\[-1mm]
+    \item Mesh deformation is not robust for large shape changes, 
+          cannot handle topological changes, and may be CPU intensive  \\[-1mm]
+    \item Convergence optimality requires computing the derivatives 
+          of the mesh changes in the entire computational fluid domain \\[-1mm]
+    \end{itemize}
+  \end{block}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.44\textwidth]{Fig/mesh_def0}
+    \hspace{3mm}
+    \includegraphics[width=0.44\textwidth]{Fig/mesh_def1}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{CFD solver II: non conforming grid approach}
+
+  \begin{block}{Immersed boundary CFD approach}
+    \begin{itemize}
+    \item Volume mesh does not conform to the surface mesh
+    \item Fixed volume mesh and decoupled geometry surface deformation 
+    \item Fast and robust mesh generation for geometry of arbitrary complexity
+    \item High level of automatization and flexible geometry modeling
+    \item Coupling between volume and surface discretization 
+      \begin{itemize}
+      \item Geometry intersector: can be fast, robust and accurate (CS)
+      \item IB numerical treatment: can be slow, not robust and not accurate (CFD)
+      \end{itemize}
+    \end{itemize}
+  \end{block}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.65\textwidth]{Fig/embopt}
+  \end{figure}
+
+\end{frame}
+
+%------------------------------------------------------------------------------
+\section{Optimization problem}
+
+\begin{frame}
+  \frametitle{PDE-constrained optimization}
+
+  \begin{itemize}
+    \item PDE-constrained optimization for steady problems
+      \begin{equation*}
+        \begin{aligned}
+          & \underset{\ubold \in \Rbb^{N_\wbold},~\mubold \in \Rbb^{N_\mubold}}{\text{minimize}}
+          & & \Jcal(\ubold, \mubold) \\
+          & \text{subject to}
+          & & \Rbold(\ubold, \mubold) = 0 \\
+          & & & \cbold(\ubold, \mubold) \leq 0
+        \end{aligned}
+      \end{equation*}
+    \item Nested approach
+      \begin{equation*}
+        \begin{aligned}
+          & \underset{\mubold \in \Rbb^{N_\mubold}}{\text{minimize}}
+          & & \Jcal(\ubold(\mubold), \mubold) \\
+          & \text{subject to}
+          & & \cbold(\ubold(\mubold), \mubold) \leq 0.
+        \end{aligned}
+      \end{equation*}
+  \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Computation of the gradient}
+  
+  \begin{itemize}  
+    \item Gradients of the objective function
+      \begin{equation*}
+        \oder{\Fcal}{\mubold} = \pder{\Fcal}{\mubold} + \pder{\Fcal}{\ubold}\pder{\ubold}{\mubold}
+      \end{equation*}
+    \item If the flow residual is converged
+      \begin{equation*}
+        \Rbold(\ubold(\mubold), \mubold) = 0, \,\,\forall \mubold 
+        \quad \longrightarrow \quad
+        \oder{\Rbold}{\mubold} = \pder{\Rbold}{\mubold} + \pder{\Rbold}{\ubold}\pder{\ubold}{\mubold} = 0        
+      \end{equation*}
+
+      \begin{equation*}
+        \pder{\ubold}{\mubold} = -\left[\pder{\Rbold}{\ubold}\right]^{-1}\pder{\Rbold}{\mubold}
+      \end{equation*}
+    \item The derivative of the objective function becomes\\
+      \begin{center}
+      \begin{tikzpicture}[node distance = 1.2cm, auto]
+        \node [blocke] (init) {$\oder{\Fcal}{\mubold} = \pder{\Fcal}{\mubold} - 
+                              \pder{\Fcal}{\ubold}\left(\left[\pder{\Rbold}{\ubold}\right]^{-1}
+                              \pder{\Rbold}{\mubold}\right)$};
+      \end{tikzpicture}
+      \end{center}
+  \end{itemize}
+
+\end{frame}
+
+%------------------------------------------------------------------------------
+\section{Numerical framework}
+
+\begin{frame}
+  \frametitle{Governing equations and flow solver}
+  \begin{itemize}
+  \item Steady 3D Euler equations of a perfect gas
+  \item FV Spatial discretization on unstructured grids with embedded boundaries
+  \item Residual of each node formally reads
+    \begin{equation*} 
+      \Rbold_i = \sum_{j \in \K_i} \Fbold_{ij}(\wbold_{ij}, \wbold_{ji}, \n_{ij})
+    \end{equation*}
+  \end{itemize}
+  \vspace{-6mm}
+  \begin{columns}
+    \begin{column}{0.45\textwidth}
+      \begin{figure}
+        \includegraphics[width=1\textwidth]{Fig/fiver1}
+        \hspace{-10mm}
+      \end{figure}
+    \end{column}
+    \begin{column}{0.02\textwidth}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \begin{block}{``Internal'' cells}
+        Standard MUSCL reconstruction + Roe's numerical flux
+      \end{block}
+      \begin{block}{``Interface'' cells}
+       FIVER: numerical flux based on the exact solution of 
+        one-dimensional half-Riemann problem 
+      \end{block}
+    \end{column}    
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{IB with the FIVER approach: original formulation}
+  \vspace{-2mm}
+  \begin{itemize}
+  \item Identify immersed boundaries with control volume interfaces $\mathcal{C}_{ij}$
+    \begin{figure}[t!]
+      \centering
+      \includegraphics[width=0.35\textwidth]{Fig/fiver1}
+    \end{figure} 
+    \vspace{-1mm}
+  \item Solve exactly local one-dimensional half-Riemann problems at $\mathcal{C}_{ij}$
+    \vspace{-2mm}
+    \begin{columns}
+      \hspace{4mm}
+      \begin{column}{0.55\textwidth}
+        \begin{equation*}
+          \left\{\!\!\!\! \begin{array}{ll}
+            \dfrac{\partial \tilde\wbold^\star}{\partial \tau} + \dfrac{\partial\tilde\fbold(\tilde\wbold^\star)}{\partial \xi} = 0 \\[2mm]
+            \tilde\wbold^\star(\xi, 0) = \tilde\wbold_{ij}, & \!\!\xi \le 0  \\[2mm]
+            \vel(0, \tau)\cdot \nbold_\wall = \vel_\wall\cdot \nbold_\wall, & \!\!0 \le \tau \le \Delta t
+          \end{array} \right.
+        \end{equation*}
+      \end{column}
+      \begin{column}{0.43\textwidth}
+        \begin{figure}[b!]
+          \centering
+          \hspace{-5mm}
+          \includegraphics[width=0.99\textwidth]{Fig/riemann}
+        \end{figure}
+      \end{column}
+    \end{columns}
+    \item Evaluate numerical flux: $\Fbold_{ij} = \Fbold_{ij}(\wbold_{ij}, \wbold^\star_{b}, \n_{ij})$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{IB with the FIVER approach: enhanced formulation}
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.35\textwidth]{Fig/fiver2}
+  \end{figure}
+  \vspace{-5mm}
+  \begin{itemize}
+  \item The fluid state is extrapolated to the material interface $\Gamma$ \\[-4mm]
+    \begin{equation*}
+      \wbold_\Gamma = \wbold_i + \nabla \wbold_i \boldsymbol\!\cdot (\xbold_\Gamma - \xbold_i)
+    \end{equation*} 
+  \item The one-dimensional half-Riemann problem is solved at material interface $\Gamma$\\[-4mm]
+    \begin{equation*}
+      \tilde\wbold^\star_\Gamma =\tilde\wbold^\star(\tilde\wbold_\Gamma, \vel_\wall, \nbold_\wall)
+    \end{equation*} 
+  \item The fluid state is inter/extra-polated at control volume interface $\mathcal{C}_{ij}$\\[-4mm]
+    \begin{equation*}
+      \wbold^\star_{ij} = \wbold^\star_{ij}(\wbold^\star_\Gamma, \wbold_{i'})
+    \end{equation*}
+  \item Numerical flux at the control volume interface: $\Fbold_{ij} = \Fbold_{ij}(\wbold_{ij}, \wbold^\star_{ij}, \n_{ij})$
+  \item  Second-order convergence is recovered in the vicinity of the interface
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Analytical derivatives: $\left[\frac{\partial \Fbold}{\partial \ubold}\right]$}
+  \begin{itemize}
+  \item Derivative of numerical flux far from the immersed boundaries
+  \begin{equation*}
+    \frac{\partial \Fbold_{ij}}{\partial \ubold_{k}} = 
+    {\color{red}{\frac{\partial \Fbold_{ij}}{\partial \wbold_{ij}}}} \,
+    {\color{green}{\frac{\partial \wbold_{ij}}{\partial \wbold_k}}}\,
+    \frac{\partial \wbold_k}{\partial \ubold_k}
+  \end{equation*}
+\item Contribution to the Jacobian due to the immersed boundary treatment
+    \begin{equation*}
+    \frac{\partial \Fbold_{ij}}{\partial \ubold_k} = 
+    {\color{red}{\frac{\partial \Fbold_{ij}}{\partial \wbold_{ij}^\star}}} \,
+    {\color{blue}{\frac{\partial \wbold_{ij}^\star}{\partial \wbold_k}}} \,
+    \frac{\partial \wbold_k}{\partial \ubold_k} +
+    {\color{red}{\frac{\partial \Fbold_{ij}}{\partial \wbold_{ij}}}} \,
+    {\color{green}{\frac{\partial \wbold_{ij}}{\partial \wbold_k}}} \,
+    \frac{\partial \wbold_k}{\partial \ubold_k}
+    \end{equation*}
+  \begin{itemize}
+  \item {\color{red}{Analytical Jacobian of the (Roe's) numerical flux}}
+  \item {\color{blue}{Analytical derivative of the solution of the 1D half-Riemann problem}}
+  \item {\color{green}{Analytical derivative of MUSCL reconstruction and limitation}}  
+  \end{itemize}
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Analytical derivatives: $\left\{\frac{\partial \Fbold}{\partial \mubold}\right\}$}
+  \begin{itemize}
+  \item Effect of the geometry deformation on the numerical residual \\[1.5mm]
+  \item Different from zero only for nodes closed to the immersed boundaries
+    \begin{equation*}
+      \Fbold_{ij} = \Fbold_{ij}(\wbold_{ij}, \wbold^\star_{ij}(\mubold), \n_{ij})
+      \quad\longrightarrow\quad
+      \pder{\Fbold_{ij}}{\mubold} = 
+      \pder{\Fbold_{ij}}{\wbold^\star_{ij}}{\color{blue}{\pder{\wbold^\star_{ij}}{\mubold}}}
+    \end{equation*} \vspace{-2.5mm}
+    \item $\dfrac{\partial \wbold^\star_{ij}}{\partial \mubold}$ 
+      involves derivatives w.r.t shape deformation parameter of\vspace{-4mm}
+      \begin{columns}[t]
+        \column{0.03\textwidth}
+        \column{0.53\textwidth}
+        \vspace{5mm}
+        \begin{itemize}
+        \item Linear extra/inter-polation of fluid states\\[-2mm]
+        \item Pierce points coordinates\\[-2mm]
+        \item Normal vector on the immersed surface\\[-2mm]
+        \end{itemize}
+        \column{0.45\textwidth}
+        \begin{figure}[!ht]
+          \centering
+          \includegraphics[width=0.65\linewidth]{Fig/pierce}
+        \end{figure}
+      \end{columns}\vspace{-4mm}
+    \item Derivatives of geometrical quantities with respect to $\mubold$
+      \begin{equation*}
+        \frac{\partial \xi}{\partial \mubold} = 
+        \frac{\partial \xi}{\partial x_\ell} \frac{\partial x_\ell}{\partial \mubold}, 
+        \quad 
+        \frac{\partial \boldsymbol{n}_{wall}}{\partial \mubold} = 
+        \frac{\partial \boldsymbol{n}_{wall}}{\partial x_\ell} \frac{\partial x_\ell}{\partial \mubold},
+        \quad \cdots
+    \end{equation*}\vspace{-2.5mm}
+    \item $\dfrac{\partial x_\ell}{\partial \mubold}$:
+      Jacobian of the free-form deformation 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Analytical derivatives: $\left\{\frac{\partial \Jcal}{\partial s}\right\}$}
+  \begin{itemize}
+  \item Objective function: force coefficients  
+    $\dfrac{\partial C_{L,D}}{\partial \mubold}$ and
+    $\dfrac{\partial C_{L,D}}{\partial \ubold}$
+    \item Aerodynamic forces computed by extrapolating pressure on the surface
+      \begin{equation*}
+        \boldsymbol{f} = \sum_{e \in E_r} P_e \boldsymbol{n}_e 
+        \quad \Rightarrow \quad 
+        C_L = \frac{\boldsymbol{f}\cdot \boldsymbol{\ell}}{q_\infty S}
+        \quad,
+        C_L = \frac{\boldsymbol{f}\cdot \boldsymbol{d}}{q_\infty S}
+        \vspace{-1mm}
+      \end{equation*}
+      \item Derivative of the forces
+        \begin{equation*}
+          \begin{split}
+            \frac{\partial \boldsymbol{f}}{\partial \mubold} & = 
+            \sum_{e \in E_r} \frac{\partial P_e}{\partial P_i} \frac{\partial P_i}{\partial \mubold} \boldsymbol{n}_e  +
+            \sum_{e \in E_r} P_e\frac{\partial  \boldsymbol{n}_e }{\partial \mubold} \\
+            \frac{\partial \boldsymbol{f}}{\partial \ubold} & = 
+            \sum_{e \in E_r} \frac{\partial P_e}{\partial P_i} \frac{\partial P_i}{\partial \ubold} \boldsymbol{n}_e 
+          \end{split}
+        \end{equation*}
+\end{itemize}
+
+\end{frame}
+
+%------------------------------------------------------------------------------
+\section{Numerical results}
+
+\begin{frame}
+  \frametitle{Verification of the analytical sensitivities}  
+  \framesubtitle{NACA-0012, Ma = 0.5, $\alpha=2^\circ$}
+  \vspace{-5mm}
+  \begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.42\linewidth]{Fig/mesh_naca_sc}
+    \hspace{4mm}
+    \includegraphics[width=0.43\linewidth]{Fig/res_naca_sc}
+  \end{figure}
+
+  \begin{columns}
+    \column{0.5\textwidth}
+    \begin{itemize}
+    \item 3D Grid $\sim 200\,000$ nodes
+    \item CFD CPU time $\sim 10$ min
+    \item Direct problem CPU time: seconds
+    \end{itemize}
+    \column{0.5\textwidth}
+    \includegraphics[width=1.0\linewidth]{Fig/ffd}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Verification of the analytical sensitivities}  
+  \framesubtitle{NACA-0012, Ma = 0.6, $\alpha=2^\circ$}
+  \begin{itemize}
+    \item Sensitivity of the lift coefficient 
+    \item Relative error between analytical and finite difference derivatives
+  \end{itemize}
+  \begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Fig/err_sc}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Single element airfoil optimization}
+  \framesubtitle{NACA-0012, Ma = 0.5, $\alpha=2^\circ$}
+  \begin{itemize}
+  \item Objective: maximize lift
+  \item Cubic design element 
+    \begin{itemize}
+    \item 8 variables for the displacement of a control node in the vertical direction
+    \item 1 displacement constrained to zero to eliminate rigid translations
+    \end{itemize}
+  \item Second-order spatial discretization
+  \item Constraint only on no self-penetration
+  \end{itemize}
+  \vspace{2mm}
+   \begin{figure}
+    \centering
+    \includegraphics[width=0.65\textwidth]{Fig/nacadef}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Single element airfoil optimization}
+  \framesubtitle{NACA-0012, Ma = 0.5, $\alpha=2^\circ$}
+  \begin{itemize}
+  \item Optimization converges in $10$ design iterations
+  \item Extreme shape deformation handled easily in the IB framework
+  \end{itemize}
+   \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}
+        \centering
+        \includegraphics[width=1.0\textwidth]{Fig/naca_def}
+      \end{figure}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}
+        \centering
+        \includegraphics[width=1.0\textwidth]{Fig/L_naca}
+      \end{figure}
+    \end{column}      
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Multi-element airfoil with large kinematics}
+  \begin{itemize}
+  \item Design of a three-element high-lift configuration
+  \item Large number of design variables: geometry perturbation + 
+        large displacements and deflections of the slat and flap elements
+  \item Maximize the lift by finding the best position of the slat and flap
+    elements without introducing any shape modification
+  \item Starting from completely closed configuration, let the optimizer find 
+    the best relative positions of the airfoil elements
+  \end{itemize}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{Fig/L1T2_halfopen}
+  \end{figure} 
+\end{frame}
+
+\begin{frame}
+   \frametitle{Multi-element airfoil with large kinematics}
+    \begin{itemize}
+    \item 6 design variables: rotation, vertical and horizontal displacements of the
+      slat and flap 
+    \item Pinball algorithm used to detect contacts between elements and
+      avoid interpenetration
+    \item Same fluid grid used to perform the previous test case
+    \item $Ma = 0.2$ and $\alpha = 10^\circ$
+    \item Final value of the lift doubles after 6 optimization iterations
+    \end{itemize}
+    \begin{figure}
+      \centering
+      \includegraphics[width=0.8\textwidth]{Fig/L1T2_dep}
+     \end{figure}
+\end{frame}
+
+%------------------------------------------------------------------------------
+\section{Conclusions}
+
+\begin{frame}
+  \frametitle{Conclusions and future work}
+    \begin{block}{Conclusions}
+      \begin{itemize}
+      \item Analitical sensitivities for FIVER immersed boundary method
+      \item Direct approach for computing the derivatives        
+      \item Gradient based optimization with the IB framework
+      \item Simplification and fully automatization of the optimization process
+      \end{itemize}
+      \end{block}
+    \begin{block}{Future work}
+      \begin{itemize}
+      \item Multi-disciplinary design optimization (\emph{e.g.} FSI)
+      \item Extension to the adjoint approach
+      \item Extension to viscous problems, RANS in particular 
+      \end{itemize}
+      \end{block}
+\end{frame}
+
+%/////////////////////////////////////////////////////////
+\appendix
+\backupbegin
+
+\begin{frame}
+\end{frame}
+
+\begin{frame}
+\frametitle{Approximation of the viscous terms}
+\begin{itemize}
+\item Viscous contribution to the residual: ghost points
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.35\linewidth]{Fig/GhostFEM_e}
+\end{figure}
+\begin{equation*}
+\int_{\Omega_e}\nabla \psi_i \cdot \Fbold^v(\wbold_h, \nabla \wbold_h) \approx
+|\Omega_e| \nabla \psi_i^{\Omega_e} \cdot \Fbold^v(\bar{\wbold}^{\Omega_e}_h, \nabla \wbold^{\Omega_e}_h)
+\end{equation*}
+\begin{equation*}
+\nabla \wbold^{\Omega_e}_h = \sum_{k=1}^{N_n} \nabla \psi_k^{\Omega_e} \, \wbold_k^{\Omega_e}
+\end{equation*}
+\item Viscous flux depends only on the gradient of the velocity and the gradient of the temperature
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Numerical tests}
+\framesubtitle{Laminar flow over a plate (Ma $=0.3$, Re $=1\,000$)}
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.47\linewidth]{Fig/gridAligned}
+  \hspace{5mm}
+  \includegraphics[width=0.47\linewidth]{Fig/gridRotated}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Numerical tests}
+\framesubtitle{Laminar flow over a plate (Ma $=0.3$, Re $=1\,000$)}
+\begin{figure}[!ht]
+  \centering
+\includegraphics[width=0.65\linewidth]{Fig/CF_alignedVsRotated}
+\end{figure}
+\end{frame}
+
+\backupend
+\end{document}
+

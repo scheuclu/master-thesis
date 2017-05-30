@@ -1,0 +1,158 @@
+\documentclass[10pt, mathserif]{beamer}
+
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primary_0,
+    citecolor=neutral_1,
+    urlcolor=red,
+    pdfauthor={Lukas Scheucher},
+    pdfcreator={Lukas Scheucher},   % creator of the document
+    pdfproducer={Lukas Scheucher}, % producer of the document
+    linktoc=all
+}
+
+\usetheme{CambridgeUS}
+\setbeamertemplate{navigation symbols}{}
+\useoutertheme[subsection=false]{miniframes}
+
+\setbeamercolor{block body}{bg=yellow!23}
+\setbeamercolor{block title}{bg=purple!100!black!140, fg=white}
+\setbeamercolor{footline}{fg=gray!100}
+\setbeamercolor{item}{fg=purple!100!black!150,bg=purple!100!black!150}
+\setbeamercolor*{title}{fg=purple!100!black!150,bg=lightgray!50}
+\setbeamercolor*{author}{fg=blue}
+\setbeamercolor*{author in head/foot}{fg=blue,bg=gray!15}
+\setbeamercolor*{author in head/foot}{fg=black,bg=gray!15}
+\setbeamercolor*{date in head/foot}{fg=black,bg=gray!25}
+\setbeamercolor*{frametitle}{fg=purple!100!black!150, bg=gray!15}
+\setbeamerfont{footl}{size=\tiny}
+\usefonttheme[onlylarge]{structuresmallcapsserif}
+\setbeamerfont{frametitle}{size=\normalsize}
+
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=1.6ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont*{footl}\insertshortauthor~~(\insertshortinstitute)
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.6\paperwidth,ht=1.6ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont*{footl}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}
+  \vskip0pt%
+}
+
+
+
+\usepackage{amsmath, amstext, amssymb, latexsym, psfrag, soul, cancel, relsize}
+\usepackage{graphicx, color, colortbl, epsfig, subfigure, booktabs, animate}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[percent]{overpic}
+
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepgfplotslibrary{groupplots}
+
+% Define block styles
+\tikzstyle{decision} = [diamond, draw, fill=yellow!80, 
+                        text width=4.5em, text badly centered, node distance=2cm, inner sep=0pt]
+\tikzstyle{block}  = [rectangle, draw, fill=black!20, 
+                     text width=8em, text centered, rounded corners, minimum height=1em]
+\tikzstyle{block1} = [rectangle, draw, fill=blue!30, 
+                     text width=8em, text centered, rounded corners, minimum height=1em]
+\tikzstyle{block3} = [rectangle, draw, fill=red!50, 
+                     text width=8em, text centered, rounded corners, minimum height=1em]
+\tikzstyle{block2} = [rectangle, draw, fill=green!40, 
+                     text width=8em, text centered, rounded corners, minimum height=1em]
+\tikzstyle{block4} = [rectangle, draw, fill=yellow!80, 
+                     text width=8em, text centered, rounded corners, minimum height=1em]
+\tikzstyle{blocke} = [rectangle, draw, fill=yellow!25, 
+                     text width=16em, text centered, rounded corners, minimum height=2em]
+\tikzstyle{line} = [draw, -latex']
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Rbb}{\ensuremath{\mathbb{R} }}
+\newcommand\mubold{{\ensuremath{\boldsymbol{\mu}}}}
+\newcommand{\Jcal}{\ensuremath{\mathcal{J}}}
+\newcommand{\func}[3]{\ensuremath{#1 : #2 \rightarrow #3}}
+\newcommand{\Dcal}{\ensuremath{\mathcal{D}}}
+\newcommand{\Fcal}{\ensuremath{\mathcal{J}}}
+
+\newcommand\cbold{\ensuremath{\mathbf{c}}}
+\newcommand{\pder}[2]{\ensuremath{\dfrac{\partial #1}{\partial #2}}} %1st partial derivative
+\newcommand{\oder}[2]{\ensuremath{\dfrac{\mathrm{d} #1}{\mathrm{d} #2}}} %1st ordinary derivative
+
+\newcommand\Rbold{\ensuremath{\mathbf{R}}}
+\newcommand\ubold{\ensuremath{\mathbf{u}}}
+\newcommand\wbold{\ensuremath{\mathbf{w}}}
+\newcommand\Fbold{\ensuremath{\mathbf{F}}}
+\newcommand\fbold{\ensuremath{\mathbf{f}}}
+\newcommand\xbold{\ensuremath{\mathbf{x}}}
+\newcommand\nbold{\ensuremath{\mathbf{n}}}
+\newcommand\C{\mathcal{C}}
+\newcommand\dC{\partial\mathcal{C}}
+\newcommand\n{\boldsymbol{n}}
+\newcommand\K{\mathcal{K}}
+
+\newcommand{\Et}{E^t}
+\newcommand{\IdxM} {\mathbb{I}}
+\newcommand{\vel}{\boldsymbol{v}}
+\newcommand{\mm}{\boldsymbol{m}}
+\newcommand{\dsddt}[1] {\dfrac{\partial{#1}}{\partial{t}}}
+\newcommand{\Div}[1] { \boldsymbol{\nabla} \!\dotprod #1 }
+\newcommand{\vzero}{\boldsymbol{0}}
+\newcommand{\wall}{\mathrm{wall}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[]{\large{Analytical and Numerical Approaches for the Computation of Aeroelastic Sensitivities Using the Direct and Adjoint Methods}}
+\author[Scheucher]{Lukas Scheucher}
+\institute[Stanford]{Stanford University}
+\date[SMaster thesis]{October 2016 - June 2017}
+\newcommand{\backupbegin}{
+   \newcounter{finalframe}
+   \setcounter{finalframe}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \setcounter{framenumber}{\value{finalframe}}
+}
+
+
+\usepackage{hhline}
+
+
+\usepackage{color}
+\usepackage[table]{xcolor}
+\usepackage{soul}
+\definecolor{hlcolorblue}{RGB}{126,215,255}
+\definecolor{hlcolorgreen}{RGB}{126,255,175}
+\definecolor{hlcolororange}{RGB}{246,194,115}
+\definecolor{hlcoloryellow}{RGB}{255,243,113}
+\definecolor{hlcolorpurple}{RGB}{215,163,232}
+\DeclareRobustCommand{\hltblue}[1]{{\sethlcolor{hlcolorblue}\hl{#1}}}
+\DeclareRobustCommand{\hltgreen}[1]{{\sethlcolor{hlcolorgreen}\hl{#1}}}
+\DeclareRobustCommand{\hltorange}[1]{{\sethlcolor{hlcolororange}\hl{#1}}}
+\DeclareRobustCommand{\hltyellow}[1]{{\sethlcolor{hlcoloryellow}\hl{#1}}}
+\DeclareRobustCommand{\hltpurple}[1]{{\sethlcolor{hlcolorpurple}\hl{#1}}}
+\newcommand{\hleblue}[1]{\colorbox{hlcolorblue}{$\displaystyle{#1}$}}
+\newcommand{\hlegreen}[1]{\colorbox{hlcolorgreen}{$\displaystyle{#1}$}}
+\newcommand{\hleorange}[1]{\colorbox{hlcolororange}{$\displaystyle{#1}$}}
+\newcommand{\hleyellow}[1]{\colorbox{hlcoloryellow}{$\displaystyle{#1}$}}
+\newcommand{\hlepurple}[1]{\colorbox{hlcolorpurple}{$\displaystyle{#1}$}}
+
+
+\def\maathunderline#1#2{\color{#1}\underline{{\color{black}#2}}\color{black}}
+
+\newsavebox\MBox
+\newcommand\mathunderline[2][red]{{\sbox\MBox{$#2$}%
+  \rlap{\usebox\MBox}\color{#1}\rule[-1.2\dp\MBox]{\wd\MBox}{2.0pt}}}
+
+\DeclareRobustCommand{\hlt}[2]{{\sethlcolor{#1}\hl{#2}}}
+\newcommand{\hle}[2]{\colorbox{#1}{$\displaystyle{#2}$}}

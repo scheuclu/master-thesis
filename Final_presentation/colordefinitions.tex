@@ -1,0 +1,112 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                              %
+% Stanford color scheme                                        %
+%                                                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%Primary Palette
+\definecolor{primary_0}{RGB}{140,21,21}
+\definecolor{primary_1}{RGB}{77,79,83}
+\definecolor{primary_2}{RGB}{0,0,0}
+
+%Neutral Color Palette
+\definecolor{neutral_0}{RGB}{210,194,149}
+\definecolor{neutral_1}{RGB}{179,153,93}
+\definecolor{neutral_2}{RGB}{146,139,129}
+\definecolor{neutral_3}{RGB}{182,177,169}
+\definecolor{neutral_4}{RGB}{218,215,203}
+\definecolor{neutral_5}{RGB}{199,209,197}
+\definecolor{neutral_6}{RGB}{77,83,87}
+\definecolor{neutral_7}{RGB}{95,87,79}
+
+
+%Deep tone color palette
+\definecolor{deep_0}{RGB}{94,48,50}
+\definecolor{deep_1}{RGB}{141,60,30}
+\definecolor{deep_2}{RGB}{0,80,92}
+\definecolor{deep_3}{RGB}{23,94,84}
+\definecolor{deep_4}{RGB}{83,40,79}
+
+
+%Bright Color Palette
+\definecolor{bright_0}{RGB}{0,152,219}
+\definecolor{bright_1}{RGB}{0,124,146}
+\definecolor{bright_2}{RGB}{0,155,118}
+\definecolor{bright_3}{RGB}{178,111,22}
+\definecolor{bright_4}{RGB}{233,131,0}
+\definecolor{bright_5}{RGB}{234,171,0}
+
+
+\pgfplotscreateplotcyclelist{primary_color_list}{
+primary_0\\%
+primary_1\\%
+primary_2\\%
+}
+
+
+\pgfplotscreateplotcyclelist{neutral_color_list}{
+neutral_1\\%
+neutral_2\\%
+neutral_3\\%
+neutral_4\\%
+neutral_5\\%
+neutral_6\\%
+neutral_7\\%
+neutral_8\\%
+}
+
+
+\pgfplotscreateplotcyclelist{bright_color_list}{
+bright_0\\%
+bright_1\\%
+bright_2\\%
+bright_3\\%
+bright_4\\%
+bright_5\\%
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                              %
+% Other colors                                                 %
+%                                                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%colors for text highlighting
+\definecolor{hlcolor_blue}{RGB}{126,215,255}
+\definecolor{hlcolor_green}{RGB}{126,255,175}
+\definecolor{hlcolor_orange}{RGB}{246,194,115}
+\definecolor{hlcolor_yellow}{RGB}{255,243,113}
+\definecolor{hlcolor_purple}{RGB}{215,163,232}
+
+%tikz color list
+\definecolor{list1_1}{RGB}{0,101,189}
+\definecolor{list1_2}{RGB}{156,157,159}
+\definecolor{list1_3}{RGB}{162,173,0}
+\definecolor{list1_4}{RGB}{227,114,34} 
+\definecolor{list1_5}{RGB}{152,198,234}
+
+
+\pgfplotscreateplotcyclelist{markerlist}{
+list1_1, thick, solid, mark=*\\%
+list1_2, thick, solid, mark=asterisk\\%
+list1_3, thick, solid, mark=diamond*\\%
+list1_4, thick, solid, mark=triangle\\%
+list1_5, thick, solid, mark=square\\%
+}
+
+\pgfplotscreateplotcyclelist{linelist}{
+list1_1, solid\\%
+list1_2, solid\\%
+list1_3, solid\\%
+list1_4, solid\\%
+list1_5, solid\\%
+}
+
+\definecolor{lightgrey}{RGB}{200,200,200}
+\definecolor{darkgrey}{RGB}{100,100,100}
+\definecolor{nassitextcolor}{RGB}{0,0,200}

@@ -1,0 +1,122 @@
+\section{Introduction}
+
+
+\begin{frame}
+  \frametitle{Why Sensitivity Analysis?}
+  \framesubtitle{-> Design optimization!}
+  \begin{itemize}
+    \item Requirements on CFD
+      \begin{itemize}
+      \item \textbf<2>{Complex flows (transonic, turbulent \dots) and high Reynolds numbers}
+      \item Well-resolved boundary layers and flow features
+      \item Steady/unsteady flows
+      \item \textbf<3>{Numerical accuracy, solver robustness and short turn-around time}
+      \item \textbf<2>{Moderate to highly complex geometries}
+      \end{itemize}
+    \item Requirements on design and optimization 
+      \begin{itemize}
+      \item Automatic framework
+      \item Efficient optimization algorithms
+      \item \textbf<3>{Large number of design variables}
+      \item Multi-point design and multi-disciplinary design optimization
+      \item Geometrical/engineering constraints 
+      \end{itemize}
+   \end{itemize}
+   \onslide<2>{$\rightarrow$\textbf{Embedded framework}}\\
+   \onslide<3>{$\rightarrow$\textbf{Analytic Sensitivities}}
+\end{frame}
+
+%------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{Aerodynamic shape optimization}
+  
+  \begin{columns}
+    \begin{column}{0.55\textwidth}
+      \scalebox{0.9}{\begin{tikzpicture}[scale=1.0,node distance = 1.2cm]
+        \node [block]                                      (init) {Initial geometry};
+        \node [block1, below of=init]                      (parameter) {Parameter change};
+        \node [block1, below= 1cm of parameter]                 (modify) {\textbf<2>{Shape}  \mbox{\textbf<2>{modification}}};
+        \node [block2, below= 1cm of modify]                    (mesh) {Mesh procedure};
+        \node [block3, below of=mesh]                      (simulation) {Flow simulation};
+        \node [decision, right of=parameter, node distance=3.5cm] (decide) {Optimum?};
+        \node [block4, right of=mesh, node distance=3.5cm] (optimize) {Gradient based optimization};
+        \node [block3, below of=simulation]                (objective) {\textbf<2>{Gradient of objective function \& constraints}}; 
+        \path [line] (init) -- (parameter);
+        \path [line] (parameter) -- (modify);
+        \path [line] (decide) -- (parameter);        
+        \path [line] (modify) -- (mesh);
+        \path [line] (mesh) -- (simulation);
+        \path [line] (simulation) -- (objective);   
+        \path [line] (objective) -| (optimize);
+        \path [line] (optimize) -- (decide);  
+        
+        \draw[darkgrey,thick,dotted] ($(parameter.north west)+(-0.2,0.15)$)  rectangle ($(parameter.south east)+(0.2,-0.45)$);    %SDesign
+        \draw[darkgrey,thick,dotted] ($(modify.north west)+(-0.2,0.15)$)  rectangle ($(modify.south east)+(0.2,-0.45)$);    %SDesign
+        \draw[darkgrey,thick,dotted] ($(mesh.north west)+(-0.2,0.15)$)    rectangle ($(objective.south east)+(0.2,-0.45)$); %Aero-F   
+        \draw[darkgrey,thick,dotted] ($(decide.north west)+(-1.2,0.6)$)   rectangle ($(optimize.south east)+(0.2,-0.45)$);  %Python
+        
+        \node [darkgrey,anchor=north east] at  ($(parameter.south east)+(0.0,0.0)$)                (aaa) {\texttt{Bash}};
+%        \onslide<1>{\node [darkgrey,anchor=north east] at  ($(optimize.south east)+(0.0,0.0)$)                (aaa) {\texttt{Python}};};
+%        \onslide<2>{\node [black,anchor=north east] at  ($(optimize.south east)+(0.0,0.0)$)                (aaa) {\texbf{Python}};};
+        \node [darkgrey,anchor=north east] at  ($(objective.south east)+(0.0,0.0)$)                (aaa) {\texttt{Aero-F}};
+        \node [darkgrey,anchor=north east] at  ($(modify.south east)+(0.0,0.0)$)                (aaa) {\texttt{SDesign}};
+      \end{tikzpicture}}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \begin{block}{Gradient based optimization}
+       \begin{itemize}
+       \item Requires objective function and constraints
+       \item Gradient of objective function and constraints
+       \end{itemize}
+       \end{block}
+      \begin{block}{How to compute the gradient}
+       \begin{itemize}
+       \item Finite difference
+       \item \textbf<2>{Direct approach}
+       \item Adjoint approach
+       \end{itemize}
+       \end{block}
+    \end{column}      
+  \end{columns}
+
+\end{frame}
+
+%------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{The AERO-Suite}
+%  \centering
+  \def\vert{0.5cm}
+  \def\horz{0.5cm}
+  \textbf{Block Diagramm}\\
+  \centering
+      \scalebox{0.8}{\begin{tikzpicture}[scale=1.0]
+        \node [block3]                                      (aerof) {\textbf<2>{Aero-F}};
+        \node [block3, below right=\vert and \horz of aerof]   (matcher) {Matcher};
+        \node [block3, above right=\vert and \horz of matcher] (aeros) {Aero-S};
+        \node [block3, below=\vert of matcher]             (sower) {Sower};
+        \node [block3, below=\vert of sower]             (mesh) {Mesh};
+        \node [block3, above right=\vert and \horz of aerof] (sowerr) {Sower};
+        \node [block3, above=\vert of sowerr]             (xpexo) {xpexo};
+        
+        \node [block,below=\vert of mesh]             (gmsh) {GMSH};
+        \node [block,above=\vert of xpexo]             (paraview) {Paraview};
+        
+        \draw[<->,dashed] (aerof) -- (matcher);
+        \draw[<->,dashed] (aeros) -- (matcher);
+        \draw[->,dashed] (sower) -- (matcher);
+        \draw[->] (sower) -| (aerof);
+        \draw[->] (sower) -| (aeros);
+        
+        \draw[->] (mesh) -- (sower);
+        \draw[->] (gmsh) -- (mesh);
+        \draw[->] (sowerr) -- (xpexo);
+        \draw[->] (xpexo) -- (paraview);
+        
+        \draw[->] (aerof) |- (sowerr);
+        \draw[->] (aeros) |- (sowerr);
+        
+        \draw[darkgrey,thick,dashed] ($(gmsh.north west)+(-4.0,0.15)$)  rectangle ($(xpexo.north east)+(4.0,0.15)$);    %SDesign
+     \end{tikzpicture}}
+\end{frame}
