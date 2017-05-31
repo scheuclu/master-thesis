@@ -1,4 +1,4 @@
-\section{Solution sensitivity}
+\section{Aerodynamic Optimization}
 
 \def\incrabsvars{\Delta \absvars}
 \def\incrlagmultsneq{\Delta \lagmultsneq}
@@ -59,20 +59,20 @@
     \item PDE-constrained optimization for steady problems
       \begin{equation*}
         \begin{aligned}
-          & \underset{\ubold \in \Rbb^{N_\wbold},~\mubold \in \Rbb^{N_\mubold}}{\text{minimize}}
-          & & \optcrit(\ubold, \mubold)\onslide<2->{\rightarrow \text{e.g. Lift-Drag ratio}} \\
+          & \underset{\dfstate \in \Rbb^{N_\wbold},~\absvar \in \Rbb^{N_\absvar}}{\text{minimize}}
+          & & \optcrit(\dfstate, \absvar\onslide<2->{\rightarrow \text{e.g. Lift-Drag ratio}} \\
           & \text{subject to}
-          & & \Rbold(\ubold, \mubold) = 0 \onslide<3->{\rightarrow \text{e.g. geometry of engine mount}} \\
-          & & & \cbold(\ubold, \mubold) \leq 0 \onslide<4->{\rightarrow \text{e.g. Lift-Drag ratio}}
+          & & \Rbold(\dfstate, \absvar) = 0 \onslide<3->{\rightarrow \text{e.g. geometry of engine mount}} \\
+          & & & \cbold(\dfstate, \absvar) \leq 0 \onslide<4->{\rightarrow \text{e.g. Lift-Drag ratio}}
         \end{aligned}
       \end{equation*}
     \item Nested approach
       \begin{equation*}
         \begin{aligned}
           & \underset{\mubold \in \Rbb^{N_\mubold}}{\text{minimize}}
-          & & \optcrit(\ubold(\mubold), \mubold) \\
+          & & \optcrit(\dfstate(\absvar), \absvar) \\
           & \text{subject to}
-          & & \cbold(\ubold(\mubold), \mubold) \leq 0.
+          & & \cbold(\dfstate(\absvar), \absvar) \leq 0.
         \end{aligned}
       \end{equation*}
   \end{itemize}
@@ -80,206 +80,3 @@
 
 %------------------------------------------------------------------------------
 
-\begin{frame}
-  \frametitle{Computation of the gradient}
-  
-  \begin{itemize}  
-    \item Gradients of the objective function
-			\begin{align*}\label{eq:sensitivity_startingpoint}
-			\DoptcritJBYabsvarI\bigg\rvert_{\fstate_0}=\setulcolor{primary_0}\setul{}{2pt}
-			\underbrace{\PoptcritJBYabsvarI\bigg\rvert_{\fstate_0}}_{
-			                                                        \substack{
-			                                                                 \text{\ul{directly derived from}} \\
-			                                                                 \text{\ul{the definition of} $\optcrit$}
-			                                                                 } 
-			                                                        }  +
-			\underbrace{\PoptcritJBYfstate\bigg\rvert_{\fstate_0}}_ {\setulcolor{neutral_1}
-			                                                        \substack{
-			                                                                 \text{\ul{derived analytically or~~}}\\
-			                                                                 \text{\ul{by} FD}
-			                                                                 }
-			                                                        }
-			\underbrace{\DfstateBYabsvarI\bigg\rvert_{\fstate_0}}_  {\setulcolor{neutral_2}
-			                                                        \substack{
-			                                                                 \text{\ul{derived from dynamic}}\\
-			                                                                 \text{\ul{fluid equilibrium}}
-			                                                                 }
-			                                                        }
-			\end{align*}
-%    \item If the flow residual is converged
-%      \begin{equation*}
-%        \Rbold(\ubold(\mubold), \mubold) = 0, \,\,\forall \mubold 
-%        \quad \longrightarrow \quad
-%        \oder{\Rbold}{\mubold} = \pder{\Rbold}{\mubold} + \pder{\Rbold}{\ubold}\pder{\ubold}{\mubold} = 0        
-%      \end{equation*}
-%
-%      \begin{equation*}
-%        \pder{\ubold}{\mubold} = -\left[\pder{\Rbold}{\ubold}\right]^{-1}\pder{\Rbold}{\mubold}
-%      \end{equation*}
-%    \item The derivative of the objective function becomes\\
-%      \begin{center}
-%      \begin{tikzpicture}[node distance = 1.2cm, auto]
-%        \node [blocke] (init) {$\oder{\optcrit}{\mubold} = \pder{\optcrit}{\mubold} - 
-%                              \pder{\optcrit}{\ubold}\left(\left[\pder{\Rbold}{\ubold}\right]^{-1}
-%                              \pder{\Rbold}{\mubold}\right)$};
-%      \end{tikzpicture}
-%      \end{center}
-  \end{itemize}
-
-\end{frame}
-
-%------------------------------------------------------------------------------
-
-\begin{frame}
-\frametitle{Derivation of $\pdfrac{\dfstate}{\absvar}$}
-\begin{align*}
-\cancelto{0}{\pdfrac{\bar{\dfstate_i}}{t}} +
-\underbrace{
-  \underbrace{\sum_{j \in \vertexset(i)} \fluxesnum_{ij}(\dfstate_{ij},\dfstate_{ji},\wnormal_{ij})}_{\dresidual^i} -
-  \underbrace{\sum_{T_i \in \elementset(i)} \int_{T_j} \difftensor \nabla \dfstate \nabla \phi_j dx}_{\dresidual^v}      }_{\dresidual} =
-\vec{0}
-\end{align*}
-
-
-\def\DdresidualBYabsvarI{ \tfrac{\dresidual}{\absvar_i} }
-\def\PdresidualBYabsvarI{ \pdfrac{\dresidual}{\absvar_i} }
-\def\PdresidualBYdfstate{ \pdfrac{\dresidual}{\dfstate}  }
-\def\DdfstateBYabsvarI  { \tfrac{\dfstate}{\absvar_i}   }
-\def\PdresidualBYdmms   { \pdfrac{\dresidual}{\dmpos}     }
-\def\DdmmsBYabsvarI     { \tfrac{\dmpos}{\absvar_i}      }
-\begin{align*}
-\DdresidualBYabsvarI=\vec{0}=
-\PdresidualBYabsvarI                      +
-\PdresidualBYdfstate    \DdfstateBYabsvarI +
-\PdresidualBYdmms       \DdmmsBYabsvarI
-\end{align*}
-
-
-\begin{align*}
-\PdresidualBYdfstate    \mathunderline[neutral_2]{\displaystyle\DdfstateBYabsvarI}=
--\DdresidualBYabsvarI 
--\PdresidualBYdmms       \DdmmsBYabsvarI
-\end{align*}
-
-
-\end{frame}
-
-%------------------------------------------------------------------------------
-\def\DdresidualBYabsvarI{ \tfrac{\dresidual}{\absvar_i} }
-\def\PdresidualBYabsvarI{ \pdfrac{\dresidual}{\absvar_i} }
-\def\PdresidualBYdfstate{ \pdfrac{\dresidual}{\dfstate}  }
-\def\DdfstateBYabsvarI  { \tfrac{\dfstate}{\absvar_i}   }
-\def\PdresidualBYdmms   { \pdfrac{\dresidual}{\dmpos}     }
-\def\DdmmsBYabsvarI     { \tfrac{\dmpos}{\absvar_i}      }
-\begin{frame}
-The interface component is determined by the structure. Having obtained this one, the interior component can be computed by solving an auxiliary, fictitious Dirichlet problem:
-\begin{align*}
-\tfrac{\mms_\Omega}{\absvar_i}=-\left[\inv{\fic{\stiffmat}_{\Omega\Omega}} \fic{\stiffmat}_{\Omega\Gamma}\right] \tfrac{\mpos_\Gamma}{\absvar_i}
-\end{align*}
-
-
-
-\begin{align*}
-\tfrac{\optcrit_j}{\absvar_i}\bigg\rvert_{\dfstate_0} &=
--\tfrac{\optcrit_j}{\fstate}\bigg\rvert_{\dfstate_0}
-\inv{\left[\PdresidualBYdfstate\bigg\rvert_{\fstate_0}\right]}
-\left(
-  \hle{neutral_1}{\PdresidualBYabsvarI\bigg\rvert_{\fstate_0} } +
-  \begin{bmatrix}
-    \alpha\pdfrac{\dresidual}{\dmms_\Omega}\bigg\rvert_{\dfstate_0}~
-    \pdfrac{\dresidual}{\dmms_\Gamma}\bigg\rvert_{\dfstate_0}
-  \end{bmatrix}
-  \underbrace{\begin{bmatrix}
-    \alpha \inv{\fic{\stiffmat}_{\Omega\Omega}} \fic{\stiffmat}_{\Omega\Gamma} \nonumber\\
-    \eye
-  \end{bmatrix}
-  \underbrace{\tfrac{\dmms_\Gamma}{\absvar_i}}_{\text{SDESIGN}}   }_{\text{ALE mesh motion}}
-\right)\\
-\alpha&=
-\begin{cases}
-  1\text{  in ALE framework}\\
-  0\text{  in Embedded framework}
-\end{cases}
-\end{align*}
-
-
-\end{frame}
-
-%------------------------------------------------------------------------------
-
-
-\begin{frame}
-\frametitle{Derivation of $\pdfrac{\dresidual}{\dfstate}$ }
-
-\begin{align*}
-    \frac{\partial \dresidual^{c,i}_{ij}}{\partial \dfstate_k} = 
-    {\color{primary_0}{\frac{\partial \dresidual^{c,i}_{ij}}{\partial \dfstateprim_{ij}^\star}}} \,
-    {\color{neutral_1}{\frac{\partial \dfstateprim_{ij}^\star}{\partial \dfstateprim_k}}} \,
-    \frac{\partial \dfstateprim_k}{\partial \dfstate_k} +
-    {\color{primary_0}{\frac{\partial \dresidual^{c,i}_{ij}}{\partial \dfstateprim_{ij}}}} \,
-    {\color{neutral_2}{\frac{\partial \dfstateprim_{ij}}{\partial \dfstateprim_k}}} \,
-    \frac{\partial \dfstateprim_k}{\partial \dfstate_k} +
-    \underbrace{\pdfrac{\dresidual^{c,i}_{ij}}{\dmpos}\pdfrac{\dmpos}{\normal_{ij}}}_{=\vec{0}\text{ for embedded}}
-\end{align*}
-
-\begin{center}
-	\begin{itemize}
-	  \item {\color{primary_0} {Analytical Jacobian of the (Roe's) centering flux} }
-	  \item {\color{neutral_1} {Analytical derivative of the solution of the 1D half-Riemann problem}}
-	  \item {\color{neutral_2} {Analytical derivative of the MUSCL reconstruction and limitation}}
-	\end{itemize}
-\end{center}
-
-
-\only<2>{$\rightarrow$ \textbf{We don't go into any more detail here!}}
-
-
-\end{frame}
-
-%------------------------------------------------------------------------------
-
-\begin{frame}
-\frametitle{Analytic derivatives}
-\framesubtitle{$\pdfrac{\dresidual}{\absvar_i}$}
-
-\begin{itemize}
-\item{Approach}
-	\begin{itemize}
-		\item Separate treatment of inviscid and viscous contribution
-		\item Re-use information from the intersector, obtained by FIVER, whenever possible
-	\end{itemize}
-\item Inviscid part
-
-\end{itemize}
-
-\begin{align*}
-& \dresidual^{c,i}_{ij} = \fluxesnum^i_{ij}(\dfstateprim_{ij},\dfstateprim^{*}_{ij}(\absvar),\normal_{ij}) \\
-& \pdfrac{\dresidual^{c,i}_{ij}}{\absvar}=\pdfrac{\dresidual^{c,i}_{ij}}{\dfstate^{\star}_{ij}}\pdfrac{\dfstate^{\star}_{ij}}{\absvar}
-\end{align*}
-
-\end{frame}
-
-%------------------------------------------------------------------------------
-
-
-\begin{frame}
-\frametitle{Analytic derivatives}
-\framesubtitle{$\pdfrac{\dresidual}{\absvar_i}$}
-
-\begin{itemize}
-\item Diffusive part
-\end{itemize}
-
-\begin{align*}
-\dresidual_i^v=-\sum_{T_i \in \elementset(i)} \sum_{i=1}^{n_g} 
-w_i \prim{\difftensor} \nabla \prim{\dfstate}(\dmpos_i) \nabla \phi_j(\dmpos_i) dx
-\end{align*}
-\begin{align*}
-    \pdfrac{\dresidual^v(\absvars,\dfstateprim^a(\absvars),\dfstateprim^g(\dfstateprim^a(\absvars)),\mpos(\absvars))}{\absvars}=\\
-    \underbrace{\pdfrac{\dresidual^v}{\dfstateprim^a}\pdfrac{\dfstateprim^a}{\absvars}}_{\substack{\text{can be re-used from ALE } \\ \text{after the ghost-point population}}}+
-    \pdfrac{\dresidual^v}{\dfstateprim^g}\cdot
-    \overbrace{\pdfrac{\dfstateprim^g}{\dfstateprim^a}}^{\substack{\text{obtained during the}\\ \text{population process} }} \pdfrac{\dfstateprim^a}{\absvars} \nonumber
-    +
-    \underbrace{\pdfrac{\dresidual}{\dmpos}\pdfrac{\dmpos}{\absvars}}_{=\vec{0}\text{ for embedded}}
-\end{align*}
-\end{frame}

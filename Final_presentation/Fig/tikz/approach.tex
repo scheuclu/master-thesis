@@ -1,0 +1,153 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\def\mainpath{/home/lukas/Desktop/project/independence/project/thesis/}
+\def\tikzpath{\mainpath/fig/tikz}
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{calc}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepgfplotslibrary{groupplots}
+
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\input{\mainpath/customcommands}
+
+\tikzset{>=latex}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+            
+            
+% Define block styles
+\tikzstyle{decision} = [diamond, draw, fill=neutral_0, 
+                        text width=4.5em, text badly centered, node distance=2cm, inner sep=0pt]
+\tikzstyle{block}  = [rectangle, draw, fill=black!20, 
+                     text width=8em, text centered, rounded corners, minimum height=1em]
+\tikzstyle{block1} = [rectangle, draw, fill=neutral_5, 
+                     text width=8em, text centered, rounded corners, minimum height=1em]
+\tikzstyle{block3} = [rectangle, draw, fill=deep_1, 
+                     text width=8em, text centered, rounded corners, minimum height=1em]
+\tikzstyle{block2} = [rectangle, draw, fill=bright_1,
+                     text width=8em, text centered, rounded corners, minimum height=1em]
+\tikzstyle{block4} = [rectangle, draw, fill=neutral_0, 
+                     text width=8em, text centered, rounded corners, minimum height=1em]
+\tikzstyle{blocke} = [rectangle, draw, fill=neutral_4, 
+                     text width=16em, text centered, rounded corners, minimum height=2em]
+\tikzstyle{line} = [draw, -latex']
+
+
+\tikzstyle{blocka}  = [rectangle, draw, fill=neutral_4, 
+                     text width=4em, text centered, rounded corners, minimum height=1em]
+                     
+\tikzstyle{blockb}  = [rectangle, draw, fill=neutral_0, 
+                     text width=4em, text centered, rounded corners, minimum height=1em]
+
+
+
+\input{\mainpath/colordefinitions}
+\begin{document}
+
+
+\begin{tikzpicture}[node distance = 0.8cm, auto]
+        \def\hdist{1.5cm}
+        \node [blockb]                                      (l11) {$\pdfrac{\optcrit}{\absvar}$};
+        \node [below of = l11]                              (l11o) {};
+        
+        %level-2
+        \node [blocka, below of=l11o]                      (l23) {$\pdfrac{\optcrit_j}{\absvar_i}$};
+        \node [blocka, left =\hdist of l23]               (l22) {$\pdfrac{\optcrit_j}{\dfstate}$};
+        \node [blockb, left =\hdist of l22]               (l21) {$\tfrac{\dfstate}{\absvar_i}$};
+        \node [blocka, right =\hdist of l23]              (l24) {$\pdfrac{\optcrit}{\dmpos}$};
+        \node [blocka, right =\hdist of l24]              (l25) {$\tfrac{\dmpos}{\absvar_i}$};
+        \node [above of = l21]                            (l21u) {};
+        \node [below of = l21]                            (l21o) {};
+        \node [below of = l22]                            (l22o) {};
+        \node [below of = l23]                            (l23o) {};
+        \node [below of = l24]                            (l24o) {};
+        \node [below of = l25]                            (l25o) {};
+        
+        %level-3
+        \node [blocka, below of=l23o]                      (l33) {$\pdfrac{\dresidual}{\dfstate}$};
+        \node [blockb, left =\hdist of l33]               (l32) {$\tfrac{\dresidual}{\absvar}$};
+        \node [blocka, left =\hdist of l32]               (l31) {$\pdfrac{\dresidual}{\dmpos}$};
+        \node [blocka, right =\hdist of l33]              (l34) {$\tfrac{\dmpos}{\absvar_i}$};
+        %\node [blocka, right =\hdist of l34]              (l35) {l35};
+        \node [below of = l31]                            (l31o) {};
+        \node [below of = l32]                            (l32o) {};
+        \node [below of = l33]                            (l33o) {};
+        \node [below of = l34]                            (l34o) {};
+        %\node [below of = l35]                            (l35o) {};
+        
+        %level-4
+        \node [blockb, below of=l33o]                     (l43) {$\pdfrac{\dresidual}{\absvar}$};
+        \node [blocka, left =\hdist of l43]               (l42) {$\pdfrac{\dresidual}{\dfstate^{\star}}$};
+        \node [blocka, left =\hdist of l42]               (l41) {$\pdfrac{\dfstate^{\star}}{\absvar}$};
+        \node [blocka, right =\hdist of l43]              (l44) {$\pdfrac{\dfstateprim^g}{\dfstateprim^a}$};
+        %\node [blocka, right =\hdist of l44]             (l45) {$\pdfrac{}{}$};
+        \node [below of = l41]                            (l41o) {};
+        \node [below of = l42]                            (l42o) {};
+        \node [below of = l43]                            (l43o) {};
+        \node [below of = l44]                            (l44o) {};
+        %\node [below of = l45]                            (l45o) {};
+        
+        %level-5
+        \node [blocka, below of=l43o]                      (l53) {$\pdfrac{\dfstateprim^g}{\absvar}$};
+        \node [blocka, left =\hdist of l53]               (l52) {$\pdfrac{\dresidual}{\dmpos}$};
+        %\node [blocka, left =\hdist of l52]               (l51) {l51};
+        \node [blocka, right =\hdist of l53]              (l54) {$\pdfrac{\dmpos}{\absvar}$};
+        %\node [blocka, right =\hdist of l54]              (l55) {l55};
+        
+  
+        %thick lines      
+        \draw[-,very thick] (l11) -- (l11o);
+        \draw[-,very thick] (l11o) -| (l21);
+        \draw[-,very thick] (l21u) -| (l11);
+        
+        \draw[-,very thick] (l21) |- (l22o);
+        \draw[-,very thick] (l21o) -| (l32);
+        
+        \draw[-,very thick] (l32) |- (l33o);
+        \draw[-,very thick] (l32o) -| (l43);
+        
+        
+        %thin lines
+        \draw[-] (l11o) -| (l22);
+        \draw[-] (l11o) -| (l23);
+        \draw[-] (l11o) -| (l24);
+        \draw[-] (l11o) -| (l25);
+        \draw[-] (l21o) -- (l31);
+        \draw[-] (l21o) -| (l33);
+        \draw[-] (l21o) -| (l34);
+        \draw[-] (l41) |- (l34o);
+        \draw[-] (l44) |- (l31o);
+        \draw[-] (l43) -- (l53);
+        \draw[-] (l52) |- (l44o);
+        \draw[-] (l42o) -| (l54);
+        
+        
+        %draw dashed lines
+        \draw[gray,dashed] (l22) -- (l22o) node[midway] (l22){};
+        \draw[gray,dashed] (l23) -- (l23o) node[midway] (l23){};
+        \draw[gray,dashed] (l24) -- (l24o) node[midway] (l24){};
+        \draw[gray,dashed] (l25) -- (l25o) node[midway] (l25){};
+        
+        \draw[gray,dashed] (l31) -- (l31o) node[midway] (l31){};
+        \draw[gray,dashed] (l33) -- (l33o) node[midway] (l33){};
+        \draw[gray,dashed] (l34) -- (l34o) node[midway] (l34){};
+        
+        \draw[gray,dashed] (l41) -- (l41o) node[midway] (l41){};
+        \draw[gray,dashed] (l42) -- (l42o) node[midway] (l42){};
+        \draw[gray,dashed] (l44) -- (l44o) node[midway] (l44){};
+\end{tikzpicture}
+
+
+
+\end{document}
+
+

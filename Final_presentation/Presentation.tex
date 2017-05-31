@@ -12,6 +12,14 @@
 
 \addbibresource{\thesispath/bibliography.bib}
 
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline for section \thesection}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
 \begin{document}
 
 %\input{/home/lukas/Desktop/project/independence/project/thesis/bibliography.bib}
@@ -34,7 +42,8 @@
 % MAIN PART -------------------------------------------------------------------
 \input{chapters/introduction}
 \input{chapters/optimization}
-%\input{chapters/numerical_framework}
+\input{chapters/sensitivity_analysis}
+\input{chapters/numerical_framework}
 \input{chapters/numerical_results}
 \input{chapters/verification}
 %\input{chapters/conclusions}

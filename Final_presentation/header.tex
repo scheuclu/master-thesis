@@ -77,6 +77,12 @@
                      text width=16em, text centered, rounded corners, minimum height=2em]
 \tikzstyle{line} = [draw, -latex']
 
+\tikzstyle{blocka}  = [rectangle, draw, fill=neutral_4, 
+                     text width=4em, text centered, rounded corners, minimum height=1em]
+                     
+\tikzstyle{blockb}  = [rectangle, draw, fill=neutral_0, 
+                     text width=4em, text centered, rounded corners, minimum height=1em]
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\Rbb}{\ensuremath{\mathbb{R} }}
@@ -129,7 +135,7 @@
 
 
 \usepackage{color}
-\usepackage[table]{xcolor}
+\usepackage{xcolor}
 \usepackage{soul}
 \definecolor{hlcolorblue}{RGB}{126,215,255}
 \definecolor{hlcolorgreen}{RGB}{126,255,175}
@@ -156,3 +162,13 @@
 
 \DeclareRobustCommand{\hlt}[2]{{\sethlcolor{#1}\hl{#2}}}
 \newcommand{\hle}[2]{\colorbox{#1}{$\displaystyle{#2}$}}
+
+
+
+
+% beamer color sheme
+
+%\setbeamercolor*{palette primary}{bg=yellow, fg = green}
+%\setbeamercolor*{palette secondary}{bg=orange, fg = black}
+\setbeamercolor*{palette tertiary}{bg=primary_0, fg = white}%title bar
+%\setbeamercolor*{palette quaternary}{bg=purple, fg = black}
