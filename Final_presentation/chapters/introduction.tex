@@ -100,19 +100,28 @@
 
 
 
+
+
+
 \begin{frame}
   \frametitle{Motivation}
-  \only<1>{\framesubtitle{-> Why Sensitivity Analysis?}}
-  \only<2>{\framesubtitle{-> Why Embedded framework?}}
-  \only<3->{\framesubtitle{-> Why analytic approach?}}
+  \only<1>{\framesubtitle{ Basics}}
+  \only<2>{\framesubtitle{-> Why Sensitivity Analysis?}}
+  \only<3>{\framesubtitle{-> Why Embedded framework?}}
+  \only<4->{\framesubtitle{-> Why analytic approach?}}
   \begin{itemize}
+    \item Aerodynamic optimization
+     \begin{itemize}
+       \item \textbf<2>{Gradient based}
+       \item \textbf<2>{Take the human out of the loop}
+     \end{itemize}
     \item Requirements on CFD
       \begin{itemize}
-      \item \textbf<2>{Complex flows (transonic, turbulent \dots) and high Reynolds numbers}
+      \item \textbf<3>{Complex flows (transonic, turbulent \dots) and high Reynolds numbers}
       \item Well-resolved boundary layers and flow features
       \item Steady/unsteady flows
-      \item \textbf<3>{Numerical accuracy, solver robustness and short turn-around time}
-      \item \textbf<2>{Moderate to highly complex geometries}
+      \item \textbf<4>{Numerical accuracy, solver robustness and short turn-around time}
+      \item \textbf<3>{Moderate to highly complex geometries}
       \end{itemize}
     \item Requirements on design and optimization 
       \begin{itemize}
@@ -123,14 +132,57 @@
       \item Geometrical/engineering constraints 
       \end{itemize}
    \end{itemize}
-   \onslide<2>{$\rightarrow$\textbf{Embedded framework}}\\
-   \onslide<3>{$\rightarrow$\textbf{Analytic Sensitivities}}
+   \onslide<3>{$\rightarrow$\textbf{Embedded framework}}\\
+   \onslide<4>{$\rightarrow$\textbf{Analytic Sensitivities}}
 \end{frame}
+
+
+%-----------------------------------------------------------------------------------------------------
+
+\begin{frame}
+  \frametitle{The AERO-Suite\footcite{Aerof}~\footcite{Aeros}}
+  \framesubtitle{Workflow}
+%  \centering
+  \def\vert{0.5cm}
+  \def\horz{0.5cm}
+  \centering
+      \scalebox{0.8}{\begin{tikzpicture}[scale=1.0]
+        \node [block3]                                      (aerof) {\textbf<2>{Aero-F}};
+        \node [block3, below right=\vert and \horz of aerof]   (matcher) {Matcher};
+        \node [block3, above right=\vert and \horz of matcher] (aeros) {Aero-S};
+        \node [block3, below=\vert of matcher]             (sower) {Sower};
+        \node [block3, below=\vert of sower]             (mesh) {Mesh};
+        \node [block3, above right=\vert and \horz of aerof] (sowerr) {Sower};
+        \node [block3, above=\vert of sowerr]             (xpexo) {xpexo};
+        
+        \node [block,below=\vert of mesh]             (gmsh) {GMSH};
+        \node [block,above=\vert of xpexo]             (paraview) {Paraview};
+        
+        \draw[<->,dashed,thick] (aerof) -- (matcher);
+        \draw[<->,dashed,thick] (aeros) -- (matcher);
+        \draw[->,dashed,thick] (sower) -- (matcher);
+        \draw[->,thick] (sower) -| (aerof);
+        \draw[->,thick] (sower) -| (aeros);
+        
+        \draw[->,thick] (mesh) -- (sower);
+        \draw[->,thick] (gmsh) -- (mesh);
+        \draw[->,thick] (sowerr) -- (xpexo);
+        \draw[->,thick] (xpexo) -- (paraview);
+        
+        \draw[->,thick] (aerof) |- (sowerr);
+        \draw[->,thick] (aeros) |- (sowerr);
+        
+        \draw[darkgrey,thick,dashed] ($(gmsh.north west)+(-4.0,0.15)$)  rectangle ($(xpexo.north east)+(4.0,0.15)$);    %SDesign
+     \end{tikzpicture}}
+\end{frame}
+
 
 %------------------------------------------------------------------------------
 
 \begin{frame}
   \frametitle{Aerodynamic shape optimization}
+  \only<1>{\framesubtitle{-> Overview}}
+  \only<2>{\framesubtitle{-> Thesis focus}}
   
   \begin{columns}
     \begin{column}{0.55\textwidth}
@@ -158,6 +210,7 @@
         \draw[darkgrey,thick,dotted] ($(decide.north west)+(-1.2,0.6)$)   rectangle ($(optimize.south east)+(0.2,-0.45)$);  %Python
         
         \node [darkgrey,anchor=north east] at  ($(parameter.south east)+(0.0,0.0)$)                (aaa) {\texttt{Bash}};
+        \node [darkgrey,anchor=north east] at  ($(optimize.south east)+(0.0,0.0)$)                (aaa) {\texttt{Python}};
 %        \onslide<1>{\node [darkgrey,anchor=north east] at  ($(optimize.south east)+(0.0,0.0)$)                (aaa) {\texttt{Python}};};
 %        \onslide<2>{\node [black,anchor=north east] at  ($(optimize.south east)+(0.0,0.0)$)                (aaa) {\texbf{Python}};};
         \node [darkgrey,anchor=north east] at  ($(objective.south east)+(0.0,0.0)$)                (aaa) {\texttt{Aero-F}};
@@ -185,39 +238,4 @@
 
 %------------------------------------------------------------------------------
 
-\begin{frame}
-  \frametitle{The AERO-Suite\footcite{Aerof} \footcite{Aeros}}
-%  \centering
-  \def\vert{0.5cm}
-  \def\horz{0.5cm}
-  \textbf{Aero - workflow}\\
-  \centering
-      \scalebox{0.8}{\begin{tikzpicture}[scale=1.0]
-        \node [block3]                                      (aerof) {\textbf<2>{Aero-F}};
-        \node [block3, below right=\vert and \horz of aerof]   (matcher) {Matcher};
-        \node [block3, above right=\vert and \horz of matcher] (aeros) {Aero-S};
-        \node [block3, below=\vert of matcher]             (sower) {Sower};
-        \node [block3, below=\vert of sower]             (mesh) {Mesh};
-        \node [block3, above right=\vert and \horz of aerof] (sowerr) {Sower};
-        \node [block3, above=\vert of sowerr]             (xpexo) {xpexo};
-        
-        \node [block,below=\vert of mesh]             (gmsh) {GMSH};
-        \node [block,above=\vert of xpexo]             (paraview) {Paraview};
-        
-        \draw[<->,dashed] (aerof) -- (matcher);
-        \draw[<->,dashed] (aeros) -- (matcher);
-        \draw[->,dashed] (sower) -- (matcher);
-        \draw[->] (sower) -| (aerof);
-        \draw[->] (sower) -| (aeros);
-        
-        \draw[->] (mesh) -- (sower);
-        \draw[->] (gmsh) -- (mesh);
-        \draw[->] (sowerr) -- (xpexo);
-        \draw[->] (xpexo) -- (paraview);
-        
-        \draw[->] (aerof) |- (sowerr);
-        \draw[->] (aeros) |- (sowerr);
-        
-        \draw[darkgrey,thick,dashed] ($(gmsh.north west)+(-4.0,0.15)$)  rectangle ($(xpexo.north east)+(4.0,0.15)$);    %SDesign
-     \end{tikzpicture}}
-\end{frame}
+

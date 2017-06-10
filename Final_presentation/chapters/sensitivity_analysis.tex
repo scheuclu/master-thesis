@@ -14,19 +14,19 @@
 
 \def\PoptcritJBYstructdisp{\pdfrac{\optcrit_{j}}{\structdisp}}
 \def\PoptcritJBYmms       {\pdfrac{\optcrit_{j}}{\mms}}
-\def\PoptcritJBYfstate    {\pdfrac{\optcrit_{j}}{\fstate}}
+\def\PoptcritJBYfstate    {\pdfrac{\optcrit_{j}}{\dfstate}}
 
 \def\DoptcritJBYstructdisp{\tfrac{\optcrit_{j}}{\structdisp}}
 \def\DoptcritJBYmms       {\tfrac{\optcrit_{j}}{\mms}}
-\def\DoptcritJBYfstate    {\tfrac{\optcrit_{j}}{\fstate}}
+\def\DoptcritJBYfstate    {\tfrac{\optcrit_{j}}{\dfstate}}
 
 \def\DstructdispBYabsvarI{\frac{d \structdisp}{d \absvar_{i}} }
 \def\DmmsBYabsvarI       {\frac{d \mms       }{d \absvar_{i}} }
-\def\DfstateBYabsvarI    {\frac{d \fstate    }{d \absvar_{i}} }
+\def\DfstateBYabsvarI    {\frac{d \dfstate    }{d \absvar_{i}} }
 
 \def\PstructdispBYabsvarI{\pdfrac{d \structdisp}{d \absvar_{i}} }
 \def\PmmsBYabsvarI       {\pdfrac{d \mms       }{d \absvar_{i}} }
-\def\PfstateBYabsvarI    {\pdfrac{d \fstate    }{d \absvar_{i}} }
+\def\PfstateBYabsvarI    {\pdfrac{d \dfstate    }{d \absvar_{i}} }
 
 \def\PEOSstructBYabsvarI{\pdfrac{\EOSstruct} {\absvar_i}}
 \def\PEOSmeshBYabsvarI  {\pdfrac{\EOSmesh}  {\absvar_i}}
@@ -38,7 +38,7 @@
 
 \def\PEOSstructBYstructdisp{\pdfrac{\EOSstruct} {\structdisp}}
 \def\PEOSstructBYmms{\pdfrac{\EOSstruct}{\mms}}
-\def\PEOSstructBYfstate    {\pdfrac{\EOSstruct}{\fstate}}
+\def\PEOSstructBYfstate    {\pdfrac{\EOSstruct}{\dfstate}}
 
 \def\PEOSmeshBYstructdisp{\pdfrac{\EOSmesh}{\structdisp}}
 \def\PEOSmeshBYmms       {\pdfrac{\EOSmesh} {\mms}}
@@ -56,36 +56,49 @@
 
 \begin{frame}
   \frametitle{Computation of the gradient}
-  
-  \begin{itemize}  
+
+  \begin{itemize}
+    \item{Objective}
+      \begin{equation*}
+        \begin{aligned}
+          & \underset{\dfstate \in \Rbb^{N_\wbold},~\absvar \in \Rbb^{N_\absvar}}{\text{minimize}}
+          & & \optcrit(\absvar, \dfstate, \mpos)
+        \end{aligned}
+      \end{equation*}  
     \item Gradients of the objective function
 			\begin{align*}\label{eq:sensitivity_startingpoint}
 			\DoptcritJBYabsvarI\bigg\rvert_{\fstate_0}=\setulcolor{primary_0}\setul{}{2pt}
-			\underbrace{\PoptcritJBYabsvarI\bigg\rvert_{\fstate_0}}_{
+			\underbrace{\PoptcritJBYabsvarI\bigg\rvert_{\dfstate_0}}_{
 			                                                        \substack{
 			                                                                 \text{\ul{directly derived from}} \\
 			                                                                 \text{\ul{the definition of} $\optcrit$}
 			                                                                 } 
 			                                                        }  +
-			\underbrace{\PoptcritJBYfstate\bigg\rvert_{\fstate_0}}_ {\setulcolor{neutral_1}
+			\underbrace{\PoptcritJBYfstate\bigg\rvert_{\dfstate_0}}_ {\setulcolor{neutral_1}
 			                                                        \substack{
 			                                                                 \text{\ul{derived analytically or~~}}\\
 			                                                                 \text{\ul{by} FD}
 			                                                                 }
-			                                                        }
-			\underbrace{\hle{neutral_1}{\DfstateBYabsvarI\bigg\rvert_{\fstate_0}}}_  {\setulcolor{neutral_2}
+			                                                        }                                             
+			\only<1>{\underbrace{\hle{neutral_1}{\DfstateBYabsvarI\bigg\rvert_{\dfstate_0}}}_  {\setulcolor{neutral_2}
 			                                                        \substack{
 			                                                                 \text{\ul{derived from dynamic}}\\
 			                                                                 \text{\ul{fluid equilibrium}}
 			                                                                 }
-			                                                        } + \\
-			\underbrace{\underbrace{\pdfrac{\optcrit}{\dmpos}\bigg\rvert_{\fstate_0}}_ {\setulcolor{neutral_1}
+			                                                        } + \\}
+			\only<2>{\underbrace{\hle{neutral_3}{\DfstateBYabsvarI\bigg\rvert_{\dfstate_0}}}_  {\setulcolor{neutral_2}
+			                                                        \substack{
+			                                                                 \text{\ul{derived from dynamic}}\\
+			                                                                 \text{\ul{fluid equilibrium}}
+			                                                                 }
+			                                                        } + \\}
+			\underbrace{\underbrace{\pdfrac{\optcrit}{\dmpos}\bigg\rvert_{\dfstate_0}}_ {\setulcolor{neutral_1}
 			                                                        \substack{
 			                                                                 \text{\ul{derived analytically or~~}}\\
 			                                                                 \text{\ul{by} FD}
 			                                                                 }
 			                                                        }
-			\underbrace{\pdfrac{\dmpos}{\absvar_i}\bigg\rvert_{\fstate_0}}_  {\setulcolor{neutral_2}
+			\underbrace{\pdfrac{\dmpos}{\absvar_i}\bigg\rvert_{\dfstate_0}}_  {\setulcolor{neutral_2}
 			                                                        \substack{
 			                                                                 \text{\ul{derived from SDESIGN}}\\
 			                                                                 \text{\ul{~}}
@@ -371,8 +384,8 @@
 %	  0\text{  in Embedded framework}
 %	\end{cases}
 %	\right)
-	\end{align*}
-	\end{item}
+%	\end{align*}
+	\end{itemize}
 \end{frame}
 %\everymath{\displaystyle}
 
@@ -518,7 +531,7 @@ w_i \prim{\difftensor} \nabla \prim{\dfstate}(\dmpos_i) \nabla \phi_j(\dmpos_i) 
         \node [below of = l32]                            (l32o) {};
         \node [below of = l33]                            (l33o) {};
         \node [below of = l34]                            (l34o) {};
-        \node [below of = l35]                            (l35o) {};
+        %\node [below of = l35]                            (l35o) {};
         
         %level-4
         \node [blockb,thick, below of=l33o]                     (l43) {$\pdfrac{\dresidual}{\absvar}$};
@@ -615,7 +628,7 @@ w_i \prim{\difftensor} \nabla \prim{\dfstate}(\dmpos_i) \nabla \phi_j(\dmpos_i) 
         \node [below of = l32]                            (l32o) {};
         \node [below of = l33]                            (l33o) {};
         \node [below of = l34]                            (l34o) {};
-        \node [below of = l35]                            (l35o) {};
+        %\node [below of = l35]                            (l35o) {};
         
         %level-4
         \node [blockb, below of=l33o]                     (l43) {$\pdfrac{\dresidual}{\absvar}$};
@@ -630,7 +643,7 @@ w_i \prim{\difftensor} \nabla \prim{\dfstate}(\dmpos_i) \nabla \phi_j(\dmpos_i) 
         %\node [below of = l45]                            (l45o) {};
         
         %level-5
-        \node [blocka, below of=l43o]                      (l53) {$\pdfrac{\dfstateprim^g}{\absvar}$};
+        \node [blocka, below of=l43o]                     (l53) {$\pdfrac{\dfstateprim^g}{\absvar}$};
         \node [blocka, left =\hdist of l53]               (l52) {$\pdfrac{\dresidual}{\dmpos}$};
         \node [blocka, right =\hdist of l53]              (l54) {$\pdfrac{\dmpos}{\absvar}$}; 
   

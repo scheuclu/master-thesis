@@ -52,6 +52,70 @@
 \def\PmmsBYabsvarI       {\pdfrac{\mms}        {\absvar_i}}
 \def\PfstateBYabsvarI    {\pdfrac{\fstate}     {\absvar_i}}
 
+
+
+
+\begin{frame}
+  \frametitle{Aerodynamic shape optimization}
+  \only<1>{\framesubtitle{-> Overview}}
+  \only<2>{\framesubtitle{-> Thesis focus}}
+  
+  \begin{columns}
+    \begin{column}{0.55\textwidth}
+      \scalebox{0.9}{\begin{tikzpicture}[scale=1.0,node distance = 1.2cm]
+        \node [block]                                      (init) {Initial geometry};
+        \node [block1, below of=init]                      (parameter) {Parameter change};
+        \node [block1, below= 1cm of parameter]                 (modify) {\textbf<2>{Shape}  \mbox{\textbf<2>{modification}}};
+        \node [block2, below= 1cm of modify]                    (mesh) {Mesh procedure};
+        \node [block3, below of=mesh]                      (simulation) {Flow simulation};
+        \node [decision, right of=parameter, node distance=3.5cm] (decide) {Optimum?};
+        \node [block4, right of=mesh, node distance=3.5cm] (optimize) {Gradient based optimization};
+        \node [block3, below of=simulation]                (objective) {\textbf<2>{Gradient of objective function \& constraints}}; 
+        \path [line] (init) -- (parameter);
+        \path [line] (parameter) -- (modify);
+        \path [line] (decide) -- (parameter);        
+        \path [line] (modify) -- (mesh);
+        \path [line] (mesh) -- (simulation);
+        \path [line] (simulation) -- (objective);   
+        \path [line] (objective) -| (optimize);
+        \path [line] (optimize) -- (decide);  
+        
+        \draw[darkgrey,thick,dotted] ($(parameter.north west)+(-0.2,0.15)$)  rectangle ($(parameter.south east)+(0.2,-0.45)$);    %SDesign
+        \draw[darkgrey,thick,dotted] ($(modify.north west)+(-0.2,0.15)$)  rectangle ($(modify.south east)+(0.2,-0.45)$);    %SDesign
+        \draw[darkgrey,thick,dotted] ($(mesh.north west)+(-0.2,0.15)$)    rectangle ($(objective.south east)+(0.2,-0.45)$); %Aero-F   
+        \draw[darkgrey,thick,dotted] ($(decide.north west)+(-1.2,0.6)$)   rectangle ($(optimize.south east)+(0.2,-0.45)$);  %Python
+        
+        \node [darkgrey,anchor=north east] at  ($(parameter.south east)+(0.0,0.0)$)                (aaa) {\texttt{Bash}};
+        \node [darkgrey,anchor=north east] at  ($(optimize.south east)+(0.0,0.0)$)                (aaa) {\texttt{Python}};
+%        \onslide<1>{\node [darkgrey,anchor=north east] at  ($(optimize.south east)+(0.0,0.0)$)                (aaa) {\texttt{Python}};};
+%        \onslide<2>{\node [black,anchor=north east] at  ($(optimize.south east)+(0.0,0.0)$)                (aaa) {\texbf{Python}};};
+        \node [darkgrey,anchor=north east] at  ($(objective.south east)+(0.0,0.0)$)                (aaa) {\texttt{Aero-F}};
+        \node [darkgrey,anchor=north east] at  ($(modify.south east)+(0.0,0.0)$)                (aaa) {\texttt{SDesign}};
+      \end{tikzpicture}}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \begin{block}{Gradient based optimization}
+       \begin{itemize}
+       \item Requires objective function and constraints
+       \item Gradient of objective function and constraints
+       \end{itemize}
+       \end{block}
+      \begin{block}{How to compute the gradient}
+       \begin{itemize}
+       \item Finite difference
+       \item \textbf<2>{Direct approach}
+       \item Adjoint approach
+       \end{itemize}
+       \end{block}
+    \end{column}      
+  \end{columns}
+
+\end{frame}
+
+
+
+%------------------------------------------------------------------------------
+
 \begin{frame}
   \frametitle{PDE-constrained optimization}
 
@@ -60,10 +124,10 @@
       \begin{equation*}
         \begin{aligned}
           & \underset{\dfstate \in \Rbb^{N_\wbold},~\absvar \in \Rbb^{N_\absvar}}{\text{minimize}}
-          & & \optcrit(\dfstate, \absvar\onslide<2->{\rightarrow \text{e.g. Lift-Drag ratio}} \\
+          & & \optcrit(\dfstate, \absvar) \onslide<2->{\rightarrow \textbf{e.g. Lift-Drag ratio}} \\
           & \text{subject to}
-          & & \Rbold(\dfstate, \absvar) = 0 \onslide<3->{\rightarrow \text{e.g. geometry of engine mount}} \\
-          & & & \cbold(\dfstate, \absvar) \leq 0 \onslide<4->{\rightarrow \text{e.g. Lift-Drag ratio}}
+          & & \Rbold(\dfstate, \absvar) = 0 \onslide<3->{\rightarrow \textbf{e.g. geometry of engine mount}} \\
+          & & & \cbold(\dfstate, \absvar) \leq 0 \onslide<4->{\rightarrow \textbf{e.g. minimmum Lift}}
         \end{aligned}
       \end{equation*}
     \item Nested approach
@@ -76,7 +140,11 @@
         \end{aligned}
       \end{equation*}
   \end{itemize}
+  ~~\\
+  \only<5>{Gradient based optimization requires total derivatives(\textbf{Sensitivites}) !}
 \end{frame}
+
+
 
 %------------------------------------------------------------------------------
 
