@@ -68,54 +68,95 @@
     \item Gradients of the objective function
 			\begin{align*}\label{eq:sensitivity_startingpoint}
 			\DoptcritJBYabsvarI\bigg\rvert_{\fstate_0}=\setulcolor{primary_0}\setul{}{2pt}
-			\underbrace{\PoptcritJBYabsvarI\bigg\rvert_{\dfstate_0}}_{
+			\only<1->{\underbrace{\PoptcritJBYabsvarI\bigg\rvert_{\dfstate_0}}_{
 			                                                        \substack{
 			                                                                 \text{\ul{directly derived from}} \\
 			                                                                 \text{\ul{the definition of} $\optcrit$}
 			                                                                 } 
-			                                                        }  +
-			\underbrace{\PoptcritJBYfstate\bigg\rvert_{\dfstate_0}}_ {\setulcolor{neutral_1}
+			                                                        }}  +
+			\only<2->{\underbrace{\PoptcritJBYfstate\bigg\rvert_{\dfstate_0}}_ {\setulcolor{neutral_1}
 			                                                        \substack{
 			                                                                 \text{\ul{derived analytically or~~}}\\
 			                                                                 \text{\ul{by} FD}
 			                                                                 }
-			                                                        }                                             
-			\only<1>{\underbrace{\hle{neutral_1}{\DfstateBYabsvarI\bigg\rvert_{\dfstate_0}}}_  {\setulcolor{neutral_2}
+			                                                        }    }                                         
+			\only<3-5>{\underbrace{\hle{white}{\DfstateBYabsvarI\bigg\rvert_{\dfstate_0}}}_  {\setulcolor{neutral_2}
 			                                                        \substack{
 			                                                                 \text{\ul{derived from dynamic}}\\
 			                                                                 \text{\ul{fluid equilibrium}}
 			                                                                 }
 			                                                        } + \\}
-			\only<2>{\underbrace{\hle{neutral_3}{\DfstateBYabsvarI\bigg\rvert_{\dfstate_0}}}_  {\setulcolor{neutral_2}
+			\only<6->{\underbrace{\hle{neutral_1}{\DfstateBYabsvarI\bigg\rvert_{\dfstate_0}}}_  {\setulcolor{neutral_2}
 			                                                        \substack{
 			                                                                 \text{\ul{derived from dynamic}}\\
 			                                                                 \text{\ul{fluid equilibrium}}
 			                                                                 }
 			                                                        } + \\}
-			\underbrace{\underbrace{\pdfrac{\optcrit}{\dmpos}\bigg\rvert_{\dfstate_0}}_ {\setulcolor{neutral_1}
+			\only<4->{\underbrace{
+			  \only<4->{\underbrace{\pdfrac{\optcrit}{\dmpos}\bigg\rvert_{\dfstate_0}}_ {\setulcolor{neutral_1}
 			                                                        \substack{
 			                                                                 \text{\ul{derived analytically or~~}}\\
 			                                                                 \text{\ul{by} FD}
 			                                                                 }
-			                                                        }
-			\underbrace{\pdfrac{\dmpos}{\absvar_i}\bigg\rvert_{\dfstate_0}}_  {\setulcolor{neutral_2}
+			                                                        }}
+			  \only<5->{\underbrace{\pdfrac{\dmpos}{\absvar_i}\bigg\rvert_{\dfstate_0}}_  {\setulcolor{neutral_2}
 			                                                        \substack{
 			                                                                 \text{\ul{derived from SDESIGN}}\\
 			                                                                 \text{\ul{~}}
 			                                                                 }
-			                                                        } }_{=0\text{ for Embedded}}
+			                                                        }}
+		   }_{=0\text{ for Embedded}}}
 			\end{align*}
   \end{itemize}
-  \onslide<2->{\hlt{neutral_1}{\textbf{$\rightarrow$ We only look into this term}!}}
+  \onslide<6->{\hlt{neutral_1}{\textbf{$\rightarrow$ We only look into this term}!}}
 \end{frame}
 
+%------------------------------------------------------------------------------
 
+\def\DdresidualBYabsvarI{ \tfrac{\dresidual}{\absvar_i} }
+\def\PdresidualBYabsvarI{ \pdfrac{\dresidual}{\absvar_i} }
+\def\PdresidualBYdfstate{ \pdfrac{\dresidual}{\dfstate}  }
+\def\DdfstateBYabsvarI  { \tfrac{\dfstate}{\absvar_i}   }
+\def\PdresidualBYdmms   { \pdfrac{\dresidual}{\dmpos}     }
+\def\DdmmsBYabsvarI     { \tfrac{\dmpos}{\absvar_i}      }
+%\everymath{\scriptstyle}
+\begin{frame}
+\frametitle{Derivation of $\pdfrac{\dfstate}{\absvar}$}
+  \begin{itemize}
+	\item The final system can be written as
+		\begin{align*}
+		\tfrac{\optcrit_j}{\absvar_i}\bigg\rvert_{\dfstate_0} &=
+		-\tfrac{\optcrit_j}{\fstate}\bigg\rvert_{\dfstate_0}
+		\inv{\left[\hle{neutral_0}{\PdresidualBYdfstate}\bigg\rvert_{\fstate_0}\right]} \\
+		&\left(
+		  \hle{neutral_1}{\PdresidualBYabsvarI}\bigg\rvert_{\fstate_0} +
+		  \begin{bmatrix}
+		    \alpha\pdfrac{\dresidual}{\dmms_\Omega}\bigg\rvert_{\dfstate_0}~
+		    \pdfrac{\dresidual}{\dmms_\Gamma}\bigg\rvert_{\dfstate_0}
+		  \end{bmatrix}
+		  \begin{bmatrix}
+		    \alpha \inv{\fic{\stiffmat}_{\Omega\Omega}} \fic{\stiffmat}_{\Omega\Gamma} \\
+		    \eye
+		  \end{bmatrix}
+		  \tfrac{\dmms_\Gamma}{\absvar_i}
+		\right)\\
+		\alpha&=
+		\begin{cases}
+		  1\text{  in ALE framework}\\
+		  0\text{  in Embedded framework}
+		\end{cases}
+		\end{align*}
+	\end{itemize}
+	\only<1->{\textbf{$\rightarrow$ We only look into these terms}}
+\end{frame}
+%\everymath{\displaystyle}
 
 %------------------------------------------------------------------------------
 
 
 \begin{frame}
-\frametitle{AAA}
+\frametitle{Sensitivity derivation - chain rule}
+\framesubtitle{$\pdfrac{\optcrit}{\absvar}$}
 \centering
 \begin{tikzpicture}[node distance = 0.6cm, auto]
         \def\hdist{0.7cm}
@@ -216,18 +257,18 @@
 \frametitle{Derivation of $\pdfrac{\dfstate}{\absvar}$}
 
 \begin{itemize}
-\item Consider the fluid equations at equilibrium
 
 
+\only<1->{\item Consider the fluid equations at equilibrium
 \begin{align*}
 \cancelto{0}{\pdfrac{\bar{\dfstate_i}}{t}} +
 \underbrace{
   \underbrace{\sum_{j \in \vertexset(i)} \fluxesnum_{ij}(\dfstate_{ij},\dfstate_{ji},\wnormal_{ij})}_{\dresidual^i} -
   \underbrace{\sum_{T_i \in \elementset(i)} \int_{T_j} \difftensor \nabla \dfstate \nabla \phi_j dx}_{\dresidual^v}      }_{\dresidual} =
 \vec{0}
-\end{align*}
+\end{align*}}
 
-\item Therefor
+\only<2->{\item Therefore
 \def\DdresidualBYabsvarI{ \tfrac{\dresidual}{\absvar_i} }
 \def\PdresidualBYabsvarI{ \pdfrac{\dresidual}{\absvar_i} }
 \def\PdresidualBYdfstate{ \pdfrac{\dresidual}{\dfstate}  }
@@ -239,24 +280,61 @@
 \PdresidualBYabsvarI                      +
 \PdresidualBYdfstate    \DdfstateBYabsvarI +
 \PdresidualBYdmms       \DdmmsBYabsvarI
-\end{align*}
+\end{align*}}
 
-\item Which leads to
+\only<3->{\item Which leads to
 \begin{align*}
-\PdresidualBYdfstate    \mathunderline[neutral_1]{\displaystyle\DdfstateBYabsvarI}=
--\DdresidualBYabsvarI 
--\PdresidualBYdmms       \DdmmsBYabsvarI
-\end{align*}
+\PdresidualBYdfstate \displaystyle\DdfstateBYabsvarI=
+-\DdresidualBYabsvarI
+-\PdresidualBYdmms   \DdmmsBYabsvarI
+\end{align*}}
 
 \end{itemize}
+\end{frame}
+
+%------------------------------------------------------------------------------
+\begin{frame}
+\def\DdresidualBYabsvarI{ \tfrac{\dresidual}{\absvar_i} }
+\def\PdresidualBYabsvarI{ \pdfrac{\dresidual}{\absvar_i} }
+\def\PdresidualBYdfstate{ \pdfrac{\dresidual}{\dfstate}  }
+\def\DdfstateBYabsvarI  { \tfrac{\dfstate}{\absvar_i}   }
+\def\PdresidualBYdmms   { \pdfrac{\dresidual}{\dmpos}     }
+\def\DdmmsBYabsvarI     { \tfrac{\dmpos}{\absvar_i}      }
+\frametitle{Derivation of $\pdfrac{\dfstate}{\absvar}$}
+\framesubtitle{Direct and Adjoint method}
+\begin{itemize}
+	\item{Matrix-Matrix-Matrix product}
+	\begin{align*}
+		\DdfstateBYabsvarI=-\inv{\PdresidualBYdfstate}
+		\hle{neutral_0}{\DdresidualBYabsvarI}
+		\only<1>{-\inv{\hle{neutral_0}{\PdresidualBYdfstate}}\PdresidualBYdmms\DdmmsBYabsvarI}
+		\only<2->{-\underbrace{\inv{\hle{neutral_0}{\PdresidualBYdfstate}}\PdresidualBYdmms\DdmmsBYabsvarI}_{\dmat{A}\dmat{B}\dmat{C}}}
+	\end{align*}
+	\item{Two different ways to do the product}
+	\begin{itemize}
+		\item{Direct: $\dmat{A}\dmat{B}\dmat{C}$~~$\order{n_{eq}^2n_{\absvars}+n_{\optcrits}n_{eq}n_{\absvars}}$}
+		\item{Adjoint: $\left[\dmat{C}^T(\dmat{A}\dmat{B})\right]^T$~~$\order{n_{eq}^2n_{\optcrits}+n_{\optcrits}n_{eq}n_{\absvars}}$}
+		\begin{align*}
+		&n_{eq}\rightarrow&\text{number of equations}\\
+		&n_{\absvars}\rightarrow&\text{number of abstract variables}\\
+		&n_{\optcrits}\rightarrow&\text{number of optimization criteria}
+		\end{align*}
+	\end{itemize}
+	\\	
+\end{itemize}
+\only<3->{\textbf{We only look into these terms}}
 \end{frame}
 
 
 %------------------------------------------------------------------------------
 
 
+%------------------------------------------------------------------------------
+
+
 \begin{frame}
-\frametitle{AAA}
+\frametitle{Sensitivity derivation - chain rule}
+\framesubtitle{$\tfrac{\dfstate}{\absvar_i}$}
 \centering
 \begin{tikzpicture}[node distance = 0.6cm, auto]
         \def\hdist{0.7cm}
@@ -277,7 +355,7 @@
         \node [below of = l25]                            (l25o) {};
         
         %level-3
-        \node [blocka, below of=l23o]                      (l33) {$\pdfrac{\dresidual}{\dfstate}$};
+        \node [blockb, below of=l23o]                      (l33) {$\pdfrac{\dresidual}{\dfstate}$};
         \node [blockb,thick, left =\hdist of l33]               (l32) {$\tfrac{\dresidual}{\absvar}$};
         \node [blocka, left =\hdist of l32]               (l31) {$\pdfrac{\dresidual}{\dmpos}$};
         \node [blocka, right =\hdist of l33]              (l34) {$\tfrac{\dmpos}{\absvar_i}$};
@@ -350,51 +428,15 @@
 \end{tikzpicture}
 \end{frame}
 
-%------------------------------------------------------------------------------
-\def\DdresidualBYabsvarI{ \tfrac{\dresidual}{\absvar_i} }
-\def\PdresidualBYabsvarI{ \pdfrac{\dresidual}{\absvar_i} }
-\def\PdresidualBYdfstate{ \pdfrac{\dresidual}{\dfstate}  }
-\def\DdfstateBYabsvarI  { \tfrac{\dfstate}{\absvar_i}   }
-\def\PdresidualBYdmms   { \pdfrac{\dresidual}{\dmpos}     }
-\def\DdmmsBYabsvarI     { \tfrac{\dmpos}{\absvar_i}      }
-%\everymath{\scriptstyle}
-\begin{frame}
-  \begin{itemize}
-	\item The final system can be written as
-%	\begin{align*}
-%	\tfrac{\optcrit_j}{\absvar_i}\bigg\rvert_{\dfstate_0} &=
-%	-\tfrac{\optcrit_j}{\fstate}\bigg\rvert_{\dfstate_0}
-%	\inv{\left[\hle{neutral_1}{\PdresidualBYdfstate\bigg\rvert_{\fstate_0}}\right]}
-%	\left(
-%	  \PdresidualBYabsvarI\bigg\rvert_{\fstate_0} +
-%	  \begin{bmatrix}
-%	    \alpha\pdfrac{\dresidual}{\dmms_\Omega}\bigg\rvert_{\dfstate_0}~
-%	    \pdfrac{\dresidual}{\dmms_\Gamma}\bigg\rvert_{\dfstate_0}
-%	  \end{bmatrix}
-%	  \underbrace{\begin{bmatrix}
-%
-%	    \alpha \inv{\fic{\stiffmat}_{\Omega\Omega}} \fic{\stiffmat}_{\Omega\Gamma} \nonumber\\
-%	    \eye
-%	  \end{bmatrix}
-%	  \underbrace{\tfrac{\dmms_\Gamma}{\absvar_i}}_{\text{SDESIGN}}   }_{\text{ALE mesh motion}}
-%	\right)\\
-%	\alpha&=
-%	\begin{cases}
-%	  1\text{  in ALE framework}\\
-%	  0\text{  in Embedded framework}
-%	\end{cases}
-%	\right)
-%	\end{align*}
-	\end{itemize}
-\end{frame}
-%\everymath{\displaystyle}
+
 
 %------------------------------------------------------------------------------
 
 
 \begin{frame}
 \frametitle{Derivation of $\pdfrac{\dresidual}{\dfstate}$ }
-
+\begin{itemize}
+\item{Also known as fluid Jacobian}
 \begin{align*}
     \frac{\partial \dresidual^{c,i}_{ij}}{\partial \dfstate_k} = 
     {\color{primary_0}{\frac{\partial \dresidual^{c,i}_{ij}}{\partial \dfstateprim_{ij}^\star}}} \,
@@ -417,39 +459,39 @@
 
 \only<2>{$\rightarrow$ \textbf{We don't go into any more detail here!}}
 
-
+\end{itemize}
 \end{frame}
 
 %------------------------------------------------------------------------------
 %\everymath{\scriptstyle}
-\begin{frame}
-	The interface component is determined by the structure. Having obtained this one, the interior component can be computed by solving an auxiliary, fictitious Dirichlet problem:
-	\begin{align*}
-	\tfrac{\mms_\Omega}{\absvar_i}=-\left[\inv{\fic{\stiffmat}_{\Omega\Omega}} \fic{\stiffmat}_{\Omega\Gamma}\right] \tfrac{\mpos_\Gamma}{\absvar_i}
-	\end{align*}
-	\begin{align*}
-	\tfrac{\optcrit_j}{\absvar_i}\bigg\rvert_{\dfstate_0} &=
-	-\tfrac{\optcrit_j}{\fstate}\bigg\rvert_{\dfstate_0}
-	\inv{\left[\PdresidualBYdfstate\bigg\rvert_{\fstate_0}\right]}
-	\left(
-	  \hle{neutral_1}{\PdresidualBYabsvarI\bigg\rvert_{\fstate_0} } +
-	  \begin{bmatrix}
-	    \alpha\pdfrac{\dresidual}{\dmms_\Omega}\bigg\rvert_{\dfstate_0}~
-	    \pdfrac{\dresidual}{\dmms_\Gamma}\bigg\rvert_{\dfstate_0}
-	  \end{bmatrix}
-	  \underbrace{\begin{bmatrix}
-	    \alpha \inv{\fic{\stiffmat}_{\Omega\Omega}} \fic{\stiffmat}_{\Omega\Gamma} \nonumber\\
-	    \eye
-	  \end{bmatrix}
-	  \underbrace{\tfrac{\dmms_\Gamma}{\absvar_i}}_{\text{SDESIGN}}   }_{\text{ALE mesh motion}}
-	\right)\\
-	\alpha&=
-	\begin{cases}
-	  1\text{  in ALE framework}\\
-	  0\text{  in Embedded framework}
-	\end{cases}
-	\end{align*}
-\end{frame}
+%\begin{frame}
+%	The interface component is determined by the structure. Having obtained this one, the interior component can be computed by solving an auxiliary, fictitious Dirichlet problem:
+%	\begin{align*}
+%	\tfrac{\mms_\Omega}{\absvar_i}=-\left[\inv{\fic{\stiffmat}_{\Omega\Omega}} \fic{\stiffmat}_{\Omega\Gamma}\right] \tfrac{\mpos_\Gamma}{\absvar_i}
+%	\end{align*}
+%	\begin{align*}
+%	\tfrac{\optcrit_j}{\absvar_i}\bigg\rvert_{\dfstate_0} &=
+%	-\tfrac{\optcrit_j}{\fstate}\bigg\rvert_{\dfstate_0}
+%	\inv{\left[\PdresidualBYdfstate\bigg\rvert_{\fstate_0}\right]}
+%	\left(
+%	  \hle{neutral_1}{\PdresidualBYabsvarI\bigg\rvert_{\fstate_0} } +
+%	  \begin{bmatrix}
+%	    \alpha\pdfrac{\dresidual}{\dmms_\Omega}\bigg\rvert_{\dfstate_0}~
+%	    \pdfrac{\dresidual}{\dmms_\Gamma}\bigg\rvert_{\dfstate_0}
+%	  \end{bmatrix}
+%	  \underbrace{\begin{bmatrix}
+%	    \alpha \inv{\fic{\stiffmat}_{\Omega\Omega}} \fic{\stiffmat}_{\Omega\Gamma} \nonumber\\
+%	    \eye
+%	  \end{bmatrix}
+%	  \underbrace{\tfrac{\dmms_\Gamma}{\absvar_i}}_{\text{SDESIGN}}   }_{\text{ALE mesh motion}}
+%	\right)\\
+%	\alpha&=
+%	\begin{cases}
+%	  1\text{  in ALE framework}\\
+%	  0\text{  in Embedded framework}
+%	\end{cases}
+%	\end{align*}
+%\end{frame}
 %\everymath{\displaystyle}
 %------------------------------------------------------------------------------
 
@@ -458,6 +500,10 @@
 \framesubtitle{$\pdfrac{\dresidual}{\absvar_i}$}
 
 \begin{itemize}
+\item{Remember}
+\begin{align*}
+\dresidual=\dresidual^i+\dresidual^v
+\end{align*}
 \item{Approach}
 	\begin{itemize}
 		\item Separate treatment of inviscid and viscous contribution
@@ -501,7 +547,8 @@ w_i \prim{\difftensor} \nabla \prim{\dfstate}(\dmpos_i) \nabla \phi_j(\dmpos_i) 
 
 
 \begin{frame}
-\frametitle{AAA}
+\frametitle{Sensitivity derivation - chain rule}
+\framesubtitle{$\tfrac{\dresidual}{\absvar}$}
 \centering
 \begin{tikzpicture}[node distance = 0.6cm, auto]
         \def\hdist{0.7cm}
@@ -598,7 +645,8 @@ w_i \prim{\difftensor} \nabla \prim{\dfstate}(\dmpos_i) \nabla \phi_j(\dmpos_i) 
 
 
 \begin{frame}
-\frametitle{AAA}
+\frametitle{Sensitivity derivation - chain rule}
+\framesubtitle{$\pdfrac{\dresidual}{\absvar}$}
 \centering
 \begin{tikzpicture}[node distance = 0.6cm, auto]
         \def\hdist{0.7cm}

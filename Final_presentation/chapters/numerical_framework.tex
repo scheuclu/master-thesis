@@ -40,11 +40,52 @@ Viscous fluxes
 
 \end{frame}
 
+%------------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Body-fitted vs. embedded framework}
+\begin{columns}
+\only<1->{\begin{column}{0.5\textwidth}
+    Mesh is structure specific
+    \begin{figure}
+     \includegraphics[width=1.0\textwidth]{/home/lukas/Desktop/project/independence/project/thesis/fig/pdf/mesh_bodyfitted.pdf}
+     \caption{Body-fitted}
+     \end{figure}
+\end{column}}
+\only<2->{\begin{column}{0.5\textwidth}  %%<--- here
+    Mesh independent of structure geometry
+    \begin{figure}
+     \includegraphics[width=1.0\textwidth]{/home/lukas/Desktop/project/independence/project/thesis/fig/pdf/mesh_embedded.pdf}
+     \caption{Embedded}
+     \end{figure}
+\end{column}}
+\end{columns}
+\end{frame}
+
+
+%------------------------------------------------------------------------------
+
+%\begin{frame}
+%\frametitle{Body-fitted vs. embedded framework}
+%\begin{figure*}[b!]
+%	\begin{subfigure}[t]{0.5\textwidth}
+%	  \includegraphics[width=4cm]{/home/lukas/Desktop/project/independence/project/thesis/fig/pdf/mesh_bodyfitted.pdf}
+%	  %\caption{aaa}
+%	\end{subfigure}
+%	\begin{subfigure}[t]{0.5\textwidth}
+%	  \includegraphics[width=4cm]{/home/lukas/Desktop/project/independence/project/thesis/fig/pdf/mesh_embedded.pdf}
+%	  %\caption{bbb}
+%	\end{subfigure}
+%  %\caption{ccc}
+%\end{figure*}
+%\end{frame}
+
 
 %------------------------------------------------------------------------------
 
 \begin{frame}
-\frametitle{Setup}
+\frametitle{Immersed Boundary Method}
+\framesubtitle{FIVER\footcite{Main2014}}
 \begin{figure}[h!]
 	\begin{center}
         \includegraphics[scale=0.75]{\thesispath/fig/tikz/build/fiver_surrogate_interface.pdf}
@@ -77,7 +118,6 @@ Viscous fluxes
 \underbrace{\sum_{j \in \vertexset(i)\setminus\vertexset(i)^a} \fluxesnum_{ij}(\fstate_{i},\fstate^{*},\wnormal_{ij})}_{\text{intersected elements treated with FIVER}}
 \end{align*}
 
-FIVER\footcite{Main2014}
 $\fluxesnum$ ... flux function of Roe\footcite{Roe1981}
 
 \end{frame}
