@@ -62,8 +62,8 @@
 %\sectlof
 %\sectlot
 
-The previous chapter dealt with the \ac{SA} of a pure fluid problem. Boundary, or respectively mesh-movement in general, was only introduces due to shape variation via design variables itself. However, one can easily decieve a system, where the fluid interacts with an elastic structure. This introduces an additional dependency of the structure shape, and thus fluid-structure interface, on the fluid solution. Also, a fully coupled system shows a direct connection between the stress resultants in the structure with the fluid solution.\
-This chapter therfore investigates the \ac{SA} of such a coupled system of equations. Considerations are build upon the derivations in chapter~\ref{sec:SA} and the coupled three-field \ac{FSI} formulation described in chapter~\ref{sec:3_field_formulation}.\\
+The previous chapter dealt with the \ac{SA} of a pure fluid problem. Boundary, or respectively mesh-movement in general, was only introduces due to shape variation via design variables itself. However, one can easily deceive a system, where the fluid interacts with an elastic structure. This introduces an additional dependency of the structure shape, and thus fluid-structure interface, on the fluid solution. Also, a fully coupled system shows a direct connection between the stress resultants in the structure with the fluid solution.\
+This chapter therefore investigates the \ac{SA} of such a coupled system of equations. Considerations are build upon the derivations in chapter~\ref{sec:SA} and the coupled three-field \ac{FSI} formulation described in chapter~\ref{sec:3_field_formulation}.\\
 The \ac{SA} approach applied in this thesis is based on the work of~\cite{Sobieszczanski1990}, for deriving the \ac{GSE} of coupled systems. As introduced by the authors of\cite{Maute2001}, we utilize the three-field formulation of \cite{Farhat1995}.
 
 
@@ -155,14 +155,14 @@ Combining the previous two equations, it follows that the total derivative of th
 \end{align}
 Where $n_{eq}$ is the total number of equations(e.g. five fluid state equations for the compressible \ac{NSE} in 3D, three equations of the mesh motions and another three equations for the structure motion), $n_{q}$ is the number of optimization criteria and $n_s$ is the number of abstract variables.
 
-\section{Direct vs. adjoint approach}
+\section{Direct and adjoint approach}
 Looking at the above equation ~\ref{eq:totderiv_optcritBYabsvar} one can identify a matrix-matrix-matrix product. Matrix-matrix products are not commutative, one can, however, perform the following transformation
 \begin{align}\label{eq:adjoint_concept}
 \dmat{A}\dmat{B}\dmat{C}                    &= \dmat{A}(\dmat{B}\dmat{C}) \nonumber\\
 \left[ \dmat{A}(\dmat{B}\dmat{C}) \right]^T &= (\dmat{B}\dmat{C})^T\dmat{A}^T=\dmat{C}^T\dmat{B}^T\dmat{A}^T=\dmat{C}^T(\dmat{A}\dmat{B})^T \nonumber\\
 \rightarrow \dmat{A}\dmat{B}\dmat{C}        &= \left[\dmat{C}^T(\dmat{A}\dmat{B})\right]^T
 \end{align}
-Depending on the sizes of the involved matrices one or the other form might be advantaagous. Specifically, the straight forward way of computing the triple product is known as the \textit{direct approach} and the transposed matrix way is called the \textit{adjoint approach}.
+Depending on the sizes of the involved matrices one or the other form might be advantageous. Specifically, the straight forward way of computing the triple product is known as the \textit{direct approach} and the transposed matrix way is called the \textit{adjoint approach}.
 
 \paragraph{Direct approach}
 In the direct approach, one first computes the derivatives of the aeroelastic response for each abstract variable and then performs the matrix product with $\tensor{A}$ in equation \eqref{eq:totderiv_optcritBYabsvar}:
@@ -198,7 +198,7 @@ By standard algebra theory, the total complexity of this computation can be appr
 
 
 \paragraph{Adjoint approach}
-In the adjoint approach on first computes the derivatives of the optimization criteria and then multiplies with the Jacobian before substituting this into Equation~\eqref{eq:totderiv_optcritBYabsvar}:
+In the adjoint approach one first computes the derivatives of the optimization criteria and then multiplies with the Jacobian before substituting this into Equation~\eqref{eq:totderiv_optcritBYabsvar}:
 \begin{align}\label{eq:firststep_adjoint}
 \begin{bmatrix}
 \adjoints_{\structdisp} \\
@@ -298,7 +298,7 @@ where $\fic{\structdisp}$ is obtained from:
 
 
 \paragraph{3) Compute derivative of the fluid mesh motion}
-The fluid mesh motion is computed by solving the pseudo Dirichlet problem as described in~\cite{Farhat1995}. By design, the fictions stiffness matrix $\fic{\stiffmat}$ does not depend on the abstract optimization variables $\absvars$
+The fluid mesh motion is computed by solving the pseudo Dirichlet problem as described in~\cite{Farhat1995}. By design, the fictitious stiffness matrix $\fic{\stiffmat}$ does not depend on the abstract optimization variables $\absvars$
 \begin{align}\label{eq:mms_domain}
 \fic{\stiffmat}_{\Omega \Omega}  \tfrac{\its{\mms}_{\Omega}}{\absvar_i} =
 -\fic{\stiffmat}_{\Omega \Gamma} \tfrac{\its{\mms}_{\Gamma}}{\absvar_i}
@@ -338,7 +338,7 @@ Finally, the convergence of the staggered algorithm can be monitored via
   \leq \\
   \tolsa \norm{ \stiffmat \tfrac{ \itn{\fic{\structdisp}}  }{\absvar_i}  -  \pdfrac{\sload}{\absvar_i} - \pdfrac{\itn{\sload}}{\absvar_i}  +  \pdfrac{\stiffmat}{\absvar_i}}_{2} &
 \end{split} &
-\\
+\nonumber\\
 \begin{split}
   \norm{\jactwo \tfrac{\itss{\fstate}}{\absvar_i} + \pdfrac{\tensor{F}_2}{\absvar_i} + \pdfrac{\tensor{F}_2}{\mms} \itss{\tfrac{\mms}{\absvar_i} }   }_{2} &
   \leq \\
@@ -388,12 +388,11 @@ Equation \eqref{eq:firststep_adjoint} can be written as:
     \PoptcritJBYfstate     \\
     \end{bmatrix}
 \end{align}
-\textbf{TODO check if the index j is really required here!}
 A stated earlier, the matrices $\pdfrac{\optcrits}{\mms}$ and $\pdfrac{\optcrits}{\fstate}$ can be computed analytically. As for $\AthreethreeALE$, we follow the methodology outlined in \cite{Lesoinne2001} for evaluating ans storing it efficiently as the product of flux operators. Again the staggered procedure for solving the adjoint state problem shares the same computational kernels with the partitioned aeroelastic scheme described in~\cite{Farhat1995}\\
 
 \paragraph{1) Update the adjoint structure displacement to the new time step}
 \begin{align}
-\itss{\structdispad}=(1-\theta)\its{\structdispad}+\theta \itss{\fic{\structdispad}} \\
+\itss{\structdispad}=(1-\theta)\its{\structdispad}+\theta \itss{\fic{\structdispad}}
 \end{align}
 where $\itss{\fic{\structdispad}}$ is obtained from
 \begin{align}

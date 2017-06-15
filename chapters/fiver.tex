@@ -14,7 +14,7 @@
 It was already outlined in Section \ref{sec:fluid_mechanics}, that using an Eulerian approach int the context of an aeroelastic simulation leads to a so-called embedded formulation, where the interface of the structure mesh no longer coincides with the fluid mesh. This was appealing, since it allowed for the usage of fixed meshes and an Eulerian formulation, on the other hand as  explained in Section \ref{sec:fiver_setup}, an error of the order $\order{\frac{h}{2}}$ is introduced. A possible solution to recover second order convergence rate is quickly described in chapter~\ref{sec:fiver-2}.\\
 For the solution of multi-material flows with immersed boundaries, the \acf{FIVER} has been developed in the \acf{FRG}. The basic concepts of \ac{FIVER} have first been described in~\cite{Farhat2008} in the context of two-phase compressible flows and underwater implosions. It has then be extended to fluid-structure interaction in \cite{Wang2011a}. Finally, an approach to restore a second order global rate of convergence has been presented in \cite{Main2014}.\\
 Unlike most other \ac{IBM}, \ac{FIVER} operates on arbitrary unstructured grids.\\
-\ac{FIVER} was also extended to implicit time discretizations in \cite{Main2014a} and to viscous, multi-material flows in \cite{Farhat2014}.\\
+\ac{FIVER} was also extended to implicit time discretization in \cite{Main2014a} and to viscous, multi-material flows in \cite{Farhat2014}.\\
 The \ac{FIVER} framework is characterized by two simple ideas:
 \begin{itemize}
 \item Keeping the underlying semi-discretization as close as possible to a Godunov-type scheme in order to facilitate its implementation in a large body of existing flow solvers.
@@ -35,7 +35,7 @@ Finally, in an \ac{FSI} simulation we are typically interested in integral quant
 \begin{figure}[h!]
 	\begin{center}
         \includegraphics[scale=0.75]{\mainpath/fig/tikz/build/fiver_surrogate_interface.pdf}
-        \caption[Immersed boundary method via \ac{FIVER}: setup]{Sketch of an embedded simulation setup. The primal grid is intersected by a material interface. In \ac{FIVER}, the material interface is replaced by a surrogate interface that is created by connecting the dual-grid interfaces closest to the embedded surface. By connecting the interchapter points of the embedded surface with the primal grid, we can also create a so-called, reconstructed surface that is particularly useful for the calculation of forces on the surface.}
+        \caption[Immersed boundary method via \ac{FIVER}: setup]{Sketch of an embedded simulation setup. The primal grid is intersected by a material interface. In \ac{FIVER}, the material interface is replaced by a surrogate interface that is created by connecting the dual-grid interfaces closest to the embedded surface. By connecting the intersection points of the embedded surface with the primal grid, we can also create a so-called, reconstructed surface that is particularly useful for the calculation of forces on the surface.}
 		\label{fig:FIVER_interchapter}
     \end{center}
 \end{figure}
@@ -60,7 +60,7 @@ First, we notice that we can split the summation as follows
 %\fluxesnum_{ij}
 %\end{align}
 
-where $\fstate_{*}$ is the fluid state at the auxiliary interchapter between edge $ij$ and the auxiliary interface.
+where $\fstate_{*}$ is the fluid state at the auxiliary intersection between edge $ij$ and the auxiliary interface.
 To obtain $\fstate_{8}$ a one-sided Riemann problem is defined
 \begin{align}\label{eq:half_riemann_problem}
 \pdfrac{\fstateprim}{t}=\pdfrac{\fluxesconv}{s}(\fstateprim) = \vec{0}
@@ -101,7 +101,7 @@ The original \ac{FIVER} method was developed in \cite{Farhat2008}. As depicted i
 \begin{figure}[h!]
 	\begin{center}
         \includegraphics[width=0.5\textwidth]{\mainpath/fig/png/riemann}
-        \caption[Riemann Sketch]{Solution of the 1D half Riemann problem around edge $i-j$ described in equation \eqref{eq:half_riemann_problem}. The obtained fluid state at the interface is then used to evaluate the flux function, see equations~[=\eqref{eq:half_riemann_problem_original} and \eqref{eq:flux_with_reconstructed_value_fiver1}}
+        \caption[Riemann problem setup]{Solution of the 1D half Riemann problem around edge $i-j$ described in equation \eqref{eq:half_riemann_problem}. The obtained fluid state at the interface is then used to evaluate the flux function, see equations~\eqref{eq:half_riemann_problem_original} and \eqref{eq:flux_with_reconstructed_value_fiver1}}
 		\label{fig:riemann_sketch}
     \end{center}
 \end{figure}
@@ -116,7 +116,7 @@ The original \ac{FIVER} method was developed in \cite{Farhat2008}. As depicted i
 The original version of \ac{FIVER} has been outlined in chapter~\ref{sec:fiver-1}. This algorithm has been successfully applied to the solution of multi-phase flows, underwater implosion problems and fluid structure interaction. However, like most \ac{IBM} it suffers one distinct disadvantage: global convergence drops to first order with an $\order{1}$ error at the interface. This observation motivated the generalization of FIVER to second order global accuracy performed in \cite{Main2014}.\\
 
 
-Here, we first extrapolate the fluid state at node $i$ to the real interchapter point with the interface (see Figure~\ref{fig:FIVER_interchapter}).
+Here, we first extrapolate the fluid state at node $i$ to the real intersection point with the interface (see Figure~\ref{fig:FIVER_interchapter}).
 \begin{align}
 \dfstate_{\Gamma} = \dfstate_i + \nabla \dfstate_i(\dmpos_{\Gamma}-\dmpos_i)
 \end{align}
@@ -132,7 +132,7 @@ The numerical flux can then be evaluated the usual way using the obtained fluid 
 \begin{align}
 \dresidual^c_{ij} = \dresidual^c_{ij}(\dfstate_{ij},\dfstate^{\star}_{ij}, \normal_{ij})
 \end{align}
-It has been proven in \cite{Main2014} that this approach recovers second order convergence int the vicinity of the interface and a second order global convergence can be achieved.
+It has been proven in \cite{Main2014} that this approach recovers second order convergence in the vicinity of the interface and thus a second order global convergence can be achieved.
 
 
 \section{Evaluation of the viscous terms at the interface}\label{sec:fiver_viscous_term}
@@ -154,7 +154,7 @@ We did not have that problem for the inviscid term of equation \eqref{eq:nse_fin
 For the viscous part, however, we want to keep the \ac{FE} like formulations described in \ref{sec:mixed_FV_FE_formulation} to avoid re-writing large portions of the code. If a triangle is cut by the interface, one or two nodes will therefore be labeled inactive, and be denoted as ghost-nodes.
 Clearly, the fluid state vector at this ghost nodes is not defined. The question thus becomes how to evaluate this terms (last part in equation~\eqref{eq:fiver_viscous_split} ).\\
 \\
-The approach we take, that is also outlined in \cite{Farhat2014} is to reconstruct a pseudo fluid-state at the ghost points, such that the boundary conditions at the wall are fullfilled.
+The approach we take, that is also outlined in \cite{Farhat2014} is to reconstruct a pseudo fluid-state at the ghost points, such that the boundary conditions at the wall are fulfilled.
 
 \subsection{Reconstruction of the fluid-state at ghost-nodes}\label{sec:ghost_node_reconstruction}
 
@@ -168,7 +168,7 @@ For an adiabatic wall, the temperature gradient at the wall is zero, which can b
 \begin{figure}[h!]
 	\begin{center}
         \includegraphics[width=0.8\textwidth]{\mainpath/fig/tikz/build/ghost_population}
-        \caption[Ghost Point population]{Illustration of the ghost point population process. States at nodes $i,j,k$ are known from computation. States at mid-edges $kg,ig,jg$ are the states we want to impose at the interface. The pressure and density are constantly extrapolated from the fluid states, whereas the velocity is set to the structure  velocity at the interface, A linear extrapolation is then performed form the active states over the stated at the interchapter points to obtain the interpolated ghost states. Since the interpolated ghost state values are typically ambiguous, due to multiple edges connecting to one ghost node, a least-square algorithm or a simple averaging can be performed to obtain a final value for the ghost state $\fstate_g$.}
+        \caption[Ghost Point population]{Illustration of the ghost point population process. States at nodes $i,j,k$ are known from computation. States at mid-edges $kg$, $ig$ and $jg$ are the states we want to impose at the interface. The pressure and density are constantly extrapolated from the fluid states, whereas the velocity is set to the structure  velocity at the interface, A linear extrapolation is then performed form the active states over the stated at the intersections points to obtain the interpolated ghost states. Since the interpolated ghost state values are typically ambiguous, due to multiple edges connecting to one ghost node, a least-square algorithm or a simple averaging can be performed to obtain a final value for the ghost state $\fstate_g$.}
 		\label{fig:ghost_population}
     \end{center}
 \end{figure}
@@ -182,8 +182,8 @@ The elegance of this approach is that once the ghost points states have been fou
 \section{Evaluation of forces}\label{sec:fiver_force_evaluation}
 Another issue that arises for embedded simulations is the appropriate evaluation of the forces on an embedded interface. This is especially important if the embedded framework is used in an \ac{FSI} setup to get an appropriate resultant on the structure.\\
 Sensitivity Analysis is another application, where appropriate evaluation of Lift and Drag integrals are crucial.\\
-This problem as been analyzed in \cite{Wang2011}\cite{Wang2012}.\\
-Most importantly, the question becomes whether to evaluate the pressure integral~\eqref{eq:lift_and_drag_integrals} over the auxiliary control volume interface (figure~\ref{fig:FIVER_interchapter}) or over the so called reconstructed interface, which can be obtained by creating auxiliary surfaces inside the intersected elements through the knowledge of interchapter points at the edges. Detailed information about the interchapter detection is provided in \cite{Wang2011a}
+This problem has been analyzed in \cite{Wang2011}\cite{Wang2012}.\\
+Most importantly, the question becomes whether to evaluate the pressure integral~\eqref{eq:lift_and_drag_integrals} over the auxiliary control volume interface (figure~\ref{fig:FIVER_interchapter}) or over the so called reconstructed interface, which can be obtained by creating auxiliary surfaces inside the intersected elements through the knowledge of intersection points at the edges. Detailed information about the intersection detection is provided in\cite{Wang2011a}
 
 
 

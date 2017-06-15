@@ -1,7 +1,7 @@
 \documentclass[../main.tex]{subfiles}
 %\usepackage{algorithm}
 %\usepackage{algorithmic}
-\everymath{\displaystyle}
+%\everymath{\displaystyle}
 \def\arraystretch{2.0}
 \begin{document}
 \setlength{\delimitershortfall}{0pt}
@@ -120,7 +120,7 @@ As mentioned in Section~\ref{sec:optimization}, we typically deal with an optimi
                                                         }
 \end{align}
 \subsection{Calculation of $\PoptcritJBYabsvarI\bigg\rvert_{\fstate_0}$}
-For the optimization criterion, we restrict ourselves to Lift($L$), Drag($D$) and combinations of  these quantities( e.g. Lift-Drag ration $\frac{L}{D}$ ). As abstract variables we only consider the free stream mach-number $\machnum_{\infty}$, the free-stream angle of attack $\aoa$ and an airfoil shape parameter as explained in chapter \ref{sec:design_model}.
+For the optimization criterion, we restrict ourselves to Lift($L$), Drag($D$) and combinations of  these quantities( e.g. Lift-Drag ration $\frac{L}{D}$ ). As abstract variables we only consider the free stream Mach-number $\machnum_{\infty}$, the free-stream angle of attack $\aoa$ and an airfoil shape parameter as explained in chapter \ref{sec:design_model}.
 The formula for the lift over an airfoil can be written as
 
 
@@ -142,7 +142,7 @@ Also, having determined the derivatives $\pdfrac{\lift}{\absvar_i}$ and $\pdfrac
 The derivative of the optimization criteria with respect to the fluid state vector can again be splitted into Lift and Drag part.
 For an aeroelastic simulation, the biggest difficulty here is the dependence of the fluid state by the fluid-structure interface itself.
 We are therefore faced with a derivative of an integral quantity, where the integration area itself is dependent on the quantity of interest.\\
-For this purpose, we recall the Leibnitz rule from calculus:
+For this purpose, we recall the Leibniz rule from calculus:
 \begin{align}\label{eq:leibnitz_rule}
 \frac{d}{dx}\Big(\int_{a(x)}^{b(x)} f(x,t) dt \Big) =
 f(x,b(x))\cdot \frac{d}{dx}b(x)-
@@ -160,7 +160,7 @@ where $\sum_{\Gamma_{FS}}$ is the set of surface elements on the fluid-structure
 Finally, the derivative of the lift-to-drag ratio can be obtained analogously to equation~\eqref{eq:lifttoddrag_by_absvar} as
 \begin{align}\label{eq:lifttodrag_by_dfstate}
 \mathunderline[neutral_1]{\pdfrac{(\frac{\mathsf{L}}{\mathsf{D}})}{\dfstate}\rvert_{\fstate_0}}=
-\frac{\mathsf{D}_0 \pdfrac{\mathsf{L}}{\dfstate}\rvert_{\fstate_0} - \mathsf{L}_0 \pdfrac{\drag}{\dfstate}\rvert_{\dfstate_0} }{{\mathsf{D}_0}^2}
+\frac{\mathsf{D}\rvert_{\fstate_0} \pdfrac{\mathsf{L}}{\dfstate}\rvert_{\fstate_0} - \mathsf{L}\rvert_{\fstate_0} \pdfrac{\drag}{\dfstate}\rvert_{\dfstate_0} }{{\mathsf{D}\rvert_{\fstate_0}}^2}
 \end{align}
 
 
@@ -180,7 +180,7 @@ After discretization, we have derived our discrete governing equation as
 \sum_{T_i \in \elementset(i)} \int_{T_j} \difftensor \nabla \dfstate \nabla \phi_j dx =
 \vec{0}
 \end{align}
-For the pupose of Sensitivity analysis around a given steady state, the fluid-state vector does not change in time, and can thus be ommitted, also we summaraize the convective and the diffusivee part as $\dresidual$ 
+For the purpose of Sensitivity analysis around a given steady state, the fluid-state vector does not change in time, and can thus be omitted, also we summarize the convective and the diffusive part as $\dresidual$ 
 \begin{align}\label{eq:nse_final_discretized_notationchange}
 \cancelto{0}{\pdfrac{\bar{\dfstate_i}}{t}} +
 \underbrace{
@@ -224,8 +224,9 @@ The total derivative of the residual with respect to the design variable can thu
 
 
 Therefore the total derivative of the fluid state with respect to the shape variable, needed in equation \eqref{eq:sensitivity_startingpoint}, can be obtained by solving
+
 \begin{align}\label{eq:dfstate_by_absvarI}
-\PdresidualBYdfstate    \mathunderline[neutral_2]{\DdfstateBYabsvarI}=
+\PdresidualBYdfstate    \mathunderline[neutral_2]{\displaystyle\DdfstateBYabsvarI}=
 -\DdresidualBYabsvarI 
 -\PdresidualBYdmms       \DdmmsBYabsvarI
 \end{align}
@@ -261,7 +262,7 @@ After inserting \eqref{eq:lifttoddrag_by_absvar}, \eqref{eq:lifttodrag_by_dfstat
     \pdfrac{\dresidual}{\dmms_\Gamma}\bigg\rvert_{\dfstate_0}
   \end{bmatrix}
   \begin{bmatrix}
-    \alpha \inv{\fic{\stiffmat}_{\Omega\Omega}} \fic{\stiffmat}_{\Omega\Gamma} \\
+    \alpha \inv{\fic{\stiffmat}_{\Omega\Omega}} \fic{\stiffmat}_{\Omega\Gamma} \nonumber\\
     \eye
   \end{bmatrix}
   \tfrac{\dmms_\Gamma}{\absvar_i}

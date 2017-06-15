@@ -6,12 +6,12 @@
 \setlength{\delimitershortfall}{0pt}
 
 
-\chapter{Numerical solution}\label{sec:finite_volume_method}
+\chapter{The \acl{FV} method}\label{sec:finite_volume_method}
 \minitoc
 %\sectlof
 %\sectlot
 
-\section{Basic \acf{FV} formulation}\label{sec:basic_fv}
+\section{Basic \acl{FV} formulation}\label{sec:basic_fv}
 Like \ac{FD} or \acf{FE}, the \acf{FV} method is a mean of solving a \ac{PDE} by transforming it into a discrete algebraic form. In the field of fluid mechanics, the finite volume method is the most popular approach. Other than \ac{FD} or \ac{FE}, the \ac{FV} is conservative by construction. In contrast to \ac{FD} it can easily be implemented for unstructured grids. Compared to the \ac{FE} method, where boundary conditions come naturally from the formulation, this causes some difficulties in \ac{FV}.\\
 It shall also be mentioned that the introduction of stabilization schemes(like streamline upwinding), is much easier in an \ac{FV} formulation.
 Overall, for \ac{CFD}, \ac{FV} has so far shown to be the best compromise between accuracy, stability and efficiency.
@@ -59,8 +59,8 @@ In equivalent manner as in equations \eqref{eq:general_conservative_form} to \eq
 \end{align}
 
 
-\section{Mixed \ac{FV}-\ac{FE} formulation}\label{sec:mixed_FV_FE_formulation}
-It would be totally feasible to now solve both terms with classical \ac{FV} methods. However, we note two things. First, there is no need for upwinding in the diffusive term due to its elliptic nature.
+\section{\ac{FE}-like treatment of the viscous term}\label{sec:mixed_FV_FE_formulation}
+It would be totally feasible to now solve both terms of equation~\ref{eq:NSE_full_FV formulation} with classical \ac{FV} methods. However, we note two things: First, there is no need for upwinding in the diffusive term due to its elliptic nature.
 Secondly, the integration of the second term also becomes much more cumbersome than the first one due to the gradient of the fluid state vector demanding at least a first order representation.\\
 For this reasons, we introduce the following, mixed \ac{FV}-\ac{FE} formulation
 
@@ -71,8 +71,8 @@ For this reasons, we introduce the following, mixed \ac{FV}-\ac{FE} formulation
 \vec{0}
 \end{align}
 
-where $\difftensor$ is the diffusive tensor introduced in \textbf{TODO} and $\phi_i$ is a linear P1 shape-function over the triangle.
-Please also note that the convective term is now integrated over the dual cell related to vertex $i$, whereas the diffusive term integrated over all primal triangles connected to vertex $i$.\\
+where $\difftensor$ is the diffusive tensor introduced in \cite{Larat2012} and $\phi_i$ is a linear P1 shape-function over the triangle.
+Please also note that the convective term is now integrated over the dual cell related to vertex $i$, whereas the diffusive term is integrated over all primal triangles connected to vertex $i$.\\
 We will justify this re-formulation in chapter~\ref{sec:viscous_term_treatment}. See also figure~\ref{fig:dualcell_unstructured}.
 
 
@@ -144,7 +144,7 @@ In this thesis, the surface integral in equation \eqref{eq_mixed_FV_FE} is then 
 \int_{\partial\Omega_i} \fluxesconv(\fstate)\cdot dS \approx
 \sum_{j \in \vertexset(i)} \fluxesnum_{ij}(\fstate_{ij},\fstate_{ji},\normal_{ij})
 \end{align}
-where $\fluxesnum_{ij}$ denotes the chosen numerical flux function along the edge $i-j$ and the two extrapolated fluid states at the $i$ and the $j$-side of the the interchapter of the cell boundary $\partial \Omega_{ij}$ and edge $i-j$ are denoted by $\fstate_{ij}$ and $\fstate_{ji}$ respectively. The area-weighted normal of edge $i-j$ is denoted as $\normal_{ij}$.
+where $\fluxesnum_{ij}$ denotes the chosen numerical flux function along the edge $i-j$ and the two extrapolated fluid states at the $i$ and the $j$-side of the the intersection of the cell boundary $\partial \Omega_{ij}$ and edge $i-j$ are denoted by $\fstate_{ij}$ and $\fstate_{ji}$ respectively. The area-weighted normal of edge $i-j$ is denoted as $\normal_{ij}$.
  \\
  A popular choice for the numerical approximation of the convective fluxes is the so-called Roe flux. Appropriate upwinding is directly built into the definition of the Roe flux ~\cite{Roe1981}. In 1D it is defined as:
  \begin{align}
@@ -197,7 +197,7 @@ Now, we use a particular geometric relation, that holds for primitive elements l
   \int_{C_i\cap T} \normal ds = \frac{\normal_i^T}{2}
 \end{align}
 where $\normal_i^T$ is the normal to the primal mesh triangle $T$ on the edge opposite of node $i$.
-This is where the geometric considerations of chapter \ref{sec:geometric_considerations} come into place. As shown in equation \eqref{eq:final_relation}, the integral over the dual face edge can be written via the normal of the primal mesh triangle as
+This is where the geometric considerations of chapter \ref{sec:geometric_considerations} comes into place. As shown in equation \eqref{eq:final_relation}, the integral over the dual face edge can be written via the normal of the primal mesh triangle as
 \begin{align}
   -\sum_{T\in\mathcal{D}_i} \difftensor \nabla\fstate \frac{\normal_i^T}{2}
 \end{align}
@@ -211,7 +211,7 @@ Finally we can go the opposite way, and join the summations over integrals over 
   II = -\int_{\mathcal{D}_i} \difftensor \nabla\fstate\cdot\nabla \phi_i dx
 \end{align}
 which is exactly the term provided in equation \eqref{eq:nse_final_discretized}.
-Since we used the same step-function based test-functions for all terms in equation \eqref{fv_weak_form_felike}, this approach is not only consistent, for the special case, of linear triangles we have shown that our finite element term is equivalent to a FV approximation.
+Since we used the same step-function based test-functions for all terms in equation \eqref{fv_weak_form_felike}, this approach is not only consistent, for the special case of linear triangles we have shown that our finite element term is equivalent to a FV approximation.
 
 
 
@@ -255,7 +255,6 @@ where $\vec{\nu}$ is the weighted outward facing normal to edge $jk$.
 \end{align}
 
 Referring to previous chapter we remind the reader that in the vertex based \ac{FV} approach, an integration over the dual face interface (dashed line in Figure~\ref{fig:p1_linear_shape_function}) via the weighted interface normal is typically performed.
-
 By simple geometrical considerations we can now determine, that the following relation holds
 \begin{align}\label{eq:final_relation}
 \int_{\Gamma_C \cap T} const.~\vec{n}_c &= \frac{1}{2}\int_{\Gamma_T} const.~\vec{n}_T \\
@@ -266,13 +265,13 @@ By simple geometrical considerations we can now determine, that the following re
 
 \section{Second Order \ac{FV} methods}\label{sec:fv_ordertwo}
 
-The \ac{FV} scheme, we have so far introduced in chapters~\ref{sec:basic_fv},\ref{sec:fv_fluid_mechanics} and \ref{sec:mixed_FV_FE_formulation} is first order accurate. This chapter is dedicated to introducing the second order scheme, used in AEROF.\\
+The \ac{FV} scheme, we have so far introduced in chapters~\ref{sec:basic_fv},~\ref{sec:fv_fluid_mechanics} and \ref{sec:mixed_FV_FE_formulation} is first order accurate. This chapter is dedicated to introducing the second order scheme, used in AEROF.\\
 However, Godunov's theorem \cite{Godunov1959} states that only first-order accurate schemes can have the property of not generating new extrema(spurious oscillations)\cite{Godunov1959}. To address this problem, the concept of a flux limiter will be quickly introduced.
 
 
 
 \subsection{Linear reconstruction}\label{sec:linear_reconstruction}
-In a classic FV scheme, a constant approximation, that represents the temporal average(see equation \eqref{eq:final_fv_general}) is used in each cell. The constant approximations inside the cell makes the scheme first order. What is more, it is not able to handle schocks or discontinuities; they tend to become smeared when evolved in time.\\
+In a classic FV scheme, a constant approximation, that represents the temporal average(see equation \eqref{eq:final_fv_general}) is used in each cell. The constant approximations inside the cell makes the scheme first order. What is more, it is not able to handle shocks or discontinuities; they tend to become smeared when evolved in time.\\
 To address this issue, a linear reconstruction is being introduced:
 
 \begin{align}\label{eq:linear_reconstruction}
@@ -282,11 +281,11 @@ where $\nabla\fstate_i$ is being reconstructed from the neighboring fluid state 
 \begin{align}\label{eq:gradient_average}
 \nabla\fstate_i=\frac{1}{N} \sum_{j\in\kappa(i)} \frac{\fstate_j-\fstate_i}{\mpos_j-\mpos_i}
 \end{align}
-where $\kappa(i)$ is the set of all vertices connected to vertice $i$ by an edge. Alternative methods like a least-square solver are also being used.\\
+where $\kappa(i)$ is the set of all vertices connected to vertex $i$ by an edge. Alternative methods like a least-square solver are also being used.\\
 
 
 
-\subsection{The concept of \acf{TVD}}\label{sec:TVD}
+\subsection{The \acf{TVD} property}\label{sec:TVD}
 For further considerations the property of \acf{TVD} shall be introduced here. In numerical methods, this is a property of a discretization used to solve hyperbolic \ac{PDE}. The concept of \ac{TVD} was introduced by Harten\cite{Harten1983}.
 For a simple 1D case, the total variation of a solution is given as
 \begin{align}
@@ -296,19 +295,19 @@ or in the discrete case
 \begin{align}
 TV=\sum_i \abs{u_{i+1}-u_i}
 \end{align}
-We call a numerical method to be \ac{TVD} if
+A numerical method is saif to be \ac{TVD}, if
 \begin{align}
-TC(u^{n+1})\leq TV(u^n)
+TV(u^{n+1})\leq TV(u^n)
 \end{align}
-Harten proved the that a monotone scheme is \ac{TVD} and that a \ac{TVD} scheme is monotonicity preserving. In \ac{CFD} \ac{TVD} schemes enable stable predictions of schocks on relatively coarse grids without spurious oscillations. Due to Godunov's theorem, this is crucial for second-order schemes.\\
+Harten proved the that a monotone scheme is \ac{TVD} and that a \ac{TVD} scheme is monotonicity preserving. In \ac{CFD} \ac{TVD} schemes enable stable predictions of shocks on relatively coarse grids without spurious oscillations. Due to Godunov's theorem, this is crucial for second-order schemes.\\
 
 
-Linear reconstruction,as introduced in equation \eqref{eq:linear_reconstruction},leads to schemes that are not \ac{TVD}. Particularly, it has been shown that they tend to introduce spurious oscillations where shocks or discontinuities are present. This issue is being addressed in the following subsection.
+Linear reconstruction, as introduced in equation \eqref{eq:linear_reconstruction}, leads to schemes that are not \ac{TVD}. Particularly, it has been shown that they tend to introduce spurious oscillations where shocks or discontinuities are present. This issue is being addressed in the following subsection.
 
 
 
 \subsection{\acf{MUSCL}}\label{sec:muscl}
-\acf{MUSCL} schemes are based on the idea of using piecewise linear approximations on each cell. To counter the stability issues associated with this approach, the introduce so-called slope-limited left and right fluid states.\\
+\acf{MUSCL} schemes are based on the idea of using piecewise linear approximations on each cell. To counter the stability issues associated with this approach, they introduce so-called slope-limited left and right fluid states.\\
 Instead of a pure constant or pure linear reconstruction, the following convex linear combination is considered:
 \begin{align}
 \fstate_{i+\frac{1}{2}}^{n+} = \bar{\fstate}_i^n +\frac{1}{2}\phi_i^{n+}(\bar{\fstate}_i^n-\bar{\fstate}_{i-1}^n)
@@ -339,14 +338,14 @@ It has been shown that this limiter makes a second-order, linear reconstruction 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%TODO put this into a new file
 
-\subsection{The immersed boundary method}\label{sec:immersed_boundaries}
+\subsection{The \acf{IBM}}\label{sec:immersed_boundaries}
 Traditionally internal fluid boundaries, like physical walls imposed by a structure, are represented by meshing the fluid such that it coincides with the structure surface. This approach, that shall be denoted by "explicit boundary method" here, is intuitive and the imposition of boundary conditions comes naturally.
 However, in the case of fluid structure interaction, where we expect the structure to move and deform, an explicit boundary treatment, as described above, prohibits the use of an Eulerian formulation, as described in chapter~\ref{sec:eulerian_lagrangian}. Instead every move or shape-change of the structure requires an appropriate update of the fluid mesh. Therefore, \ac{FSI} problems with explicit boundaries are typically solved via an \
 \ac{ALE} formulation. Details can be found in chapter~\ref{sec:eulerian_lagrangian}.\\
   \\
-However, using an \ac{ALE}-formulation has some severe disadvantages. First and most importantly for the context of shape-optimization, only minor changes to the topology are admissible. The mesh-motion or mesh-update algorithm is only capable of moving the fluid nodes in a spatial manner, the main connectivity of the mesh does not change, however. Therefor, the method can neither cover large distortions, nor is it possible to fundamentally change the structure shape, e.g. removing material in a non-critical region of the structure.\\
-Additionally, creating body-fitted meshed can be cumbersome and time consuming, especially for complex structure geometries.\\
-An elegant solution to this problem is the so-called "immersed boundary method", first described in the context of flow-computations in the human heart in~\cite{Peskin1972}. In an immersed boundary method, the structure surface does not coincide with fluid faces. Therefore, no mesh-movement algorithm is required, and the fluid mesh no longer needs to be specifically designed with a certain structure in mind. In fact, combing this approach with an adaptive mesh refinement completely eliminates the cost in fluid mesh generation.\\
+However, using an \ac{ALE}-formulation has some severe disadvantages. First and most importantly for the context of shape-optimization, only minor changes to the topology are admissible. The mesh-motion or mesh-update algorithm is only capable of moving the fluid nodes in a spatial manner, the main connectivity of the mesh does not change, however. Therefor, the method can neither cover large distortions, nor is it capable of large structure motions, e.g. removing material in a non-critical region of the structure.\\
+Additionally, creating body-fitted meshes can be cumbersome and time consuming, especially for complex structure geometries.\\
+An elegant solution to this problem is the so-called \acf{IBM}, first described in the context of flow-computations in the human heart in~\cite{Peskin1972}. In an immersed boundary method, the structure surface does not coincide with fluid faces. Therefore, no mesh-movement algorithm is required, and the fluid mesh no longer needs to be specifically designed with a certain structure in mind. In fact, combing this approach with an adaptive mesh refinement completely eliminates the cost in fluid mesh generation.\\
 The two different approaches are visualized in Figure~\ref{fig:ale_vs_embedded}.
 Due to the attractiveness of the immersed boundary method in the context of shape optimization, special emphasis has been put on the immersed boundary method in this thesis.
 
@@ -363,7 +362,7 @@ Due to the attractiveness of the immersed boundary method in the context of shap
 			        \includegraphics[width=\linewidth]{\mainpath/fig/geo/embedded.png}
 			        \caption{immersed wall boundary}
 			    \end{subfigure}%
-\caption[Body-fitted vs. immersed wall boundary]{NACA 0012 profile meshed with a classical wall boundary on the left versus an immersed boundary on the right. This geometry is relatively simple, for more complex examples, however, not requiring a conforming fluid grid on the interface can be a huge advantage.}
+\caption[Body-fitted vs. immersed wall boundary]{NACA0012 profile meshed with a classical wall boundary on the left versus an immersed boundary on the right. This geometry is relatively simple, for more complex examples, however, not requiring a conforming fluid grid on the interface can be a huge advantage.}
 \label{fig:ale_vs_embedded}
 \end{figure}
 

@@ -1,0 +1,35 @@
+\documentclass[../main.tex]{subfiles}
+%\usepackage{algorithm}
+%\usepackage{algorithmic}
+
+
+\everymath{\displaystyle}
+\def\arraystretch{2.0}
+\def\naca0012path{/home/lukas/Desktop/project/independence/project/simulations/naca0012}
+\begin{document}
+\setlength{\delimitershortfall}{0pt}
+
+\FloatBarrier 
+\chapter{Conclusions}\label{sec:conclusions}
+\minitoc
+%\sectlof
+%\sectlot
+
+\section{Summary}\label{sec:summary}
+This thesis began with a short motivation on why analytic sensitivity analysis is desirable and what applications in the context of optimization look like. We then provided a quick overview on the basic equations of fluid mechanics in section~\ref{sec:fluid_mechanics}. Particularly, we put emphasis on important issues for the subsequent chapters, like Eulerian and Lagrangian view or turbulence models.
+The \acf{FV} method has then been introduced in section~\ref{sec:finite_volume_method} as a mean of solving those equations numerically.This chapter followed closely the \av{FV} approach used in AERO-F\cite{Aerof}, the flow solver at the \acf{FRG} at Stanford University. This code has a comprehensive \acf{IBM} framework: \acf{FIVER}\cite{Main2014}. While not restricted to it, this thesis largely dealt with this framework, the body-fitted case being regarded as a subset.\\
+The thesis than shifted towards motivating \acf{SA} by introducing the basics of aerodynamic shape optimizations in section~\ref{sec:optimization} more precisely, gradient-based optimization.
+The derivation of these gradients in an analytic manner has been the main focus of this thesis and was introduced in section~\ref{sec:SA} for fluid equations, and section~\ref{sec:aeroelastic_sa} for coupled fluid-structure interaction problems.\\
+The theory covered both, the direct and the adjoint method, the implementation was focused on implementing the direct method first.\\
+Details on how to evaluate a number of particularly interesting derivatives have been provided in section~\ref{sec:dresidual_derivative}.\\
+The implemented analytic derivatives have undergone thorough verification in section~\ref{sec:verification} before they have been applied to simple demonstrative examples in section~ref{sec:examples}.
+
+\section{Outlook}\label{sec:outlook}
+We have successfullu demonstrated the feasibility of  analytic sensitivity analysis with an \acf{IBM} and fully viscous and turbulent flows.\\
+In combination with the \acf{FIVER}, this offers a very promising framework for aerodynamic and aeroelastic shape optimization. By utilizing the \ac{IBM} we have been able to optimize complex and greatly changing geometries, that would not have been possible in a body-fitted framework, or would at least have required some sort of re-meshing algorithm. The examples delivered promising results for both inviscid and viscous flows.\\
+So far, all examples and verification have been run on first-order simulations. Future effort should therefore focus on the validation of the implemented framework on higher order schemes.\\
+Overall, the developed framework represents a powerful and comprehensive tool for gradient-based aerodynamic shape optimization. The \ac{IBM} framework provides unprecedented flexibility with regards to the geometry while greatly improving both the computational efficiency as well as stability compared to \ac{FD} gradients.
+
+
+
+\end{document}

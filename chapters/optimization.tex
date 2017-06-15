@@ -11,12 +11,12 @@
 %\sectlot
 
 
-As mentioned in the introduction, the overall motivation for this thesis is optimization. A typicall optimization process, not restricted to fluid problems, is depicted in Figure~\ref{fig:optimization_blockdiagram}.
+As mentioned in the introduction, the overall motivation for this thesis is optimization. A typical optimization process, not restricted to fluid problems, is depicted in Figure~\ref{fig:optimization_blockdiagram}.
 \begin{figure}[h!]
 	\begin{center}
 	%/home/lukas/Desktop/project/independence/project/thesis/fig/tikz/build/optimization_blockdiagram.pdf
         \includegraphics{\mainpath/fig/tikz/build/optimization_blockdiagram.pdf}
-        \caption[Optimization scheme: block-diagram]{Flow chart of an optimization process in the context of flow simulations. If one regards the flow-computation block as a black-box to compute gradients of an objective function and the shape-modification block more general as parameter modification, this optimization routine is applicable to all kinds of problems. In our case, we begin with an initial geometry created by a standard mesh-generation software. We also parametrize the initial mesh in terms of design elements in this first step. This is done via SDesign\cite{SDesign} in this thesis. All further modifications to the geometry are obtained via the design element concept. The mesh-movement, steady-state siumulations and \acf{SA} are then performed in AERO-F\cite{Aerof}. For the optimizer itself, python has been chosen in this thesis, more specifically the \texttt{pyOpts} module. The codes communicate via result-files. These files are used to monitor and investigate the optimization process.}
+        \caption[Optimization scheme: block-diagram]{Flow chart of an optimization process in the context of flow simulations. If one regards the flow-computation as a black-box to compute gradients of an objective function and the shape-modification block more general as parameter modification, this optimization routine is applicable to all kinds of problems. In our case, we begin with an initial geometry created by a standard mesh-generation software. We also parametrize the initial mesh in terms of design elements in this first step. This is done via SDesign\cite{SDesign} in this thesis. All further modifications to the geometry are obtained via the design element concept. The mesh-movement, steady-state simulations and \acf{SA} are then performed in AERO-F\cite{Aerof}. For the optimizer itself, python has been chosen in this thesis, more specifically the \texttt{pyOpt} module. The codes communicate via result-files. These files are used to monitor and investigate the optimization process.}
 		\label{fig:optimization_blockdiagram}
     \end{center}
 \end{figure}
@@ -33,7 +33,7 @@ A generic, aeroelastic optimization problem can be written as
 \end{cases} \label{eq:generic_optimization_problem_1}\\
 &\absvars = \{ \absvars \in \mathbb{R}^{n_{\absvars}} | \absvars_L \leq \absvars \leq \absvars_U \}\label{eq:generic_optimization_problem_2}
 \end{align}
-Here,  $\costfunc$ is an arbitrary cost function that should be minimized. Note that a maximization problem can easily be obtained by multiplying the cost function by a factor of $-1$. In aerodynamics, a typical example for a cost function would be the \ac{LDR} of an airfoil. The cost-function is described in terms of so-called \textit{abstract variables}. These can have some physical interpretation, but don't necessarily have to(see Section~\ref{sec:design_model}). Since typically, these optimization problems have no finite solution on an unbounded domain, some restrictions/conditions are introduced. In the airfoil example, we would probably specify a minimum lift that is required to support the configuration. Also a maximum stress for the structure will likely have to be specified. These are classical examples of non-equality constraints, denoted by $\neqctr(\absvars)$ in the above formulation. Constraints can also be formulated in an equality sense, for instance geometrical restrictions due to the turbine suspensions.\\
+Here,  $\costfunc$ is an arbitrary cost function that should be minimized. Note that a maximization problem can easily be obtained by multiplying the cost function by a factor of $-1$. In aerodynamics, a typical example for a cost function would be the \ac{LDR} of an airfoil. The cost-function is described in terms of so-called \textit{abstract variables}. These can have some physical interpretation, but don't necessarily have to(see section~\ref{sec:design_model}). Since typically, these optimization problems have no finite solution on an unbounded domain, some restrictions/conditions are introduced. In the airfoil example, we would probably specify a minimum lift that is required to support the configuration. Also a maximum stress for the structure will likely have to be specified. These are classical examples of non-equality constraints, denoted by $\neqctr(\absvars)$ in the above formulation. Constraints can also be formulated in an equality sense, for instance geometrical restrictions due to the turbine suspensions.\\
 Furthermore, the abstract optimization variables $\absvars$ themselves are typically restricted by lower($\absvars_L$) and upper($\absvars_U$) bounds.\\
 The combinations of objective function~$\costfunc$ and constraints $\eqctr$ and $\neqctr$ is typically denoted as optimization criteria $\optcrit$.
 \begin{align}\label{eq:optimization_criteria}
@@ -50,8 +50,8 @@ As \cite{Maute2001} write, the aeroelastic optimization problem can typically be
 \end{itemize}
 
 The optimization model describes the solution of the generic optimization problem\eqref{eq:generic_optimization_problem_1}-\eqref{eq:generic_optimization_problem_2}. For this thesis, a \ac{SQP} has been chosen~\cite{Bonnans2006}.\\
-The design model links abstract optimization variables~$\absvars$ to actual shapes, structures, geometries or aerodynamics design parameters. For this purpose SDESIGN, a programm specifically written for \ac{SA} purpose in the \ac{FRG}, has been used during this thesis. Its basic concepts an ideas are described in \cite{Maute2003}.\\
-Finally, the analysis model provides concepts of evaluation the optimization criteria. Typically, the optimization criteria depend on $\structdisp$ and $\fstate$ which is why a coupled system of equations has to be solved in every design optimization process. The Sensitivity Analysis (SA) is also part of this model. Aeroelastic analysis and Sensitivity analysis are discussed in Section~\ref{sec:aeroelastic_sa}.
+The design model links abstract optimization variables~$\absvars$ to actual shapes, structures, geometries or aerodynamics design parameters. For this purpose SDESIGN, a program specifically written for \ac{SA} purpose in the \ac{FRG}, has been used during this thesis. Its basic concepts and ideas are described in \cite{Maute2003}.\\
+Finally, the analysis model provides concepts of evaluation the optimization criteria. Typically, the optimization criteria depend on $\structdisp$ and $\fstate$ which is why a coupled system of equations has to be solved in every design optimization step. The Sensitivity Analysis (SA) is also part of this model. Aeroelastic analysis and Sensitivity analysis are discussed in Section~\ref{sec:aeroelastic_sa}.
 
 \section{Optimization Model}\label{sec:optimization_model}
 Optimization problems are typically solved by gradient-based methods. The methods are divided into
@@ -64,13 +64,13 @@ Optimization problems are typically solved by gradient-based methods. The method
 This thesis focuses on Lagrange approaches. For a thorough analysis and comparison of the different approaches, the interested reader is referred to~\cite{Schittkowski1994}.\\
 The Lagrangian approach formulates the optimization problem\eqref{eq:generic_optimization_problem_1}\eqref{eq:generic_optimization_problem_2} as an extreme value problem of the Lagrangian:
 \begin{align}\label{eq:lagrangian_of_optimization}
-\Lagfunc(\absvars,\lagmultseq,\lagmultsneq)=\costfunc(\absvars))=\T{\lagmultseq} \eqctr(\absvars) + \T{\lagmultsneq}\neqctr(\absvars) \\
+\Lagfunc(\absvars,\lagmultseq,\lagmultsneq)=\costfunc(\absvars))=\T{\lagmultseq} \eqctr(\absvars) + \T{\lagmultsneq}\neqctr(\absvars)
 \end{align}
 Here, $\lagmultseq$ denote the Lagrange multipliers for the equality constraints and $\lagmultsneq$ the Lagrange multipliers for the non-equality constraints.
 In fact, one can easily see that the original optimization problem can be obtained as saddle point of the Lagrangian:
 \begin{align}\label{eq:saddlepoint_optimization}
-\pdfrac{\Lagfunc}{\absvars}&=\pdfrac{\costfunc}{\absvars}=\T{\lagmultseq}\pdfrac{\eqctr}{\absvars}+\T{\lagmultsneq}\pdfrac{\neqctr}{\absvars} \\
-\pdfrac{\Lagfunc}{\lagmultseq}&=\eqctr=\vec{0} \\
+\pdfrac{\Lagfunc}{\absvars}&=\pdfrac{\costfunc}{\absvars}=\T{\lagmultseq}\pdfrac{\eqctr}{\absvars}+\T{\lagmultsneq}\pdfrac{\neqctr}{\absvars} \nonumber\\
+\pdfrac{\Lagfunc}{\lagmultseq}&=\eqctr=\vec{0} \nonumber\\
 \pdfrac{\Lagfunc}{\lagmultsneq}&=\T{\lagmultsneq}\neqctr=\vec{0}
 \end{align}
 The \ac{SQP} method, mention before uses a Newton-Rhapsodon algorithm to solve the above system.
@@ -135,7 +135,7 @@ In the above formulation, the evaluation of the second derivative of the Lagrang
     \it{\incrlagmultsneq} \\
     \end{bmatrix}
 \end{align}
-The appropriate step size $\it{\alpha}$ is determined by a line search. AS~\cite{Maute2001} write, due to this insufficiencies, the Lagrangian can not be used to measure an improvement. Instead, a merit function is introduced that is minimized by the line-search. A local minimum is reached by following a sequence of decreasing merit function values. Convergence of the process can be measured via the $\mathcal{L}_2$-norm of the residual of the Kuhn-Tucker conditions\eqref{eq:saddlepoint_optimization}.\\
+The appropriate step size $\it{\alpha}$ is determined by a line search. As~\cite{Maute2001} write, due to this insufficiencies, the Lagrangian can not be used to measure an improvement. Instead, a merit function is introduced that is minimized by the line-search. A local minimum is reached by following a sequence of decreasing merit function values. Convergence of the process can be measured via the $\mathcal{L}_2$-norm of the residual of the Kuhn-Tucker conditions\eqref{eq:saddlepoint_optimization}.\\
 By construction, the constraints are satisfied only when the optimum point is reached.
 
 

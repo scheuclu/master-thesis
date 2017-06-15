@@ -23,7 +23,7 @@ We need this derivative in order to solve for $\tfrac{\optcrit_{j}}{\absvar_{i}}
 
 
 
-As described in~equation \eqref{eq:nse_final_discretized_notationchange}, the total residual is comprised of a convective(inviscid) part and a diffusive(viscous) contribution. Thanks to the distributive property of the derivative operator, we can thus compute the derivative of the total residual as the sum of the derivatives of the components. This is particulary important for us, since we used two different discretization routines for the viscous and the inviscid part(see chapter \ref{sec:mixed_FV_FE_formulation}).\\
+As described in~equation \eqref{eq:nse_final_discretized_notationchange}, the total residual is comprised of a convective(inviscid) part and a diffusive(viscous) contribution. Thanks to the distributive property of the derivative operator, we can thus compute the derivative of the total residual as the sum of the derivatives of the components. This is particularly important for us, since we used two different discretization routines for the viscous and the inviscid part(see chapter \ref{sec:mixed_FV_FE_formulation}).\\
 
 
 
@@ -67,8 +67,8 @@ Putting all this together, one can write
 	\end{itemize}
 \end{center}
 
-where, $\prim{(\sim)}$ denotes primitive quantitives, $\frac{\partial \dfstateprim_k}{\partial \dfstate_k}$ accounts for the conversion between primitive and conservative state vector, $\pdfrac{\dresidual^{c,i}_{ij}}{\fstateprim^{\star}_{ij}}$ is the analytical derivative of the \ac{MUSCL} reconstruction and limitation and $a$ is the analytical Jacobian of the Roe flux. Finally, $\frac{\partial \dfstateprim_{ij}^\star}{\partial \dfstateprim_k}$ accounts for the analytical derivative of the solution of the 1D half-Riemann problem. This also accounts for the only really new derivative to be considered in comparison to the cells far from the immersed boundaries.\\
-The analytic Jacobian of the Roe flux is provided in chapter~\ref{sec:jacobian_roeflux}, the derivative of the solution of the 1D half-Riemann problem is discussed in chapter~\ref{sec:fiver-1}, the derivative of the MUSCL reconstruction in chapter~\textbf{TODO} and finally, the derivative of the conversion to primitive variables is discussed in chapter~\textbf{TODO}.
+where, $\prim{(\sim)}$ denotes primitive quantitative, $\frac{\partial \dfstateprim_k}{\partial \dfstate_k}$ accounts for the conversion between primitive and conservative state vector, $\pdfrac{\dresidual^{c,i}_{ij}}{\fstateprim^{\star}_{ij}}$ is the analytical derivative of the \ac{MUSCL} reconstruction and limitation and $a$ is the analytical Jacobian of the Roe flux. Finally, $\frac{\partial \dfstateprim_{ij}^\star}{\partial \dfstateprim_k}$ accounts for the analytical derivative of the solution of the 1D half-Riemann problem. This also accounts for the only really new derivative to be considered in comparison to the cells far from the immersed boundaries.\\
+The analytic Jacobian of the Roe flux is provided in chapter~\ref{sec:jacobian_roeflux}, the derivative of the solution of the 1D half-Riemann problem is discussed in chapter~\ref{sec:fiver-1}, the derivative of the MUSCL reconstruction in section~\ref{sec:linear_reconstruction} and finally, the derivative of the conversion to primitive variables is discussed in section~\ref{sec:conservative_form_nsg}.
 
 
 
@@ -137,7 +137,7 @@ w_i \prim{\difftensor} \nabla \prim{\dfstate}(\dmpos_i) \nabla \phi_j(\dmpos_i) 
 
 
 
-\section{Analytic Jacobian of the Roe flux}\label{sec:jacobian_roeflux}
+\section{Analytic Jacobian of the Roe flux $\pdfrac{\dmat{\phi}}{\dfstate}$}\label{sec:jacobian_roeflux}
 
 This chapter provides a detailed step by step derivation of the analytic convective Jacobian. This chapter is lengthy and not necessarily required for understanding the rest of the thesis. For this reason it has been moved at the end of this chapter. Nonetheless, in the authors opinion, it provides some crucial insight into the basics of \ac{SA}, and it is certainly of great help and serves as a reference for anyone who wants to implement those derivatives himself.\\
 
@@ -145,11 +145,10 @@ We start by expanding the derivative to
 \begin{align}
 \pdfrac{\dresidual_i^c}{\dfstate}=
 \sum_{j \in \vertexset(i)}
-\underbrace{\pdfrac{meas(C_{ij})}{\dfstate} \fluxesnum_{ij}(\dfstate_{ij},\dfstate_{ji},\wnormal_{ij})}_{=\vec{0}\text{ for embedded}} +
-meas(C_{ij}) \pdfrac{\fluxesnum_{ij}(\dfstate_{ij},\dfstate_{ji},\wnormal_{ij})}{\dfstate}
+\underbrace{\pdfrac{\cellsize{(C_{ij}}}{\dfstate} \fluxesnum_{ij}(\dfstate_{ij},\dfstate_{ji},\wnormal_{ij})}_{=\vec{0}\text{ for embedded}} +
+\cellsize{C_{ij}} \pdfrac{\fluxesnum_{ij}(\dfstate_{ij},\dfstate_{ji},\wnormal_{ij})}{\dfstate}
 \end{align}
 where the first term is always zero for embedded simulations.\\
-\question{TODO ask Farhat what to do with the first derivative.}
 
 Next, we recall the definition of the numerical flux as
 \begin{align}\label{eq:roe_flux}
@@ -197,7 +196,7 @@ In Section~\ref{sec:SA}, we have derived that for any sensitivity calculation, t
 We have derived in Section~\ref{sec:mixed_FV_FE_formulation} that at an interior vertex point of the fluid mesh, we have
 \begin{align}\label{eq:convectiveterm _approximation2}
 \left[\fluxmatconv(\dfstate,\dmpos,\dmms)\right]_i=
-\sum_{j \in \vertexset(i)} mes(\partial C_{ij})\fluxesnum(\dfstate_i,\dfstate_j,\normal_{ij})
+\sum_{j \in \vertexset(i)} \cellsize{\partial C_{ij}}\fluxesnum(\dfstate_i,\dfstate_j,\normal_{ij})
 \end{align}
 Since an equilibrium point is considered, $\dmms=\vec{0}$ and is neglected in the following derivations.
 
@@ -261,7 +260,7 @@ The Jacobi matrix in primitive form can be written as
 \def\jff{\dens\vn v_3+\dens H n_3}
 \def\jfff{\dens\vn\frac{\gamma}{\dens(\gamma-1)}}
 \begin{align}\small
-\prim{\fluxjac}&=\pdfrac{(\prim{\fluxesconv}\cdot\normal)}{\prim{\fstate}} \\
+\prim{\fluxjac}&=\pdfrac{(\prim{\fluxesconv}\cdot\normal)}{\prim{\fstate}} \nonumber\\
 &=
 \begin{bmatrix}
 \vn      &  \dens n_x                &  \dens n_y                &  \dens n_z                 &  0   \\
@@ -439,11 +438,11 @@ Due to its shape, the derivation of $\jaceigvals$ can be simplified to a differe
 \pdfrac{\eigval_1}{\fstateprim}(\fstateprim,\normal)&=\pdfrac{\eigval_2}{\fstateprim}(\fstateprim,\normal)=\pdfrac{\eigval_3}{\fstateprim}(\fstateprim,\normal)=
 \T{\left[
 0~~~~\T{\normal}~~~~0
-\right] } \\
+\right] } \nonumber\\
 \pdfrac{\eigval_4}{\fstateprim}(\fstateprim,\normal)&=
 \T{\left[
 -\frac{c}{2\dens}~~~~\T{\normal}~~~~\frac{c}{2 \pres}
-\right] } \\
+\right] } \nonumber\\
 \pdfrac{\eigval_5}{\fstateprim}(\fstateprim,\normal)&=
 \T{\left[
 \frac{c}{2\dens}~~~~\T{\normal}~~~~-\frac{c}{2 \pres}
@@ -560,12 +559,14 @@ Similar to the previously discussed fluid Jacobian, the computation of $\pdfrac{
 We again focus on the special case of an intersected cell in the following two sections, since the standard case of a standard cell far from the interface follows trivially from that.
 
 It shall also be noted that in most cases, the derivative $\pdfrac{\dresidual}{\absvar}$ is non-zero only at a few fluid nodes. For shape-sensitivity, for example, only the nodes at the interface have a non-zero contribution. Looking at equation \eqref{eq:full_sa_nostruct} one can therefor interpret the solution of the linear system, or the multiplication with the inverse Jacobian, as a propagation operation.\\
-\subsection{Convective contribution $\pdfrac{\dresidual^c}{\absvar}$}
+
+
+\subsection{Convective contribution to $\pdfrac{\dresidual}{\absvar}$}
 Generally, one can write the convective fluid residual as 
 \begin{align}\label{eq:convective_residual_fulldependency}
 \dresidual^{c,i}_{ij} = \fluxesnum^i_{ij}(\dfstateprim_{ij},\dfstateprim^{*}_{ij}(\absvar),\normal_{ij})
 \end{align}
-The most important factor here is of course the dependency of the half Riemann solution on the abstract variable. This dependecy becomes obvious in the case of shape sensitivity, since the interchapter point used for the Riemann solution depends upon the interface shape.\\
+The most important factor here is of course the dependency of the half Riemann solution on the abstract variable. This dependency becomes obvious in the case of shape sensitivity, since the intersection point used for the Riemann solution depends upon the interface shape.\\
 The derivative can be obtained straightforwardly as
 \begin{align}
 \pdfrac{\dresidual^{c,i}_{ij}}{\absvar}=\pdfrac{\dresidual^{c,i}_{ij}}{\dfstate^{\star}_{ij}}\pdfrac{\dfstate^{\star}_{ij}}{\absvar}
@@ -576,11 +577,11 @@ The second derivative is more cumbersome. The issue is visualized in Figure~\ref
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=0.3\linewidth]{\mainpath/fig/png/pierce.png}
-\caption[Visualization of a face interchapter in 3D]{Visualization of the interchapter of a fluid mesh edge $(D-E)$ with an element of the embedded surface $(A-B-C)$. For a shape-sensitivity analysis, SDesign returns the derivatives of the embedded surface nodes $A,B,C$ position with respect to the shape parameter. This is done by first computing the interchapter point $P$. Together with the element normal $\normal$, the interchapter point is used to reconstruct the shape derivatives at nodes $D$ and $E$.}
+\caption[Visualization of a face intersection in 3D]{Visualization of the intersection of a fluid mesh edge $(D-E)$ with an element of the embedded surface $(A-B-C)$. For a shape-sensitivity analysis, SDesign returns the derivatives of the embedded surface nodes $A,B,C$ position with respect to the shape parameter. This is done by first computing the intersection point $P$. Together with the element normal $\normal$, the intersection point is used to reconstruct the shape derivatives at nodes $D$ and $E$.}
 \label{fig:pierce}
 \end{figure}
 
-Based on the consideration above, we find the following dependency for the 
+Based on the consideration above, we find the following dependency
 \begin{align}
 \pdfrac{\dfstate^{\star}_{ij}}{\absvar}=\pdfrac{\dfstate^{\star}_{ij}}{\absvar}
 \Big(
@@ -590,13 +591,13 @@ Based on the consideration above, we find the following dependency for the
 
 The derivatives of the geometrical quantities with respect to $\absvar$ are found as
 \begin{align}
-\pdfrac{\xi}{\absvars}&=\pdfrac{\xi}{\mpos}\pdfrac{\mpos}{\absvars} \\
+\pdfrac{\xi}{\absvars}&=\pdfrac{\xi}{\mpos}\pdfrac{\mpos}{\absvars} \nonumber\\
 \pdfrac{\normal_{wall}}{\absvar}&=\pdfrac{\normal_{wall}}{\mpos}\pdfrac{\mpos}{\absvar}
 \end{align}
 
 
-\subsection{Viscous contribution $\pdfrac{\dresidual^v}{\absvar}$}\label{sec:dRdS_viscous}
-The derivative of the viscous contibution is derived very simmilarly to the viscous Jacobian.
+\subsection{Viscous contribution to $\pdfrac{\dresidual}{\absvar}$}\label{sec:dRdS_viscous}
+The derivative of the viscous contribution is derived very similarly to the viscous Jacobian.
 Looking at equation \eqref{eq:jacobian_viscous} one can derive
 \begin{align}
     \pdfrac{\dresidual^v(\absvars,\dfstateprim^a(\absvars),\dfstateprim^g(\dfstateprim^a(\absvars)),\mpos(\absvars))}{\absvars}=
