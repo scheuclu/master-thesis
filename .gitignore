@@ -7,4 +7,6 @@
 *.toc
 *.nlo
 *_latexmk
+*.mtc*
+fig/studies
 

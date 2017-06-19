@@ -62,6 +62,12 @@ Ami Harten.
 \newblock {High Resolution Schemes for Hyperbolic Conservation Laws}.
 \newblock {\em ournal of Computational Physics}, 135:260--278, 1983.
 
+\bibitem{Larat2012}
+Adam Larat.
+\newblock {The embedded boundary method for turbulent flows - Internal FRG
+  report}.
+\newblock pages 1--38, 2012.
+
 \bibitem{Lesoinne2001}
 Michel Lesoinne, Marcus Sarkis, Ulrich Hetmaniuk, and Charbel Farhat.
 \newblock {A linearized method for the frequency analysis of three-dimensional

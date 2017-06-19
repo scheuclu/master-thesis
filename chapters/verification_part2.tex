@@ -14,8 +14,8 @@
 \FloatBarrier
 
 
-\subsection{Verification of Lift and Drag results}\label{sec:verification_liftdrag}
-
+\section{Verification of Lift and Drag results}\label{sec:verification_liftdrag}
+This section deals with the verification of the actual lift and drag sensitivities, thus the final objective functions derivatives. Those sensitivities are more cumbersome to obtain than the sensitivities of the state vector $\pdfrac{\dfstate}{\absvar}$, provided in section~\ref{sec:verification_dwds},  particularly for the embedded case or for the case of shape-sensitivities, where the integration area itself is derived.
 
 \foreach \eqtype in {Euler, Laminar, RANS}{
 	\begin{figure}
@@ -38,57 +38,6 @@
 	  \label{fig:dLdMa_\eqtype_emb}
 	\end{figure}
 }
-
-
-
-%\foreach \eqtype in {Laminar}{
-%	\begin{figure}.
-%	  \textbf{Validation of the Lift and Drag results for mach-sensitivity: body-fitted \eqtype  equations}
-%	  \centering
-%	  \input{\mainpath/fig/studies/force_convergence/ALE/machsens/ALE_\eqtype/tikzfiles/Ma0.5/liftdrag}
-%	  \caption[Validation of the Lift and Drag results for mach-sensitivity: body-fitted \eqtype equations]{The graph shows the relative error between the Lift and Drag Mach-sensitivities obtained by \ac{FD} of two steady states, compared to the mach-sensitivity obtained by analytic direct evaluation. $L_x$ denotes the Drag, $L_y$ denotes the lift. Please note that a \ac{FD} Jacobian has been used here, which of course introduces an approximation error. Furthermore, the finite precision of the obtained steady states is another error source. This explains why the error levels off. For all practical optimization purposes, the obtained accuracy is more than enough.}
-%	  \label{fig:dLdMA_laminar_ale}
-%	\end{figure}
-%}
-
-%
-
-%---------------------------------------------------------------------------------------------------------------------%
-% Force convergence for shape sensitivity                                                                             %
-%---------------------------------------------------------------------------------------------------------------------%
-%\foreach \eqtype in {Euler,Laminar,RANS}{
-%	\begin{figure}
-%	  \centering
-%	  \textbf{Validation of the Lift and Drag results for shape-sensitivity: body-fitted \eqtype equations}\par\medskip  
-%	  \input{\mainpath/fig/studies/force_convergence/ALE/shapesens/ALE_\eqtype/tikzfiles/Ma0.3/force.tex}
-%	  \caption[Validation of the Lift and Drag results for shape-sensitivity: body-fitted \eqtype equations]{The graph shows the relative error between the Lift and Drag shape-sensitivities obtained by \ac{FD} of two steady states, compared to the sensitivity obtained by analytic direct evaluation. Please not that a \ac{FD} Jacobian has been used here, which introduces an approximation error, Furthermore, the finite precision of the obtained steady states is another error source.This explains why the error levels off. For all practical optimization purposes, the obtained accuracy is more than enough.}
-%	  \label{fig:validation_liftdrag_shapesens_bodyfitted_\eqtype}
-%	\end{figure}
-%}
-
-
-
-%\begin{figure}
-%  \textbf{Force convergence machsens ALE Euler body-fitted}
-%  \input{/home/lukas/Desktop/project/independence/project/thesis/fig/studies/force_convergence/ALE/machsens/ALE_Euler/tikzfiles/Ma0.5/liftdrag.tex}
-%\end{figure}
-%
-%
-%\begin{figure}
-%  \textbf{Force convergence machsens ALE Laminar body-fitted}
-%  \input{/home/lukas/Desktop/project/independence/project/thesis/fig/studies/force_convergence/ALE/machsens/ALE_Laminar/tikzfiles/Ma0.5/liftdrag.tex}
-%\end{figure}
-% 
-%\begin{figure}
-%  \textbf{Force convergence machsens ALE RANS body-fitted}
-%  \input{/home/lukas/Desktop/project/independence/project/thesis/fig/studies/force_convergence/ALE/machsens/ALE_RANS/tikzfiles/Ma0.5/liftdrag.tex}
-%\end{figure}
-
-
-%\begin{figure}
-%  \textbf{Bla bla bla}
-%  \input{/home/lukas/Desktop/project/independence/project/thesis/fig/studies/force_convergence/Emb/machsens/ALE_RANS/tikzfiles/Ma0.3/force.tex}
-%\end{figure}
 
 
 \end{document}

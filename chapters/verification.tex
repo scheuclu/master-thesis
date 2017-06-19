@@ -55,13 +55,13 @@ The validation of integrated forces is provided in figures~[\ref{fig:dLdMa_Euler
 
 \begin{figure}
 \centering
-\includegraphics[scale=0.5]{\mainpath/fig/pdf/verificationsetup.pdf}
+\includegraphics[scale=0.8]{\mainpath/fig/pdf/verificationsetup.pdf}
 \caption[Verification setup]{Setup used for the sensitivity verification. A simple NACA0012 profile is considered. The design element concept, as described in section \ref{sec:design_model} is applied. The profile is deformed using a cubic polynomial in x-direction and a linear polynomial in y-direction.}
 \label{fig:verification_setup}
 \end{figure}
 
-
-\section{Mach-sensitivity}
+\section{Verification of $\pdfrac{\dfstate}{\absvar}$}\label{sec:verification_dwds}
+\subsection{Mach-sensitivity}
 For the body-fitted case, the verification of $\tfrac{\dfstate}{\machnum_{\infty}}$ is provided in figure~\ref{fig:verification_dwdma_ale_Euler} for Euler equations, figure~\ref{fig:verification_dwdma_ale_Laminar} for full \ac{NSE} and in figure~\ref{fig:verification_dwdma_ale_RANS} for \ac{NSE} with an additional Spallart-Almares turbulence model.
 Additionally, a side by side comparison of the analytic results between all three equation types is also provided in figure~\ref{fig:verification_dwdma_ale_comparison} in order to ensure, that the additional viscous and turbulent terms actually account for a visible difference.\\
 For the embedded case, we provide the verification of $\tfrac{\dfstate}{\machnum_{\infty}}$  in figure~\ref{fig:verification_dwdma_emb_Euler} for Euler equation, figure~\ref{fig:verification_dwdma_emb_Laminar} for full \ac{NSE} and in figure~\ref{fig:verification_dwdma_emb_RANS} for \ac{NSE} equations with an additional Spallart-Almares turbulence model.
@@ -189,7 +189,7 @@ Again, a side by side comparison of the analytic results between all three equat
 %--------------------------------------------------------------------------------------------
 
 
-\section{Shape-sensitivity}
+\subsection{Shape-sensitivity}
 The verification of $\tfrac{\dfstate}{\absvar}$ for body-fitted simulations is provided in figure~\ref{fig:verification_dwds_ale_Euler} for Euler equation, figure~\ref{fig:verification_dwds_ale_Laminar} for full \ac{NSE} and in figure~\ref{fig:verification_dwds_ale_RANS} for \ac{NSE} with an additional Spallart-Almares turbulence model.
 Additionally, a side by side comparison of the analytic results between all three equation types is also provided in figure~\ref{fig:verification_dwds_ale_comparison} in order to ensure that the additional viscous and turbulent terms actually account for a visible difference.
 \\

@@ -3,171 +3,143 @@
 \subsection*{Operators}
 
 \subsection*{Algebraic operations}
-\begin{tabular}{l l l}
-$\T{Q}$ & Transpose of a tensor& \texttt{T}\\
-$\inv{Q}$ & Inverse of a tensor& \texttt{inv}\\
-$\av{q}$ & Average component of a quantity& \texttt{av}\\
-$\fluc{q}$ & Fluctuating component of a quantity& \texttt{fluc}\\
-$\norm{q}$ & Norm of a quantity& \texttt{norm}\\
-$\prim{q}$ & Quantity being expressed in primitive variables& \texttt{prim}\\
+\begin{tabular}{l l}
+$\T{Q}$ & Transpose of a tensor\\
+$\inv{Q}$ & Inverse of a tensor\\
+$\av{q}$ & Average component of a quantity\\
+$\fluc{q}$ & Fluctuating component of a quantity\\
+$\norm{q}$ & Norm of a quantity\\
+$\prim{q}$ & Quantity being expressed in primitive variables
 \end{tabular}
 
 \subsection*{Representation of scalars, tensors and other quantities}
-\begin{tabular}{l l l}
-$\s{q}$ & Scalar quantity& \texttt{s}\\
-$\v{q}$ & Vector quantity& \texttt{v}\\
-$\m{Q}$ & Matrix quantity& \texttt{m}\\
-$\tensor{Q}$ & Tensor quantity& \texttt{tensor}\\
-$\abs{q}$ & Norm of a vector& \texttt{abs}\\
-$\c{Q,q}$ & Continous quantity& \texttt{c}\\
-$\d{Q,q}$ & Discrete quantity& \texttt{d}\\
-$\it{q}$ & Iteration index in the optimization loop& \texttt{it}\\
-$\ito{q}$ & Iteration index in the optimization loop& \texttt{ito}\\
-$\its{q}$ & Iteration index in thestaggered algorithm& \texttt{its}\\
-$\fic{Q}$ & Fictious entity& \texttt{fic}\\
-$\order{Q}$ & Order of magnitude& \texttt{order}\\
+\begin{tabular}{l l}
+$\s{q}$ & Scalar quantity\\
+$\v{q}$ & Vector quantity\\
+$\m{Q}$ & Matrix quantity\\
+$\tensor{Q}$ & Tensor quantity\\
+$\abs{q}$ & Norm of a vector\\
+$\c{Q,q}$ & Continous quantity\\
+$\d{Q,q}$ & Discrete quantity\\
+$\it{q}$ & Iteration index in the optimization loop\\
+$\its{q}$ & Iteration index in the staggered algorithm\\
+$\fic{Q}$ & Fictious entity\\
+$\order{n}$ & Order of magnitude
 \end{tabular}
 
 \subsection*{Analytic operations}
-\begin{tabular}{l l l}
-$\dderivtime{Q}$ & Second time derivative at a fixed refrence position& \texttt{dderivtime}\\
-$\derivtime{Q}$ & First time derivative at a fixed reference position& \texttt{derivtime}\\
-$\pdfrac{q1}{q2}$ & Partial derivative of one argument with respect to the other& \texttt{pdfrac}\\
-$\ppdfrac{q1}{q2}$ & Second partial derivative of one argument with respect to the other& \texttt{ppdfrac}\\
-$\mfrac{q1}{q2}$ & Material time derivative& \texttt{mfrac}\\
+\begin{tabular}{l l}
+$\derivtime{q}$ & First time derivative at a fixed reference position\\
+$\dderivtime{q}$ & Second time derivative at a fixed refrence position\\
+$\pdfrac{q_1}{q_2}$ & Partial derivative of one argument with respect to the other\\
+$\ppdfrac{q_1}{q_2}$ & Second partial derivative of one argument with respect to the other\\
+$\mfrac{q_1}{q_2}$ & Material time derivative
 \end{tabular}
 
 \subsection*{Symbols}
 
+\subsubsection*{Numerical formulation}
+\begin{tabular}{l l}
+$\fstate$ & Fluid state vector\\
+$\fstatead$ & Adjoint fluid state vector\\
+$\fstaterans$ & Augumented fluid state vector in the RANS formulation\\
+$\fstateprim$ & Primitive fluid state vector\\
+$\mpos$ & Fluid mesh position\\
+$\mms$ & Fluid mesh motion\\
+$\mmsad$ & Adjoint fluid mesh motion\\
+$\ifaceprojStoF$ & Interface projection matrix from structure to fluid mesh\\
+$\ifaceprojFtoS$ & Interface projection matrix from fluid to structure mesh\\
+$\EOSfluid$ & State equation of the fluid\\
+$\EOSstruct$ & State equation of the structure\\
+$\EOSmesh$ & State equation of the mesh motion\\
+$\dresidual$ & Discrete fluid residual\\
+$\structdisp$ & Structure displacement\\
+$\structdispad$ & Adjoint structure displacement\\
+$\jactwo$ & Second order Jacobian of the flux\\
+$\jacale$ & Jacobian of the mesh motion\\
+$\fluxmatconv$ & Convective part of the flux matrix\\
+$\fluxmatdiff$ & Diffusive part of the flux matrix\\
+$\fload$ & Fluid load\\
+$\sload$ & Structure load\\
+$\cellvolmat$ & Diagonal matrix with vell volumes\\
+$\turbulencesource$ & Source term in the \ac{RANS} equations\\
+$\turbparamvec$ & Additional fluid state variables introduced by the turbulence model
+\end{tabular}
+
 \subsubsection*{Fluid Mechanics}
-\begin{tabular}{l l l}
-$\fluxesconv$ & Convective fluxes& \texttt{fluxesconv}\\
-$\fluxesdiff$ & Diffusive fluxes& \texttt{fluxesdiff}\\
-$\dens$ & Density& \texttt{dens}\\
-$\pres$ & Pressure& \texttt{pres}\\
-$\dpres$ & Pressure& \texttt{dpres}\\
-$\totpres$ & Pressure& \texttt{totpres}\\
-$\fluidvel$ & Fluid velocity vector& \texttt{fluidvel}\\
-$\fluidvelcomp$ & Fluid velocity vector& \texttt{fluidvelcomp}\\
-$\fluidvelx$ & Fluid velocity in x-direction& \texttt{fluidvelx}\\
-$\fluidvely$ & Fluid velocity in y-direction& \texttt{fluidvely}\\
-$\fluidvelz$ & Fluid velocity in z-direction& \texttt{fluidvelz}\\
-$\energytot$ & Total energies& \texttt{energytot}\\
-$\energyint$ & Internal energy& \texttt{energyint}\\
-$\eye$ & Identity matrix& \texttt{eye}\\
-$\fluidstrain$ & Deviatoric fluid stress tensor& \texttt{fluidstrain}\\
-$\fluidstress$ & Deviatoric fluid stress tensor& \texttt{fluidstress}\\
-$\fluidstresscomp$ & Deviatoric fluid stress tensor& \texttt{fluidstresscomp}\\
-$\thermcond$ & Thermal conductivity of the fluid& \texttt{thermcond}\\
-$\temp$ & Fluid temperature& \texttt{temp}\\
-$\heatfluxcomp$ & Heat flux comopnenent& \texttt{heatfluxcomp}\\
-$\heatflux$ & Heat flux vector& \texttt{heatflux}\\
-$\viscosdyn$ & Dynamic viscosity& \texttt{viscosdyn}\\
-$\viscoskin$ & Kinematic viscosity& \texttt{viscoskin}\\
-$\reynolds$ & Reynolds number& \texttt{reynolds}\\
-$\specheatratio$ & Specific heat ratio& \texttt{specheatratio}\\
-$\shr$ & Specific heat ratio& \texttt{shr}\\
-$\jac$ & Jacoian matrix& \texttt{jac}\\
-$\fluxjac$ & Flux Jacobian& \texttt{fluxjac}\\
-$\jaceigvecs$ & Matrix that contains the eigenvectors of the jacobian matrix of $\fluxmatconv$& \texttt{jaceigvecs}\\
-$\jaceigvals$ & Diagonal matrix that contains the eigenvalues of the jacobian matrix of $\fluxmatconv$& \texttt{jaceigvals}\\
-$\roeavgfunc$ & Averaging function associated with the Roe flux& \texttt{roeavgfunc}\\
-$\machnum$ & Mach number& \texttt{machnum}\\
-$\M$ & Mach number& \texttt{M}\\
-$\nut$ & Turbulent eddy viscosity& \texttt{nut}\\
-$\difftensor$ & Diffussive tensor& \texttt{difftensor}\\
-$\sspeed$ & Speed of sound& \texttt{sspeed}\\
-$\fluxesnum$ & Numerical flux& \texttt{fluxesnum}\\
-$\roeavgmat$ & Averaging matrix of the Roe flux& \texttt{roeavgmat}\\
-\end{tabular}
-
-\subsubsection*{Optimization}
-\begin{tabular}{l l l}
-$\costfunc$ & Target cost function& \texttt{costfunc}\\
-$\eqctr$ & Equality constraints& \texttt{eqctr}\\
-$\numeqctr$ & Number of equality constraints& \texttt{numeqctr}\\
-$\neqctr$ & Non-equality constraints& \texttt{neqctr}\\
-$\numneqctr$ & Number of non-equality constraints& \texttt{numneqctr}\\
-$\absvar$ & Abstract optimazation variable& \texttt{absvar}\\
-$\absvars$ & Vector of abstract optimization variables& \texttt{absvars}\\
-$\optcrit$ & Optimization criterium& \texttt{optcrit}\\
-$\optcrits$ & Vector of optimization criteria& \texttt{optcrits}\\
-$\physvars$ & Physical design parameters& \texttt{physvars}\\
-$\Lagfunc$ & Lagrangian function of the optimization problem& \texttt{Lagfunc}\\
-$\lagmultseq$ & Lagrange multipliers of the equality constraints& \texttt{lagmultseq}\\
-$\lagmultsneq$ & Lagrange multipliers of the inequality constraints& \texttt{lagmultsneq}\\
-$\adjoints$ & Adjoint solutions& \texttt{adjoints}\\
-$\tolsa$ & Specified tolerance in the Sensitivity analysis& \texttt{tolsa}\\
-$\lift$ & Lift of an airfoil& \texttt{lift}\\
-$\drag$ & Drag of an airfoil& \texttt{drag}\\
-\end{tabular}
-
-\subsubsection*{Fluid Structure Interaction}
-\begin{tabular}{l l l}
-$\strucstateq$ & State equation of the structure& \texttt{strucstateq}\\
-$\fluidstateq$ & State equation of the fluid& \texttt{fluidstateq}\\
-$\mmsstateeq$ & State equation of the mesh motion& \texttt{mmsstateeq}\\
-\end{tabular}
-
-\subsubsection*{3-field formulations}
-\begin{tabular}{l l l}
-$\EOSstruct$ & State equation of the structure& \texttt{EOSstruct}\\
-$\EOSmesh$ & State equation of the mesh& \texttt{EOSmesh}\\
-$\EOSfluid$ & State equation of the fluid& \texttt{EOSfluid}\\
-$\mpos$ & Fluid mesh motion& \texttt{mpos}\\
-$\dmpos$ & Fluid mesh motion& \texttt{dmpos}\\
-$\mms$ & Fluid mesh motion& \texttt{mms}\\
-$\dmms$ & Fluid mesh motion& \texttt{dmms}\\
-$\mmsad$ & Adjoint fluid mesh motion& \texttt{mmsad}\\
-$\fstate$ & Fluid state vector& \texttt{fstate}\\
-$\fstatead$ & Adjoint fluid state vector& \texttt{fstatead}\\
-$\fstateprim$ & Primitive ffluid state vector& \texttt{fstateprim}\\
-$\dfstateprim$ & Primitive ffluid state vector& \texttt{dfstateprim}\\
-$\dfstate$ & Discrete fsluid state vector& \texttt{dfstate}\\
-$\dresidual$ & Discrete fsluid state vector& \texttt{dresidual}\\
-$\structdisp$ & Structure displacement& \texttt{structdisp}\\
-$\structdispad$ & Adjoint structure displacement& \texttt{structdispad}\\
-$\load$ & Fluid load TODO& \texttt{load}\\
-$\fload$ & Fluid load& \texttt{fload}\\
-$\sload$ & Structure load& \texttt{sload}\\
-$\jactwo$ & Second order Jacobian& \texttt{jactwo}\\
-$\jacale$ & Second order Jacobian& \texttt{jacale}\\
-$\ifaceprojFtoS$ & Interface projection matrix from fluid to structure mesh& \texttt{ifaceprojFtoS}\\
-$\ifaceprojStoF$ & Interface projection matrix from structure to fluid mesh& \texttt{ifaceprojStoF}\\
-$\fstaterans$ & Augumentes fluid state vector in the \ac{RANS} formulation& \texttt{fstaterans}\\
-$\turbulenceparam$ & Additional fluid state variable introduced by the turbulence model& \texttt{turbulenceparam}\\
-$\turbparamvec$ & Additional fluid state variable introduced by the turbulence model& \texttt{turbparamvec}\\
-$\turbulencesource$ & Source term in the \ac{RANS} equations& \texttt{turbulencesource}\\
-$\fluxmatconv$ & Convective part of the flux matrix& \texttt{fluxmatconv}\\
-$\fluxmatdiff$ & diffusive part of the flux matrix& \texttt{fluxmatdiff}\\
-$\turbmat$ & Turbulence term& \texttt{turbmat}\\
-$\cellvolmat$ & Diagonal matrix with vell volumes& \texttt{cellvolmat}\\
-$\specificwork$ & specific work& \texttt{specificwork}\\
-$\aoa$ & angle of attack& \texttt{aoa}\\
-\end{tabular}
-
-\subsubsection*{Sturctural Analysis}
-\begin{tabular}{l l l}
-$\stiffmat$ & \ac{FE} stiffness matrix& \texttt{stiffmat}\\
-$\disp$ & Displacement vector& \texttt{disp}\\
-$\dispvec$ & Discrete displacement vector& \texttt{dispvec}\\
-$\motion$ & Mesh motion& \texttt{motion}\\
-$\ifacedisp$ & Interface displacement& \texttt{ifacedisp}\\
-$\ifacedispvec$ & Interface displacement& \texttt{ifacedispvec}\\
+\begin{tabular}{l l}
+$\dens$ & Density\\
+$\pres$ & Pressure\\
+$\totpres$ & Total pressure\\
+$\fluidvel$ & Fluid velocity vector\\
+$\machnum$ & Mach number\\
+$\energyint$ & Internal energy\\
+$\energytot$ & Total energy\\
+$\sspeed$ & Speed of sound\\
+$\fluxesconv$ & Convective fluxes\\
+$\fluxesdiff$ & Diffusive fluxes\\
+$\fluxesnum$ & Numerical flux\\
+$\difftensor$ & Diffusive tensor\\
+$\viscosdyn$ & Dynamic viscosity\\
+$\viscoskin$ & Kinematic viscosity\\
+$\nut$ & Turbulent eddy viscosity\\
+$\reynolds$ & Reynolds number\\
+$\fluidstrain$ & Deviatoric fluid strain tensor\\
+$\fluidstress$ & Deviatoric fluid stress tensor\\
+$\thermcond$ & Thermal conductivity of the fluid\\
+$\temp$ & Fluid temperature\\
+$\specheatratio$ & Specific heat ratio\\
+$\eye$ & Identity matrix\\
+$\roeavgfunc$ & Averaging function associated with the Roe flux\\
+$\fluxjac$ & Flux Jacobian\\
+$\jaceigvals$ & Diagonal matrix that contains the eigenvalues of the jacobian matrix of $\fluxmatconv$\\
+$\jaceigvecs$ & Matrix that contains the eigenvectors of the jacobian matrix of $\fluxmatconv$\\
+$\roeavgmat$ & Averaging matrix of the Roe flux\\
+$\heatflux$ & Heat flux vector
 \end{tabular}
 
 \subsubsection*{Discretization}
-\begin{tabular}{l l l}
-$\dualcell$ & Dual cell& \texttt{dualcell}\\
-$\primmesh$ & Primal mesh& \texttt{primmesh}\\
-$\dualmesh$ & Dual mesh& \texttt{dualmesh}\\
-$\normal$ & Symbol for dyadic product& \texttt{normal}\\
-$\wnormal$ & Weighted normal& \texttt{wnormal}\\
-$\normalx$ & x-component of the cell normal& \texttt{normalx}\\
-$\normaly$ & y-component of the cell normal& \texttt{normaly}\\
-$\normalz$ & z-component of the cell normal& \texttt{normalz}\\
-$\vertex$ & Mesh vertex& \texttt{vertex}\\
-$\vertexset$ & Set of vertices& \texttt{vertexset}\\
-$\elementset$ & Set of elements related to vertex i& \texttt{elementset}\\
+\begin{tabular}{l l}
+$\vertex$ & Mesh vertex\\
+$\vertexset$ & Set of vertices\\
+$\elementset$ & Set of elements related to vertex i\\
+$\primmesh$ & Primal mesh\\
+$\dualcell$ & Dual cell\\
+$\dualmesh$ & Dual mesh\\
+$\normal$ & Normal vector\\
+$\wnormal$ & Weighted normal\\
+$\normalx$ & x-component of the cell normal\\
+$\normaly$ & y-component of the cell normal\\
+$\normalz$ & z-component of the cell normal
+\end{tabular}
+
+\subsubsection*{Optimization}
+\begin{tabular}{l l}
+$\physvars$ & Physical design parameters\\
+$\costfunc$ & Target cost function\\
+$\optcrit$ & Optimization criterion\\
+$\optcrits$ & Vector of optimization criteria\\
+$\absvar$ & Abstract optimization variable\\
+$\absvars$ & Vector of abstract optimization variables\\
+$\Lagfunc$ & Lagrangian function of the optimization problem\\
+$\tolsa$ & Specified tolerance in the Sensitivity analysis\\
+$\eqctr$ & Equality constraints\\
+$\numeqctr$ & Number of equality constraints\\
+$\lagmultseq$ & Lagrange multipliers of the equality constraints\\
+$\neqctr$ & Non-equality constraints\\
+$\numneqctr$ & Number of non-equality constraints\\
+$\lagmultsneq$ & Lagrange multipliers of the inequality constraints\\
+$\lift$ & Lift of an airfoil\\
+$\drag$ & Drag of an airfoil\\
+$\aoa$ & Angle of attack
+\end{tabular}
+
+\subsubsection*{Sturctural Analysis}
+\begin{tabular}{l l}
+$\disp$ & Displacement vector\\
+$\dispvec$ & Discrete displacement vector\\
+$\ifacedispvec$ & Interface displacement vector\\
+$\motion$ & Mesh motion\\
+$\stiffmat$ & \ac{FE} stiffness matrix
 \end{tabular}
 

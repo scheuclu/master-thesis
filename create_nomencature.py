@@ -50,7 +50,8 @@ with open("Nomenclature.tex","w") as outfile:
     for secname in operators.keys():
         print(secname)
         outfile.write("\subsection*{"+secname+"}\n")
-        outfile.write("\\begin{tabular}{l l l}\n")
+        # outfile.write("\\begin{tabular}{l l l}\n")
+        outfile.write("\\begin{tabular}{l l}\n")
         for temp in operators[secname]:
             print("===="+str(temp)+"\n")
             withexpr=re.search("with{.*}",temp[0]).group(0)
@@ -61,10 +62,12 @@ with open("Nomenclature.tex","w") as outfile:
             numarg=int(temp[1].split("{")[1].split("}")[1][1])
             if numarg==1:
                 print(command+str(numarg))
-                outfile.write("$"+command+"{"+withexpr+"}$" +" & "+explclean+"& \\texttt{"+command[1:]+"}\\\\\n")
+                # outfile.write("$"+command+"{"+withexpr+"}$" +" & "+explclean+"& \\texttt{"+command[1:]+"}\\\\\n")
+                outfile.write("$"+command+"{"+withexpr+"}$" +" & "+explclean+"\\\\\n")
             elif numarg==2:
                 print(command+str(numarg))
-                outfile.write("$"+command+"{"+withexpr.split('&')[0]+"}"+"{"+withexpr.split('&')[1]+"}$" +" & "+explclean+"& \\texttt{"+command[1:]+"}\\\\\n")
+                # outfile.write("$"+command+"{"+withexpr.split('&')[0]+"}"+"{"+withexpr.split('&')[1]+"}$" +" & "+explclean+"& \\texttt{"+command[1:]+"}\\\\\n")
+                outfile.write("$"+command+"{"+withexpr.split('&')[0]+"}"+"{"+withexpr.split('&')[1]+"}$" +" & "+explclean+"\\\\\n")
             else:
                 print("\033[91mERROR Currently only operators with one argument are supported\033[00m")
                 sys.exit()
@@ -78,10 +81,12 @@ with open("Nomenclature.tex","w") as outfile:
     for descr in symbols.keys():
         print(descr)
         outfile.write("\\subsubsection*{"+descr+"}\n")
-        outfile.write("\\begin{tabular}{l l l}\n")
+        # outfile.write("\\begin{tabular}{l l l}\n")
+        outfile.write("\\begin{tabular}{l l}\n")
         for expl in symbols[descr]:
             command=symbols[descr][expl].split("{")[1].split("}")[0]
-            outfile.write("$"+command+"$ & "+expl+"& \\texttt{"+command[1:]+"}\\\\\n")
+            # outfile.write("$"+command+"$ & "+expl+"& \\texttt{"+command[1:]+"}\\\\\n")
+            outfile.write("$"+command+"$ & "+expl+"\\\\\n")
         outfile.write("\end{tabular}\n\n")
 
 

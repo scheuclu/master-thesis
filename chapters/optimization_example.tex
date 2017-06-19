@@ -16,19 +16,19 @@
 %\sectlot
 
 
-This section is denoted to some small exampled of the newly implemented analytic sensitivity framework. Due to a limited time availiable, we restricted our considerations to simple 2D problems. Perticularly, an optimization on the NACA0012 profile, as already described in REF, is presented in REF.\\
-A slightly more cumbersome example, that nicely portrays the advantages of the embedded sensitivity framework is then provided in section REF. Here, the flap ans slat configuration of an airfoil in maximized. This requires large deformations and would not be possible with the body-fitted sensitivity framework.
+This section is denoted to simple examples of the newly implemented analytic sensitivity framework. Due to a limited time available, we restricted our considerations to simple 2D problems. Particularly, an optimization on the NACA0012 profile, as already described in figure~\ref{fig:verification_setup}, is presented in section~\ref{sec:example_naca}.\\
+A slightly more cumbersome example, that nicely portrays the advantages of the embedded sensitivity framework is then provided in section \ref{sec:example_multielem}. Here, the flap and slats configuration of an airfoil is maximized. This requires large deformations and would not be possible with the body-fitted sensitivity framework.
 
 \section{\ac{LDR} shape-optimization of a NACA0012 airfoil}\label{sec:example_naca}
-We consider the optimization of a NACA0012 airfoil for an angle of attack of $\alpha=0.0^{\circ}$ and a Mach number of 0.3. For comparison, both the inviscid and the viscous results are provided.
+We consider the optimization of a NACA0012 airfoil for an angle of attack of $\alpha=0.0^{\circ}$ and a Mach number of 0.3. %For comparison, both the inviscid and the viscous results are provided.
 
 
-\subsection{Setup}
-The setup has already been described in figure~\ref{fig:verification_setup}. The shape is described using the design variable concept~\ref{sec:design_model} with $8$ abstract variables.
+\subsection{Setup}\label{sec:naca0012_setup}
+The setup has already been described in figure~\ref{fig:verification_setup}. The shape is described using the design variable concept (see section~\ref{sec:design_model}) with $8$ abstract variables.
 In this particular example, the lower, front design variable has been fixed in order to prevent rigid body motions.
-\subsection{Result}
+\subsection{Results}\label{sec:naca0012_results}
 
-The example has been run using $\sim1000000$ nodes and 120 subdomains. All forces have been evaluated on the discrete embedded surface. Both the initial and the final, converges shape are provided in figure \ref{fig:naca0012_ldr_solutions}.
+The example has been run meshed with $\sim1000000$ nodes and running on 60 compute cores. All forces have been evaluated on the discrete embedded surface. Both the initial and the final, converged shape are provided in figure \ref{fig:naca0012_ldr_solutions}.
 
 
 
@@ -42,7 +42,7 @@ The example has been run using $\sim1000000$ nodes and 120 subdomains. All force
     	\includegraphics[width=\linewidth]{\naca0012path/minLiftOverDrag/mesh/archive/euler_frontfixed_9it_nominlift/py/surfaces_borderless.pdf}
     	\caption{shapes}
     	\end{subfigure}
-    	\caption[NACA0012 LDR optimization - convergence]{Convergence of the \ac{LDR} during the optimization. A \ac{BFGS} algorithm has been used here. The left figure shows the convergence of the lift-to-drag ration, the right figure displays the different airfoil shapes during the optimization process.}
+    	\caption[NACA0012 LDR optimization - convergence]{Convergence of the \ac{LDR} during the optimization. A \ac{BFGS} algorithm has been used for optimization. The left figure shows the convergence of the lift-to-drag ratio, the right figure displays the different airfoil shapes during the optimization process.}
     \label{fig:nac0012_ldr_convergence}
 \end{figure}
 
@@ -51,36 +51,36 @@ The example has been run using $\sim1000000$ nodes and 120 subdomains. All force
 
 \begin{figure}[t!]
     \centering
-    	\begin{subfigure}[t]{0.45\textwidth}
+    	\begin{subfigure}[t]{0.40\textwidth}
     	    \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
         \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
 			  \fbox{\includegraphics[width=\linewidth]{\naca0012path/minLiftOverDrag/mesh/euler2/post/png/It000_velx.png}}
 			  %\caption{NACA0012 original shape}
-		\end{subfigure}~
-    	\begin{subfigure}[t]{0.45\textwidth}
+		\end{subfigure}\hfill~
+    	\begin{subfigure}[t]{0.40\textwidth}
     	    	\setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
         \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
 			  \fbox{\includegraphics[width=\linewidth]{\naca0012path/minLiftOverDrag/mesh/euler2/post/png/It009_velx.png}}
 			  %\caption{final optimized shape}
 		\end{subfigure}~
     	\begin{subfigure}[t]{0.1\textwidth}
-			  \includegraphics[scale=0.45]{\naca0012path/minLiftOverDrag/mesh/euler2/post/png/colorbar_velocity.png}
+			  \includegraphics[scale=0.40]{\naca0012path/minLiftOverDrag/mesh/euler2/post/png/colorbar_velocity.png}
 			  %\caption{final optimized shape}
-		\end{subfigure}\\
-    	\begin{subfigure}[t]{0.45\textwidth}
+		\end{subfigure}\\\vspace{1cm}
+    	\begin{subfigure}[t]{0.40\textwidth}
     	    \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
         \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
 			  \fbox{\includegraphics[width=\linewidth]{\naca0012path/minLiftOverDrag/mesh/euler2/post/png/It000_press.png}}
 			  \caption{NACA0012 original shape}
-		\end{subfigure}~
-    	\begin{subfigure}[t]{0.45\textwidth}
+		\end{subfigure}\hfill~
+    	\begin{subfigure}[t]{0.40\textwidth}
     	    \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
         \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
 			  \fbox{\includegraphics[width=\linewidth]{\naca0012path/minLiftOverDrag/mesh/euler2/post/png/It009_press.png}}
 			  \caption{final optimized shape}
 		\end{subfigure}~
     	\begin{subfigure}[t]{0.1\textwidth}
-			  \includegraphics[scale=0.45]{\naca0012path/minLiftOverDrag/mesh/euler2/post/png/colorbar_press.png}
+			  \includegraphics[scale=0.40]{\naca0012path/minLiftOverDrag/mesh/euler2/post/png/colorbar_press.png}
 			 % \caption{final optimized shape}
 		\end{subfigure}
     \caption[NACA0012 LDR optimization - solution fields]{Lift over Drag optimization of a 2D airfoil in the embedded framework. The design element configuration of the embedded surface is depicted in Figure~\ref{fig:verification_setup}.}
@@ -96,275 +96,37 @@ The example has been run using $\sim1000000$ nodes and 120 subdomains. All force
 
 \section{Multi-element airfoil with large kinematics}\label{sec:example_multielem}
 
-\subsection{Setup}
-aaa
-\subsection{Result}
+The second example aims at pointing out the superiority of the embedded approach over the body-fitted approach when it comes to shape optimization. Due to the large motions involved, this example would not have been possible with a body-fitted framework. The setup is described in section~\ref{sec:multielem_setup} and the results are presented in section~\ref{sec:multielem_results}.
+
+\subsection{Setup}\label{sec:multielem_setup}
+
+The setup is described in figure~\ref{fig:multi_elem_setup}. The airfoil consists of 3 separate parts, where the front and back can perform large motions. Each motion is described by a single parameter(rotatory movement). This way, the parameter space has been kept low-dimensional, which enabled us to sample the whole space, thereby verifying that the optimizer indeed finds the correct solution
+
+\begin{figure}[t!]
+    \centering
+    	\includegraphics[width=0.5\linewidth]{/home/lukas/Desktop/project/independence/project/thesis/fig/pdf/multielem/setup.pdf}
+    	\caption[Multi-element example: setup]{Setup for the multi-element example. A 3 element airfoil is considered. The motion of the from of back element is being described via a simple rotation. This is done on purpose to keep the parameter-space low-dimensional. This example would not be possible in the body-fitted framework.}
+    	\label{fig:multi_elem_setup}
+\end{figure}
 
 
+\subsection{Results}\label{sec:multielem_results}
+The objective of this simulation was the minimization of the lift over drag ratio. We prescribed both minimum lift and maximum drag constraints. The optimization was then performed using an \ac{SLSQP} algorithm. In order to verify the results of the optimizer, we performed a $30\times30$ sampling of the parameter space. The lift and drag results are visualized in figure~\ref{fig:multi_elem_liftanddrag} and the lift over drag ration is printed over the parameter space in figure~\ref{fig:multi_elem_ldr}.
 
+\begin{figure}[t!]
+    \centering
+    	\includegraphics[width=0.5\linewidth]{\mainpath/fig/pdf/multielem/lift.pdf}~
+    	\includegraphics[width=0.5\linewidth]{\mainpath/fig/pdf/multielem/drag.pdf}
+    	\caption[Multi-element example: lift and drag]{Lift(left figure)- and drag(right figure)- results plotted over the parameter space spanned by $\alpha_0$ and $\alpha_1$. ISO-lines that don't fulfill the minimum lift or maximum drag requirements are plotted in dashed lines. An optimum is searched in the remaining parameter space. The optimum found is plotted in figure~\ref{fig:multi_elem_ldr}}
+    	\label{fig:multi_elem_liftanddrag}
+\end{figure}
 
-%After chapter~\ref{sec:fluid_mechanics} described the basic equation of fluid mechanics, discretization of this equations with \ac{FV} and \ac{FE} schemes in chapter~\ref{sec:finite_volume_method}, and an introduction to \ac{SA}, the expressions for the actual derivatives have been derived in chapter~\ref{sec:SA}. This has been done for both the body-fitted and the embedded~\ref{sec:embedded_boundary_method} framework of AERO-F.\\
-%This chapter is denoted to a thorough validation of the obtained derivatives. As described in \ref{sec:SA}, AERO-F handles both sensitivities with respect to far-field variables(e.g. angle of attack) as well as shape sensitivities. Both types require to be handled fundamentally different. While the first type leads to derivatives mainly in the far field boundary conditions, the latter one interferes with the wall treatment. More importantly, as shown in chapters~\ref{sec:fluid_jacobian} and \ref{sec:dresidual_by_absvar}, in the embedded case, doing shape sensitivities leads to additional derivatives with regards to the intersector.\\
-%For all those reasons, the verification provided in this chapter deals with both $\machnum_{\infty}$-sensitivity as well as shape-sensitivity. More over we will provide plots for both the body-fitted and the embedded case.
-%
-%\section{Approach}\label{sec:verification_approach}
-%The question of how to verify the obtained sensitivities is anything but straightforward.\\
-%The first question is: What can be verified anyway?\\
-%If we have a look at equation \eqref{eq:full_sa_nostruct}, one can see, that there are to main derivatives: $\pdfrac{\dresidual}{\dfstate}$ and $\pdfrac{\dresidual}{\absvar}$. The derivative with respect to the mesh position $\pdfrac{\dresidual}{\dmpos}$ is not validated here, since it is obtained from SDESIGN and taken for granted.\\
-%The basic idea that we exploit for verification is to compute a reference solution for the sensitivities by a \ac{FD} of two steady-state simulation. The advantage is, that the sensitivity-module does not have to be used at all to obtain those references, thus it is ensured that potential bugs are not carried over.\\
-%However, for both of the above quantities, computing a finite difference solution is cumbersome. For the Jacobian $\pdfrac{\dresidual}{\dfstate}$ a simple forward difference would look as follows:
-%\begin{align}
-%\pdfrac{\dresidual_i}{\dfstate_j}\bigg\rvert_{\fstate_0}=\frac{\dresidual_i(\dfstate_0+\epsilon\vec{e}_j)-\dresidual_i(\dfstate_0-\epsilon\vec{e}_j)}{2\epsilon}
-%\end{align}
-%which would entail an $\order{N}$ number of residual evaluations.\\
-%As far as $\pdfrac{\dresidual}{\absvar}$ goes, a \ac{FD} verification would be feasible:
-%\begin{align}
-%\pdfrac{\dresidual_i}{\machnum_{\infty}}&=\frac{\dresidual(\dfstate_i^{+})-\dresidual(\dfstate_i^{-})}{2\epsilon} \nonumber \\
-%\dfstate_i^{\pm} &=
-%\begin{cases}
-%\dfstate_i\big\rvert_{0}\text{   for internal nodes}\\
-%\dfstate_i\big\rvert_{\fstate_i(\machnum_i=\machnum_0+\epsilon)}\text{   for boundary nodes}
-%\end{cases}
-%\end{align}
-%which could be done cheaply, and is in fact done in AERO-F if the parameter \texttt{SensitivityAnalysis.SensitivityComputation} is set to \texttt{FiniteDifference} however, it requires the fluid-state to be updated according to the Mach-number change at the fluid boundary and thus introduced the potential for new bugs.\\
-%Instead, the first quantity to be validated in this thesis is the solution of the linear system described in equation \eqref{eq:full_sa_nostruct}: $\pdfrac{\dfstate}{\absvar}$.\\
-%this can be done easily by performing a simple \ac{FD} on the solution of two steady-state simulations;
-%\begin{align}
-%\tfrac{\dfstate}{\absvar}=\frac{\dfstate(\absvar+\epsilon)-\dfstate(\absvar-\epsilon)}{2 \epsilon}
-%\end{align}
-%which involves no extra coding and can be done with a standard steady state solver.
-%The validation of $\tfrac{\dfstate}{\absvar}$ is provided in figures [\ref{fig:verification_dwdma_ale_Euler},\ref{fig:verification_dwdma_ale_Laminar},\ref{fig:verification_dwdma_ale_RANS}] for the body fitted framework and figures~[\ref{fig:verification_dwdma_emb_Euler},\ref{fig:verification_dwdma_emb_Laminar},\ref{fig:verification_dwdma_emb_RANS}] for the embedded.
-%
-%Additionally, since the optimization will run on lift and drag, we also validate them with steady state results.
-%\begin{align}
-%\tfrac{\optcrit}{\absvar}=\frac{\optcrit(\absvar+\epsilon)-\optcrit(\absvar-\epsilon)}{2 \epsilon}
-%\end{align}
-%The validation of integrated forces is provided in figures~[\ref{fig:dLdMa_Euler_ale},\ref{fig:dLdMa_Laminar_ale},\ref{fig:dLdMa_RANS_ale}] for body-fitted computations and in figures~[\ref{fig:dLdMa_Euler_emb},\ref{fig:dLdMa_Laminar_emb},\ref{fig:dLdMa_RANS_emb}] for embedded.
-%
-%
-%
-%\section{Mach-sensitivity}
-%For the body-fitted case, the verification of $\tfrac{\dfstate}{\machnum_{\infty}}$ is provided in figure~\ref{fig:verification_dwdma_ale_Euler} for Euler equations, figure~\ref{fig:verification_dwdma_ale_Laminar} for full \ac{NSE} and in figure~\ref{fig:verification_dwdma_ale_RANS} for \ac{NSE} with an additional Spallart-Almares turbulence model.
-%Additionally, a side by side comparison of the analytic results between all three equation types is also provided in figure~\ref{fig:verification_dwdma_ale_comparison} in order to ensure, that the additional viscous and turbulent terms actually account for a visible difference.\\
-%For the embedded case, we provide the verification of $\tfrac{\dfstate}{\machnum_{\infty}}$  in figure~\ref{fig:verification_dwdma_emb_Euler} for Euler equation, figure~\ref{fig:verification_dwdma_emb_Laminar} for full \ac{NSE} and in figure~\ref{fig:verification_dwdma_emb_RANS} for \ac{NSE} equations with an additional Spallart-Almares turbulence model.
-%Again, a side by side comparison of the analytic results between all three equation types is also provided in figure~\ref{fig:verification_dwdma_emb_comparison} in order to ensure that the additional viscous and turbulent terms actually account for a visible difference.
-%
-%
-%%--------------------------------------------------------------------------------------------
-%%\section{Body-fitted}
-%\foreach \vertype in {Euler,Laminar,RANS}{
-%	%\subsection{Verification $\tfrac{\dfstate}{\machnum_{\infty}}$ for \vertype equations and a body-fitted framework}
-%	\begin{figure}[t!]
-%	    \centering
-%	    \textbf{Verification $\tfrac{\dfstate}{\machnum_{\infty}}$ for {\vertype} equations and a body-fitted framework}\par\medskip    
-%	    \foreach \n in {1,2,3,5}{
-%	      \foreach \type in {FD,ana}{
-%			    \begin{subfigure}[t]{0.4\textwidth}
-%			        \centering
-%			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
-%              \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
-%			        \fbox{\includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/machsens/ALE/\vertype_component\n_\type}}
-%			        \caption{$\linepdfrac{\d{w}_\n^{\type}}{\machnum_{\infty}}$}
-%			    \end{subfigure}%
-%			    ~ 
-%	      }
-%	      
-%	    }
-%	    \caption[Verification $\tfrac{\dfstate}{\machnum_{\infty}}$ {\vertype} equations body-fitted]{Verification of $\tfrac{\dfstate}{\machnum_{\infty}}$ for {\vertype} equations in the body-fitted framework. The \ac{FD} reference solution as described in chapter~\ref{sec:verification_approach} is provided in the left column, the newly implemented analytic derivatives are visualized in the right column. \ac{FD} and analytic solution are plotted using the same color-scheme.}
-%	    \label{fig:verification_dwdma_ale_\vertype}
-%	    
-%	    
-%	\end{figure}
-%}
-%
-%%--------------------------------------------------------------------------------------------
-%%\section{Embedded}
-%\foreach \vertype in {Euler,Laminar,RANS}{
-%	%\subsection{Verification of the \vertype derivatives}
-%	\begin{figure}[t!]
-%	    \centering
-%	    \textbf{Verification of $\tfrac{\dfstate}{\machnum_{\infty}}$ for {\vertype} equations and a embedded framework}\par\medskip    
-%	    \foreach \n in {1,2,3,5}{
-%	      \foreach \type in {FD,ana}{
-%			    \begin{subfigure}[t]{0.4\textwidth}
-%			        \centering
-%			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
-%              \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
-%			        \fbox{\includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/machsens/Emb/\vertype_component\n_\type}}
-%			        \caption{$\linepdfrac{\d{w}_\n^{\type}}{\machnum_{\infty}}$}
-%			    \end{subfigure}%
-%			    ~ 
-%	      }
-%	      
-%	    }
-%	    \caption[Verification of $\tfrac{\dfstate}{\machnum_{\infty}}$ for {\vertype} equations, embedded]{Verification of $\tfrac{\dfstate}{\machnum_{\infty}}$ for {\vertype} equations in the embedded framework. The \ac{FD} reference solution as described in chapter~\ref{sec:verification_approach} is provided in the left column, the newly implemented analytic derivatives are visualized in the right column. \ac{FD} and analytic solution are plotted using the same color-scheme.}
-%	    \label{fig:verification_dwdma_emb_\vertype}
-%	    
-%	\end{figure}
-%}
-%
-%
-%
-%
-%
-%%--------------------------------------------------------------------------------------------
-%%\subsection{Comparison}
-%
-%\begin{figure}[t!]
-%    \centering
-%    \textbf{Comparison of $\tfrac{\dfstate}{\machnum_{\infty}}$ in the body-fitted framework for all 3 equation types}\par\medskip    
-%    \foreach \n in {1,2,3,5}{
-%      \foreach \simtype in {Euler,Laminar,RANS}{
-%		    \begin{subfigure}[t]{0.33\textwidth}
-%		        \centering
-%			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
-%              \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
-%		        \fbox{\includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/machsens/ALE/comparison_\simtype_component\n_ana}}
-%		        \caption{$\linepdfrac{\d{w_\n^{\simtype}}}{\machnum_{\infty}}$}
-%		    \end{subfigure}%
-%		    ~ 
-%      }
-%      
-%    }
-%    \caption[Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for all equation types body-fitted]{Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for Euler equations(left column), laminar \ac{NSE} equations (center column) and \ac{NSE} equations with turbulence models (right column) in the body-fitted framework.}
-%    \label{fig:verification_dwdma_ale_comparison}
-%\end{figure}
-%
-%
-%\begin{figure}[t!]
-%    \centering
-%    \textbf{Comparison of $\tfrac{\dfstate}{\machnum_{\infty}}$ in the embedded framework for all 3 equation types}\par\medskip    
-%    \foreach \n in {1,2,3,5}{
-%      \foreach \simtype in {Euler,Laminar,RANS}{
-%		    \begin{subfigure}[t]{0.33\textwidth}
-%		        \centering
-%			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
-%              \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
-%		        \fbox{\includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/machsens/Emb/comparison_\simtype_component\n_ana}}
-%		        \caption{$\linepdfrac{\d{w_\n^{\simtype}}}{\machnum_{\infty}}$}
-%		    \end{subfigure}%
-%		    ~ 
-%      }
-%      
-%    }
-%    \caption[Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for all equation types embedded]{Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for Euler equations(left column), laminar \ac{NSE} equations (center column) and \ac{NSE} equations with turbulence models (right column) in the embedded framework.}
-%    \label{fig:verification_dwdma_emb_comparison}
-%\end{figure}
-%
-%
-%
-%\FloatBarrier
-%
-%%--------------------------------------------------------------------------------------------
-%%--------------------------------------------------------------------------------------------
-%
-%
-%\section{Shape-sensitivity}
-%The verification of $\tfrac{\dfstate}{\absvar}$ for ALE simulations is provided in figure~\ref{fig:verification_dwds_ale_Euler} for Euler equation, figure~\ref{fig:verification_dwds_ale_Laminar} for full \ac{NSE} and in figure~\ref{fig:verification_dwds_ale_RANS} for \ac{NSE} equations with an additional Spallart-Almares turbulence model.
-%Additionally, a side by side comparison of the analytic results between all three equation types is also provided in figure~\ref{fig:verification_dwds_ale_comparison} in order to ensure that the additional viscous and turbulent terms actually account for a visible difference.
-%\\
-%For the embedded case, we provide the verification of $\tfrac{\dfstate}{\absvar}$  in figure~\ref{fig:verification_dwds_emb_Euler} for Euler equation, figure~\ref{fig:verification_dwds_emb_Laminar} for full \ac{NSE} and in figure~\ref{fig:verification_dwds_emb_RANS} for \ac{NSE} equations with an additional Spallart-Almares turbulence model.
-%Again, a side by side comparison of the analytic results between all three equation types is also provided in figure~\ref{fig:verification_dwds_emb_comparison} in order to ensure that the additional viscous and turbulent terms actually account for a visible difference.
-%%--------------------------------------------------------------------------------------------
-%%\section{Body-fitted}
-%\foreach \vertype in {Euler,Laminar,RANS}{
-%	%\subsection{Verification of the \vertype derivatives}
-%	\begin{figure}[t!]
-%	    \centering
-%	    \textbf{Verification $\tfrac{\dfstate}{\absvar}$ for {\vertype} equations and a body-fitted framework}\par\medskip    
-%	    \foreach \n in {1,2,3,5}{
-%	      \foreach \type in {FD,ana}{
-%			    \begin{subfigure}[t]{0.4\textwidth}
-%			        \centering
-%			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
-%              \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
-%			        \fbox{\includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/shapesens/ALE/\vertype_component\n_\type}}
-%			        \caption{$\linepdfrac{\d{w}_\n^{\type}}{\absvar}$}
-%			    \end{subfigure}%
-%			    ~ 
-%	      }
-%	      
-%	    }
-%	    \caption[Verification of $\tfrac{\dfstate}{\absvar}$ {\vertype} for equations, body-fitted]{Verification of $\tfrac{\dfstate}{\absvar}$ for {\vertype} equations in the body-fitted framework.
-%	    The \ac{FD} reference solution as described in chapter~\ref{sec:verification_approach} is provided in the left column, the newly implemented analytic derivatives are visualized in the right column. \ac{FD} and analytic solution are plotted using the same color-scheme.}
-%	    \label{fig:verification_dwds_ale_\vertype}
-%	    
-%	\end{figure}
-%}
-%
-%%--------------------------------------------------------------------------------------------
-%%\section{Embededd}
-%
-%\foreach \vertype in {Euler,Laminar,RANS}{
-%	%\subsection{Verification of the \vertype derivatives}
-%	\begin{figure}[t!]
-%	    \centering
-%	    \textbf{Verification $\tfrac{\dfstate}{\absvar}$ for {\vertype} equations and a embedded framework}\par\medskip    
-%	    \foreach \n in {1,2,3,5}{
-%	      \foreach \type in {FD,ana}{
-%			    \begin{subfigure}[t]{0.4\textwidth}
-%			        \centering
-%			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
-%              \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
-%			        \fbox{\includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/shapesens/Emb/\vertype_component\n_\type}}
-%			        \caption{$\linepdfrac{\d{w}_\n^{\type}}{\absvar}$}
-%			    \end{subfigure}%
-%			    ~ 
-%	      }
-%	      
-%	    }
-%	    \caption[Verification $\tfrac{\dfstate}{\absvar}$ {\vertype} equations embedded]{Verification of $\tfrac{\dfstate}{\absvar}$ for {\vertype} equations in the embedded framework.
-%	    The \ac{FD} reference solution as described in chapter~\ref{sec:verification_approach} is provided in the left column, the newly implemented analytic derivatives are visualized in the right column. \ac{FD} and analytic solution are plotted using the same color-scheme.}
-%	    \label{fig:verification_dwds_emb_\vertype}
-%	    
-%	\end{figure}
-%}
-%
-%
-%%--------------------------------------------------------------------------------------------
-%%\subsection{Comparison}
-%
-%\begin{figure}[t!]
-%    \centering
-%    \textbf{Comparison of $\tfrac{\dfstate}{\absvar}$ in the body-fitted framework for all 3 equation types}\par\medskip    
-%    \foreach \n in {1,2,3,5}{
-%      \foreach \simtype in {Euler,Laminar,RANS}{
-%		    \begin{subfigure}[t]{0.33\textwidth}
-%		        \centering
-%			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
-%              \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
-%		        \fbox{\includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/shapesens/ALE/\simtype_component\n_ana}}
-%		        \caption{$\linepdfrac{\d{w_\n^{\simtype}}}{\absvar}$}
-%		    \end{subfigure}%
-%		    ~ 
-%      }
-%      
-%    }
-%    \caption[Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for all equation types, body-fitted]{Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for Euler equations(left column), laminar \ac{NSE} equations (center column) and \ac{NSE} equations with turbulence models (right column) in the body-fitted framework.}
-%    \label{fig:verification_dwds_ale_comparison}
-%\end{figure}
-%
-%\begin{figure}[t!]
-%    \centering
-%    \textbf{Comparison of $\tfrac{\dfstate}{\absvar}$ in the embedded framework for all 3 equation types}\par\medskip    
-%    \foreach \n in {1,2,3,5}{
-%      \foreach \simtype in {Euler,Laminar,RANS}{
-%		    \begin{subfigure}[t]{0.33\textwidth}
-%		        \centering
-%			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
-%              \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
-%		        \fbox{\includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/shapesens/Emb/\simtype_component\n_ana}}s
-%		        \caption{$\linepdfrac{\d{w_\n^{\simtype}}}{\absvar}$}
-%		    \end{subfigure}%
-%		    ~ 
-%      }
-%      
-%    }
-%    \caption[Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for all equation types, embedded]{Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for Euler equations(left column), laminar \ac{NSE} equations (center column) and \ac{NSE} equations with turbulence models (right column) in the embedded framework.}
-%    \label{fig:verification_dwds_emb_comparison}
-%\end{figure}
-%
-
+\begin{figure}[t!]
+    \centering
+    	\includegraphics[width=0.5\linewidth]{\mainpath/fig/pdf/multielem/liftdrag.pdf}
+    	\caption[Multi-element example: LDR-ratio]{\acf{LDR} over the parameter space for the example presented in figure~\ref{fig:multi_elem_setup}. $\alpha_0$ id plotted over the horizontal axis, $\alpha_1$ over the vertical axis. There is no local maximum, instead the optimum is on the border of the parameter space. Both the starting configuration as well as the optimum found by the optimizer are plotted. The optimization has been perfomed using \texttt{SciPy:L-BFGS-B}. }
+    	\label{fig:multi_elem_ldr}
+\end{figure}
 
 
 

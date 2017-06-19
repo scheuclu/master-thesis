@@ -1,0 +1,47 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\def\mainpath{/home/lukas/Desktop/project/independence/project/thesis/}
+\def\tikzpath{\mainpath/fig/tikz}
+
+\usetikzlibrary{positioning}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepgfplotslibrary{groupplots}
+
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{filecontents}
+\usepgfplotslibrary{fillbetween}
+\input{\mainpath/customcommands}
+
+\tikzset{>=latex}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\input{\mainpath/colordefinitions}
+\begin{document}
+
+
+
+
+
+\pgfplotstableread[col sep = comma]{/home/lukas/Desktop/project/independence/project/simulations/naca0012/minLiftOverDrag/mesh/archive/euler_frontfixed_9it_nominlift/py/LDR.csv}\mydata
+\begin{tikzpicture}
+
+\begin{axis}[ylabel=LDR-ratio,xlabel=iteration number,width=8cm,height=5cm,]
+ \addplot[thick,primary_0,mark=o] table[x expr=\coordindex, y index=0]{\mydata};
+ 
+\end{axis}
+\end{tikzpicture}
+
+
+
+\end{document}
+
+

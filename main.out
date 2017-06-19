@@ -1,63 +1,74 @@
-\BOOKMARK [1][-]{section.1}{Fluid mechanics}{}% 1
-\BOOKMARK [2][-]{subsection.1.1}{Eulerian and Lagrangian view}{section.1}% 2
-\BOOKMARK [3][-]{subsubsection.1.1.1}{Material derivative}{subsection.1.1}% 3
-\BOOKMARK [3][-]{subsubsection.1.1.2}{Eulerian derivative}{subsection.1.1}% 4
-\BOOKMARK [2][-]{subsection.1.2}{Basic equations of fluid mechanics}{section.1}% 5
-\BOOKMARK [3][-]{subsubsection.1.2.1}{Incompressible Navier Stokes Equations}{subsection.1.2}% 6
-\BOOKMARK [3][-]{subsubsection.1.2.2}{Compressible Navier Stokes Equations}{subsection.1.2}% 7
-\BOOKMARK [3][-]{subsubsection.1.2.3}{Euler equations}{subsection.1.2}% 8
-\BOOKMARK [3][-]{subsubsection.1.2.4}{Conservative Form}{subsection.1.2}% 9
-\BOOKMARK [3][-]{subsubsection.1.2.5}{Conservative form of the Euler equations}{subsection.1.2}% 10
-\BOOKMARK [3][-]{subsubsection.1.2.6}{Equations of state}{subsection.1.2}% 11
-\BOOKMARK [3][-]{subsubsection.1.2.7}{Reynolds Averaged Navier-Stokes \(RANS\) Equations}{subsection.1.2}% 12
-\BOOKMARK [1][-]{section.2}{Numerical solution}{}% 13
-\BOOKMARK [2][-]{subsection.2.1}{Basic Finite Volumes \(FV\) formulation}{section.2}% 14
-\BOOKMARK [2][-]{subsection.2.2}{Finite Volume method for fluid mechanics}{section.2}% 15
-\BOOKMARK [2][-]{subsection.2.3}{Mixed FV-FE formulation}{section.2}% 16
-\BOOKMARK [3][-]{subsubsection.2.3.1}{Derivation of the mixed FV-FE formulation}{subsection.2.3}% 17
-\BOOKMARK [3][-]{subsubsection.2.3.2}{Geometric considerations}{subsection.2.3}% 18
-\BOOKMARK [2][-]{subsection.2.4}{Second Order FV methods}{section.2}% 19
-\BOOKMARK [3][-]{subsubsection.2.4.1}{Linear reconstrucrtion}{subsection.2.4}% 20
-\BOOKMARK [3][-]{subsubsection.2.4.2}{The concept of Total Variation Diminishing \(TVD\)}{subsection.2.4}% 21
-\BOOKMARK [3][-]{subsubsection.2.4.3}{Monotonic Upwind scheme for Conservation Laws \(MUSCL\)}{subsection.2.4}% 22
-\BOOKMARK [2][-]{subsection.2.5}{The immersed boundary method}{section.2}% 23
-\BOOKMARK [1][-]{section.3}{Fluid structure interaction}{}% 24
-\BOOKMARK [2][-]{subsection.3.1}{Coupled three-field formulation}{section.3}% 25
-\BOOKMARK [3][-]{subsubsection.3.1.1}{Staggered algorithm}{subsection.3.1}% 26
-\BOOKMARK [1][-]{section.4}{Optimization}{}% 27
-\BOOKMARK [2][-]{subsection.4.1}{Optimization Model}{section.4}% 28
-\BOOKMARK [2][-]{subsection.4.2}{Design Model}{section.4}% 29
-\BOOKMARK [2][-]{subsection.4.3}{Analysis Model}{section.4}% 30
-\BOOKMARK [1][-]{section.5}{Fluid Sensitivity Analysis \(SA\)}{}% 31
-\BOOKMARK [2][-]{subsection.5.1}{General concepts}{section.5}% 32
-\BOOKMARK [2][-]{subsection.5.2}{Sensitivity derivation}{section.5}% 33
-\BOOKMARK [3][-]{subsubsection.5.2.1}{Calculation of qjsi86418188 to.bold0mu mumu wwtruewwww0}{subsection.5.2}% 34
-\BOOKMARK [3][-]{subsubsection.5.2.2}{Calculation of qjbold0mu mumu wwtruewwww86418188 to.bold0mu mumu wwtruewwww0}{subsection.5.2}% 35
-\BOOKMARK [3][-]{subsubsection.5.2.3}{Calculation of d bold0mu mumu wwtruewwwwd si 86418188 to.bold0mu mumu wwtruewwww0}{subsection.5.2}% 36
-\BOOKMARK [2][-]{subsection.5.3}{Full sensitivity equation}{section.5}% 37
-\BOOKMARK [1][-]{section.6}{Derivatives of the fluid residual}{}% 38
-\BOOKMARK [2][-]{subsection.6.1}{Fluid Jacobian bold0mu mumu RRtrueRRRRbold0mu mumu wwtruewwww}{section.6}% 39
-\BOOKMARK [3][-]{subsubsection.6.1.1}{Derivative of the convective Jacobian bold0mu mumu RRtrueRRRRcbold0mu mumu wwtruewwww}{subsection.6.1}% 40
-\BOOKMARK [3][-]{subsubsection.6.1.2}{Derivative of the viscous Jacobian bold0mu mumu RRtrueRRRRcbold0mu mumu wwtruewwww}{subsection.6.1}% 41
-\BOOKMARK [2][-]{subsection.6.2}{Analytic Jacobian of the Roe flux}{section.6}% 42
-\BOOKMARK [2][-]{subsection.6.3}{Derivative with respect to the abstract variable bold0mu mumu RRtrueRRRRs}{section.6}% 43
-\BOOKMARK [3][-]{subsubsection.6.3.1}{Convective contribution bold0mu mumu RRtrueRRRRcs}{subsection.6.3}% 44
-\BOOKMARK [3][-]{subsubsection.6.3.2}{Viscous contribution bold0mu mumu RRtrueRRRRvs}{subsection.6.3}% 45
-\BOOKMARK [1][-]{section.7}{Aero-elastic Sensitivity Analysis}{}% 46
-\BOOKMARK [2][-]{subsection.7.1}{Direct vs. adjoint approach}{section.7}% 47
-\BOOKMARK [3][-]{subsubsection.7.1.1}{Direct Sensitivity Analysis for the Euler equations}{subsection.7.1}% 48
-\BOOKMARK [3][-]{subsubsection.7.1.2}{Adjoint Sensitivity Analysis for the Euler equations}{subsection.7.1}% 49
-\BOOKMARK [1][-]{section.8}{The Embedded Boundary Method - FIVER}{}% 50
-\BOOKMARK [2][-]{subsection.8.1}{Setup}{section.8}% 51
-\BOOKMARK [2][-]{subsection.8.2}{Evaluation of the inviscid term at the interface}{section.8}% 52
-\BOOKMARK [3][-]{subsubsection.8.2.1}{First order FIVER}{subsection.8.2}% 53
-\BOOKMARK [3][-]{subsubsection.8.2.2}{Second order FIVER}{subsection.8.2}% 54
-\BOOKMARK [2][-]{subsection.8.3}{Evaluation of the viscous terms at the interface}{section.8}% 55
-\BOOKMARK [3][-]{subsubsection.8.3.1}{Reconstruction of the fluid-state at ghost-nodes}{subsection.8.3}% 56
-\BOOKMARK [2][-]{subsection.8.4}{Evaluation of forces}{section.8}% 57
-\BOOKMARK [2][-]{subsection.8.5}{The level-set method}{section.8}% 58
-\BOOKMARK [1][-]{section.9}{Verification}{}% 59
-\BOOKMARK [2][-]{subsection.9.1}{Approach}{section.9}% 60
-\BOOKMARK [2][-]{subsection.9.2}{Mach-sensitivity}{section.9}% 61
-\BOOKMARK [2][-]{subsection.9.3}{Shape-sensitivity}{section.9}% 62
-\BOOKMARK [2][-]{subsection.9.4}{Verification of Lift and Drag results}{section.9}% 63
+\BOOKMARK [0][-]{chapter.1}{Basic equations of fluid mechanics}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Eulerian and Lagrangian view}{chapter.1}% 2
+\BOOKMARK [2][-]{subsection.1.1.1}{Material derivative}{section.1.1}% 3
+\BOOKMARK [2][-]{subsection.1.1.2}{Eulerian derivative}{section.1.1}% 4
+\BOOKMARK [1][-]{section.1.2}{Basic equations of fluid mechanics}{chapter.1}% 5
+\BOOKMARK [2][-]{subsection.1.2.1}{Incompressible Navier Stokes Equations}{section.1.2}% 6
+\BOOKMARK [2][-]{subsection.1.2.2}{Compressible Navier Stokes Equations}{section.1.2}% 7
+\BOOKMARK [2][-]{subsection.1.2.3}{Euler equations}{section.1.2}% 8
+\BOOKMARK [2][-]{subsection.1.2.4}{Conservative form of a Partial Differential Equation}{section.1.2}% 9
+\BOOKMARK [2][-]{subsection.1.2.5}{Conservative form of the Euler equations}{section.1.2}% 10
+\BOOKMARK [2][-]{subsection.1.2.6}{Equations of state}{section.1.2}% 11
+\BOOKMARK [2][-]{subsection.1.2.7}{Reynolds Averaged Navier-Stokes \(RANS\) Equations}{section.1.2}% 12
+\BOOKMARK [0][-]{chapter.2}{The Finite Volume method}{}% 13
+\BOOKMARK [1][-]{section.2.1}{Basic Finite Volumes formulation}{chapter.2}% 14
+\BOOKMARK [1][-]{section.2.2}{Finite Volume method for fluid mechanics}{chapter.2}% 15
+\BOOKMARK [1][-]{section.2.3}{FE-like treatment of the viscous term}{chapter.2}% 16
+\BOOKMARK [2][-]{subsection.2.3.1}{Derivation of the mixed FV-FE formulation}{section.2.3}% 17
+\BOOKMARK [1][-]{section.2.4}{Second Order FV methods}{chapter.2}% 18
+\BOOKMARK [2][-]{subsection.2.4.1}{Linear reconstruction}{section.2.4}% 19
+\BOOKMARK [2][-]{subsection.2.4.2}{The Total Variation Diminishing \(TVD\) property}{section.2.4}% 20
+\BOOKMARK [2][-]{subsection.2.4.3}{Monotonic Upwind scheme for Conservation Laws \(MUSCL\)}{section.2.4}% 21
+\BOOKMARK [2][-]{subsection.2.4.4}{The Immersed Boundary Method \(IBM\)}{section.2.4}% 22
+\BOOKMARK [0][-]{chapter.3}{Fluid structure interaction}{}% 23
+\BOOKMARK [1][-]{section.3.1}{Motivation}{chapter.3}% 24
+\BOOKMARK [1][-]{section.3.2}{Coupled three-field formulation}{chapter.3}% 25
+\BOOKMARK [2][-]{subsection.3.2.1}{Staggered algorithm}{section.3.2}% 26
+\BOOKMARK [0][-]{chapter.4}{Optimization}{}% 27
+\BOOKMARK [1][-]{section.4.1}{Optimization Model}{chapter.4}% 28
+\BOOKMARK [1][-]{section.4.2}{Design Model}{chapter.4}% 29
+\BOOKMARK [1][-]{section.4.3}{Analysis Model}{chapter.4}% 30
+\BOOKMARK [0][-]{chapter.5}{Fluid Sensitivity Analysis \(SA\)}{}% 31
+\BOOKMARK [1][-]{section.5.1}{General concepts}{chapter.5}% 32
+\BOOKMARK [1][-]{section.5.2}{Sensitivity derivation}{chapter.5}% 33
+\BOOKMARK [2][-]{subsection.5.2.1}{Calculation of qjsi86418188 to.bold0mu mumu wwtruewwww0}{section.5.2}% 34
+\BOOKMARK [2][-]{subsection.5.2.2}{Calculation of qjbold0mu mumu wwtruewwww86418188 to.bold0mu mumu wwtruewwww0}{section.5.2}% 35
+\BOOKMARK [2][-]{subsection.5.2.3}{Calculation of d bold0mu mumu wwtruewwwwd si 86418188 to.bold0mu mumu wwtruewwww0}{section.5.2}% 36
+\BOOKMARK [1][-]{section.5.3}{Full sensitivity equation}{chapter.5}% 37
+\BOOKMARK [0][-]{chapter.6}{Derivatives of the fluid residual}{}% 38
+\BOOKMARK [1][-]{section.6.1}{Fluid Jacobian bold0mu mumu RRtrueRRRRbold0mu mumu wwtruewwww}{chapter.6}% 39
+\BOOKMARK [2][-]{subsection.6.1.1}{Derivative of the convective Jacobian bold0mu mumu RRtrueRRRRcbold0mu mumu wwtruewwww}{section.6.1}% 40
+\BOOKMARK [2][-]{subsection.6.1.2}{Derivative of the viscous Jacobian bold0mu mumu RRtrueRRRRcbold0mu mumu wwtruewwww}{section.6.1}% 41
+\BOOKMARK [1][-]{section.6.2}{Analytic Jacobian of the Roe flux bold0mu mumu truebold0mu mumu wwtruewwww}{chapter.6}% 42
+\BOOKMARK [1][-]{section.6.3}{Derivative with respect to the abstract variable bold0mu mumu RRtrueRRRRs}{chapter.6}% 43
+\BOOKMARK [2][-]{subsection.6.3.1}{Convective contribution to bold0mu mumu RRtrueRRRRs}{section.6.3}% 44
+\BOOKMARK [2][-]{subsection.6.3.2}{Viscous contribution to bold0mu mumu RRtrueRRRRs}{section.6.3}% 45
+\BOOKMARK [0][-]{chapter.7}{Aero-elastic Sensitivity Analysis}{}% 46
+\BOOKMARK [1][-]{section.7.1}{Direct and adjoint approach}{chapter.7}% 47
+\BOOKMARK [2][-]{subsection.7.1.1}{Direct Sensitivity Analysis for the Euler equations}{section.7.1}% 48
+\BOOKMARK [2][-]{subsection.7.1.2}{Adjoint Sensitivity Analysis for the Euler equations}{section.7.1}% 49
+\BOOKMARK [0][-]{chapter.8}{The Embedded Boundary Method - FIVER}{}% 50
+\BOOKMARK [1][-]{section.8.1}{Setup}{chapter.8}% 51
+\BOOKMARK [1][-]{section.8.2}{Evaluation of the inviscid term at the interface}{chapter.8}% 52
+\BOOKMARK [2][-]{subsection.8.2.1}{First order FIVER}{section.8.2}% 53
+\BOOKMARK [2][-]{subsection.8.2.2}{Second order FIVER}{section.8.2}% 54
+\BOOKMARK [1][-]{section.8.3}{Evaluation of the viscous terms at the interface}{chapter.8}% 55
+\BOOKMARK [2][-]{subsection.8.3.1}{Reconstruction of the fluid-state at ghost-nodes}{section.8.3}% 56
+\BOOKMARK [1][-]{section.8.4}{Evaluation of forces}{chapter.8}% 57
+\BOOKMARK [1][-]{section.8.5}{The level-set method}{chapter.8}% 58
+\BOOKMARK [0][-]{chapter.9}{Verification}{}% 59
+\BOOKMARK [1][-]{section.9.1}{Approach}{chapter.9}% 60
+\BOOKMARK [1][-]{section.9.2}{Verification of bold0mu mumu wwtruewwwws}{chapter.9}% 61
+\BOOKMARK [2][-]{subsection.9.2.1}{Mach-sensitivity}{section.9.2}% 62
+\BOOKMARK [2][-]{subsection.9.2.2}{Shape-sensitivity}{section.9.2}% 63
+\BOOKMARK [1][-]{section.9.3}{Verification of Lift and Drag results}{chapter.9}% 64
+\BOOKMARK [0][-]{chapter.10}{Examples}{}% 65
+\BOOKMARK [1][-]{section.10.1}{LDR shape-optimization of a NACA0012 airfoil}{chapter.10}% 66
+\BOOKMARK [2][-]{subsection.10.1.1}{Setup}{section.10.1}% 67
+\BOOKMARK [2][-]{subsection.10.1.2}{Results}{section.10.1}% 68
+\BOOKMARK [1][-]{section.10.2}{Multi-element airfoil with large kinematics}{chapter.10}% 69
+\BOOKMARK [2][-]{subsection.10.2.1}{Setup}{section.10.2}% 70
+\BOOKMARK [2][-]{subsection.10.2.2}{Results}{section.10.2}% 71
+\BOOKMARK [0][-]{chapter.11}{Conclusions}{}% 72
+\BOOKMARK [1][-]{section.11.1}{Summary}{chapter.11}% 73
+\BOOKMARK [1][-]{section.11.2}{Outlook}{chapter.11}% 74

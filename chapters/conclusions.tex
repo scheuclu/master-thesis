@@ -22,12 +22,12 @@ The thesis than shifted towards motivating \acf{SA} by introducing the basics of
 The derivation of these gradients in an analytic manner has been the main focus of this thesis and was introduced in section~\ref{sec:SA} for fluid equations, and section~\ref{sec:aeroelastic_sa} for coupled fluid-structure interaction problems.\\
 The theory covered both, the direct and the adjoint method, the implementation was focused on implementing the direct method first.\\
 Details on how to evaluate a number of particularly interesting derivatives have been provided in section~\ref{sec:dresidual_derivative}.\\
-The implemented analytic derivatives have undergone thorough verification in section~\ref{sec:verification} before they have been applied to simple demonstrative examples in section~ref{sec:examples}.
+The implemented analytic derivatives have undergone thorough verification in section~\ref{sec:verification} before they have been applied to simple demonstrative examples in section~\ref{sec:examples}.
 
 \section{Outlook}\label{sec:outlook}
-We have successfullu demonstrated the feasibility of  analytic sensitivity analysis with an \acf{IBM} and fully viscous and turbulent flows.\\
+We have successfully demonstrated the feasibility of  analytic sensitivity analysis with an \acf{IBM} and fully viscous and turbulent flows.\\
 In combination with the \acf{FIVER}, this offers a very promising framework for aerodynamic and aeroelastic shape optimization. By utilizing the \ac{IBM} we have been able to optimize complex and greatly changing geometries, that would not have been possible in a body-fitted framework, or would at least have required some sort of re-meshing algorithm. The examples delivered promising results for both inviscid and viscous flows.\\
-So far, all examples and verification have been run on first-order simulations. Future effort should therefore focus on the validation of the implemented framework on higher order schemes.\\
+So far, all examples and verifications have been run on first-order simulations. Future effort should therefore focus on the validation of the implemented framework on higher order schemes.\\
 Overall, the developed framework represents a powerful and comprehensive tool for gradient-based aerodynamic shape optimization. The \ac{IBM} framework provides unprecedented flexibility with regards to the geometry while greatly improving both the computational efficiency as well as stability compared to \ac{FD} gradients.
 
 
