@@ -7,11 +7,12 @@
 
 
 \chapter{The Finite Volume method}\label{sec:finite_volume_method}
+\addcontentsline{lof}{chapter}{The Finite Volume method}
 \minitoc
 %\sectlof
 %\sectlot
 
-\section{Basic \acl{FV} formulation}\label{sec:basic_fv}
+\section{Basic Finite Volume formulation}\label{sec:basic_fv}
 Like \ac{FD} or \acf{FE}, the \acf{FV} method is a mean of solving a \ac{PDE} by transforming it into a discrete algebraic form. In the field of fluid mechanics, the finite volume method is the most popular approach. Other than \ac{FD} or \ac{FE}, the \ac{FV} is conservative by construction. In contrast to \ac{FD} it can easily be implemented for unstructured grids. Compared to the \ac{FE} method, where boundary conditions come naturally from the formulation, this causes some difficulties in \ac{FV}.\\
 It shall also be mentioned that the introduction of stabilization schemes(like streamline upwinding), is much easier in an \ac{FV} formulation.
 Overall, for \ac{CFD}, \ac{FV} has so far shown to be the best compromise between accuracy, stability and efficiency.

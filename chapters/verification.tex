@@ -9,6 +9,7 @@
 \setlength{\delimitershortfall}{0pt}
 
 \chapter{Verification}\label{sec:verification}
+\addcontentsline{lof}{chapter}{Verification}
 \minitoc
 %\sectlof
 %\sectlot
@@ -55,13 +56,14 @@ The validation of integrated forces is provided in figures~[\ref{fig:dLdMa_Euler
 
 \begin{figure}
 \centering
-\includegraphics[scale=0.8]{\mainpath/fig/pdf/verificationsetup.pdf}
+\includegraphics[scale=1.0]{\mainpath/fig/pdf/verificationsetup.pdf}
 \caption[Verification setup]{Setup used for the sensitivity verification. A simple NACA0012 profile is considered. The design element concept, as described in section \ref{sec:design_model} is applied. The profile is deformed using a cubic polynomial in x-direction and a linear polynomial in y-direction.}
 \label{fig:verification_setup}
 \end{figure}
 
 \section{Verification of $\pdfrac{\dfstate}{\absvar}$}\label{sec:verification_dwds}
-\subsection{Mach-sensitivity}
+As explained the first quantity we can reasonably verify is the partial derivative of the fluid state vector $\dfstate$ with respect to the abstract variable. We do this for both a global quantity( free stream mach number $\machnum$) in section \ref{sec:verification_dwds_mach} as well as a shape variable in section~\ref{sec:verification_dwds_shape}
+\subsection{Mach-sensitivity}\label{sec:verification_dwds_mach}
 For the body-fitted case, the verification of $\tfrac{\dfstate}{\machnum_{\infty}}$ is provided in figure~\ref{fig:verification_dwdma_ale_Euler} for Euler equations, figure~\ref{fig:verification_dwdma_ale_Laminar} for full \ac{NSE} and in figure~\ref{fig:verification_dwdma_ale_RANS} for \ac{NSE} with an additional Spallart-Almares turbulence model.
 Additionally, a side by side comparison of the analytic results between all three equation types is also provided in figure~\ref{fig:verification_dwdma_ale_comparison} in order to ensure, that the additional viscous and turbulent terms actually account for a visible difference.\\
 For the embedded case, we provide the verification of $\tfrac{\dfstate}{\machnum_{\infty}}$  in figure~\ref{fig:verification_dwdma_emb_Euler} for Euler equation, figure~\ref{fig:verification_dwdma_emb_Laminar} for full \ac{NSE} and in figure~\ref{fig:verification_dwdma_emb_RANS} for \ac{NSE} equations with an additional Spallart-Almares turbulence model.
@@ -134,52 +136,52 @@ Again, a side by side comparison of the analytic results between all three equat
 %--------------------------------------------------------------------------------------------
 %\subsection{Comparison}
 
-\begin{figure}[t!]
-    \centering
-    \textbf{Comparison of $\tfrac{\dfstate}{\machnum_{\infty}}$ in the body-fitted framework for all 3 equation types}\par\medskip    
-    \foreach \n in {1,2,3,5}{
-      \foreach \simtype in {Euler,Laminar,RANS}{
-		    \begin{subfigure}[t]{0.3\textwidth}
-		        \centering
-			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
-              \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
-		        \fbox{\includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/machsens/ALE/comparison_\simtype_component\n_ana}}
-		        \caption{$\linepdfrac{\d{w_\n^{\simtype}}}{\machnum_{\infty}}$}
-		    \end{subfigure}%
-		    ~ 
-      }~
-	    \begin{subfigure}[t]{0.1\textwidth}
-	      \includegraphics[width=0.19\linewidth]{\mainpath/fig/studies/StateVector_verification/colorbar_empty}
-	    \end{subfigure}
-      
-    }
-    \caption[Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for all equation types body-fitted]{Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for Euler equations(left column), laminar \ac{NSE} equations (center column) and \ac{NSE} equations with turbulence models (right column) in the body-fitted framework.}
-    \label{fig:verification_dwdma_ale_comparison}
-\end{figure}
-
-
-\begin{figure}[t!]
-    \centering
-    \textbf{Comparison of $\tfrac{\dfstate}{\machnum_{\infty}}$ in the embedded framework for all 3 equation types}\par\medskip    
-    \foreach \n in {1,2,3,5}{
-      \foreach \simtype in {Euler,Laminar,RANS}{
-		    \begin{subfigure}[t]{0.3\textwidth}
-		        \centering
-			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
-              \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
-		        \fbox{\includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/machsens/Emb/comparison_\simtype_component\n_ana}}
-		        \caption{$\linepdfrac{\d{w_\n^{\simtype}}}{\machnum_{\infty}}$}
-		    \end{subfigure}%
-		    ~ 
-      }~
-	    \begin{subfigure}[t]{0.1\textwidth}
-	      \includegraphics[width=0.19\linewidth]{\mainpath/fig/studies/StateVector_verification/colorbar_empty}
-	    \end{subfigure}
-      
-    }
-    \caption[Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for all equation types embedded]{Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for Euler equations(left column), laminar \ac{NSE} equations (center column) and \ac{NSE} equations with turbulence models (right column) in the embedded framework.}
-    \label{fig:verification_dwdma_emb_comparison}
-\end{figure}
+%\begin{figure}[t!]
+%    \centering
+%    \textbf{Comparison of $\tfrac{\dfstate}{\machnum_{\infty}}$ in the body-fitted framework for all 3 equation types}\par\medskip    
+%    \foreach \n in {1,2,3,5}{
+%      \foreach \simtype in {Euler,Laminar,RANS}{
+%		    \begin{subfigure}[t]{0.3\textwidth}
+%		        \centering
+%			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
+%              \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
+%		        \fbox{\includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/machsens/ALE/comparison_\simtype_component\n_ana}}
+%		        \caption{$\linepdfrac{\d{w_\n^{\simtype}}}{\machnum_{\infty}}$}
+%		    \end{subfigure}%
+%		    ~ 
+%      }~
+%	    \begin{subfigure}[t]{0.1\textwidth}
+%	      \includegraphics[width=0.19\linewidth]{\mainpath/fig/studies/StateVector_verification/colorbar_empty}
+%	    \end{subfigure}
+%      
+%    }
+%    \caption[Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for all equation types body-fitted]{Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for Euler equations(left column), laminar \ac{NSE} equations (center column) and \ac{NSE} equations with turbulence models (right column) in the body-fitted framework.}
+%    \label{fig:verification_dwdma_ale_comparison}
+%\end{figure}
+%
+%
+%\begin{figure}[t!]
+%    \centering
+%    \textbf{Comparison of $\tfrac{\dfstate}{\machnum_{\infty}}$ in the embedded framework for all 3 equation types}\par\medskip    
+%    \foreach \n in {1,2,3,5}{
+%      \foreach \simtype in {Euler,Laminar,RANS}{
+%		    \begin{subfigure}[t]{0.3\textwidth}
+%		        \centering
+%			        \setlength{\fboxsep}{\valfboxsep}%\valfboxsep=0pt
+%              \setlength{\fboxrule}{\valfboxrule}%\valfboxrule=1pt
+%		        \fbox{\includegraphics[width=\linewidth]{\mainpath/fig/studies/StateVector_verification/machsens/Emb/comparison_\simtype_component\n_ana}}
+%		        \caption{$\linepdfrac{\d{w_\n^{\simtype}}}{\machnum_{\infty}}$}
+%		    \end{subfigure}%
+%		    ~ 
+%      }~
+%	    \begin{subfigure}[t]{0.1\textwidth}
+%	      \includegraphics[width=0.19\linewidth]{\mainpath/fig/studies/StateVector_verification/colorbar_empty}
+%	    \end{subfigure}
+%      
+%    }
+%    \caption[Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for all equation types embedded]{Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for Euler equations(left column), laminar \ac{NSE} equations (center column) and \ac{NSE} equations with turbulence models (right column) in the embedded framework.}
+%    \label{fig:verification_dwdma_emb_comparison}
+%\end{figure}
 
 
 
@@ -189,7 +191,7 @@ Again, a side by side comparison of the analytic results between all three equat
 %--------------------------------------------------------------------------------------------
 
 
-\subsection{Shape-sensitivity}
+\subsection{Shape-sensitivity}\label{sec:verification_dwds_shape}
 The verification of $\tfrac{\dfstate}{\absvar}$ for body-fitted simulations is provided in figure~\ref{fig:verification_dwds_ale_Euler} for Euler equation, figure~\ref{fig:verification_dwds_ale_Laminar} for full \ac{NSE} and in figure~\ref{fig:verification_dwds_ale_RANS} for \ac{NSE} with an additional Spallart-Almares turbulence model.
 Additionally, a side by side comparison of the analytic results between all three equation types is also provided in figure~\ref{fig:verification_dwds_ale_comparison} in order to ensure that the additional viscous and turbulent terms actually account for a visible difference.
 \\
@@ -279,7 +281,7 @@ Again, a side by side comparison of the analytic results between all three equat
 	    \end{subfigure}
       
     }
-    \caption[Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for all equation types, body-fitted]{Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for Euler equations(left column), laminar \ac{NSE} equations (center column) and \ac{NSE} equations with turbulence models (right column) in the body-fitted framework.}
+    \caption[Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for all equation types, body-fitted]{Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for Euler equations(left column), laminar \ac{NSE} equations (center column) and \ac{NSE} equations with turbulence models (right column) in the body-fitted framework. The purpose of this comparison is to show that each additional equation term actually has a visible impact on the solution, thus we ensure that the separate verification of each equation type in the previous chapter actually captured all terms.}
     \label{fig:verification_dwds_ale_comparison}
 \end{figure}
 
@@ -302,7 +304,7 @@ Again, a side by side comparison of the analytic results between all three equat
 	    \end{subfigure}
       
     }
-    \caption[Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for all equation types, embedded]{Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for Euler equations(left column), laminar \ac{NSE} equations (center column) and \ac{NSE} equations with turbulence models (right column) in the embedded framework.}
+    \caption[Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for all equation types, embedded]{Comparison of analytic $\tfrac{\dfstate}{\machnum_{\infty}}$ for Euler equations(left column), laminar \ac{NSE} equations (center column) and \ac{NSE} equations with turbulence models (right column) in the embedded framework. The purpose of this comparison is to show that each additional equation term actually has a visible impact on the solution, thus we ensure that the separate verification of each equation type in the previous chapter actually captured all terms. }
     \label{fig:verification_dwds_emb_comparison}
 \end{figure}
 

@@ -22,7 +22,7 @@ under Time  {
   }
   under Implicit {
     TurbulenceModelCoupling = Strong;
-    MatrixVectorProduct = FiniteDifference;
+    MatrixVectorProduct = Exact;
     FiniteDifferenceOrder = SecondOrder;
     under Newton {
       MaxIts = 5;

@@ -48,7 +48,7 @@ under SensitivityAnalysis {
     Type = Gmres;
     MaxIts = 500;
     KrylovVectors = 500;
-    Eps = 1e-8;
+    Eps = 1e-10;
     Output = "results/linearsolver_direct.txt";
     under Preconditioner { Type = Ras; Fill = 0; }
   }

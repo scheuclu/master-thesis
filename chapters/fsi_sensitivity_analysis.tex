@@ -58,6 +58,7 @@
 \def\PfstateBYabsvarI    {\pdfrac{\fstate}     {\absvar_i}}
 
 \chapter{Aero-elastic \acl{SA}}\label{sec:aeroelastic_sa}
+%\addcontentsline{lof}{chapter}{Aero-elastic \acl{SA}}
 \minitoc
 %\sectlof
 %\sectlot
@@ -156,13 +157,10 @@ Combining the previous two equations, it follows that the total derivative of th
 Where $n_{eq}$ is the total number of equations(e.g. five fluid state equations for the compressible \ac{NSE} in 3D, three equations of the mesh motions and another three equations for the structure motion), $n_{q}$ is the number of optimization criteria and $n_s$ is the number of abstract variables.
 
 \section{Direct and adjoint approach}
-Looking at the above equation ~\ref{eq:totderiv_optcritBYabsvar} one can identify a matrix-matrix-matrix product. Matrix-matrix products are not commutative, one can, however, perform the following transformation
-\begin{align}\label{eq:adjoint_concept}
-\dmat{A}\dmat{B}\dmat{C}                    &= \dmat{A}(\dmat{B}\dmat{C}) \nonumber\\
-\left[ \dmat{A}(\dmat{B}\dmat{C}) \right]^T &= (\dmat{B}\dmat{C})^T\dmat{A}^T=\dmat{C}^T\dmat{B}^T\dmat{A}^T=\dmat{C}^T(\dmat{A}\dmat{B})^T \nonumber\\
-\rightarrow \dmat{A}\dmat{B}\dmat{C}        &= \left[\dmat{C}^T(\dmat{A}\dmat{B})\right]^T
-\end{align}
-Depending on the sizes of the involved matrices one or the other form might be advantageous. Specifically, the straight forward way of computing the triple product is known as the \textit{direct approach} and the transposed matrix way is called the \textit{adjoint approach}.
+Looking at the above equation ~\ref{eq:totderiv_optcritBYabsvar} one can identify a matrix-matrix-matrix product. 
+For this system the same consideration as already presented in equation~\ref{eq:adjoint_concept} hold.\\
+Particularly the conclusion, that depending on the number of optimization criteria versus the number of abstract variables, one or the other approach is advantageous, holds.
+
 
 \paragraph{Direct approach}
 In the direct approach, one first computes the derivatives of the aeroelastic response for each abstract variable and then performs the matrix product with $\tensor{A}$ in equation \eqref{eq:totderiv_optcritBYabsvar}:
@@ -193,7 +191,7 @@ In the direct approach, one first computes the derivatives of the aeroelastic re
   \DfstateBYabsvarI \\[0.5em]
   \end{bmatrix}
 \end{align}
-By standard algebra theory, the total complexity of this computation can be approximated as $\order{n_{eq}^2n_{\absvars}+n_{\optcrits}n_{eq}n_{\absvars}}$
+As already mentioned, standard algebra theory, the total complexity of this computation can be approximated as $\order{n_{eq}^2n_{\absvars}+n_{\optcrits}n_{eq}n_{\absvars}}$
 
 
 
@@ -227,10 +225,8 @@ In the adjoint approach one first computes the derivatives of the optimization c
 Here the total complexity can be approximated as $\order{n_{eq}^2n_{\optcrits}+n_{\optcrits}n_{eq}n_{\absvars}}$\\
 
 
-If one or the other approach is to be preferred depends on the optimization setup, particularly the number of optimization criteria and the number of optimization variables. Looking at the orders above, one can conclude that if the number of abstract parameters $n_{\absvars}$ is smaller than the number of optimization criteria, the direct approach is more efficient, otherwise the adjoint approach is to be preferred. Additionally one can argue, that the relevant term in the orders above is the one with $n_{eq}^2$  since it dominates the sum. Therefore, depending on whether $n_s$ or $n_q$ is bigger, the direct or the adjoint method is to be preferred.
 
-
-\subsection{Direct \acl{SA} for the Euler equations}\label{sec:direct_sa}
+\subsection{Direct analysis for the Euler equations}\label{sec:direct_sa}
 
 
 The $\dmat{A}$ matrix for the direct approach in ALE formulation can be written as
@@ -347,7 +343,7 @@ Finally, the convergence of the staggered algorithm can be monitored via
 \end{align}
 
 
-\subsection{Adjoint \acl{SA} for the Euler equations}\label{sec:adjoint_sa}
+\subsection{Adjoint analysis for the Euler equations}\label{sec:adjoint_sa}
 The adjoint SA follows the same scheme as the direct one
 
 

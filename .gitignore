@@ -8,5 +8,11 @@
 *.nlo
 *_latexmk
 *.mtc*
+re
+sys
+tags
+*.out
+*.maf
+*.bbl
 fig/studies
 

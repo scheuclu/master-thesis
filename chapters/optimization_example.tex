@@ -11,6 +11,7 @@
 
 \FloatBarrier 
 \chapter{Examples}\label{sec:examples}
+\addcontentsline{lof}{chapter}{Examples}
 \minitoc
 %\sectlof
 %\sectlot
@@ -104,8 +105,8 @@ The setup is described in figure~\ref{fig:multi_elem_setup}. The airfoil consist
 
 \begin{figure}[t!]
     \centering
-    	\includegraphics[width=0.5\linewidth]{/home/lukas/Desktop/project/independence/project/thesis/fig/pdf/multielem/setup.pdf}
-    	\caption[Multi-element example: setup]{Setup for the multi-element example. A 3 element airfoil is considered. The motion of the from of back element is being described via a simple rotation. This is done on purpose to keep the parameter-space low-dimensional. This example would not be possible in the body-fitted framework.}
+    	\includegraphics[width=0.6\linewidth]{/home/lukas/Desktop/project/independence/project/thesis/fig/pdf/multielem/setup.pdf}
+    	\caption[Multi-element example: setup]{Setup for the multi-element example. A 3 element airfoil is considered. The motion of the front and back element is being described via a simple rotation. This is done on purpose to keep the parameter-space low-dimensional. This example would not be possible in the body-fitted framework.}
     	\label{fig:multi_elem_setup}
 \end{figure}
 
@@ -124,7 +125,7 @@ The objective of this simulation was the minimization of the lift over drag rati
 \begin{figure}[t!]
     \centering
     	\includegraphics[width=0.5\linewidth]{\mainpath/fig/pdf/multielem/liftdrag.pdf}
-    	\caption[Multi-element example: LDR-ratio]{\acf{LDR} over the parameter space for the example presented in figure~\ref{fig:multi_elem_setup}. $\alpha_0$ id plotted over the horizontal axis, $\alpha_1$ over the vertical axis. There is no local maximum, instead the optimum is on the border of the parameter space. Both the starting configuration as well as the optimum found by the optimizer are plotted. The optimization has been perfomed using \texttt{SciPy:L-BFGS-B}. }
+    	\caption[Multi-element example: LDR-ratio]{\acf{LDR} over the parameter space for the example presented in figure~\ref{fig:multi_elem_setup}. $\alpha_0$ id plotted over the horizontal axis, $\alpha_1$ over the vertical axis. There is no local maximum, instead the optimum is on the border of the parameter space. Both the starting configuration as well as the optimum found by the optimizer are plotted. The optimization has been perfomed using \texttt{SciPy:L-BFGS-B}. The optimum has been found at $\alpha_0=0.0$ and $\alpha_1=0.244$. We can visually confirm that this apparently is a local optimum.}
     	\label{fig:multi_elem_ldr}
 \end{figure}
 

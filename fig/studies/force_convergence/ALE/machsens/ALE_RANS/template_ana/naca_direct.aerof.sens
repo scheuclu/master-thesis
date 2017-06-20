@@ -41,7 +41,7 @@ under SensitivityAnalysis {
   dFdS_final  = "results/dFdS_final_direct";
   Method = Direct;
   SensitivityComputation = Analytical;
-  MatrixVectorProduct = FiniteDifference;
+  MatrixVectorProduct = Exact;
   AngleRadians = Off;
   SensitivityMesh = Off;
   SensitivityMach = On;

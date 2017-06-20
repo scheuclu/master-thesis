@@ -61,6 +61,7 @@
 
 
 \chapter{Fluid \acf{SA}}\label{sec:SA}
+\addcontentsline{lof}{chapter}{Fluid \acf{SA}}
 \minitoc
 %\sectlof
 %\sectlot
@@ -273,6 +274,58 @@ After inserting \eqref{eq:lifttoddrag_by_absvar}, \eqref{eq:lifttodrag_by_dfstat
   0\text{  in Embedded framework}
 \end{cases}
 \end{align}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Direct and adjoint approach}
+Looking at the above equation one can identify a matrix-matrix-matrix product:
+
+\begin{align}
+\inv{\pdfrac{\dresidual}{\absvar}} \pdfrac{\dresidual}{\dfstate}  \pdfrac{\dfstate}{\absvar}
+\end{align}
+
+ Matrix-matrix products are not commutative, one can, however still solve this product in different ways by performin the following transformation
+\begin{align}\label{eq:adjoint_concept}
+\dmat{A}\dmat{B}\dmat{C}                    &= \dmat{A}(\dmat{B}\dmat{C}) \nonumber\\
+\left[ \dmat{A}(\dmat{B}\dmat{C}) \right]^T &= (\dmat{B}\dmat{C})^T\dmat{A}^T=\dmat{C}^T\dmat{B}^T\dmat{A}^T=\dmat{C}^T(\dmat{A}\dmat{B})^T \nonumber\\
+\rightarrow \dmat{A}\dmat{B}\dmat{C}        &= \left[\dmat{C}^T(\dmat{A}\dmat{B})\right]^T
+\end{align}
+Depending on the sizes of the involved matrices one or the other form might be advantageous. Specifically, the straight forward way of computing the triple product is known as the \textit{direct approach} and the transposed matrix way is called the \textit{adjoint approach}.
+
+
+By standard algebra theory, the total complexity of the direct computation can be approximated as $\order{n_{eq}^2n_{\absvars}+n_{\optcrits}n_{eq}n_{\absvars}}$, whereas the complexity of the adjoint computation is approximated as $\order{n_{eq}^2n_{\optcrits}+n_{\optcrits}n_{eq}n_{\absvars}}$.\\
+
+
+If one or the other approach is to be preferred depends on the optimization setup, particularly the number of optimization criteria and the number of optimization variables. Looking at the orders above, one can conclude that if the number of abstract parameters $n_{\absvars}$ is smaller than the number of optimization criteria, the direct approach is more efficient, otherwise the adjoint approach is to be preferred. Additionally one can argue, that the relevant term in the orders above is the one with $n_{eq}^2$  since it dominates the sum. Therefore, depending on whether $n_s$ or $n_q$ is bigger, the direct or the adjoint method is to be preferred.
 
 
 
