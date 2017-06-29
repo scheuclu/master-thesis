@@ -123,20 +123,20 @@
     \item PDE-constrained optimization for steady problems
       \begin{equation*}
         \begin{aligned}
-          & \underset{\dfstate \in \Rbb^{N_\wbold},~\absvar \in \Rbb^{N_\absvar}}{\text{minimize}}
-          & & \optcrit(\dfstate, \absvar) \onslide<2->{\rightarrow \textbf{e.g. Lift-Drag ratio}} \\
+          & \underset{\dfstate \in \Rbb^{N_\wbold,\dmpos},~\absvar \in \Rbb^{N_\absvar}}{\text{minimize}}
+          & & \optcrit(\dfstate(\absvar), \absvar,\dmpos(\absvar)) \onslide<2->{\rightarrow \textbf{e.g. Lift-Drag ratio}} \\
           & \text{subject to}
-          & & \Rbold(\dfstate, \absvar) = 0 \onslide<3->{\rightarrow \textbf{e.g. geometry of engine mount}} \\
-          & & & \cbold(\dfstate, \absvar) \leq 0 \onslide<4->{\rightarrow \textbf{e.g. minimmum Lift}}
+          & & \Rbold(\dfstate, \absvar,\dmpos) = 0 \onslide<3->{\rightarrow \textbf{e.g. geometry of engine mount}} \\
+          & & & \cbold(\dfstate, \absvar,\dmpos) \leq 0 \onslide<4->{\rightarrow \textbf{e.g. minimmum Lift}}
         \end{aligned}
       \end{equation*}
     \item Nested approach
       \begin{equation*}
         \begin{aligned}
           & \underset{\mubold \in \Rbb^{N_\mubold}}{\text{minimize}}
-          & & \optcrit(\dfstate(\absvar), \absvar) \\
+          & & \optcrit(\dfstate, \absvar,\dmpos) \\
           & \text{subject to}
-          & & \cbold(\dfstate(\absvar), \absvar) \leq 0.
+          & & \cbold(\dfstate, \absvar,\dmpos) \leq 0.
         \end{aligned}
       \end{equation*}
   \end{itemize}

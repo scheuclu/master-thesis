@@ -99,7 +99,7 @@
 			                                                                 \text{\ul{by} FD}
 			                                                                 }
 			                                                        }}
-			  \only<5->{\underbrace{\pdfrac{\dmpos}{\absvar_i}\bigg\rvert_{\dfstate_0}}_  {\setulcolor{neutral_2}
+			  \only<5->{\underbrace{\tfrac{\dmpos}{\absvar_i}\bigg\rvert_{\dfstate_0}}_  {\setulcolor{neutral_2}
 			                                                        \substack{
 			                                                                 \text{\ul{derived from SDESIGN}}\\
 			                                                                 \text{\ul{~}}
@@ -113,43 +113,7 @@
 
 %------------------------------------------------------------------------------
 
-\def\DdresidualBYabsvarI{ \tfrac{\dresidual}{\absvar_i} }
-\def\PdresidualBYabsvarI{ \pdfrac{\dresidual}{\absvar_i} }
-\def\PdresidualBYdfstate{ \pdfrac{\dresidual}{\dfstate}  }
-\def\DdfstateBYabsvarI  { \tfrac{\dfstate}{\absvar_i}   }
-\def\PdresidualBYdmms   { \pdfrac{\dresidual}{\dmpos}     }
-\def\DdmmsBYabsvarI     { \tfrac{\dmpos}{\absvar_i}      }
-%\everymath{\scriptstyle}
-\begin{frame}
-\frametitle{Derivation of $\pdfrac{\dfstate}{\absvar}$}
-  \begin{itemize}
-	\item The final system can be written as
-		\begin{align*}
-		\tfrac{\optcrit_j}{\absvar_i}\bigg\rvert_{\dfstate_0} &=
-		-\tfrac{\optcrit_j}{\fstate}\bigg\rvert_{\dfstate_0}
-		\inv{\left[\hle{neutral_0}{\PdresidualBYdfstate}\bigg\rvert_{\fstate_0}\right]} \\
-		&\left(
-		  \hle{neutral_1}{\PdresidualBYabsvarI}\bigg\rvert_{\fstate_0} +
-		  \begin{bmatrix}
-		    \alpha\pdfrac{\dresidual}{\dmms_\Omega}\bigg\rvert_{\dfstate_0}~
-		    \pdfrac{\dresidual}{\dmms_\Gamma}\bigg\rvert_{\dfstate_0}
-		  \end{bmatrix}
-		  \begin{bmatrix}
-		    \alpha \inv{\fic{\stiffmat}_{\Omega\Omega}} \fic{\stiffmat}_{\Omega\Gamma} \\
-		    \eye
-		  \end{bmatrix}
-		  \tfrac{\dmms_\Gamma}{\absvar_i}
-		\right)\\
-		\alpha&=
-		\begin{cases}
-		  1\text{  in ALE framework}\\
-		  0\text{  in Embedded framework}
-		\end{cases}
-		\end{align*}
-	\end{itemize}
-	\only<1->{\textbf{$\rightarrow$ We only look into these terms}}
-\end{frame}
-%\everymath{\displaystyle}
+
 
 %------------------------------------------------------------------------------
 
@@ -293,6 +257,67 @@
 \end{frame}
 
 %------------------------------------------------------------------------------
+
+
+\def\DdresidualBYabsvarI{ \tfrac{\dresidual}{\absvar_i} }
+\def\PdresidualBYabsvarI{ \pdfrac{\dresidual}{\absvar_i} }
+\def\PdresidualBYdfstate{ \pdfrac{\dresidual}{\dfstate}  }
+\def\DdfstateBYabsvarI  { \tfrac{\dfstate}{\absvar_i}   }
+\def\PdresidualBYdmms   { \pdfrac{\dresidual}{\dmpos}     }
+\def\DdmmsBYabsvarI     { \tfrac{\dmpos}{\absvar_i}      }
+%\everymath{\scriptstyle}
+\begin{frame}
+\frametitle{Derivation of $\pdfrac{\dfstate}{\absvar}$}
+  \begin{itemize}
+  
+  \item{The total derivative of the fluid state thus gives}
+		\begin{align*}
+		\tfrac{\dfstate}{\absvar}=
+		\inv{\left[\PdresidualBYdfstate\bigg\rvert_{\fstate_0}\right]}
+		\left(
+		  \PdresidualBYabsvarI\bigg\rvert_{\fstate_0} +
+		  \begin{bmatrix}
+		    \alpha\pdfrac{\dresidual}{\dmms_\Omega}\bigg\rvert_{\dfstate_0}~
+		    \pdfrac{\dresidual}{\dmms_\Gamma}\bigg\rvert_{\dfstate_0}
+		  \end{bmatrix}
+		  \begin{bmatrix}
+		    \alpha \inv{\fic{\stiffmat}_{\Omega\Omega}} \fic{\stiffmat}_{\Omega\Gamma} \\
+		    \eye
+		  \end{bmatrix}
+		  \tfrac{\dmms_\Gamma}{\absvar_i}
+		\right)
+		\end{align*}  
+  
+  
+	\item Which leads to the following, final equation for the sensitivities
+		\begin{align*}
+		\tfrac{\optcrit_j}{\absvar_i}\bigg\rvert_{\dfstate_0} &=
+		-\tfrac{\optcrit_j}{\fstate}\bigg\rvert_{\dfstate_0}
+		\inv{\left[\hle{neutral_0}{\PdresidualBYdfstate}\bigg\rvert_{\fstate_0}\right]} \\
+		&\left(
+		  \hle{neutral_1}{\PdresidualBYabsvarI}\bigg\rvert_{\fstate_0} +
+		  \begin{bmatrix}
+		    \alpha\pdfrac{\dresidual}{\dmms_\Omega}\bigg\rvert_{\dfstate_0}~
+		    \pdfrac{\dresidual}{\dmms_\Gamma}\bigg\rvert_{\dfstate_0}
+		  \end{bmatrix}
+		  \begin{bmatrix}
+		    \alpha \inv{\fic{\stiffmat}_{\Omega\Omega}} \fic{\stiffmat}_{\Omega\Gamma} \\
+		    \eye
+		  \end{bmatrix}
+		  \tfrac{\dmms_\Gamma}{\absvar_i}
+		\right)\\
+		\alpha&=
+		\begin{cases}
+		  1\text{  in ALE framework}\\
+		  0\text{  in Embedded framework}
+		\end{cases}
+		\end{align*}
+	\end{itemize}
+	\only<1->{\textbf{$\rightarrow$ We only look into these terms}}
+\end{frame}
+%\everymath{\displaystyle}
+
+%------------------------------------------------------------------------------
 \begin{frame}
 \def\DdresidualBYabsvarI{ \tfrac{\dresidual}{\absvar_i} }
 \def\PdresidualBYabsvarI{ \pdfrac{\dresidual}{\absvar_i} }
@@ -320,13 +345,13 @@
 		&n_{\optcrits}\rightarrow&\text{number of optimization criteria}
 		\end{align*}
 	\end{itemize}
-	\\	
+
 \end{itemize}
 \only<3->{\textbf{We only look into these terms}}
 \end{frame}
 
 
-%------------------------------------------------------------------------------
+
 
 
 %------------------------------------------------------------------------------
@@ -364,7 +389,7 @@
         \node [below of = l32]                            (l32o) {};
         \node [below of = l33]                            (l33o) {};
         \node [below of = l34]                            (l34o) {};
-        \node [below of = l35]                            (l35o) {};
+       % \node [below of = l35]                            (l35o) {};
         
 %        %level-4
 %        \node [blockb, below of=l33o]                     (l43) {$\pdfrac{\dresidual}{\absvar}$};
@@ -456,10 +481,22 @@
 	\end{itemize}
 \end{center}
 
-
-\only<2>{$\rightarrow$ \textbf{We don't go into any more detail here!}}
-
 \end{itemize}
+
+
+\only<2->{
+\begin{itemize}
+  \item some things to consider
+  \begin{itemize}
+	  \item equation of state
+	  \item flux limiters
+	  \item \dots
+	\end{itemize}
+\end{itemize}
+}
+
+
+\only<3>{$\rightarrow$ \textbf{I don't go into any more detail here!}}
 \end{frame}
 
 %------------------------------------------------------------------------------
@@ -493,6 +530,66 @@
 %	\end{align*}
 %\end{frame}
 %\everymath{\displaystyle}
+%------------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Sensitivity derivation - chain rule}
+\framesubtitle{$\tfrac{\dfstate}{\absvar_i}$}
+\centering
+\begin{tikzpicture}[node distance = 0.6cm, auto]
+        \def\hdist{0.7cm}
+        \node [blockb]                                      (l11) {$\pdfrac{\optcrit}{\absvar}$};
+        \node [below of = l11]                              (l11o) {};
+        
+        %level-2
+        \node [blocka, below of=l11o]                      (l23) {$\pdfrac{\optcrit_j}{\absvar_i}$};
+        \node [blocka, left =\hdist of l23]               (l22) {$\pdfrac{\optcrit_j}{\dfstate}$};
+        \node [blockb, left =\hdist of l22]               (l21) {$\tfrac{\dfstate}{\absvar_i}$};
+        \node [blocka, right =\hdist of l23]              (l24) {$\pdfrac{\optcrit}{\dmpos}$};
+        \node [blocka, right =\hdist of l24]              (l25) {$\tfrac{\dmpos}{\absvar_i}$};
+        \node [above of = l21]                            (l21u) {};
+        \node [below of = l21]                            (l21o) {};
+        \node [below of = l22]                            (l22o) {};
+        \node [below of = l23]                            (l23o) {};
+        \node [below of = l24]                            (l24o) {};
+        \node [below of = l25]                            (l25o) {};
+        
+        %level-3
+        \node [blockb, below of=l23o]                      (l33) {$\pdfrac{\dresidual}{\dfstate}$};
+        \node [blockb,thick, left =\hdist of l33]               (l32) {$\tfrac{\dresidual}{\absvar}$};
+        \node [blocka, left =\hdist of l32]               (l31) {$\pdfrac{\dresidual}{\dmpos}$};
+        \node [blocka, right =\hdist of l33]              (l34) {$\tfrac{\dmpos}{\absvar_i}$};
+        %\node [blocka, right =\hdist of l34]              (l35) {l35};
+        \node [below of = l31]                            (l31o) {};
+        \node [below of = l32]                            (l32o) {};
+        \node [below of = l33]                            (l33o) {};
+        \node [below of = l34]                            (l34o) {};
+       % \node [below of = l35]                            (l35o) {};
+
+        %thick lines      
+        \draw[-,very thick] (l11) -- (l11o);
+        \draw[-,very thick] (l11o) -| (l21);
+        \draw[-,very thick] (l21u) -| (l11);
+        
+        \draw[-,very thick] (l21) |- (l22o);
+        \draw[-,very thick] (l21o) -| (l32);
+
+        %thin lines
+        \draw[-] (l11o) -| (l22);
+        \draw[-] (l11o) -| (l23);
+        \draw[-] (l11o) -| (l24);
+        \draw[-] (l11o) -| (l25);
+        
+        
+        %draw dashed lines
+        \draw[gray,dashed] (l22) -- (l22o) node[midway] (l22){};
+        \draw[gray,dashed] (l23) -- (l23o) node[midway] (l23){};
+        \draw[gray,dashed] (l24) -- (l24o) node[midway] (l24){};
+        \draw[gray,dashed] (l25) -- (l25o) node[midway] (l25){};
+
+\end{tikzpicture}
+\end{frame}
+
 %------------------------------------------------------------------------------
 
 \begin{frame}
